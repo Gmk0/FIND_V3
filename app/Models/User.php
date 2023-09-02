@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -17,6 +18,11 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+
+
+    public $incrementing = false;
+    protected $keyType = 'string';
+
 
     /**
      * The attributes that are mass assignable.
@@ -48,6 +54,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'id' => 'string',
     ];
 
     /**
@@ -58,4 +65,33 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+
+    public static function boot()
+    {
+        parent::boot();
+
+
+        static::creating(function ($user) {
+            $user->id =
+                Str::uuid()->toString();
+        });
+    }
+
+    public function freelance()
+    {
+        return $this->hasOne(Freelance::class);
+    }
+
+    public function favoritesService()
+    {
+        return $this->belongsToMany(Service::class, 'favorites')
+            ->withTimestamps();
+    }
+
+    public function favoritesFreelance()
+    {
+        return $this->belongsToMany(Freelance::class, 'favorites')->withTimestamps()->orderByDesc('favorites.created_at');
+    }
+
 }

@@ -1,7 +1,355 @@
+
+@import 'aos/dist/aos.css';
+
+@import '@splidejs/splide/css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 [x-cloak] {
     display: none;
+}
+
+
+@layer base {
+    :root {
+        --color-text-base: 255, 255, 255;
+        --color-text-muted: 199, 210, 254;
+        --color-text-inverted: 241, 127, 52;
+        --color-fill: 244, 117, 33;
+        --color-button-accent: 255, 255, 255;
+        --color-button-accent-hover: 238, 242, 255;
+        --color-button-muted: var(--color-fill);
+    }
+}
+
+
+
+.button-amber {
+    --tw-bg-opacity: 1;
+    background-color: rgb(217 119 6 / var(--tw-bg-opacity));
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    font-family: DM Sans, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+    --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    --tw-shadow-color: rgb(255 90 31 / 0.2);
+    --tw-shadow: var(--tw-shadow-colored);
+
+
+}
+
+@media (min-width: 640px) {
+    #table {
+        display: inline-table !important;
+    }
+
+    #table thead tr:not(:first-child) {
+        display: none;
+    }
+}
+
+#table td:not(:last-child) {
+    border-bottom: 0;
+}
+
+#table th:not(:last-child) {
+    border-bottom: 2px solid rgba(0, 0, 0, .1);
+}
+
+.dark .bg-gray-400 {
+    --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.dark .text-gray-800 {
+
+    --tw-text-opacity: 1;
+    color: rgb(243 244 246 / var(--tw-text-opacity));
+}
+
+.dark .bg-white {
+    --tw-bg-opacity: 1;
+    background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+}
+
+.dark .text-dark {
+
+    --tw-text-opacity: 1;
+    color: rgb(243 244 246 / var(--tw-text-opacity));
+}
+
+.dark .text-darker {
+    --tw-text-opacity: 1;
+    color: rgb(243 244 246 / var(--tw-text-opacity));
+}
+
+.tab-content {
+    max-height: 0;
+    -webkit-transition: max-height 0.35s;
+    -o-transition: max-height 0.35s;
+    transition: max-height 0.35s;
+}
+
+/* :checked - resize to full height */
+.tab2 input:checked~.tab-content {
+    max-height: 100vh;
+}
+
+/* Label formatting when open */
+.tab2 input:checked+label {
+    border-left-width: 1px;
+    border-color: white;
+}
+
+/* Icon */
+.tab2 .label .icon {
+    -webkit-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+    transform-origin: center center;
+}
+
+/* Open Multiple Icon Formatting - Open */
+.tab2 input[type="checkbox"]:checked+.label .icon {
+    transform: rotate(180deg);
+}
+
+/* List Transition */
+ul a {
+    transition: color 0.5s ease;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+
+@media screen and (max-width: 767px) {
+
+    input,
+    select,
+    textarea {
+        font-size: 16px !important;
+    }
+
+}
+
+.slide-container3,
+.slide-container {
+    max-width: 1200px;
+    width: 100%;
+    padding: 40px 0;
+}
+
+
+
+.slide-content {
+    margin: 0 40px;
+    overflow: hidden;
+    border-radius: 25px;
+}
+
+.card {
+    border-radius: 25px;
+    background-color: #FFF;
+}
+
+.dark .card {
+    border-radius: 25px;
+    --tw-bg-opacity: 1;
+    background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+}
+
+.image-content,
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 14px;
+}
+
+.image-content {
+    position: relative;
+    row-gap: 5px;
+    padding: 16px 0;
+}
+
+.overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #f98943;
+    border-radius: 25px 25px 0 25px;
+}
+
+.overlay::before,
+.overlay::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -40px;
+    height: 40px;
+    width: 40px;
+    background-color: #f98943;
+}
+
+
+
+
+
+
+.overlay::after {
+    border-radius: 0 25px 0 0;
+    background-color: #FFF;
+}
+
+.dark .overlay::after {
+    border-radius: 0 25px 0 0;
+    --tw-bg-opacity: 1;
+    background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+}
+
+.card-image {
+    position: relative;
+    height: 160px;
+    width: 160px;
+    border-radius: 50%;
+    background: #FFF;
+    padding: 3px;
+}
+
+.card-image .card-img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+
+}
+
+.name {
+    font-size: 15px;
+    font-weight: 500;
+    color: #333;
+}
+
+.dark .name {
+    font-size: 15px;
+    font-weight: 500;
+    --tw-text-opacity: 1;
+    color: rgb(229 231 235 / var(--tw-text-opacity));
+}
+
+.description {
+    font-size: 14px;
+    color: #707070;
+    text-align: center;
+}
+
+.button {
+    border: none;
+    font-size: 16px;
+    color: #FFF;
+    padding: 8px 16px;
+    background-color: #4070F4;
+    border-radius: 6px;
+    margin: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    background: #265DF2;
+}
+
+.swiper-navBtn {
+    color: #6E93f7;
+    transition: color 0.3s ease;
+}
+
+.swiper-navBtn:hover {
+    color: #4070F4;
+}
+
+.swiper-navBtn::before,
+.swiper-navBtn::after {
+    font-size: 35px;
+}
+
+.swiper-button-next {
+    right: 0;
+}
+
+.swiper-button-prev {
+    left: 0;
+}
+
+.swiper-button-next2 {
+    right: 0;
+}
+
+.swiper-button-prev2 {
+    left: 0;
+}
+
+.swiper-pagination-bullet {
+    background-color: #6E93f7;
+    opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #4070F4;
+}
+
+@media screen and (max-width: 768px) {
+    .slide-content {
+        margin: 0 10px;
+    }
+
+
+}
+
+
+@keyframes slide-down {
+    from {
+        transform: translateY(-100%);
+    }
+
+    to {
+        transform: translateY(0%);
+    }
+}
+
+.animate-slide-down {
+    animation: slide-down 0.5s ease-out forwards;
+}
+
+.animate-slide-up {
+    animation-name: slide-up;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slide-up {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-100%);
+    }
 }

@@ -13,9 +13,40 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
+Route::get('/', \App\Livewire\Web\Home::class)->name('home');
+
+Route::get('/services', \App\Livewire\Web\ServicesView::class)->name('services');
+Route::get('/faq', \App\Livewire\Web\Other\Faq::class)->name('faq');
+Route::get('/apropos', \App\Livewire\Web\Other\About::class)->name('apropos');
+Route::get('/contact', \App\Livewire\Web\Other\ContactView::class)->name('contact');
+
+Route::get('/registration', \App\Livewire\Web\Registration\RegisterBegin::class)->name('register.begin');
+
+
+Route::get('/registration/info', \App\Livewire\Web\Registration\RegisterEtape1::class)->name('register.etape.1');
+
+Route::get('/registration/freelance', \App\Livewire\Web\Registration\RegistrationFreelance::class)->name('freelancer.register');
+Route::get('/create-mission', \App\Livewire\Web\Mission\CreateMission::class)->name('createProject');
+
+Route::get('/find-freelance/profile/{identifiant}', \App\Livewire\Web\Freelance\ProfileFreelance::class)->where('identifiant', '(.*)')->name('profileFreelance');
+
+Route::get('/find-freelance', \App\Livewire\Web\Freelance\FindFreelance::class)->name('find_freelance');
+
+Route::get('/categories', \App\Livewire\Web\Category\CategoryName::class)->name('categories');
+
+Route::get('/categories/{category}/{service_numero}', \App\Livewire\Web\Category\ServiceViewOne::class)->where('service_numero', '(.*)')->name('ServicesViewOne');
+
+Route::get('/categories/{category}', \App\Livewire\Web\ServicesByCategory::class)->where('category', '(.*)')->name('categoryByName');
+
+
+
+
+
+
+
+
 
 Route::middleware([
     'auth:sanctum',
@@ -25,4 +56,21 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+
+
+
+
+
+    Route::group(['prefix' => "user"], function () {
+
+
+       // Route::get('/favoris', App\Livewire\Web\Outils\FavorisUser::class)->name('favorisUser');
+        Route::get('/dashboard', \App\Livewire\User\DashboardUser::class)->name('dashboardUser');
+
+    });
+
+
+
+
 });

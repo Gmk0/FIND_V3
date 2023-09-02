@@ -1,0 +1,155 @@
+models:
+
+  Category:
+    name: string
+    description: string nullable
+    illustration: string nullable
+    relationships:
+      HasMany: Freelance,SubCategory
+
+  SubCategory:
+    name: string
+    category_id: id foreign
+    illustration: string nullable
+    relationships:
+      belongsTo: Category
+
+  Freelance:
+      nom : string
+      prenom : string
+      identifiant : string:15
+      description : text
+      langue : json nullable
+      diplome : json nullable
+      certificat : json nullable
+      site : string nullable
+      competences : json nullable
+      taux_journalier : decimal:8,2 nullable
+      comptes : json nullable
+      sub_categorie : json nullable
+      localisation : json nullable
+      user_id : uuid foreign
+      category_id : id foreign
+      level : enum:1,2,3,4,5
+      solde : decimal:8,2
+      realisations : json nullable
+      relationships:
+        BelongsTo: User,Category
+        HasMany: Service,Conversation,Message
+
+  Conversation:
+    freelance_id: id foreign
+    user_id : uuid foreign
+    status: enum:pending,finished,blocked
+    relationships:
+      belongsTo: User,Freelance
+      HasMany: Message
+
+  Message:
+    sender_id: uuid foreign:users
+    receiver_id: uuid foreign:users
+    conversation_id: id foreign
+    body: text
+    is_read: enum:0,1 default:0
+    type: string nullable
+    service_id: id foreign nullable
+    order_id: id foreign nullable
+    relationships:
+      belongsTo: User ,Freelance,Conversation,Service,Order
+
+  Service:
+      service_numero : string
+      title : string
+      tag : json
+      description : text
+      basic_price : decimal:8,2
+      basic_support : string
+      basic_revision : integer
+      basic_delivery_time: integer
+      premium_price : decimal:8,2 nullable
+      premium_support : string nullable
+      premium_revision : integer nullable
+      premium_delivery_time: integer nullable
+      extra_price : decimal:8,2 nullable
+      extra_support : string nullable
+      extra_revision : integer nullable
+      extra_delivery_time: integer nullable
+      example  : string:500 nullable
+      files : string nullable
+      format : string nullable
+      need_service : string nullable
+      delivery_time_unit : string nullable
+      sub_category : json nullable
+      video_url: string nullable
+      view_count: bigInteger default:0
+      like: bigInteger default:0
+      is_publish: enum:0,1 default:0
+      freelance_id : id foreign
+      category_id : id foreign
+      relationships:
+        BelongsTo: Freelance,Category,Favoris
+        HasMany: Order
+
+  Order:
+      order_numero : string
+      user_id : uuid foreign
+      service_id : id foreign
+      type : string nullable
+      total_amount : decimal:8,2
+      quantity : string nullable
+      transaction_id : string nullable
+      progress : integer nullable
+      is_paid : datetime nullable
+      status : enum:pending,completed,failed
+      relationships:
+        hasOne: Transaction
+        BelongsTo: User,Service
+
+
+  Transaction:
+      transaction_numero : varchar
+      user_id : uuid foreign
+      amount : decimal:8,2
+      payment_method : string
+      payment_token: string:40 nullable
+      status : enum:pending,completed,failed
+      type : string nullable
+      relationships:
+        BelongsTo: Order,User
+
+  Mission:
+      title : string
+      user_id : uuid foreign
+      category_id : id foreign
+      sub_category : json nullale
+      description : text nullable
+      files : json nullable
+      budget : decimal:8,2
+      begin_mission : date nullable
+      end_mission : date nullable
+      progress : integer nullable
+      transaction_id : id foreign
+      is_paid : datetime nullable
+      status : enum:active,inactive,completed default:active
+      relationships:
+        BelongsTo: User,Category
+        HasMany: ProjectResponse,ConversationProject
+
+
+  MissionResponse:
+      freelance_id : id foreign
+      mission_id : id foreign
+      content : text
+      budget : decimal:8,2
+      status : enum:pending,approved,rejected default:pending
+      is_paid : datetime
+      relationships:
+        BelongsTo: Mission,Freelance
+
+
+
+
+
+
+
+seeders: Freelance, Service,Category,SousCategory
