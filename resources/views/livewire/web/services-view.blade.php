@@ -212,7 +212,7 @@
                     votre projet et
                     notre communauté de freelances
                     talentueux sera ravie de vous aider..</p>
-                <a href="{{route('createProject')}}"
+                <a href="{{route('createProject')}}" wire:navigate
                     class="px-4 py-2 font-semibold text-white bg-blue-500 rounded hover:bg-blue-600">Soumettre un
                     projet</a>
             </div>

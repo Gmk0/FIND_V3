@@ -49,6 +49,8 @@
 
                 </h1>
 
+                @livewire('web.other.home-search')
+
 
 
             </div>
@@ -140,16 +142,14 @@
 
         <div id="talkAbout" class="bg-gray-100 dark:bg-gray-800 lg:min-h-screen">
 
-            <div class="container max-w-6xl p-4 m-4 mx-auto md:p-6">
+          <div class="container max-w-6xl p-4 m-4 mx-auto md:p-6">
                 <div class="mb-10 text-center">
                     <span class="font-medium text-amber-600">Presentation</span>
                     <h1 class="text-2xl font-bold text-slate-700 dark:text-gray-200 ">Ils en Parlent mieux Que nous</h1>
 
                 </div>
 
-                <div x-init="$nextTick(() => $el._x_swiper = new Swiper($el, { slidesPerView: '4',autoplay:true,
-                breakpoints:{0:{slidesPerView:1,},520:{slidesPerView:2,},950:{slidesPerView:3,},1100:{slidesPerView:4,}}, spaceBetween:
-                15, navigation: { nextEl: '.next-btn', prevEl: '.prev-btn' } }))"
+                <div x-init="$nextTick(() => $el._x_swiper = new Swiper($el,{effect: 'cube', cubeEffect: { shadow: false}, pagination: { el: '.swiper-pagination', clickable: true}}))"
                     class="swiper">
                     <div class="pb-8 swiper-wrapper ">
                         <div class="swiper-slide !bg-transparent px-2 md:px-0">
@@ -169,8 +169,7 @@
                                             <img src="images/brand/influnet.jpg" alt="company logo" loading="lazy" />
                                         </div>
                                         <p class="dark:text-gray-200">
-                                            <span class="font-serif "></span> Find est une plateforme incontournable pour
-                                            tous
+                                            <span class="font-serif "></span> Find est une plateforme incontournable pour tous
                                             les demandeurs de services. J'ai été impressionné par la qualité des
                                             freelances proposés.
                                             <span class="font-serif">"</span>
@@ -204,8 +203,7 @@
                                             bien conçue et facile à utiliser
                                             <span class="font-serif">"</span>
                                         </p>
-                                        <h6 class="text-lg font-semibold leading-none dark:text-gray-200">Ulrich Lukemba
-                                        </h6>
+                                        <h6 class="text-lg font-semibold leading-none dark:text-gray-200">Ulrich Lukemba</h6>
                                     </div>
                                 </div>
                             </div>
@@ -226,7 +224,6 @@
                 <!-- single-blog -->
 
             </div>
-
 
         </div>
 

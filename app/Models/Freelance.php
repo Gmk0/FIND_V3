@@ -84,4 +84,17 @@ class Freelance extends Model
     {
         return $this->hasMany(Message::class);
     }
+    public function favorites()
+    {
+        return $this->belongsToMany(User::class, 'favorites', 'freelance_id')
+        ->withTimestamps();
+    }
+
+
+    public function isFavorite()
+    {
+        return $this->favorites()
+            ->where('user_id', auth()->id())
+            ->exists();
+    }
 }

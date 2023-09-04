@@ -591,4 +591,7 @@
     </div>
 
 
+    <livewire:web.card.cart-service />
+
+
 </div>

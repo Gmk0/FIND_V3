@@ -21,12 +21,12 @@
                         <div class="px-6 overflow-hidden leading-normal">
                             <ul class="flex flex-col w-full p-0 space-y-2 text-left list-none list-inside text-gray-50">
 
-                                {{-- @foreach($categories as $category)
+                                @foreach($categories as $category)
                                 <li><a href="{{route('categoryByName',[$category->name])}}"
                                         class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-200">{{$category->name}}</a>
                                 </li>
                                 @endforeach
-                                --}}
+
                             </ul>
                         </div>
                     </div>
@@ -179,11 +179,11 @@
             <div>
                 <span class="footer-title">Categories</span>
                 <div class="grid grid-cols-2 gap-4">
-                    {{--
+
                     @foreach($categories as $category)
                     <a href="{{route('categoryByName',[$category->name])}}"
                         class="link link-hover">{{$category->name}}</a>
-                    @endforeach--}}
+                    @endforeach
 
 
 

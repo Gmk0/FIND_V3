@@ -6,7 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'FIND') }}</title>
+    <title>{{ config('app.name', 'FIND')}}
+        @isset($title)
+        - {{ $title }}
+        @endisset
+
+    </title>
 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
@@ -30,7 +35,7 @@
     <link rel="stylesheet" href="/css/app3.css">
 
     <script src="/js/alpine-init.js"></script> <!-- Scripts -->
-    <script src="/js/script.js"></script> <!-- Scripts -->
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

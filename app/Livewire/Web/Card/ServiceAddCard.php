@@ -33,7 +33,7 @@ class ServiceAddCard extends Component
                 'service_id' => $serviceId,
             ]);
         }
-        $this->emit('refreshFavorite');
+        $this->dispatch('refreshFavorite');
     }
 
     public function add_cart($id)
@@ -52,16 +52,10 @@ class ServiceAddCard extends Component
         $cart = new Cart($oldCart);
         $cart->add($service, $service->id, $images);
         Session::put('cart', $cart);
-        $this->emitTo('user.navigation.card-component', ' refreshComponent');
 
-        $this->emitTo('user.navigation.navigation', ' refreshComponent');
+        $this->dispatch('refreshComponent');
 
-        $this->emit('refreshComponent');
-
-        $this->notification()->success(
-            $title = "le Service a ete ajouté dans le panier",
-
-        );
+       // $this->notification()->success($title = "le Service a ete ajouté dans le panier",);
 
 
 

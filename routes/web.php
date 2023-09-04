@@ -38,7 +38,22 @@ Route::get('/categories', \App\Livewire\Web\Category\CategoryName::class)->name(
 
 Route::get('/categories/{category}/{service_numero}', \App\Livewire\Web\Category\ServiceViewOne::class)->where('service_numero', '(.*)')->name('ServicesViewOne');
 
-Route::get('/categories/{category}', \App\Livewire\Web\ServicesByCategory::class)->where('category', '(.*)')->name('categoryByName');
+Route::get('/categories/{category}', \App\Livewire\Web\Category\ServiceByCategory::class)->where('category', '(.*)')->name('categoryByName');
+
+
+
+Route::get('/checkout', \App\Livewire\Web\Checkout\CheckoutService::class)->name('checkout');
+
+
+
+
+Route::controller(PayementController::class)->group(function () {
+
+    Route::get('/checkout/status/{transaction_number}',  'paiment_status')->name('checkoutStatus');
+
+    Route::get('/checkout/status-maxi',  'paiment_maxi')->name('checkoutStatusMaxiService');
+});
+
 
 
 
@@ -59,17 +74,35 @@ Route::middleware([
 
 
 
+    Route::get('/checkout', \App\Livewire\Web\Checkout\CheckoutService::class)->name('checkout');
+
+
+
+
+    
 
 
 
     Route::group(['prefix' => "user"], function () {
 
 
-       // Route::get('/favoris', App\Livewire\Web\Outils\FavorisUser::class)->name('favorisUser');
-        Route::get('/dashboard', \App\Livewire\User\DashboardUser::class)->name('dashboardUser');
+        Route::get('/favoris', App\Livewire\User\Other\FavorisList::class)->name('favorisUser');
+        Route::get('/dashboard', \App\Livewire\User\Dashboard\DashboardUser::class)->name('dashboardUser');
 
+        Route::get('/commandes/{order_number}', App\Livewire\User\Commande\CommandeOneView::class)->name('commandeOneView');
+        Route::get('/commandes', \App\Livewire\User\Commande\CommandeList::class)->name('commandeUser');
+
+       // Route::get('/transaction/{transaction_number}', \App\Livewire\User\Transaction\TransactionOneView::class)->name('transactionOneUser');
+
+        //Route::get('/transaction', \App\Livewire\User\Transaction\TransactionList::class)->name('transactionUser');
+
+        Route::get('/mission-list', \App\Livewire\User\Mission\MissionList::class)->name('MissionUser');
+
+       // Route::get('/mission-list/{project_number}', \App\Livewire\User\Mission\MissionProposition::class)->name('PropostionProjet');
+
+       
+    // Route::get('/assistance', \App\Livewire\User\Outils\AssistanceUser::class)->name('assistanceUser');
     });
-
 
 
 
