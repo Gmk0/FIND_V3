@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Web\Card;
 
+use App\Models\Favorite;
 use App\Models\Service;
 use App\Tools\Cart;
 use Illuminate\Support\Facades\Session;
@@ -16,19 +17,19 @@ class ServiceAddCardTwo extends Component
     public function toogleFavorite($serviceId)
     {
 
-        /*$favorite = favorite::where('user_id', auth()->id())
+        $favorite = Favorite::where('user_id', auth()->id())
             ->where('service_id', $serviceId)
             ->first();
 
         if ($favorite) {
             $favorite->delete();
         } else {
-            favorite::create([
+            Favorite::create([
                 'user_id' => auth()->id(),
                 'service_id' => $serviceId,
             ]);
         }
-        $this->emit('refreshFavorite'); */
+        $this->emit('refreshFavorite'); 
     }
 
     public function add_cart($id)

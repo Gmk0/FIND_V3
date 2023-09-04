@@ -135,7 +135,6 @@ models:
         BelongsTo: User,Category
         HasMany: ProjectResponse,ConversationProject
 
-
   MissionResponse:
       freelance_id : id foreign
       mission_id : id foreign
@@ -145,11 +144,5 @@ models:
       is_paid : datetime
       relationships:
         BelongsTo: Mission,Freelance
-
-
-
-
-
-
-
+        
 seeders: Freelance, Service,Category,SousCategory
