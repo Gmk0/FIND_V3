@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Events\OrderCreated;
+use App\Notifications\OrderCreatedNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -39,11 +41,59 @@ class Order extends Model
         'service_id' => 'integer',
         'total_amount' => 'decimal:2',
         'is_paid' => 'datetime',
+        'transaction_id'=>'integer',
     ];
 
-    public function transaction(): HasOne
+    public static function boot()
     {
-        return $this->hasOne(Transaction::class);
+        parent::boot();
+        static::creating(function ($order) {
+
+            // $order->user_id = auth()->user()->id;
+            $order->order_numero = 'CMD' . date('YmdH') . rand(10, 99);
+        });
+
+        static::created(function ($order) {
+
+            FeedbackService::create(['order_id' => $order->id]);
+        });
+    }
+
+    protected $dispatchesEvents = [
+        'created' => OrderCreated::class,
+    ];
+
+
+    public function transaction()
+    {
+        return $this->belongsTo(Transaction::class);
+    }
+
+
+
+
+
+    public function notifyUser()
+    {
+        $service = $this->service;
+
+        if ($service) {
+            $freelance = $service->freelance;
+
+            if ($freelance) {
+                $user = $freelance->user;
+
+
+                $user->notify(new OrderCreatedNotification($this));
+            }
+        }
+    }
+
+
+    public function getMontant()
+    {
+        // Formater le prix avec le dollar direct
+        return $this->total_amount . " $";
     }
 
 
@@ -56,5 +106,10 @@ class Order extends Model
     public function service(): BelongsTo
     {
         return $this->belongsTo(Service::class);
+    }
+
+    public function feedback(): HasOne
+    {
+        return $this->hasOne(FeedbackService::class, 'order_id');
     }
 }

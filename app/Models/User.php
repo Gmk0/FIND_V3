@@ -76,6 +76,12 @@ class User extends Authenticatable
             $user->id =
                 Str::uuid()->toString();
         });
+        static::created(function ($user) {
+
+            UserSetting::create(['user_id' => $user->id]);
+
+            //Mail::to($user->email)->send(new welcomeMail($user));
+        });
     }
 
     public function freelance()

@@ -85,7 +85,7 @@ class Paiement
                         'customer' => $customerId,
                     ]);
 
-                    $paymentIntent->confirm();
+                // $paymentIntent->confirm();
                     $paymentMethod = PaymentMethod::retrieve($paymentMethodId);
                     $lastFour = $paymentMethod->card->last4;
                     $brand = $paymentMethod->card->brand;

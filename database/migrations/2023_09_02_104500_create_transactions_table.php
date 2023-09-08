@@ -20,7 +20,7 @@ return new class extends Migration
             $table->decimal('amount', 8, 2);
             $table->string('payment_method');
             $table->string('payment_token', 40)->nullable();
-            $table->enum('status', ["pending","completed","failed"]);
+            $table->enum('status', ["pending","completed","failed"])->default("pending");
             $table->string('type')->nullable();
             $table->timestamps();
         });

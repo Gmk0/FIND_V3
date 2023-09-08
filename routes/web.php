@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PayementController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,7 +50,7 @@ Route::get('/checkout', \App\Livewire\Web\Checkout\CheckoutService::class)->name
 
 Route::controller(PayementController::class)->group(function () {
 
-    Route::get('/checkout/status/{transaction_number}',  'paiment_status')->name('checkoutStatus');
+    Route::get('/checkout/status/{transaction_numero}',  'paiement_status')->name('checkoutStatus');
 
     Route::get('/checkout/status-maxi',  'paiment_maxi')->name('checkoutStatusMaxiService');
 });
@@ -79,7 +80,7 @@ Route::middleware([
 
 
 
-    
+
 
 
 
@@ -89,19 +90,28 @@ Route::middleware([
         Route::get('/favoris', App\Livewire\User\Other\FavorisList::class)->name('favorisUser');
         Route::get('/dashboard', \App\Livewire\User\Dashboard\DashboardUser::class)->name('dashboardUser');
 
+        Route::get('/commandes/{order_number}/checkout', \App\Livewire\User\Commande\CheckoutPendig::class)->name('commandeRepaye');
+
         Route::get('/commandes/{order_number}', App\Livewire\User\Commande\CommandeOneView::class)->name('commandeOneView');
         Route::get('/commandes', \App\Livewire\User\Commande\CommandeList::class)->name('commandeUser');
 
-       // Route::get('/transaction/{transaction_number}', \App\Livewire\User\Transaction\TransactionOneView::class)->name('transactionOneUser');
+        Route::get('/transaction/{transaction_number}', \App\Livewire\User\Transaction\TransactionOneView::class)->name('transactionOneUser');
 
-        //Route::get('/transaction', \App\Livewire\User\Transaction\TransactionList::class)->name('transactionUser');
+        Route::get('/transaction', \App\Livewire\User\Transaction\TransactionList::class)->name('transactionUser');
+
+
+        Route::get('/profile', \App\Livewire\User\User\Profile::class)->name('ProfileUser');
+
+        Route::get('/mission-list/edit/{mission_numero}', \App\Livewire\User\Mission\MissionEdit::class)->name('MissionEdit');
+
+
+        Route::get('/mission-list/{mission_numero}', \App\Livewire\User\Mission\MissionResponse::class)->name('PropostionProjet');
+
+
 
         Route::get('/mission-list', \App\Livewire\User\Mission\MissionList::class)->name('MissionUser');
 
-       // Route::get('/mission-list/{project_number}', \App\Livewire\User\Mission\MissionProposition::class)->name('PropostionProjet');
-
-       
-    // Route::get('/assistance', \App\Livewire\User\Outils\AssistanceUser::class)->name('assistanceUser');
+    Route::get('/assistance', \App\Livewire\User\Other\AssistanceUser::class)->name('assistanceUser');
     });
 
 

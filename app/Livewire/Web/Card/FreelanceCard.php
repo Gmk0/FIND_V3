@@ -27,7 +27,7 @@ class FreelanceCard extends Component
             ]);
         }
 
-        $this->emit('refreshFavorite');
+        $this->dispatch('refreshFavorite');
     }
 
     public function conversation($id)

@@ -11,8 +11,10 @@
         "autoprefixer": "^10.4.7",
         "axios": "^1.1.2",
         "daisyui": "^3.6.4",
+        "laravel-echo": "^1.15.3",
         "laravel-vite-plugin": "^0.8.0",
         "postcss": "^8.4.14",
+        "pusher-js": "^8.3.0",
         "tailwindcss": "^3.1.0",
         "vite": "^4.0.0"
     },
@@ -27,6 +29,7 @@
         "@ryangjchandler/alpine-clipboard": "^2.2.0",
         "@splidejs/splide": "^4.1.4",
         "@tailwindcss/aspect-ratio": "^0.4.2",
+        "alpinejs": "^3.0.6",
         "aos": "^3.0.0-beta.6",
         "apexcharts": "^3.41.0",
         "cleave.js": "^1.6.0",

@@ -132,6 +132,7 @@ BLADE))),
                 'end_mission' => $data['mission']['end'],
                 'progress' => 0,
 
+
             ]);
 
             $this->dispatch('notify', [
@@ -140,11 +141,13 @@ BLADE))),
             ]);
 
             $this->missionForm->fill();
+
         } catch (\Exception $e) {
 
-            $this->dispatch('notify', [
-                'message' => "Une erreur s'est produite",
-                'icon' => 'success',
+            $this->dispatch('error', [
+                'message' => "Une erreur s'est produite". $e->getMessage(),
+                'icon' => 'error',
+                'title' => 'error'
             ]);
         }
     }

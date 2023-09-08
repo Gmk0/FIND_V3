@@ -22,9 +22,9 @@ return new class extends Migration
             $table->decimal('total_amount', 8, 2);
             $table->string('quantity')->nullable();
             $table->string('transaction_id')->nullable();
-            $table->integer('progress')->nullable();
+            $table->integer('progress')->default(0);
             $table->dateTime('is_paid')->nullable();
-            $table->enum('status', ["pending","completed","failed"]);
+            $table->enum('status', ["pending","completed","failed"])->default('pending');
             $table->timestamps();
         });
 

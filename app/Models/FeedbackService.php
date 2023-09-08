@@ -13,7 +13,7 @@ class FeedbackService extends Model
 
     protected $fillable = [
         'order_id',
-        'project_id',
+        'mission_id',
         'etat',
         'delai_livraison_estimee',
         'commentaires',

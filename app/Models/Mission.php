@@ -19,6 +19,7 @@ class Mission extends Model
     protected $fillable = [
         'title',
         'user_id',
+        'mission_numero',
         'category_id',
         'sub_category',
         'description',
@@ -47,8 +48,36 @@ class Mission extends Model
         'end_mission' => 'date',
         'transaction_id' => 'integer',
         'is_paid' => 'datetime',
+        'user_id' => 'string',
+
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+
+            $model->user_id = auth()->user()->id;
+            $model->mission_numero = 'MS' . date('YmdH');
+        });
+
+        static::created(function ($model) {
+
+            FeedbackService::create(['mission_id' => $model->id]);
+        });
+
+        static::deleted(function ($model) {
+
+            FeedbackService::where('mission_id', $model->id)->delete();
+        });
+    }
+
+
+    public function budget()
+    {
+        // Formater le prix avec le dollar direct
+        return '$' . number_format($this->budget, 2, ',', ' ');
+    }
 
 
     public function user(): BelongsTo

@@ -11,6 +11,24 @@ function withOpacity(variableName) {
 }
 
 import preset from './vendor/filament/support/tailwind.config.preset'
+const defaultTheme = require('tailwindcss/defaultTheme');
+const plugin = require('tailwindcss/plugin');
+const colors = require('tailwindcss/colors');
+
+const navyColor = {
+    50: "#E7E9EF",
+    100: "#C2C9D6",
+    200: "#A3ADC2",
+    300: "#697A9B",
+    400: "#5C6B8A",
+    450: "#465675",
+    500: "#384766",
+    600: "#313E59",
+    700: "#26334D",
+    750: "#222E45",
+    800: "#202B40",
+    900: "#192132",
+};
 
 
 /** @type {import('tailwindcss').Config} */
@@ -59,11 +77,43 @@ export default {
                     hue: withOpacity('--color-fill'),
                 },
             },
+            colors: {
+                info: colors.sky["500"],
+                accent: "#5f5af6",
+                "accent-focus": "#4d47f5",
+                navy: navyColor,
 
+                find: colors.orange,
+                danger: colors.rose,
+                primary: colors.amber,
+                success: colors.green,
+                warning: colors.yellow,
+            },
         },
     },
 
+    plugins: [require('@tailwindcss/typography'),
+    require('flowbite/plugin'),
+    require('daisyui'),
+    require('@tailwindcss/forms')({
+        strategy: 'class',
+    }),
 
-    plugins: [forms, require('@tailwindcss/aspect-ratio'), require('flowbite/plugin'), require("daisyui")],
+
+    require('@tailwindcss/aspect-ratio'),
+
+
+    plugin(function ({ addUtilities, theme }) {
+        const newUtilities = {
+            '.custom-scrollbar': {
+                '.custom-scrollbar::-webkit-scrollbar': { width: '6px' },
+                '.custom-scrollbar::-webkit-scrollbar-track': { background: theme('bg-secondary') },
+                '.custom-scrollbar::-webkit-scrollbar-thumb': { background: '#888' },
+                '.custom-scrollbar::-webkit-scrollbar-thumb:hover': { background: '#555' },
+            }
+        }
+
+        addUtilities(newUtilities, ['responsive', 'hover'])
+    })],
 
 };

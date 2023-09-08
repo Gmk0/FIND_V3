@@ -32,7 +32,7 @@
 
 
         @auth
-        <div x-data="{ like: @json($service->isFavorite()) }" class="flex items-center">
+        <div  wire:ignore x-data="{ like: @json($service->isFavorite()) }" class="flex items-center">
             <button class="mr-2" x-on:click="like=!like" @click="$wire.toogleFavorite({{$service->id}})">
 
 

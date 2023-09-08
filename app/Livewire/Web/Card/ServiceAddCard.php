@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Web\Card;
 
+use App\Livewire\User\Other\FavorisList;
 use App\Models\Favorite;
 use App\Models\Service;
 use App\Tools\Cart;
@@ -12,7 +13,7 @@ class ServiceAddCard extends Component
 {
 
     public Service $service;
-    protected $listeners = ['refreshFavorite' => '$refresh'];
+    //protected $listeners = ['refreshFavorite' => '$refresh'];
     public function render()
     {
         return view('livewire.web.card.service-add-card');
@@ -33,7 +34,7 @@ class ServiceAddCard extends Component
                 'service_id' => $serviceId,
             ]);
         }
-        $this->dispatch('refreshFavorite');
+        $this->dispatch('refreshFavorite')->to(FavorisList::class);
     }
 
     public function add_cart($id)

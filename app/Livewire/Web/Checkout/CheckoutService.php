@@ -39,6 +39,7 @@ implements HasForms
     public $priceTotal = null;
     public $month;
     public $year;
+    public $localisation=['adresse'=>'', ' commune' => '', 'ville' => ''];
     public $maxi = ['name' => '', 'number' => ''];
     public $card = ['name' => '', 'cardExpiryMonth' => '10', 'cardNumber' => '4242424242424242', 'cardExpiryYear' => '2024', 'cardCvc' => ''];
 
@@ -57,10 +58,10 @@ implements HasForms
     {
         return $form->schema([
 
-            TextInput::make('maxi.name'),
-            TextInput::make('maxi.name'),
-            TextInput::make('maxi.name'),
-            TextInput::make('maxi.name'),
+            TextInput::make('localisation.adresse'),
+            TextInput::make('localisation.commune'),
+            TextInput::make('localisation.ville'),
+
 
 
 
@@ -192,28 +193,45 @@ implements HasForms
             $this->dispatch('error', ['message' => $statusResponse['message'], 'title' => 'Error',  'icon' => 'error']);
         } else {
 
-            $datas = $this->saveService();
-            $payment = new Transaction();
-            $payment->amount = $this->priceTotal;
-            $payment->payment_method = $statusResponse['identityPayment'];
-            $payment->payment_token = $statusResponse['paymentIntent'];
-            $payment->status = 'completed';
-            $payment->type = 'paiement';
-            $payment->save();
-            foreach ($datas as $order) {
-                $orderToUpdate = Order::findOrFail($order->id);
-                $orderToUpdate->status = 'completed';
-                $orderToUpdate->transaction_id = $payment->id;
-                $orderToUpdate->update();
+
+            try{
+
+
+                $payment = new Transaction();
+                $payment->amount = $this->priceTotal;
+                $payment->payment_method = $statusResponse['identityPayment'];
+                $payment->payment_token = $statusResponse['paymentIntent'];
+                $payment->status = 'completed';
+                $payment->type = 'paiement';
+                $payment->save();
+
+                $datas = $this->saveService();
+                foreach ($datas as $order) {
+                    $orderToUpdate = Order::findOrFail($order->id);
+                    $orderToUpdate->status = "completed";
+                    $orderToUpdate->transaction_id = $payment->id;
+                    $orderToUpdate->update();
+                    $orderToUpdate->notifyUser();
+                }
+
+                $payment->sendMail();
+
+                $this->dispatch('notify', [
+                    'message' => "Mission creer avec success",
+                    'icon' => 'success',
+                ]);
+
+                Session::forget('cart');
+
+                return $this->redirect(route("checkoutStatus", $payment->transaction_numero), false);
+
+            }catch(\Exception $e){
+
+                $this->dispatch('error', ['message' =>$e->getMessage(), 'title' => 'Error',  'icon' => 'error']);
+
             }
-            $this->dispatch('notify', [
-                'message' => "Mission creer avec success",
-                'icon' => 'success',
-            ]);
 
-            Session::forget('cart');
 
-            return $this->redirect(route("checkoutStatus", $payment->transaction_number), false);
         }
     }
 
@@ -268,6 +286,7 @@ implements HasForms
                     'total_amount' => $value['basic_price'] * $value['quantity'],
                     'quantity' => $value['quantity'],
                     'type' => 'service',
+                    'status' => 'pending',
 
                 ];
 
@@ -286,7 +305,7 @@ implements HasForms
         } catch (\Exception $e) {
             // En cas d'erreur, annuler la transaction de base de données
 
-            dd($e->getMessage());
+            $this->dispatch('error', ['message' => $e->getMessage(), 'title' => 'Error',  'icon' => 'error']);
         };
     }
 

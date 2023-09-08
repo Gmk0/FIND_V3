@@ -14,7 +14,7 @@ export default (userOptions = {}) => ({
         ))
     );
     this.$watch("isShowPopper", (val) => val && this.popperInstance.update());
-    
+
     Alpine.effect(
       () => Alpine.store("breakpoints").name && (this.isShowPopper = false)
     );
