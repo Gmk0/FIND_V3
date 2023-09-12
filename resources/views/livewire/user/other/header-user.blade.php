@@ -96,7 +96,7 @@
                             </li>
                             <li>
 
-                                <x-linkUser href="{{--route('messages')--}}"
+                                <x-linkUser href="{{route('MessageUser')}}"
                                     :active="request()->routeIs('MessageUser')">
                                     <ion-icon name="mail-outline" class="w-5 h-5"></ion-icon>
                                     <span>

@@ -11,7 +11,7 @@ use NotificationChannels\PusherPushNotifications\PusherChannel;
 use Pusher\PushNotifications\PushNotifications;
 use NotificationChannels\PusherPushNotifications\PusherMessage;
 
-class OrderCreatedNotification extends Notification
+class OrderCreatedNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 

@@ -19,4 +19,12 @@ class UserSetting extends Model
         'theme',
         'user_id',
     ];
+
+
+    protected $casts=[
+        'push_notifications_enabled'=>'boolean',
+        'email_notifications_enabled'=>'boolean',
+        'send_invoice_enabled' => 'boolean',
+        'number_notifications_enabled' => 'boolean',
+    ];
 }

@@ -53,9 +53,8 @@ class Service extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer',
+
         'tag' => 'array',
-        'user_id' => 'string',
         'basic_price' => 'decimal:2',
         'sub_category' => 'array',
         'files' => 'array',
@@ -69,6 +68,8 @@ class Service extends Model
         'freelance_id' => 'integer',
         'category_id' => 'integer',
     ];
+
+
 
 
 
@@ -150,7 +151,7 @@ class Service extends Model
         parent::boot();
 
         static::creating(function ($service) {
-            $service->service_number = 'SV' . date('YmdH');
+            $service->service_numero = 'SV' . date('YmdHms');
             $service->freelance_id = auth()->user()->freelance->id;
         });
     }

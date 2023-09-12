@@ -15,6 +15,8 @@ class MissionList extends Component
 {
     public $title = "Mes Missions";
     use WithPagination;
+
+
     public function render()
     {
         return view('livewire.user.mission.mission-list', ['projets' => Mission::where('user_id', auth()->user()->id)->paginate(10),]);

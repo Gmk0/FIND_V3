@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 
 class Freelance extends Model
 {
@@ -45,16 +46,23 @@ class Freelance extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'langue' => 'array',
-        'diplome' => 'array',
-        'certificat' => 'array',
-        'competences' => 'array',
+        'langue' =>
+        AsArrayObject::class,
+        'diplome' =>
+        AsArrayObject::class,
+        'certificat' =>
+        AsArrayObject::class,
+        'competences' =>
+        AsArrayObject::class,
         'taux_journalier' => 'decimal:2',
-        'comptes' => 'array',
+        //'solde' => 'decimal:2',
+        'comptes' =>
+        AsArrayObject::class,
         'sub_categorie' => 'array',
-        'localisation' => 'array',
+        'localisation' =>
+        AsArrayObject::class,
+        'user_id' => 'string',
         'category_id' => 'integer',
-        'solde' => 'decimal:2',
         'realisations' => 'array',
     ];
 

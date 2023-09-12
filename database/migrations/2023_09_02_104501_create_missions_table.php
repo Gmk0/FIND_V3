@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained();
             $table->json('sub_category')->nullable();
             $table->text('description')->nullable();
+            $table->longText('exigences')->nullable();
             $table->json('files')->nullable();
             $table->decimal('budget', 8, 2);
             $table->date('begin_mission')->nullable();

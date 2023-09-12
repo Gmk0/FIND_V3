@@ -30,7 +30,7 @@
                     <p class="mb-4 text-base text-gray-600 md:mb-2 dark:text-gray-300">Date de livraison :
 
                         <span class="text-green-500">{{$order->feedback->delai_livraison_estimee ?
-                            $Order->feedback->delai_livraison_estimee->formatLocalized('%e
+                            $order->feedback->delai_livraison_estimee->formatLocalized('%e
                             %B %G'):'Pas
                             disponible'}}</span>
                     </p>

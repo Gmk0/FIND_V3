@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Events\ProgressOrderEvent;
+use App\Notifications\MissionProgress;
+use App\Notifications\OrderProgress;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -33,15 +36,80 @@ class FeedbackService extends Model
         'order_id' => 'integer',
         'mission_id' => 'integer',
         'delai_livraison_estimee' => 'datetime',
+        'is_publish'=>'boolean'
 
     ];
+
+    public function notifyUser()
+    {
+        try{
+            $order = $this->order;
+            if ($order) {
+                $user = $order->user;
+
+                if ($user) {
+
+                    $user->notify(new OrderProgress($this));
+
+
+             broadcast(new ProgressOrderEvent($this));
+                }
+            }
+
+        }catch(\Exception $e){
+
+
+        }
+
+    }
+
+    public function notifyUserProjet()
+    {
+        $project = $this->project;
+        if ($project) {
+            $user = $project->user;
+            if ($user) {
+
+                $user->notify(new MissionProgress($this));
+            }
+        }
+    }
+
+    public function notifyFreelance()
+    {
+        $user = $this->order->service->freelance->user;
+
+
+
+
+
+        if ($user) {
+
+            $user->notify(new feedbackNotification($this));
+        }
+    }
+
+    public function notifyFreelanceProjet(User $user)
+    {
+
+
+
+
+
+
+        if ($user) {
+
+            $user->notify(new feedbackNotification($this));
+        }
+    }
+
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);
     }
 
-    public function project(): BelongsTo
+    public function mission(): BelongsTo
     {
-        return $this->belongsTo(Project::class);
+        return $this->belongsTo(Mission::class);
     }
 }

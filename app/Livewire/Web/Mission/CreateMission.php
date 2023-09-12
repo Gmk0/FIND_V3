@@ -16,7 +16,7 @@ use Filament\Forms\Components\FileUpload;
 use Livewire\WithFileUploads;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\{TextInput, Textarea, DatePicker};
+use Filament\Forms\Components\{TextInput, Textarea, DatePicker, RichEditor};
 use Livewire\Attributes\Layout;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -35,7 +35,7 @@ class CreateMission extends Component implements HasForms
     use InteractsWithForms;
     use WithFileUploads;
     public $fichier = null;
-    public $mission = ['title' => '', 'description' => '', 'category' => '', 'tax' => '', 'begin' => '', 'end' => ''];
+    public $mission = ['title' => '', 'description' => '', 'category' => '', 'tax' => '', 'begin' => '', 'end' => '','exigences'=>''];
 
 
 
@@ -91,6 +91,9 @@ class CreateMission extends Component implements HasForms
                                 ->minDate(now())
                                 ->native(false),
                         ]),
+                    RichEditor::make('mission.exigences')->label('Exigences Pour la mission')
+
+                        ,
                         TextInput::make('mission.tax')->label('Taux journalier')
                             ->numeric()
                             ->prefix('$')
@@ -130,6 +133,7 @@ BLADE))),
                 'budget' => $data['mission']['tax'],
                 'begin_mission' => $data['mission']['begin'],
                 'end_mission' => $data['mission']['end'],
+                'exigences' => $data['mission']['exigences'],
                 'progress' => 0,
 
 

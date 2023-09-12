@@ -13,7 +13,7 @@ use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
 
 #[Layout('layouts.web-layout')]
-#[Title('Creer missiion')]
+#[Title('Service Categorie')]
 
 
 class ServiceByCategory extends Component

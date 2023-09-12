@@ -38,28 +38,28 @@
             <ion-icon name="person-outline" class="w-4 h-4"></ion-icon>
             <span class="ml-2">{{__('Dashboard')}}</span>
         </x-dropdown-link>
-        <x-dropdown-link href="{{ url('/user') }}">
+        <x-dropdown-link href="{{ url('/user/profile') }}">
             <ion-icon name="person-outline" class="w-4 h-4"></ion-icon>
             <span class="ml-2">{{__('Profile')}}</span>
         </x-dropdown-link>
 
         @if(Auth::user()->freelance()->exists())
 
-        <x-dropdown-link href="{{--route('freelance.dashboard')--}}">
+        <x-dropdown-link href="{{route('freelance.dashboard')}}">
             <ion-icon name="person-outline" class="w-4 h-4"></ion-icon>
             <span class="ml-2">{{__('Dashbord Freelance')}}</span>
         </x-dropdown-link>
         @endif
 
 
-        <x-dropdown-link href="{{-- route('listProjet') --}}">
+        <x-dropdown-link href="{{ route('MissionUser')}}">
             <ion-icon name="albums-outline" class="w-4 h-4"></ion-icon>
-            <span class="ml-2">{{__('Mes projet')}}</span>
+            <span class="ml-2">{{__('Mes mission')}}</span>
         </x-dropdown-link>
 
         <x-dropdown-link href="{{-- route('parametreUser') --}}">
             <ion-icon name="settings-outline" class="w-4 h-4"></ion-icon>
-            <span class="ml-2">{{__('messages.Settings')}}</span>
+            <span class="ml-2">{{__('Parametres')}}</span>
         </x-dropdown-link>
 
         <x-dropdown-link href="{{ url('/user/favoris') }}">
@@ -92,7 +92,7 @@
         </button>
 
 
-        <x-dropdown-link href="{{-- route('messages') --}}">
+        <x-dropdown-link href="{{route('MessageUser')}}">
             <ion-icon name="chatbox-ellipses-outline" class="w-4 h-4"></ion-icon>
 
             <span class="ml-2">{{__('Mes messages')}}</span>

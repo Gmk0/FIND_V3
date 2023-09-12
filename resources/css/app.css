@@ -24,6 +24,16 @@
     }
 }
 
+ol {
+    list-style-type: decimal;
+    padding-left: 1em;
+}
+
+.rapport img{
+
+    width: 30%;
+}
+
 
 
 .button-amber {

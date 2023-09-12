@@ -5,6 +5,7 @@ namespace App\Livewire\User\Commande;
 use App\Models\Order;
 use Livewire\Component;
 use Livewire\Attributes\{Layout, Title};
+use App\Events\ProgressOrderEvent;
 
 #[Layout('layouts.user-layout')]
 
@@ -45,6 +46,19 @@ class CommandeOneView extends Component
             session()->flash('error', 'Route inexistante');
             return $this->redirectRoute('commandeUser');
         }
+    }
+
+    public function  getListeners()
+    {
+
+        $auth_id = auth()->user()->id;
+        return [
+
+            "echo-private:notify.{$auth_id},ProgressOrderEvent" => '$refresh', //
+            //'ServiceOrdered' => '$refresh',
+
+
+        ];
     }
     public function render()
     {

@@ -100,4 +100,9 @@ class User extends Authenticatable
         return $this->belongsToMany(Freelance::class, 'favorites')->withTimestamps()->orderByDesc('favorites.created_at');
     }
 
+    public function getIdFreelance()
+    {
+        return $this->freelance->id;
+    }
+
 }

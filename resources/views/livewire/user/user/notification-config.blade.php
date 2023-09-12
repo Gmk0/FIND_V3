@@ -6,69 +6,69 @@
 
             <div class="flex items-center">
 
-                <label>
-
-                    <x-filament::input.checkbox wire:model.live="enableEmail" wire:change="toogle()" />
-                    <span class="dark:text-gray-200">
-                                Recevoir des notifications par e-mail
-                                </span>
-
-                </label>
-
-            </div>
-            <div class="flex items-center">
-
-                <label>
-
-                    <x-filament::input.checkbox wire:model.live="enablePush" wire:change="toogle()" />
-                    <span class="dark:text-gray-200">
-                        Recevoir des notifications push
-                    </span>
-
-                </label>
-
-
-            </div>
-            <div class="flex items-center">
-
-
-                <label>
-
-                    <x-filament::input.checkbox wire:model="enablePhone" wire:change="toogle()" />
-                     <span class="dark:text-gray-200">
-                        Recevoir des notifications par telephone
-                    </span>
-
-                </label>
+                <div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" class="sr-only peer" wire:model.live="enablePush" x-on:change='$wire.toogle()'>
+                        <div
+                            class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+                        </div>
+                        <span class="ml-3 text-sm font-medium text-gray-400 dark:text-gray-500">Recevoir des notifications par push</span>
+                    </label>
+                </div>
 
 
             </div>
 
             <div class="flex items-center">
 
-                <label>
+                <div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" class="sr-only peer" wire:model.live="enableEmail" x-on:change='$wire.toogle()'>
+                        <div
+                            class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+                        </div>
+                        <span class="ml-3 text-sm font-medium text-gray-400 dark:text-gray-500">Recevoir des notifications par email
+                            </span>
+                    </label>
+                </div>
 
-                    <x-filament::input.checkbox  wire:change="toogle()" />
-                     <span class="dark:text-gray-200">
-                        Recevoir des notifications par telephone
-                    </span>
 
-                </label>
+            </div>
+
+            <div class="flex items-center">
+
+                <div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" class="sr-only peer" wire:model.live="enablePhone" x-on:change='$wire.toogle()'>
+                        <div
+                            class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+                        </div>
+                        <span class="ml-3 text-sm font-medium text-gray-400 dark:text-gray-500">Recevoir des notifications par telephone
+                        </span>
+                    </label>
+                </div>
 
 
             </div>
             <div class="flex items-center">
 
-                <label>
+                <div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" class="sr-only peer" wire:model.live="enableInvoie" x-on:change='$wire.toogle()'>
+                        <div
+                            class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+                        </div>
+                        <span class="ml-3 text-sm font-medium text-gray-400 dark:text-gray-500">Recevoir les facture par
+                            telephone
+                        </span>
+                    </label>
+                </div>
 
-                    <x-filament::input.checkbox wire:model.live='enableInvoie' wire:change="toogle()" />
-                     <span class="dark:text-gray-200">
-                        Recevoir des facture par mail
-                    </span>
-
-                </label>
 
             </div>
+
+
+
         </div>
 
     </div>

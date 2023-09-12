@@ -69,10 +69,14 @@ class FreelanceCard extends Component
             // $this->emitTo('user.conversation.body-message', 'loadConversation', $conversation, $freelance->id);
 
 
-            return redirect()->route('MessageUser');
+            return $this->redirect(route('MessageUser'), true);
         } catch (\Exception $e) {
 
-            $this->dispatchBrowserEvent('error', ['message' => $e->getMessage()]);
+            $this->dispatch('error', [
+                'message' => "une erreur s'est produite" . $e->getMessage(),
+                'icon' => 'error',
+                'title' => 'error'
+            ]);
         }
     }
 

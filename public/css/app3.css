@@ -1619,7 +1619,7 @@ code.inline-code {
     print-color-adjust: exact
 }
 
-.btn {
+.btn2 {
     display: inline-flex;
     cursor: pointer;
     align-items: center;
@@ -1635,12 +1635,12 @@ code.inline-code {
     transition-duration: .2s
 }
 
-.btn:focus {
+.btn2:focus {
     outline: 2px solid transparent;
     outline-offset: 2px
 }
 
-.btn:disabled {
+.btn2:disabled {
     pointer-events: none
 }
 

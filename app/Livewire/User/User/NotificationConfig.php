@@ -25,11 +25,14 @@ class NotificationConfig extends Component
 
 
 
+
         if ($this->userSetting != null) {
 
             $this->enablePush = $this->userSetting->push_notifications_enabled;
             $this->enableEmail
                 = $this->userSetting->email_notifications_enabled;
+
+
             $this->enablePhone
                 = $this->userSetting->number_notifications_enabled;
             $this->enableInvoie
@@ -42,49 +45,52 @@ class NotificationConfig extends Component
     public function toogle()
     {
 
-        //dd('lala');
-        if ($this->userSetting != null) {
-            $this->userSetting->push_notifications_enabled
-                =   $this->enablePush;
-            $this->userSetting->email_notifications_enabled =   $this->enableEmail;
-            $this->userSetting->number_notifications_enabled =   $this->enablePhone;
-            $this->userSetting->send_invoice_enabled =   $this->enableInvoie;
+        try {
+            if ($this->userSetting != null) {
 
-            $auth = auth()->user();
 
-            $auth->update();
-            $this->userSetting->update();
+               // dd($this->enablePush);
+                $this->userSetting->push_notifications_enabled = $this->enablePush;
+                $this->userSetting->email_notifications_enabled =   $this->enableEmail;
+                $this->userSetting->number_notifications_enabled =   $this->enablePhone;
+                $this->userSetting->send_invoice_enabled = $this->enableInvoie;
 
-            Notification::make()
-            ->title('saved  successfully')
-            ->success()
-            ->send();
+                $auth = auth()->user();
 
-           // $this->notification()->success($title = "Vos modifications ont éte bien sauvergader", );
-            $this->dispatch('refresh');
-        } else {
+                $auth->update();
+                $this->userSetting->update();
 
-            $userSetting = new UserSetting();
-            $userSetting->user_id = auth()->user()->id;
-            $userSetting->push_notifications_enabled = $this->enablePush;
-            $userSetting->email_notifications_enabled = $this->enableEmail;
-            $userSetting->number_notifications_enabled = $this->enablePhone;
-            $userSetting->send_invoice_enabled = $this->enableInvoie;
-            $userSetting->save();
 
-            dd($userSetting);
+                $this->dispatch('notify', ['message' => "Modification a porter avec success", 'icon' => 'success',]);
 
-            $auth = auth()->user();
+                $this->dispatch('refresh');
+            } else {
 
-            $auth->update();
+                $userSetting = new UserSetting();
+                $userSetting->user_id = auth()->user()->id;
+                $userSetting->push_notifications_enabled = $this->enablePush;
+                $userSetting->email_notifications_enabled = $this->enableEmail;
+                $userSetting->number_notifications_enabled = $this->enablePhone;
+                $userSetting->send_invoice_enabled = $this->enableInvoie;
+                $userSetting->save();
 
-            Notification::make()
-            ->title('saved  successfully')
-            ->success()
-            ->send();
-          //  $this->notification()->success($title = "Vos modifications ont éte bien sauvergader",);
-            $this->dispatch('refresh');
+
+
+                $auth = auth()->user();
+
+                $auth->update();
+
+                $this->dispatch('notify', ['message' => "Modification a porter avec success", 'icon' => 'success',]);
+                $this->dispatch('refresh');
+            }
+
+        }catch(\Exception $e){
+            dd($e->getMessage());
+
         }
+
+
+
     }
 
     public function render()

@@ -15,10 +15,14 @@ return new class extends Migration
 
         Schema::create('conversations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('freelance_id')->constrained();
-            $table->foreignUuid('user_id')->constrained();
-            $table->enum('status', ["pending","finished","blocked"]);
+            $table->foreignId('freelance_id')->constrained()->onDelete('cascade');
+            $table->foreignUuid('user_id')->constrained()->onDelete('cascade');
+            $table->timestamp('last_time_message');
+
+            $table->enum('status', ["pending", "finished"]);
+            $table->boolean('is_blocked')->default(false);
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::enableForeignKeyConstraints();

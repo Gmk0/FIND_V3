@@ -237,32 +237,6 @@
 
                             </div>
                             {{$this->addressForm}}
-                            {{--
-                            <div class="flex flex-col gap-2">
-
-
-                                <x-jet-input>
-                                    <span>Rue</span>
-                                </x-jet-input>
-                                <x-jet-input>
-                                    <span>Quartier</span>
-                                </x-jet-input>
-                                <x-jet-input>
-                                    <span>Commune</span>
-                                </x-jet-input>
-                                <x-jet-input>
-                                    <span>Ville</span>
-                                </x-jet-input>
-
-
-
-                                <x-input wire:model.defer="address.rue" placeholder="Rue" />
-                                <x-input wire:model.defer="address.quartier" placeholder="Quartier" />
-                                <x-input wire:model.defer="address.commune" placeholder="Commune" />
-                                <x-input wire:model.defer="address.ville" placeholder="Ville" />
-
-                            </div>
-                            --}}
 
                         </div>
 

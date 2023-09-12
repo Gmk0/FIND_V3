@@ -31,13 +31,14 @@
                     @endif
                 </div>
                 <div class="flex gap-4 mt-4">
-                    @if($projet->status=="active")
+                    @if($projet->status=="active" || $projet->status=="completed" )
                     <div>
 
-                        <x-filament::button  tag="a" href="{{--route('PropostionProjet',[$projet->id])--}}" color="success">
+
+
+                        <x-filament::button  tag="a" href="{{route('projetEvolution',[$projet->getApprovedMissionResponse()->response_numero])}}" color="success">
                             Evolution
                         </x-filament::button>
-
 
                         {{--
                         <x-button href="{{route('PropostionProjet',[$projet->id])}}" positive label="Evolution" />

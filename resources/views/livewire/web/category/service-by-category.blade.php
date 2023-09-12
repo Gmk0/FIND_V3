@@ -1,4 +1,4 @@
-<div class="pt-20">
+<div class="">
     <div x-data="{isOpen:false}" class="min-h-screen lg:py-8 md:px-8">
 
         <div class="px-2">

@@ -8,7 +8,7 @@ import AOS from 'aos';
 import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
 import collapse from '@alpinejs/collapse'
 
-//import jQuery from 'jquery';
+import jQuery from 'jquery';
 import Swal from 'sweetalert2';
 
 //import FormsAlpinePlugin from '../../vendor/filament/forms/dist/module.esm';
@@ -95,7 +95,7 @@ import SimpleBar from "simplebar";
 //Alpine.plugin(NotificationsAlpinePlugin);
 
 
-//window.$ = jQuery;
+window.$ = jQuery;
 
 window.Swal = Swal;
 
@@ -188,14 +188,21 @@ document.addEventListener('livewire:navigated', () => {
 
 Livewire.on('notify', function (event) {
 
-    Swal.fire({
+   /* Swal.fire({
         position: 'top-end',
         toast: event[0].toast ? event[0].toast : true,
         icon: event[0].icon,
         title: event[0].message,
         showConfirmButton: false,
         timer: 1500
-    })
+    }); */
+
+    notification({
+        text: event[0].message,
+        variant: event[0].icon,
+        duration: 1500,
+        position: 'right-bottom'
+    });
 })
 Livewire.on('error', function (event) {
 

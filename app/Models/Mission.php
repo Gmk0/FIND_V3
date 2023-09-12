@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Mission extends Model
 {
@@ -28,6 +29,7 @@ class Mission extends Model
         'begin_mission',
         'end_mission',
         'progress',
+        'exigences',
         'transaction_id',
         'is_paid',
         'status',
@@ -47,6 +49,7 @@ class Mission extends Model
         'begin_mission' => 'date',
         'end_mission' => 'date',
         'transaction_id' => 'integer',
+
         'is_paid' => 'datetime',
         'user_id' => 'string',
 
@@ -58,7 +61,7 @@ class Mission extends Model
         static::creating(function ($model) {
 
             $model->user_id = auth()->user()->id;
-            $model->mission_numero = 'MS' . date('YmdH');
+            $model->mission_numero = 'MS' . date('YmdHms');
         });
 
         static::created(function ($model) {
@@ -95,13 +98,39 @@ class Mission extends Model
         return $this->belongsTo(Transaction::class);
     }
 
-    public function projectResponses(): HasMany
+    public function rapports(): HasMany
     {
-        return $this->hasMany(ProjectResponse::class);
+        return $this->HasMany(Rapport::class);
+    }
+    public function MissionResponses(): HasMany
+    {
+        return $this->hasMany(MissionResponse::class);
     }
 
-    public function conversationProjects(): HasMany
+
+    public function getApprovedMissionResponse()
     {
-        return $this->hasMany(ConversationProject::class);
+        return $this->missionResponses()->where('status', 'approved')->first();
     }
+
+
+
+
+    public function feedbackmission(): HasOne
+    {
+        return $this->hasOne(FeedbackService::class, 'mission_id');
+    }
+
+
+    public function isFinish()
+    {
+
+        if ($this->status == 'completed') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 }

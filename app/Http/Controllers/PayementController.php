@@ -98,6 +98,60 @@ class PayementController extends Controller
         }
     }
 
+
+    public function paiment_maxi_mission()
+    {
+        // Récupérer les données de la requête de confirmation de paiement
+        $status = request('status');
+        $reference = request('reference');
+        $method = ['last4' => request('Method'), 'brand' => "maxicash"];
+        // Ajouter d'autres paramètres de la requête que vous souhaitez traiter
+
+        // Vérifier le statut de paiement
+        if ($status === 'failed') {
+
+
+            // Rediriger vers une page d'échec
+            return redirect()->route('checkout')->withErrors(['message' => 'Une erreur s\'est produite.']);
+        } else if ($status === "success") {
+
+
+
+
+
+            try {
+                // Enregistrer les informations de paiement dans la table "Transaction"
+                $payment = new Transaction();
+               // $payment->amount = $cart->totalPrice;
+                $payment->payment_method = $method;
+                $payment->payment_token = $reference;
+                $payment->status = 'completed';
+
+
+
+                $payment->save();
+
+
+                // return view('status.success', ['order' => $payment->transaction_numero]);
+                return redirect()->route('checkoutStatus', $payment->transaction_number);
+                //return response()->json(['success' => 'Paiement traité avec succès']);
+            } catch (\Exception $e) {
+                // En cas d'erreur, annuler la transaction de base de données
+
+
+
+                return redirect()->route('checkout')->withErrors(['message' => $e->getMessage()]);
+            }
+
+
+
+
+            return redirect()->route('checkout')->withErrors(['message' => 'Une erreur s\'est produite.']);
+        } else {
+            return redirect()->route('checkout')->withErrors(['message' => 'Une erreur s\'est produite.']);
+        }
+    }
+
     function saveService()
     {
 

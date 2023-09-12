@@ -28,7 +28,7 @@ use Livewire\WithPagination;
 
 #[Layout('layouts.web-layout')]
 
-#[Title('Creer missiion')]
+#[Title('Freelance')]
 
 class FindFreelance extends Component
 

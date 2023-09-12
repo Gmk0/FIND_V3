@@ -16,12 +16,22 @@ class Conversation extends Model
      *
      * @var array
      */
+
+
     protected $fillable = [
         'freelance_id',
         'user_id',
         'status',
+        'is_blocked',
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            $model->user_id = auth()->user()->id;
+        });
+    }
     /**
      * The attributes that should be cast to native types.
      *
@@ -30,7 +40,9 @@ class Conversation extends Model
     protected $casts = [
         'id' => 'integer',
         'freelance_id' => 'integer',
+        'user_id' => 'string',
     ];
+
 
     public function user(): BelongsTo
     {
