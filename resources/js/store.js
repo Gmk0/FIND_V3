@@ -11,7 +11,13 @@ export default {
         let firstTime = true;
 
         // Initialisation à partir de localStorage
-        this.isDarkModeEnabled = this.getDarkModeFromLocalStorage();
+
+
+        this.isDarkModeEnabled = JSON.parse(localStorage.getItem("_x_darkMode_on") || "false");
+
+
+
+
 
         this.isSidebarExpanded =
             document.querySelector(".sidebar") &&
@@ -20,10 +26,13 @@ export default {
 
         // Mettre à jour localStorage chaque fois que isDarkModeEnabled change
         Alpine.effect(() => {
-            localStorage.setItem('_x_darkMode_on', this.isDarkModeEnabled);
+
             this.isDarkModeEnabled
                 ? document.documentElement.classList.add("dark")
                 : document.documentElement.classList.remove("dark");
+
+
+            localStorage.setItem("_x_darkMode_on", JSON.stringify(this.isDarkModeEnabled));
         });
         Alpine.effect(() => {
             this.isMonochromeModeEnabled
@@ -52,13 +61,6 @@ export default {
         firstTime = false
 
 
-    },
-
-
-
-    getDarkModeFromLocalStorage() {
-        const storedValue = localStorage.getItem('_x_darkMode_on');
-        return storedValue ? JSON.parse(storedValue) : false;
     },
 
 

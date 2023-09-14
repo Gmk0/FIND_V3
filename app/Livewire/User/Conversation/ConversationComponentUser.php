@@ -9,16 +9,11 @@ use App\Models\Message;
 use Exception;
 use WireUi\Traits\Actions;
 use App\Events\MessageSent;
-use Livewire\Attributes\{Layout, Title};
-use Filament\Tables\Actions\ActionGroup;
-use Illuminate\Contracts\Pagination\Paginator;
-
-#[Layout('layouts.chat-layout')]
-#[Title('User converstaion')]
 
 
 class ConversationComponentUser extends Component
 {
+    use Actions;
     public $conversations;
     public $deleteUserModal;
     public $confirmConversation;

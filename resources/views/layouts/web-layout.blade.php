@@ -5,6 +5,8 @@
 
 <body class="font-sans antialiased bg-white dark:bg-gray-900">
 
+    <x-notifications z-index="z-[200]" />
+
 
 
     @livewire('web.header-web')

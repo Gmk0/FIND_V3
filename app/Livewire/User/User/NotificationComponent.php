@@ -11,16 +11,21 @@ use App\Events\OrderCreated;
 
 //use App\Events\MessageSent;
 
+use WireUi\Traits\Actions;
+
 class NotificationComponent extends Component
 {
+    use Actions;
     public $notifications;
+
 
     public function  getListeners()
     {
 
         $auth_id = auth()->user()->id;
         return [
-           // "echo-private:notify.{$auth_id},ProgressOrderEvent" => '$refresh',
+            "echo-private:notify.{$auth_id},ProgressOrderEvent" => '$refresh',
+            "echo-private:notify.{$auth_id},ProgressOrderEvent" => 'Notify',
             "echo-private:notify.{$auth_id},OrderCreated" => '$refresh',
             //"echo-private:notify.{$auth_id},ProjectResponse" => '$refresh',
             //'ServiceOrdered' => '$refresh',
@@ -30,6 +35,14 @@ class NotificationComponent extends Component
 
 
         ];
+    }
+
+    public function Notify(){
+        $this->notification()->info(
+            $title = "Information",
+            $description = "vous a recu des modifications de votre commande",
+        );
+
     }
 
     public function markRead($id)

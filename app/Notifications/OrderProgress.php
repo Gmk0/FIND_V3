@@ -55,37 +55,60 @@ class OrderProgress extends Notification implements ShouldQueue
 
     public function toPushNotification($notifiable)
     {
-try {
+                try {
 
 
-    $beamsClient = new PushNotifications(array(
-        "instanceId" => config('services.pusher.beams_instance_id'),
-        "secretKey" => config('services.pusher.beams_secret_key'),
-    ));
+            $beamsClient = new PushNotifications(array(
+                "instanceId" => config('services.pusher.beams_instance_id'),
+                "secretKey" => config('services.pusher.beams_secret_key'),
+            ));
 
 
 
 
-    $interests = "App.Models.User.{$notifiable->id}";
 
-    $data = array(
-        "web" => array(
-            "notification" => array(
-                "title" => "Nouvelle commande !",
-                "body" => 'Nouvelle progression de ' . $this->feedback->order->progress . '% pour le service ' . $this->feedback->order->service->title,
-                "deep_link" => "http://localhost:8000/user/commandes/" . $this->feedback->order->order_numero,
-                "icon" => "http://localhost:8000/images/logo/find_01.png",
-                "data" => array(
-                    "foo" => "bar",
-                    "baz" => "qux",
-                ),
-            ),
-        ),
-    );
+            $interests = "App.Models.User.{$notifiable->id}";
+                    $data = array(
+                        "web" => array(
+                            "notification" => array(
+                                "title" => "Nouvelle commande !",
+                                "body" => 'Nouvelle progression de ' . $this->feedback->order->progress . '% pour le service ' . $this->feedback->order->service->title,
+                                "deep_link" => "http://localhost:8000/user/commandes/" . $this->feedback->order->order_numero,
+                                "icon" => "http://localhost:8000/images/logo/find_01.png",
+                                "data" => array(
+                                    "foo" => "bar",
+                                    "baz" => "qux",
+                                ),
+                            ),
+                        ),
+                    );
 
-    $beamsClient->publishToInterests(array($interests), $data);
-}catch(\Exception $e){
+                $beamsClient->publishToInterests(array($interests), $data);
 
-}
+            }catch(\Exception $e){
+
+                dd($e->getMessage());
+            }
+    }
+
+
+    public function toPushNotification($notifiable)
+    {
+
+        try{
+
+            $message = "Your {$notifiable->user} account was approved!";
+
+            return PusherMessage::create()
+                ->web()
+                ->badge(1)
+                ->body($message);
+
+
+        }catch(\Exception $e){
+
+            dd($e->getMessage());
+        }
+
     }
 }

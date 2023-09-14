@@ -39,6 +39,14 @@ class PayementController extends Controller
         if ($status === 'failed') {
 
 
+            $payment = Transaction::where('payment_token', $reference)->first();
+
+
+            $payment->payment_token = $reference;
+            $payment->status = 'failed';
+            $payment->update();
+
+
             // Rediriger vers une page d'échec
             return redirect()->route('checkout')->withErrors(['message' => 'Une erreur s\'est produite.']);
         } else if ($status === "success") {
@@ -46,19 +54,18 @@ class PayementController extends Controller
 
             $cart = Session::has('cart') ? Session::get('cart') : null;
             $datas = $this->saveService();
-
-
             try {
-                // Enregistrer les informations de paiement dans la table "Transaction"
-                $payment = new Transaction();
-                $payment->amount = $cart->totalPrice;
+
+                $payment = Transaction::where('payment_token', $reference)->first();
+
+
                 $payment->payment_method = $method;
                 $payment->payment_token = $reference;
                 $payment->status = 'completed';
 
 
 
-                $payment->save();
+                $payment->update();
 
                 // Parcourir toutes les commandes pour les mettre à jour
                 foreach ($datas as $order) {
@@ -79,7 +86,7 @@ class PayementController extends Controller
                 // Retourner une réponse de succès
                 Session::forget('cart');
                 // return view('status.success', ['order' => $payment->transaction_numero]);
-                return redirect()->route('checkoutStatus', $payment->transaction_number);
+                return redirect()->route('checkoutStatus', $payment->transaction_numero);
                 //return response()->json(['success' => 'Paiement traité avec succès']);
             } catch (\Exception $e) {
                 // En cas d'erreur, annuler la transaction de base de données
@@ -126,8 +133,6 @@ class PayementController extends Controller
                 $payment->payment_method = $method;
                 $payment->payment_token = $reference;
                 $payment->status = 'completed';
-
-
 
                 $payment->save();
 

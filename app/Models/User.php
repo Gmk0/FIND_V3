@@ -19,6 +19,7 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+    public $pushNotificationType = 'users';
 
     public $incrementing = false;
     protected $keyType = 'string';
@@ -55,6 +56,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'id' => 'string',
+        'last_activity' => 'datetime:Y-m-d H:i:s',
     ];
 
     /**
@@ -104,5 +106,11 @@ class User extends Authenticatable
     {
         return $this->freelance->id;
     }
+
+    public function routeNotificationForPusherPushNotifications($notification): string
+    {
+        return 'App.Models.User.' . $this->id;
+    }
+
 
 }

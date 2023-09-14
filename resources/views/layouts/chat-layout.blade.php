@@ -1,12 +1,14 @@
 <!doctype html>
-<html class='html2' lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html class='html2' lang="{{ str_replace('_', '-', app()->getLocale()) }}" >
 
 @include('include.head')
 
 
 <body x-data
-    class="@isset($isSidebarOpen) {{ $isSidebarOpen === 'true' ? 'is-sidebar-open' : '' }} @endisset is-header-blur has-min-sidebar">
+    class="@isset($isSidebarOpen) {{ $isSidebarOpen === 'true' ? 'is-sidebar-open' : '' }} @endisset is-header-blur  overflow-hidden has-min-sidebar">
 
+
+    <x-notifications />
 
 
     <!-- App preloader-->
@@ -16,7 +18,11 @@
 
     <!-- Page Wrapper -->
 
+    <main class="overflow-hidden">
         {{ $slot }}
+
+    </main>
+
 
 
 

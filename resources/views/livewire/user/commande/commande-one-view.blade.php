@@ -98,8 +98,8 @@
 
 
                         <div class="ml-4">
-                            <p class="text-sm text-gray-600 dark:text-gray-300">{{$order->service->freelance->name}}
-                            </p>
+                            <a href="{{route('profileFreelance',$order->service->freelance->identifiant)}}" class="text-sm text-gray-600 dark:text-gray-300">{{$order->service->freelance->user->name}}
+                            </a>
 
                         </div>
                     </div>
@@ -121,7 +121,7 @@
                     </h1>
 
 
-                    {{-- <div x-cloak x-show="open" x-collapse class="">
+                    <div x-cloak x-show="open" x-collapse class="">
 
                         @forelse ($order->rapports as $rappors)
                         <div>
@@ -139,7 +139,7 @@
                         @endforelse
 
 
-                    </div>--}}
+                    </div>
 
 
                 </div>
@@ -169,6 +169,10 @@
 
                         @if(empty($order->feedback->satisfaction) || empty($order->feedback->commentaires))
                         <div class="w-full">
+
+                            <x-filament::button x-on:click="$dispatch('open-modal', { id: 'evaluer' })" icon="" size="lg" color="success">
+                                Evaluer
+                            </x-filament::button>
                             {{--
                             <x-button wire:click='openModal()' spinner="openModal" positive class="mr-2"
                                 label='Evaluer' />-}}
@@ -190,7 +194,7 @@
                             {{-- <x-button primary wire:click="sendMessag()" spinner="sendMessag" label="contacter">--
                             </x-button>--}}
 
-                        <x-filament::button size="lg" x-on:click="contactMe = !contactMe" color="success">
+                        <x-filament::button x-on:click="$dispatch('open-modal', { id: 'contacter' })" color="success">
                             Contacter
                         </x-filament::button>
 
@@ -198,9 +202,9 @@
 
                         </div>
 
-                        <div class="hidden">
-                            {{-- <x-button wire:click="$toggle('confirmModal')" negative label="Annuler la commande">
-                            </x-button>--}}
+                        <div class="">
+                             <x-button wire:click="$toggle('confirmModal')" negative label="Annuler la commande">
+                            </x-button>
 
 
                         </div>
@@ -316,9 +320,7 @@
                                     icon-position="after">
                                     voir
                                 </x-filament::button>
-                                <a href="{{route('transactionOneUser',[$order->transaction->transaction_numero])}}"
-                                    wire:navigate
-                                    class="px-5 py-2 mb-2 mr-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">voir</a>
+
                                 {{-- <x-button positive
                                     href="{{route('transactionOneUser',[$Order->transaction->transaction_numero])}}"
                                     flat sm label="voir">
@@ -333,10 +335,10 @@
                             <p class="text-sm text-gray-600 dark:text-gray-300">Numéro de transaction :
                                 Pas de transaction en cours</p>
 
-                            {{-- <x-button label="Proceder au Paiment ">
+                             <x-button label="Proceder au Paiment ">
 
                             </x-button>
-                            --}}
+
 
                         </div>
 
@@ -346,183 +348,155 @@
                 </div>
             </div>
 
-            {{-- <x-modal wire:model.defer="modal">
-                <x-card title="Evaluation">
-
-                    <div class="flex flex-col">
-                        <div>
-
-                            <div class="flex items-center">
-                                <p class="mr-2">Notez votre satisfaction :</p>
-                                <div wire:ignore class="flex justify-center">
-                                    <div class="flex items-center ">
-                                        <input value="0" type="" class="hidden" id="rating" name="rating">
-                                        <label for="star1" class="text-gray-400 cursor-pointer"
-                                            onclick="updateRating(1)">
-                                            <svg id="star1" class="w-8 h-8 fill-current"
-                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                                <path
-                                                    d="M12 2L14.1386 7.26493L20.831 9.25184L16.6281 13.8239L17.9716 20.0291L12 17.6066L6.02837 20.0291L7.3719 13.8239L3.169 9.25184L9.86144 7.26493L12 2Z" />
-                                            </svg>
-                                        </label>
-                                        <label for="star2" class="text-gray-400 cursor-pointer"
-                                            onclick="updateRating(2)">
-                                            <svg id="star2" class="w-8 h-8 fill-current"
-                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                                <path
-                                                    d="M12 2L14.1386 7.26493L20.831 9.25184L16.6281 13.8239L17.9716 20.0291L12 17.6066L6.02837 20.0291L7.3719 13.8239L3.169 9.25184L9.86144 7.26493L12 2Z" />
-                                            </svg>
-                                        </label>
-                                        <label for="star3" class="text-gray-400 cursor-pointer"
-                                            onclick="updateRating(3)">
-                                            <svg id="star3" class="w-8 h-8 fill-current"
-                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                                <path
-                                                    d="M12 2L14.1386 7.26493L20.831 9.25184L16.6281 13.8239L17.9716 20.0291L12 17.6066L6.02837 20.0291L7.3719 13.8239L3.169 9.25184L9.86144 7.26493L12 2Z" />
-                                            </svg>
-                                        </label>
-                                        <label for="star4" class="text-gray-400 cursor-pointer"
-                                            onclick="updateRating(4)">
-                                            <svg id="star4" class="w-8 h-8 fill-current"
-                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                                <path
-                                                    d="M12 2L14.1386 7.26493L20.831 9.25184L16.6281 13.8239L17.9716 20.0291L12 17.6066L6.02837 20.0291L7.3719 13.8239L3.169 9.25184L9.86144 7.26493L12 2Z" />
-                                            </svg>
-                                        </label>
-                                        <label for="star5" class="text-gray-400 cursor-pointer"
-                                            onclick="updateRating(5)">
-                                            <svg id="star5" class="w-8 h-8 fill-current"
-                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                                <path
-                                                    d="M12 2L14.1386 7.26493L20.831 9.25184L16.6281 13.8239L17.9716 20.0291L12 17.6066L6.02837 20.0291L7.3719 13.8239L3.169 9.25184L9.86144 7.26493L12 2Z" />
-                                            </svg>
-                                        </label>
 
 
-                                    </div>
+
+            <x-filament::modal :close-by-clicking-away="false" slide-over id="evaluer">
+
+                <x-slot name="heading">
+                    Evaluation
+                </x-slot>
+
+                <div class="flex flex-col">
+                    <div>
+
+                        <div class="flex items-center">
+                            <p class="mr-2">Notez votre satisfaction :</p>
+                            <div wire:ignore class="flex justify-center">
+                                <div class="flex items-center ">
+                                    <input value="0" type="" class="hidden" id="rating" name="rating">
+                                    <label for="star1" class="text-gray-400 cursor-pointer" onclick="updateRating(1)">
+                                        <svg id="star1" class="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 2L14.1386 7.26493L20.831 9.25184L16.6281 13.8239L17.9716 20.0291L12 17.6066L6.02837 20.0291L7.3719 13.8239L3.169 9.25184L9.86144 7.26493L12 2Z" />
+                                        </svg>
+                                    </label>
+                                    <label for="star2" class="text-gray-400 cursor-pointer" onclick="updateRating(2)">
+                                        <svg id="star2" class="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 2L14.1386 7.26493L20.831 9.25184L16.6281 13.8239L17.9716 20.0291L12 17.6066L6.02837 20.0291L7.3719 13.8239L3.169 9.25184L9.86144 7.26493L12 2Z" />
+                                        </svg>
+                                    </label>
+                                    <label for="star3" class="text-gray-400 cursor-pointer" onclick="updateRating(3)">
+                                        <svg id="star3" class="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 2L14.1386 7.26493L20.831 9.25184L16.6281 13.8239L17.9716 20.0291L12 17.6066L6.02837 20.0291L7.3719 13.8239L3.169 9.25184L9.86144 7.26493L12 2Z" />
+                                        </svg>
+                                    </label>
+                                    <label for="star4" class="text-gray-400 cursor-pointer" onclick="updateRating(4)">
+                                        <svg id="star4" class="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 2L14.1386 7.26493L20.831 9.25184L16.6281 13.8239L17.9716 20.0291L12 17.6066L6.02837 20.0291L7.3719 13.8239L3.169 9.25184L9.86144 7.26493L12 2Z" />
+                                        </svg>
+                                    </label>
+                                    <label for="star5" class="text-gray-400 cursor-pointer" onclick="updateRating(5)">
+                                        <svg id="star5" class="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 2L14.1386 7.26493L20.831 9.25184L16.6281 13.8239L17.9716 20.0291L12 17.6066L6.02837 20.0291L7.3719 13.8239L3.169 9.25184L9.86144 7.26493L12 2Z" />
+                                        </svg>
+                                    </label>
+
+
                                 </div>
                             </div>
                         </div>
-
-                        <x-textarea wire:model.defer="feedback.description" />
+                    </div>
+                    <div class="mt-8">
+                        <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
+                            message</label>
+                        <textarea id="message" rows="4" wire:model='feedback.description'
+                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Write your thoughts here..."></textarea>
                     </div>
 
-                    <x-slot name="footer">
-                        <div class="flex justify-end gap-x-4">
-                            <x-button lg label="Cancel" x-on:click="close" />
-
-                            <x-button lg label="Envoyer" spinner="sendFeedback" wire:click="sendFeedback()" primary />
+                    <x-slot name="footerActions">
 
 
-                        </div>
+                        <x-filament::button outlined wire:click='sendFeedback' size="lg" color="success">
+                            Envoyer
+                        </x-filament::button>
+
+                        <x-filament::button outlined x-on:click='close' icon="" size="lg" color="danger">
+                            Fermer
+                        </x-filament::button>
+
+
+
                     </x-slot>
 
-                </x-card>
 
-            </x-modal>
+                </div>
+            </x-filament::modal>
+
+            <x-filament::modal slide-over id="contacter">
+
+                <x-slot name="heading">
+                    Contacter
+                </x-slot>
 
 
 
-            <div class="fixed bottom-0 right-0 z-10 mb-4 mr-4">
-
-
-                <div x-cloak x-show="message" class=" sm:block">
-                    <div class="w-64 rounded-lg shadow-lg h-96">
-                        <div class="flex flex-col h-full">
-                            <div class="flex items-center justify-between p-4 bg-gray-800 rounded-t-lg">
-                                <h3 class="text-lg font-medium text-white">Chat</h3>
-                                <button class="text-gray-400 hover:text-white focus:outline-none focus:text-white"
-                                    @click="message=false">
-                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M6 18L18 6M6 6l12 12"></path>
-                                    </svg>
-                                </button>
+                <div>
+                    <div>
+                        <div class="flex flex-col items-start justify-between mb-4">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-lg font-semibold">{{$order->service->freelance->user->name}}</span>
+                                <span
+                                    class="{{$order->service->freelance->user->is_online ?'bg-green-400':'bg-gray-400'}}   rounded-full h-2 w-2"></span>
+                                <span class="text-xs text-gray-500">{{$order->service->freelance->user->is_online ? 'En ligne':'pas
+                                    disponible'}}</span>
                             </div>
-                            <div class="flex-1 p-4 overflow-y-auto bg-white messages custom-scrollbar">
-                                <!-- contenu de la discussion -->
-
-                                <div class="flex flex-col space-y-2">
-
-                                    @if($freelance_id !== null)
-                                    @if($messages !== null)
-
-                                    @foreach($messages as $message)
-                                    <!-- message de l'expéditeur -->
-                                    <div
-                                        class="flex items-start {{auth()->id() == $message->sender_id ? 'justify-end':''}}">
-                                        <div
-                                            class="px-4 py-2 bg-blue-600 {{auth()->id() == $message->sender_id ? 'bg-gray-200':'bg-blue-600'}} rounded-lg text-white max-w-xs">
-                                            <p class="text-sm text-gray-700">{{$message->body}}</p>
-                                        </div>
-                                    </div>
-                                    <!-- message du récepteur -->
-
-                                    @endforeach
-                                    @else
-                                    <p>Ecrivez lui un message</p>
-                                    @endif
-                                    @else
-                                    <p>Chargement de messages</p>
-                                    @endif
+                            <span class="text-xs text-gray-500">Temps de réponse : 1 heures</span>
+                        </div>
+                    </div>
+                    <div>
+                        <form wire:submit.prevent='contacter' class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+                            <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
+                                <label for="comment" class="sr-only">Votre Message</label>
+                                <textarea wire:model.live='body' id="comment" rows="4"
+                                    class="w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
+                                    placeholder="Ecrire un message..." required></textarea>
+                            </div>
+                            <div class="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
+                                <button type="submit"
+                                    class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
+                                    Envoyer
+                                </button>
+                                <div class="flex pl-0 space-x-1 sm:pl-2">
 
                                 </div>
                             </div>
-                            <div class="flex items-center p-4 bg-gray-200 rounded-b-lg">
-
-                                <x-input wire:model.defer='body'></x-input>
-
-
-                                <button wire:click="sendMessage()" class="" wire:loading.attr='disabled'
-                                    @click="photoPreview=null">
-
-                                    <svg fill="#000000" class="w-8 h-8" version="1.1" id="Layer_1"
-                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        viewBox="0 0 512.001 512.001" xml:space="preserve">
-                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
-                                        </g>
-                                        <g id="SVGRepo_iconCarrier">
-                                            <g>
-                                                <g>
-                                                    <path
-                                                        d="M509.532,34.999c-2.292-2.233-5.678-2.924-8.658-1.764L5.213,225.734c-2.946,1.144-4.967,3.883-5.192,7.034 c-0.225,3.151,1.386,6.149,4.138,7.7l102.719,57.875l35.651,174.259c0.222,1.232,0.723,2.379,1.442,3.364 c0.072,0.099,0.131,0.175,0.191,0.251c1.256,1.571,3.037,2.668,5.113,3c0.265,0.042,0.531,0.072,0.795,0.088 c0.171,0.011,0.341,0.016,0.511,0.016c1.559,0,3.036-0.445,4.295-1.228c0.426-0.264,0.831-0.569,1.207-0.915 c0.117-0.108,0.219-0.205,0.318-0.306l77.323-77.52c3.186-3.195,3.18-8.369-0.015-11.555c-3.198-3.188-8.368-3.18-11.555,0.015 l-60.739,60.894l13.124-112.394l185.495,101.814c1.868,1.02,3.944,1.239,5.846,0.78c0.209-0.051,0.4-0.105,0.589-0.166 c1.878-0.609,3.526-1.877,4.574-3.697c0.053-0.094,0.1-0.179,0.146-0.264c0.212-0.404,0.382-0.8,0.517-1.202L511.521,43.608 C512.6,40.596,511.824,37.23,509.532,34.999z M27.232,234.712L432.364,77.371l-318.521,206.14L27.232,234.712z M162.72,316.936 c-0.764,0.613-1.429,1.374-1.949,2.267c-0.068,0.117-0.132,0.235-0.194,0.354c-0.496,0.959-0.784,1.972-0.879,2.986L148.365,419.6 l-25.107-122.718l275.105-178.042L162.72,316.936z M359.507,419.195l-177.284-97.307L485.928,66.574L359.507,419.195z">
-                                                    </path>
-                                                </g>
-                                            </g>
-                                        </g>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
+                        </form>
                     </div>
+
                 </div>
-            </div>}}
+
+
+                <x-slot name="footerActions">
+
+
+                    <x-filament::button outlined tag='a' href="" size="lg" color="success">
+                        Voir les messages
+                    </x-filament::button>
+
+                    <x-filament::button outlined x-on:click='close' icon="" size="lg" color="danger">
+                        Fermer
+                    </x-filament::button>
+
+
+
+                </x-slot>
+            </x-filament::modal>
+
+
     </section>
+<x-filament-actions::modals />
 
-    {{-- <x-confirmation-modal wire:model.defer="confirmModal">
-
-        <x-slot name="title">
-            Annuler la commande
-
-        </x-slot>
-
-        <x-slot name="content">
-            Voulez-vous annuler cette commande ?
-
-        </x-slot>
-
-        <x-slot name="footer">
-            <x-secondary-button wire:click="$toggle('confirmModal')" wire:loading.attr="disabled">
-                {{ __('Annuler') }}
-            </x-secondary-button>
-
-            <x-danger-button class="ml-3" wire:click="AnnulerCommande()" wire:loading.attr="disabled">
-                {{ __('Annuler la commande') }}
-            </x-danger-button>
-        </x-slot>
-
-    </x-confirmation-modal>--}}
 
     <script>
         window.addEventListener('rowChatToBottom', event => {

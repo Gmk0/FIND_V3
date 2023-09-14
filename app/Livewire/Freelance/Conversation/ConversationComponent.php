@@ -33,16 +33,23 @@ class ConversationComponent extends Component
         $auth_id = auth()->user()->id;
         return [
 
-            //"echo-private:chat.{$auth_id},MessageSent" => '$refresh',
+            "echo-private:chat.{$auth_id},MessageSent" => '$refresh',
 
             'chatUserSelected',
             'refresh' => '$refresh',
             'refreshUser' => '$refresh',
             'refreshList' => '$refresh',
+            'changeChat'=>'$refresh',
 
 
 
         ];
+    }
+
+
+    public function sendEvent()
+    {
+
     }
 
 
@@ -52,20 +59,7 @@ class ConversationComponent extends Component
         $this->freelancerId = auth()->user()->freelance->id;
     }
 
-    public function chatUserSelected($conversation, $receiverId)
-    {
 
-        $this->selectedConversation = Conversation::find($conversation);
-        $this->user_id =
-            $this->selectedConversation->user_id;
-
-
-
-
-        $this->emitTo('user.conversation.body-message', 'loadConversation', $this->selectedConversation, $receiverId);
-        // $this->emitTo('freelancer.conversations.body', 'loadConversation', $this->selectedConversation);
-        $this->emitTo('freelance.conversations.send-message-f', 'updateSendMessage', $this->selectedConversation, $receiverId);
-    }
 
     public function render()
     {

@@ -926,7 +926,7 @@
             </div>
 
             <!-- Corps du chat -->
-            <div x-data="{ message: @entangle('body').defer }" class="flex-grow space-y-2">
+            <div x-data="{ message: @entangle('body') }" class="flex-grow space-y-2">
 
                 <textarea x-model="message"
                     class="w-full p-2 rounded-lg focus:ring-0 dark:bg-gray-800 dark:text-gray-100 focus:border-amber-500"

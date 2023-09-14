@@ -20,12 +20,14 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
 use Filament\Forms\Components\{Card, TextInput, FileUpload};
 use Filament\Forms\Components\FormComponent;
+use WireUi\Traits\Actions;
 
 
 class BodyMessage extends Component
 
 implements Forms\Contracts\HasForms
 {
+    use Actions;
 
 
     use WithFileUploads;
@@ -65,13 +67,14 @@ implements Forms\Contracts\HasForms
                 'changeChatuSER' => 'changeChatuSER',
                 "echo-private:chat.{$auth_id},MessageSent" => 'broadcastedMessageReceived',
                 "echo-private:chat.{$auth_id},MessageRead" => 'broadcastedMessageRead',
-
                 'loadConversation', 'pushMessage', 'loadmore', 'updateHeight', 'dispatchMessageSent', 'broadcastMessageRead', 'resetComponent'
 
 
             ];
 
         }catch(\Exception $e){
+
+
 
         }
 
@@ -87,7 +90,7 @@ implements Forms\Contracts\HasForms
             if ((int) $this->selectedConversation['chatId'] === (int) $event['conversation_id']) {
                 $this->dispatch('markMessageAsRead');
 
-                $this->emit('refreshList');
+                $this->dispatch('refreshList');
             }
         }
         # code...
@@ -96,16 +99,15 @@ implements Forms\Contracts\HasForms
 
     function broadcastedMessageReceived($event)
     {
-        ///here
-
-        //evenement lorsque le  message est recuu
 
 
 
-        $this->emit('refreshList');
-        //$this->emitTo('freelance.conversations.conversation-component', 'refresh');
+
+        $this->dispatch('refreshList');
+
 
         # code...
+
 
 
 
@@ -132,7 +134,7 @@ implements Forms\Contracts\HasForms
                 $this->messagesChat->push($broadcastedMessage);
 
                 $this->dispatch('rowChatToBottom');
-                $this->emitSelf('broadcastMessageRead');
+                $this->dispatch('broadcastMessageRead')->self();
             }
         }
     }
@@ -210,6 +212,9 @@ implements Forms\Contracts\HasForms
         $fiveMinutesAgo = Carbon::now()->subMinutes(5);
         $lastActivityTime = Carbon::parse($lastActivity);
 
+
+
+
         if ($lastActivityTime->gt($fiveMinutesAgo)) {
             return "En ligne";
         } else {
@@ -246,9 +251,13 @@ implements Forms\Contracts\HasForms
         Message::where('conversation_id', $this->selectedConversation['chatId'])
             ->where('receiver_id', auth()->user()->id)->update(['is_read' => 1]);
 
-        $this->emitSelf('broadcastMessageRead');
+        $this->dispatch('broadcastMessageRead')->self();
 
         $this->messageElement = Message::where('conversation_id', $this->selectedConversation['chatId'])->get();
+
+
+        $this->dispatch('refreshList');
+
     }
 
     public function changeChatuSER($data)
@@ -258,16 +267,20 @@ implements Forms\Contracts\HasForms
 
             $this->dataC = Conversation::find($data['id']);
 
+
+
             $this->receiverInstance = $this->dataC->freelance->user;
             $this->selectedConversation = [
                 'name' => $this->dataC->freelance->user->name,
                 'chatId' => $this->dataC->id,
-                'user_id' => $this->dataC->user->id,
+                'user_id' => $this->dataC->freelance->user->id,
                 'freelance_id' => $this->dataC->freelance_id,
                 'profile_url' => $this->dataC->freelance->user->profile_photo_url,
                 'profile_path' => $this->dataC->freelance->user->profile_photo_path,
                 'last_time' => $this->getLastActivityDisplay($this->dataC->freelance->user->last_activity),
             ];
+
+
 
 
             $this->messages_count = Message::where('conversation_id', $this->selectedConversation['chatId'])->count();
@@ -310,12 +323,11 @@ implements Forms\Contracts\HasForms
 
 
 
-
             $this->createdMessage = Message::create([
                 'sender_id' => Auth::user()->id,
                 'receiver_id' => $this->selectedConversation['user_id'],
                 'conversation_id' => $this->selectedConversation['chatId'],
-                'body' => $this->body ?? $this->body,
+                'body' => $this->body ?? null,
                 'file' => $file['files'],
                 'is_read' => 0,
                 'type' => "file",
@@ -327,8 +339,8 @@ implements Forms\Contracts\HasForms
             $this->dispatch('rowChatToBottom');
             $this->imageForm->fill();
 
-            $this->emit('refreshList');
-            $this->emitSelf('dispatchMessageSent');
+            $this->dispatch('refreshList');
+            $this->dispatch('dispatchMessageSent')->self();
 
             //$this->messageElement->push($this->createdMessage);
         } catch (\Exception $e) {
@@ -363,7 +375,7 @@ implements Forms\Contracts\HasForms
             $this->dispatch('rowChatToBottom');
 
             $this->dispatch('refreshList');
-            $this->dispatch('dispatchMessageSent')->self();
+    $this->dispatch('dispatchMessageSent')->self();
             // $this->dispatchMessageSent();
         } catch (\Exception $e) {
 
@@ -382,14 +394,17 @@ implements Forms\Contracts\HasForms
 
     public function dispatchMessageSent()
     {
+
+
         try {
             broadcast(new MessageSent(auth()->user(), $this->createdMessage, $this->dataC, $this->receiverInstance));
         } catch (\Exception $e) {
 
-            $this->notification()->error(
-                $title = 'une erreur survenue',
-                $description = $e->getMessage(),
-            );
+            $this->dispatch('error', [
+                'message' => "une erreur s'est produite" . $e->getMessage(),
+                'icon' => 'error',
+                'title' => 'error'
+            ]);
         }
     }
 
@@ -427,8 +442,8 @@ implements Forms\Contracts\HasForms
             $this->dispatch('rowChatToBottom');
             $this->fileForm->fill();
 
-            $this->emit('refreshList');
-            $this->emitSelf('dispatchMessageSent');
+            $this->dispatch('refreshList');
+            $this->dispatchSelf('dispatchMessageSent');
 
             $this->messageElement->push($this->createdMessage);
         } catch (\Exception $e) {
@@ -526,8 +541,8 @@ implements Forms\Contracts\HasForms
         $newMessage = Message::find($id)->delete();
         //$this->messages->destroy($newMessage);
         $this->dispatch('rowChatToBottom');
-        $this->emitSelf('refresh');
-        $this->emitTo('user.conversation.conversation-component', 'refresh');
+        $this->dispatchSelf('refresh');
+        $this->dispatchTo('user.conversation.conversation-component', 'refresh');
     }
 
     public function blockUser()

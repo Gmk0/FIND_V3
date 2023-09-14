@@ -21,6 +21,7 @@ class Message extends Model
         'conversation_id',
         'body',
         'is_read',
+        'file',
         'type',
         'service_id',
         'order_id',
@@ -34,8 +35,11 @@ class Message extends Model
     protected $casts = [
         'id' => 'integer',
         'conversation_id' => 'integer',
+        'file'=>'array',
         'service_id' => 'integer',
         'order_id' => 'integer',
+        'receiver_id'=>'string',
+        'sender_id' => 'string',
     ];
 
     public function user(): BelongsTo
@@ -52,14 +56,14 @@ class Message extends Model
 
 
 
-    public function sender(): BelongsTo
+    public function senderUser(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'sender_id');
     }
 
     public function receiver(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'receiver_id');
     }
 
     public function conversation(): BelongsTo

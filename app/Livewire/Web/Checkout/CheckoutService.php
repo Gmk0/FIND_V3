@@ -240,17 +240,37 @@ implements HasForms
     {
         $this->maxiForm->validate();
 
-        $data = $this->maxiForm->getState();
+
+        try{
+
+
+            $data = $this->maxiForm->getState();
+
+
+            $succesUrl = route('checkoutStatusMaxiService');
+            $faileurUrl
+                = route('checkoutStatusMaxiService');
+            $cancelurl
+                = route('checkoutStatusMaxiService');
+            $checkout = new Paiement();
+
+
+            $payment = new Transaction();
+            $payment->amount
+                = $this->totalPrice() / 100;;
+            $payment->payment_method = ['last4' => "", 'brand' => "maxicash"];
+            $payment->payment_token = $this->references();
+            $payment->save();
+
+            return $checkout->checkoutmaxi($this->totalPrice(),  $data['maxi']['number'],$payment->payment_token, $succesUrl, $cancelurl, $faileurUrl);
+
+        }catch(\Exception $e){
+
+            $this->dispatch('error', ['message' => $e->getMessage(), 'title' => 'Error',  'icon' => 'error']);
 
 
 
-        $succesUrl = route('checkoutStatusMaxiService');
-        $faileurUrl
-            = route('checkoutStatusMaxiService');
-        $cancelurl
-            = route('checkoutStatusMaxiService');
-        $checkout = new Paiement();
-        return $checkout->checkoutmaxi($this->totalPrice(),  $data['maxi']['number'], $this->references(), $succesUrl, $cancelurl, $faileurUrl);
+        }
     }
 
     function references()

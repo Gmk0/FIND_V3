@@ -34,8 +34,7 @@ const navyColor = {
 /** @type {import('tailwindcss').Config} */
 export default {
     darkMode: 'class',
-    presets: [preset],
-    mode: 'jit',
+    presets: [preset, require('./vendor/wireui/wireui/tailwind.config.js')],
     content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
@@ -43,6 +42,9 @@ export default {
         './app/Filament/**/*.php',
        './resources/views/filament/**/*.blade.php',
         './vendor/filament/**/*.blade.php',
+        './vendor/wireui/wireui/resources/**/*.blade.php',
+        './vendor/wireui/wireui/ts/**/*.ts',
+        './vendor/wireui/wireui/src/View/**/*.php',
         "./node_modules/flowbite/**/*.js"
     ],
 
@@ -82,6 +84,7 @@ export default {
                 accent: "#5f5af6",
                 "accent-focus": "#4d47f5",
                 navy: navyColor,
+                secondary: colors.slate,
 
                 find: colors.orange,
                 danger: colors.rose,

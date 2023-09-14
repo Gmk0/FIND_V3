@@ -72,6 +72,12 @@ class Freelance extends Model
     }
 
 
+    public function getSolde()
+    {
+
+        return $this->solde;
+    }
+
 
     public function category(): BelongsTo
     {

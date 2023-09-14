@@ -18,8 +18,10 @@
     <link rel="stylesheet" href="https://unpkg.com/@material-tailwind/html@latest/styles/material-tailwind.css" />
 
     <!-- script -->
+    <script src="https://js.pusher.com/beams/1.0/push-notifications-cdn.js"></script>
     <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/script-name.js"></script>
 
+    <script src="/service-worker.js" defer></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
@@ -36,14 +38,20 @@
         }
     </style>
 
+    @wireUiScripts
+
     <link rel="stylesheet" href="/css/app3.css">
+
+   {{-- <link rel="stylesheet" href="/build/assets/app.css">--}}
 
     <script src="/js/alpine-init.js"></script> <!-- Scripts -->
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css','resources/js/app.js'])
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/ripple.js"></script>
+
+
     @livewireStyles
     @filamentStyles
 
@@ -52,25 +60,27 @@
 
 
 
-        <script>
-            /**
-                 * THIS SCRIPT REQUIRED FOR PREVENT FLICKERING IN SOME BROWSERS
-                 */
-                localStorage.getItem("_x_darkMode_on") === "true" &&
-                    document.documentElement.classList.add("dark");
-        </script>
+     <script>
+        localStorage.getItem("dark") === "true" &&
+                document.documentElement.classList.add("dark");
+
+    </script>
 
 
     <script>
-        document.addEventListener('Keydown', (e)=>{
 
-                if(!e.target.hasAttribute('wire:navigate'))
-                return;
 
-                if(e.key.toLowerCase() == 'enter')
-                Alpine.navigate(e.target.href);
-
+           const beamsClient = new PusherPushNotifications.Client({
+            instanceId: '3a7c226c-b409-40f9-add8-ace345844730',
             });
+            beamsClient.start()
+            .then(() => beamsClient.addDeviceInterest('App.Models.User.{{ auth()->id() }}'))
+            .then(() => console.log('Successfully registered and subscribed!'))
+            .catch(console.error);
 
     </script>
+
+
+
+   {{-- <script src="/build/assets/app.js" defer></script>--}}
 </head>

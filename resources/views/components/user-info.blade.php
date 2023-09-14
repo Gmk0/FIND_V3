@@ -1,4 +1,4 @@
-<x-dropdown align="right" width="48">
+<x-jet-dropdown align="right" width="48">
     <x-slot name="trigger">
 
       @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
@@ -34,7 +34,7 @@
             {{ __('Manage Account') }}
         </div>
 
-        <x-dropdown-link href="{{ route('dashboardUser') }}">
+        <x-dropdown-link  href="{{ route('dashboardUser') }}">
             <ion-icon name="person-outline" class="w-4 h-4"></ion-icon>
             <span class="ml-2">{{__('Dashboard')}}</span>
         </x-dropdown-link>
@@ -45,7 +45,7 @@
 
         @if(Auth::user()->freelance()->exists())
 
-        <x-dropdown-link href="{{route('freelance.dashboard')}}">
+        <x-dropdown-link wire:navigate href="{{route('freelance.dashboard')}}">
             <ion-icon name="person-outline" class="w-4 h-4"></ion-icon>
             <span class="ml-2">{{__('Dashbord Freelance')}}</span>
         </x-dropdown-link>
@@ -112,4 +112,4 @@
             </x-dropdown-link>
         </form>
     </x-slot>
-</x-dropdown>
+</x-jet-dropdown>

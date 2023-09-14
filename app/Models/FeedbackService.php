@@ -52,11 +52,13 @@ class FeedbackService extends Model
                     $user->notify(new OrderProgress($this));
 
 
-             broadcast(new ProgressOrderEvent($this));
+                    // broadcast(new ProgressOrderEvent($this));
                 }
             }
 
         }catch(\Exception $e){
+
+            dd($e->getMessage());
 
 
         }
@@ -85,7 +87,7 @@ class FeedbackService extends Model
 
         if ($user) {
 
-            $user->notify(new feedbackNotification($this));
+          //  $user->notify(new feedbackNotification($this));
         }
     }
 
@@ -99,7 +101,7 @@ class FeedbackService extends Model
 
         if ($user) {
 
-            $user->notify(new feedbackNotification($this));
+          //  $user->notify(new feedbackNotification($this));
         }
     }
 

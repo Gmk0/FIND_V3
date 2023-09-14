@@ -122,7 +122,7 @@ Route::middleware([
         Route::get('/mission-list', \App\Livewire\User\Mission\MissionList::class)->name('MissionUser');
 
 
-        Route::get('/messages', \App\Livewire\User\Conversation\ConversationComponentUser::class)->name('MessageUser');
+        Route::get('/messages', \App\Livewire\User\Conversation\ComponentChatUser::class)->name('MessageUser');
 
 
     Route::get('/assistance', \App\Livewire\User\Other\AssistanceUser::class)->name('assistanceUser');

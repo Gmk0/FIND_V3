@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Freelance\Commande;
 
+use App\Events\ProgressOrderEvent;
 use Livewire\Component;
 
 
@@ -48,7 +49,7 @@ implements HasForms
 
     public $livre =false;
     public $status;
-    protected $listeners = ['refresh' => '$refresh'];
+    protected $listeners = ['refresh' => '$refresh', 'sendNotify'=>'sendNotify'];
 
     public function mount($order_numero)
     {
@@ -161,6 +162,9 @@ implements HasForms
 
                 $this->livre();
 
+                $this->dispatch('sendNotify')->self();
+
+
             } catch (\Exception $e) {
                 $this->dispatch('error', [
                     'message' => "une erreur s'est produite". $e->getMessage(),
@@ -175,6 +179,22 @@ implements HasForms
     }
 
 
+    public function sendNotify()
+    {
+
+        try{
+
+            broadcast(new ProgressOrderEvent($this->order->feedback));
+        }catch(Exception $e){
+
+            $this->dispatch('error', [
+                'message' => "une erreur s'est produite" . $e->getMessage(),
+                'icon' => 'error',
+                'title' => 'error'
+            ]);
+        }
+
+    }
 
     public function modifier(){
 

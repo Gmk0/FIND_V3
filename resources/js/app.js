@@ -3,7 +3,7 @@ import './bootstrap';
 import 'flowbite';
 import AOS from 'aos';
 
-
+import * as PusherPushNotifications from "@pusher/push-notifications-web";
 
 import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
 import collapse from '@alpinejs/collapse'
@@ -219,9 +219,21 @@ Livewire.on('error', function (event) {
 
 
 
+
+
+
     localStorage.getItem("dark") === "true" &&
     document.documentElement.classList.add("dark");
 
 
 
+document.addEventListener('Keydown', (e) => {
+
+    if (!e.target.hasAttribute('wire:navigate'))
+        return;
+
+    if (e.key.toLowerCase() == 'enter')
+        Alpine.navigate(e.target.href);
+
+});
 

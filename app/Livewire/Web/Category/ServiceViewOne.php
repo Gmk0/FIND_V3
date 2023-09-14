@@ -142,53 +142,53 @@ class ServiceViewOne extends Component
     {
 
 
+        try{
 
 
-        $conversation = Conversation::where('freelance_id', $this->service->freelance->id)
-            ->whereHas('user', function ($query) {
-                $query->where('id', auth()->id());
-            })
-            ->first();
-
-
-
-
-
-
-        //return redirect()->route('user', ['id' => $this->service->freelance->user->id]);
+            $conversation = Conversation::where('freelance_id', $this->service->freelance->id)
+                ->whereHas('user', function ($query) {
+                    $query->where('id', auth()->id());
+                })
+                ->first();
 
 
 
+            if (!$conversation) {
+                $conversation = new Conversation();
+                $conversation->freelance_id = $this->service->freelance->id;
+                $conversation->last_time_message = now();
+                $conversation->status = 'pending';
+                $conversation->save();
+            }
+
+            $createdMessage = Message::create([
+                'sender_id' => auth()->user()->id,
+                'receiver_id' => $this->service->freelance->user->id,
+                'conversation_id' => $conversation->id,
+                'body' => $this->body,
+                'is_read' => "0",
+                'type' => "text",
+                'service_id' => $this->service->id,
+
+            ]);
+
+            $this->messageSent = true;
+
+            $this->dispatch('notify', ['message' => "Message enboyer", 'icon' => 'success',]);
 
 
 
 
+        }catch(\Exception $e){
 
 
-
-
-        // Si une conversation est trouvée, afficher la vue de la conversation
-
-        if (!$conversation) {
-            $conversation = new Conversation();
-            $conversation->freelance_id = $this->service->freelance->id;
-            $conversation->last_time_message = now();
-            $conversation->status = 'pending';
-            $conversation->save();
+            $this->dispatch('error', [
+                'message' => "une erreur s'est produite" . $e->getMessage(),
+                'icon' => 'error',
+                'title' => 'error'
+            ]);
         }
 
-        $createdMessage = Message::create([
-            'sender_id' => auth()->user()->id,
-            'receiver_id' => $this->service->freelance->user->id,
-            'conversation_id' => $conversation->id,
-            'body' => $this->body,
-            'is_read' => "0",
-            'type' => "text",
-            'service_id' => $this->service->id,
-
-        ]);
-
-        $this->messageSent = true;
 
 
 
@@ -202,6 +202,8 @@ class ServiceViewOne extends Component
 
     public function contacters()
     {
+
+
         $freelanceId = $this->service->freelance->id;
 
         $conversation = Conversation::where('freelance_id', $freelanceId)

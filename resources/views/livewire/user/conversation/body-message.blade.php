@@ -158,7 +158,7 @@
 
 
                         <div
-                            class="p-3 break-normal {{ auth()->id() == $message->sender_id ? 'rounded-br-none bg-info/10 p-3 text-slate-700  dark:bg-accent dark:text-white' : 'rounded-bl-none dark:bg-navy-700 dark:text-navy-100' }} shadow-sm rounded-2xl">
+                            class="p-3 break-normal {{ auth()->id() == $message->sender_id ? 'rounded-br-none bg-info/10 p-3 text-slate-700  dark:bg-accent dark:text-white' : 'rounded-bl-none dark:bg-navy-700 bg-navy-100 dark:text-navy-100' }} shadow-sm rounded-2xl">
                             <p class="max-w-full overflow-x-hidden">{{ $message->body }}</p>
                         </div>
 

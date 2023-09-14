@@ -1,4 +1,4 @@
-<div class="">
+<div class="flex overflow-hidden min-h-100vh grow bg-slate-50 dark:bg-navy-900" x-cloak>
 
     <div class="sidebar print:hidden">
         <!-- Main Sidebar -->
@@ -81,7 +81,7 @@
                     <div class="flex flex-col mt-3 overflow-y-auto is-scrollbar-hidden grow">
 
                         @forelse ($conversations as $conversation)
-                        <div @click="$wire.emit('changeChat',{{$conversation}})"
+                        <div wire:click="$dispatch('changeChat',{data : {{$conversation}}})"
                             class="flex cursor-pointer items-center space-x-2.5 px-4 py-2.5 font-inter hover:bg-slate-150 dark:hover:bg-navy-600">
                             <div class="w-10 h-10 avatar">
 
@@ -122,11 +122,11 @@
                                         {{$conversation->messages->last()?->body}}
                                     </p>
 
-                                    @if(count($conversation->messages?->where('is_read',0)->where('sender_id',$conversation->user->id))
+                                    @if(count($conversation->messages?->where('is_read',0)->where('receiver_id',auth()->user()->id))
                                     !=0)
                                     <div
                                         class="flex h-4.5 min-w-[1.125rem] items-center justify-center rounded-full bg-slate-200 px-1.5 text-tiny+ font-medium leading-none text-slate-800 dark:bg-navy-450 dark:text-white">
-                                        {{count($conversation->messages?->where('is_read',0)->where('sender_id',$conversation->user->id))}}
+                                        {{count($conversation->messages?->where('is_read',0)->where('receiver_id',auth()->user()->id))}}
                                     </div>
                                     @endif
                                 </div>
@@ -190,7 +190,7 @@
         </div>
 
         <!-- Minimized Sidebar Panel -->
-        <div class="sidebar-panel-min">
+        <div wire:ignore class="sidebar-panel-min">
             <div class="flex flex-col h-full bg-white dark:bg-navy-750">
                 <div class="flex items-center justify-center h-18 shrink-0">
                     <div class="flex w-10 h-10 avatar">
@@ -234,7 +234,7 @@
 
                             @forelse ($conversations as $conversation)
 
-                            <div @click="$wire.emit('changeChat',{{$conversation}})"
+                            <div wire:click="$dispatch('changeChat',{data : {{$conversation}}})"
                                 class="flex cursor-pointer items-center justify-center py-2.5 hover:bg-slate-150 dark:hover:bg-navy-600">
                                 <div class="w-10 h-10 avatar">
 

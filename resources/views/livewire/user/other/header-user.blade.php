@@ -167,7 +167,7 @@
 
 
 
-                                        <x-dropdown-link href="{{ route('ProfileUser') }}">
+                                        <x-dropdown-link href="{{ route('profile.show') }}">
                                             <ion-icon name="albums-outline" class="w-4 h-4"></ion-icon>
                                             <span class="ml-2">{{__('Profile')}}</span>
                                         </x-dropdown-link>
@@ -176,7 +176,7 @@
                                             <span class="ml-2">{{__('Assitance ')}}</span>
                                         </x-dropdown-link>
 
-                                        <x-dropdown-link href="{{ route('ProfileUser')}}" wire:navigate>
+                                        <x-dropdown-link href="{{ route('profile.show')}}" wire:navigate>
                                             <ion-icon name="settings-outline" class="w-4 h-4"></ion-icon>
                                             <span class="ml-2">{{__('Securite')}}</span>
                                         </x-dropdown-link>

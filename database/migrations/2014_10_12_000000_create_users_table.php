@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->boolean('is_online')->default(false);
+            $table->timestamp('last_activity')->default(now());
             $table->foreignId('current_team_id')->nullable();
             $table->string('google_id')->unique()->nullable();
             $table->string('facebook_id')->unique()->nullable();
