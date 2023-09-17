@@ -10,7 +10,7 @@
                     <div class="flex items-center justify-between w-full p-0 pl-6 mx-auto flex-wrap-inherit">
                         <a href="{{url('/')}}"
                             class="leading-pro hover:scale-102 hover:shadow-soft-xs active:opacity-85 ease-soft-in text-xs tracking-tight-soft shadow-soft-md bg-150 bg-x-25 bg-gradient-to-tl from-gray-900 to-slate-800 rounded-3.5xl mb-0 mr-1 inline-block cursor-pointer border-0 bg-transparent px-8 py-2 text-center align-middle font-bold uppercase text-white transition-all"><span
-                                class=" to-orange-400">FIND</span>
+                                class=" to-amber-400">FIND</span>
                         </a>
                         <button navbar-trigger
                             class="px-3 py-1 ml-2 text-lg leading-none transition-all bg-transparent border border-transparent border-solid rounded-lg shadow-none cursor-pointer ease-soft-in-out lg:hidden"
@@ -56,6 +56,11 @@
 
                         </div>
 
+                        <div>
+
+                        </div>
+
+
                     </div>
                 </nav>
             </div>
@@ -81,7 +86,7 @@
                                     <x-validation-errors class="" />
 
                                     <h3
-                                        class="relative z-10 font-bold text-transparent bg-gradient-to-tl from-orange-600 to-orange-400 bg-clip-text">
+                                        class="relative z-10 font-bold text-transparent bg-gradient-to-tl from-amber-600 to-amber-400 bg-clip-text">
                                         {{__('messages.Welcomeback')}}</h3>
                                     <p class="mb-0">{{__('messages.descriptionSignin')}}</p>
                                 </div>
@@ -91,7 +96,7 @@
                                             class="mb-2 ml-1 text-xs font-bold dark:text-gray-200 text-slate-700">{{__('messages.Email')}}</label>
                                         <div class="mb-3">
                                             <x-jet-input id="email" placeholder="your email"
-                                                class="focus:shadow-soft-orange-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:outline-none focus:transition-shadow"
+                                                class="focus:shadow-soft-amber-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:outline-none focus:transition-shadow"
                                                 type="email" name="email" :value="old('email')" required autofocus />
 
                                         </div>
@@ -101,20 +106,24 @@
 
 
                                             <x-jet-input id="password"
-                                                class="focus:shadow-soft-orange-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:outline-none focus:transition-shado"
+                                                class="focus:shadow-soft-amber-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:outline-none focus:transition-shado"
                                                 type="password" name="password" required
                                                 autocomplete="current-password" />
 
                                         </div>
                                         <div class="flex justify-between">
-                                            <div class="min-h-6 mb-0.5 block pl-12">
-                                                <input id="rememberMe" name="remember"
-                                                    class="mt-0.54 rounded-10 duration-250 ease-soft-in-out after:rounded-circle after:shadow-soft-2xl after:duration-250 checked:after:translate-x-5.25 h-5 relative float-left -ml-12 w-10 cursor-pointer appearance-none border border-solid border-gray-200 bg-slate-800/10 bg-none bg-contain bg-left bg-no-repeat align-top transition-all after:absolute after:top-px after:h-4 after:w-4 after:translate-x-px after:bg-white after:content-[''] checked:border-slate-800/95 checked:bg-slate-800/95 checked:bg-none checked:bg-right"
-                                                    type="checkbox" />
-                                                <label
-                                                    class="mb-2 ml-1 text-sm font-normal cursor-pointer select-none dark:text-gray-200 text-slate-700"
-                                                    for="rememberMe">{{__('messages.Rememberme')}}</label>
+
+
+                                            <div>
+                                                <label class="relative inline-flex items-center cursor-pointer">
+                                                    <input type="checkbox" class="sr-only peer" id="rememberMe" name="remember">
+                                                    <div
+                                                        class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-amber-600">
+                                                    </div>
+                                                    <span class="ml-3 text-sm font-medium text-gray-400 dark:text-gray-500">{{__('messages.Rememberme')}}</span>
+                                                </label>
                                             </div>
+
                                             @if (Route::has('password.request'))
                                             <a class="text-sm text-gray-600 underline dark:text-gray-200 hover:text-gray-900"
                                                 href="{{ route('password.request') }}">
@@ -199,7 +208,7 @@
                                     <p class="mx-auto mb-2 text-sm leading-normal">
                                         {{__('messages.DontHaveCount')}}
                                         <a href="{{url('/register')}}"
-                                            class="relative z-10 font-semibold text-transparent bg-gradient-to-tl from-orange-600 to-orange-400 bg-clip-text">{{__('messages.enregistre')}}</a>
+                                            class="relative z-10 font-semibold text-transparent bg-gradient-to-tl from-amber-600 to-amber-400 bg-clip-text">{{__('messages.enregistre')}}</a>
                                     </p>
                                 </div>
                             </div>
@@ -216,71 +225,6 @@
             </div>
         </form>
     </main>
-    <footer class="py-12">
-        <div class="container">
-            <div class="flex flex-wrap -mx-3">
-                <div class="flex-shrink-0 w-full max-w-full mx-auto mb-6 text-center lg:flex-0 lg:w-8/12">
-                    <a href="{{url('/services')}}" target="_blank" class="mb-2 mr-4 text-slate-400 sm:mb-0 xl:mr-12">
-                        Servives
-                    </a>
-                    <a href="{{url('/apropos')}}" target="_blank" class="mb-2 mr-4 text-slate-400 sm:mb-0 xl:mr-12"> A
-                        propos
-                    </a>
-                    <a href="{{url('/categories')}}" target="_blank" class="mb-2 mr-4 text-slate-400 sm:mb-0 xl:mr-12">
-                        Categories
-                    </a>
 
-                    <a href="{{url('/faq')}}" target="_blank" class="mb-2 mr-4 text-slate-400 sm:mb-0 xl:mr-12"> FaQ
-                    </a>
-
-
-                </div>
-                <div class="flex-shrink-0 w-full max-w-full mx-auto mt-2 mb-6 text-center lg:flex-0 lg:w-8/12">
-                    <a href="" target="_blank" class="mr-6 text-slate-400">
-                        <span class="text-lg fab fa-dribbble"></span>
-                    </a>
-                    <a href="" target="_blank" class="mr-6 text-slate-400">
-                        <span class="text-lg fab fa-twitter"></span>
-                    </a>
-                    <a href="" target="_blank" class="mr-6 text-slate-400">
-                        <span class="text-lg fab fa-instagram"></span>
-                    </a>
-                    <a href="" target="_blank" class="mr-6 text-slate-400">
-                        <span class="text-lg fab fa-pinterest"></span>
-                    </a>
-                    <a href="" target="_blank" class="mr-6 text-slate-400">
-                        <span class="text-lg fab fa-github"></span>
-                    </a>
-                </div>
-            </div>
-            <div class="flex flex-wrap -mx-3">
-                <div class="w-8/12 max-w-full px-3 mx-auto mt-1 text-center flex-0">
-                    <p class="mb-0 text-slate-400">
-                        Copyright ©
-                        <script>
-                            document.write(new Date().getFullYear());
-                        </script>
-                        Find
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div class="flex flex-wrap -mx-3">
-                <div class="w-8/12 max-w-full px-3 mx-auto mt-1 text-center flex-0">
-                    <div class="flex items-center ">
-
-
-
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-        </div>
-    </footer>
+    <x-footer-auth></x-footer-auth>
 </x-guest-layout>

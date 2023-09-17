@@ -1,9 +1,10 @@
-<div>
+<div x-data="{ isOpen:false,isLoading: true,showFilters: false,showSearch: false }"
+        x-init="setTimeout(() => { isLoading = false }, 2000)">
     <div class="flex flex-col min-h-screen pt-8 mb-6">
 
-        <div class="flex flex-col p-2 mx-6 my-8 bg-white rounded-lg md:min-h-64 dark:bg-gray-800">
-            <div class="mb-4">
-                <h3 class="mb-4 font-serif text-xl leading-snug text-center dark:text-gray-400 text-slate-800">
+        <div x-show="!isLoading" x-cloak class="flex flex-col p-2 mx-6 my-8 bg-white rounded-lg md:min-h-64 dark:bg-gray-800">
+            <div class="mb-2">
+                <h3 class="font-serif text-xl leading-snug text-center dark:text-gray-400 text-slate-800">
                     Découvrez une communauté de freelances talentueux prêts à donner vie à vos projets.
                     Trouvez le service parfait pour vous, choisissez parmi une large sélection de compétences et laissez
                     notre
@@ -11,46 +12,49 @@
                 </h3>
             </div>
             <div class="">
-                <div class="flex flex-wrap gap-2" x-data="{ splide: null }" x-init="() => {
-                     splide = new Splide('.splide', {
-                         type: 'loop',
-                         perPage: 4,
-                         perMove: 1,
-                         autoplay: true,
-                         interval: 5000,
-                         gap: '1rem',
-                         breakpoints: {
-                        640: {
-                        perPage: 2,
-                        },
-                        768: {
-                        perPage: 3,
-                        },
-                        1024: {
-                        perPage: 5,
-                        },
-                        },
-                     }).mount();
-                 }">
-                    <div class="w-full splide">
-                        <div class="splide__track">
-                            <div class="splide__list">
-                                @foreach ($categories as $category)
-                                <div class="splide__slide">
-                                    <a href="{{ route('categoryByName', [$category->name]) }}"
-                                        class="flex flex-col items-center px-4 py-2.5 duration-200 border shadow-lg cursor-pointer bg-gray-50 group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
-                                        <h4
-                                            class="mt-3 mb-1 md:text-[12px] text-[10px] font-semibold text-slate-600 duration-200 group-hover:text-white">
-                                            {{ $category->name }}
-                                        </h4>
-                                    </a>
-                                </div>
-                                @endforeach
-                            </div>
-                        </div>
+             <div class="py-4 mx-6 swiper"
+                x-init="$nextTick(() => $el._x_swiper = new Swiper($el, { slidesPerView: '4', autoplay: true, breakpoints: { 0: { slidesPerView: 1 }, 520: { slidesPerView: 2 }, 950: { slidesPerView: 3 }, 1100: { slidesPerView: 4 } }, spaceBetween: 15, navigation: { nextEl: '.next-btn', prevEl: '.prev-btn' } }))">
+
+                <div class="flex items-end justify-end mb-2">
+                    <div class="flex gap-4">
+
+
+
+                        <button
+                            class="w-10 h-10 p-0 rounded-full btn2 prev-btn hover:bg-slate-300/20 focus:bg-slate-300/20 dark:active:bg-slate-300/25 active:bg-slate-100/25 disabled:pointer-events-none disabled:select-none disabled:opacity-60 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+                        <button
+                            class="w-10 h-10 p-0 rounded-full btn2 next-btn hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 disabled:pointer-events-none disabled:select-none disabled:opacity-60 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
                     </div>
+
                 </div>
+
+                <div class="swiper-wrapper">
+                    @foreach ($categories as $category)
+                    <div class="swiper-slide">
+                        <a href="{{ route('categoryByName', [$category->name]) }}"
+                            class="flex flex-col items-center px-4 py-2.5 duration-200 border shadow-lg cursor-pointer bg-gray-50 group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
+                            <h4
+                                class="mt-3 mb-1 md:text-[12px] text-[10px] font-semibold text-slate-600 duration-200 group-hover:text-white">
+                                {{ $category->name }}
+                            </h4>
+                        </a>
+                    </div>
+                    @endforeach
+                </div>
+
             </div>
+            </div>
+        </div>
+        <div x-show="isLoading" class="flex flex-col h-48 p-2 mx-6 my-8 bg-white rounded-lg animate-pulse dark:bg-gray-800">
+
         </div>
 
 
@@ -65,14 +69,14 @@
 
 
                     <button
-                        class="w-10 h-10 p-0 rounded-full btn prev-btn hover:bg-slate-300/20 focus:bg-slate-300/20 dark:active:bg-slate-300/25 active:bg-slate-100/25 disabled:pointer-events-none disabled:select-none disabled:opacity-60 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                        class="w-10 h-10 p-0 rounded-full btn2 prev-btn hover:bg-slate-300/20 focus:bg-slate-300/20 dark:active:bg-slate-300/25 active:bg-slate-100/25 disabled:pointer-events-none disabled:select-none disabled:opacity-60 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7" />
                         </svg>
                     </button>
                     <button
-                        class="w-10 h-10 p-0 rounded-full btn next-btn hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 disabled:pointer-events-none disabled:select-none disabled:opacity-60 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                        class="w-10 h-10 p-0 rounded-full btn2 next-btn hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 disabled:pointer-events-none disabled:select-none disabled:opacity-60 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
@@ -147,7 +151,7 @@
                 </p>
                 <div class="flex gap-4">
                     <button
-                        class="w-10 h-10 p-0 rounded-full btn prev-btn hover:bg-slate-300/20 focus:bg-slate-300/20 dark:active:bg-slate-300/25 active:bg-slate-100/25 disabled:pointer-events-none disabled:select-none disabled:opacity-60 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                        class="w-10 h-10 p-0 rounded-full btn2 prev-btn hover:bg-slate-300/20 focus:bg-slate-300/20 dark:active:bg-slate-300/25 active:bg-slate-100/25 disabled:pointer-events-none disabled:select-none disabled:opacity-60 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -155,7 +159,7 @@
                         </svg>
                     </button>
                     <button
-                        class="w-10 h-10 p-0 rounded-full btn next-btn hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 disabled:pointer-events-none disabled:select-none disabled:opacity-60 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                        class="w-10 h-10 p-0 rounded-full btn2 next-btn hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 disabled:pointer-events-none disabled:select-none disabled:opacity-60 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />

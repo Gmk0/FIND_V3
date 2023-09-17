@@ -19,6 +19,9 @@ return new class extends Migration
             $table->boolean('send_invoice_enabled')->default(true);
             $table->boolean('number_notifications_enabled')->default(false);
             $table->enum('theme', ['Dark', 'Light', 'Follow Device'])->default('Follow Device');
+            $table->json('addresse_facturation')->nullable();
+            $table->boolean('feedback_submitted')->default(false);
+            $table->json('feedback')->nullable();
             $table->timestamps();
         });
     }

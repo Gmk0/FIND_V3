@@ -54,7 +54,7 @@ class CommandeFreelance extends Component implements HasForms, HasTable
     public function table(Table $table): Table
     {
         return $table
-            ->query(Order::query())
+            ->query($this->getTableQuery())
             ->paginated([10, 25, 50, 100, 'all'])
             ->columns([
                 Tables\Columns\TextColumn::make('order_numero')->label('order'),

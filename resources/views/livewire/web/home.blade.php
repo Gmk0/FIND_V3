@@ -2,10 +2,6 @@
 
 
     <div>
-
-
-
-
         <div
             class="relative grid grid-cols-1 gap-8 px-4 py-16 overflow-hidden lg:py-0 lg:h-screen text-neutral-50 2xl:px-60 lg:grid-cols-12 bg-skin-fill dark:bg-gray-800">
             <div
@@ -57,13 +53,9 @@
 
             <div class="relative z-20 hidden col-span-6 lg:flex">
                 <div class="flex flex-wrap gap-2">
-                    <div class="w-full ">
+                    <div  data-aos="fade-up" data-aos-duration="800" class="w-full ">
                         <div class="">
-
-
-
-
-                            <picture class="splide__slide">
+                            <picture class="">
                                 <source srcset="/images/hero/brand2.png" type="image/png" />
                                 <img class="z-50 w-full h-full " src="/images/hero/brand2.png" alt="" />
                             </picture>

@@ -45,7 +45,7 @@
                 </div>
             </div>
         </div>
-        <div x-show="activeChat?.name" wire:ignore class="flex items-center -mr-1">
+        <div  wire:ignore class="flex items-center -mr-1">
 
             <button
                 class="hidden p-0 rounded-full btn2 h-9 w-9 text-slate-500 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:text-navy-200 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
@@ -64,47 +64,51 @@
                         d="M9.25 21.167h5.5c4.584 0 6.417-1.834 6.417-6.417v-5.5c0-4.583-1.834-6.417-6.417-6.417h-5.5c-4.583 0-6.417 1.834-6.417 6.417v5.5c0 4.583 1.834 6.417 6.417 6.417ZM13.834 2.833v18.334" />
                 </svg>
             </button>
-            <div x-data="usePopper({ placement: 'bottom-end', offset: 4 })"
-                @click.outside="if(isShowPopper) isShowPopper = false" class="inline-flex">
-                <button x-ref="popperRef" @click="isShowPopper = !isShowPopper"
-                    class="p-0 rounded-full btn2 h-9 w-9 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5.5 w-5.5" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
-                    </svg>
-                </button>
+            <div x-show="activeChat?.name">
+                <div x-data="usePopper({ placement: 'bottom-end', offset: 4 })" @click.outside="if(isShowPopper) isShowPopper = false"
+                    class="inline-flex">
+                    <button x-ref="popperRef" @click="isShowPopper = !isShowPopper"
+                        class="p-0 rounded-full btn2 h-9 w-9 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5.5 w-5.5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                        </svg>
+                    </button>
 
-                <div x-ref="popperRoot" class="popper-root" :class="isShowPopper && 'show'">
-                    <div
-                        class="popper-box rounded-md border border-slate-150 bg-white py-1.5 font-inter dark:border-navy-500 dark:bg-navy-700">
-                        <ul>
+                    <div x-cloak x-ref="popperRoot" class="popper-root" :class="isShowPopper && 'show'">
+                        <div
+                            class="popper-box rounded-md border border-slate-150 bg-white py-1.5 font-inter dark:border-navy-500 dark:bg-navy-700">
+                            <ul>
 
 
-                            <li>
-                                <a href="#"
-                                    class="flex items-center h-8 px-3 pr-8 space-x-3 font-medium tracking-wide transition-all outline-none hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mt-px" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
-                                    </svg>
-                                    <span>Block User</span></a>
-                            </li>
-                            <li>
-                                <a href="#" wire:click="$toggle('confirmModal')"
-                                    class="flex items-center h-8 px-3 pr-8 space-x-3 font-medium tracking-wide transition-all outline-none text-error hover:bg-error/20 focus:bg-error/20">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                    </svg>
-                                    <span> Delete chat</span></a>
-                            </li>
-                        </ul>
+                                <li>
+                                    <a href="#"
+                                        class="flex items-center h-8 px-3 pr-8 space-x-3 font-medium tracking-wide transition-all outline-none hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mt-px" fill="none" viewBox="0 0 24 24"
+                                            stroke="currentColor" stroke-width="1.5">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                                        </svg>
+                                        <span>Block User</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" wire:click="$toggle('confirmModal')"
+                                        class="flex items-center h-8 px-3 pr-8 space-x-3 font-medium tracking-wide transition-all outline-none text-error hover:bg-error/20 focus:bg-error/20">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                                            stroke="currentColor" stroke-width="1.5">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                        <span> Delete chat</span></a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
+
             </div>
+
         </div>
     </div>
 

@@ -65,5 +65,8 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'freelance_exist' => \App\Http\Middleware\FreelanceExist::class,
+        'freelance' => \App\Http\Middleware\FreelanceAccess::class,
+        'socialMedia' => \App\Http\Middleware\verifySocialMedia::class,
     ];
 }

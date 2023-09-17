@@ -3,6 +3,7 @@
 namespace App\Livewire\User\Commande;
 
 use App\Models\Order;
+
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -17,6 +18,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\WithPagination;
 use Illuminate\Contracts\Pagination\Paginator;
+use Filament\Tables\Actions\{BulkAction, Action};
 
 class CommandeTable extends Component implements HasForms, HasTable
 {
@@ -108,7 +110,13 @@ class CommandeTable extends Component implements HasForms, HasTable
                 */
             ])
             ->actions([
-                //
+            //
+
+            Action::make('Voir')
+                ->url(fn (Order $record): string => route('commandeOneView', $record->order_numero))
+                // ->openUrlInNewTab()
+                ->icon('heroicon-s-pencil')
+                ->tooltip('Voir'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

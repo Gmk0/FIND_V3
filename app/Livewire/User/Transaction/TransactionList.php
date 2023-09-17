@@ -58,6 +58,8 @@ implements HasForms, HasTable
             ->columns([
                 Tables\Columns\TextColumn::make('transaction_numero')->label('ID'),
                 Tables\Columns\TextColumn::make('amount')->money('usd', true),
+            Tables\Columns\TextColumn::make('type')
+            ->toggleable(isToggledHiddenByDefault: false),
                 TagsColumn::make('payment_method'),
                 Tables\Columns\TextColumn::make('created_at')->label('Date transaction')
                 ->dateTime()

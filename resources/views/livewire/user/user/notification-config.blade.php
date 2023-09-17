@@ -1,5 +1,5 @@
 <div>
-    <div class="p-4 mb-6 bg-white rounded-md">
+    <div class="p-4 mb-6 bg-white rounded-md dark:bg-navy-800">
         <h2 class="p-4 mb-2 text-lg font-medium dark:text-gray-200">Paramètres de notification</h2>
         <div class="p-4 space-y-4">
 

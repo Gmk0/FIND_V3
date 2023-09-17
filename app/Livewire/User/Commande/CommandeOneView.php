@@ -17,6 +17,7 @@ use Livewire\Attributes\On;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\{TextInput, Select};
 use WireUi\Traits\Actions;
+use Filament\Actions\Action;
 
 #[Layout('layouts.user-layout')]
 
@@ -194,6 +195,47 @@ implements HasForms, HasActions
         );
         //$this->dispatch('notify', ['message' => "Modification a porter a votre commande", 'icon' => 'success',]);
 
+    }
+
+    #[On('impossible')]
+    public function impossible()
+    {
+
+        $this->dispatch('error', [
+            'message' => "Impossible d'annuler cette commande le freelance a deja atteint une progression de plus de 60%",
+            'icon' => 'error',
+            'title' => 'error'
+        ]);
+
+    }
+
+    public function annulerAction(): Action
+    {
+        return Action::make('annuler')
+        ->label('Annuler la commande')
+        ->requiresConfirmation()
+            ->modalHeading('Annuler la commande')
+            ->modalDescription('Êtes-vous sûr de vouloir Annuler la commande? Depasser le 60% la commande peut plus etre annuler.')
+            ->modalSubmitActionLabel('Oui, Annuler')
+            ->color('danger')
+            ->modalIcon('heroicon-o-pencil')
+            ->modalIconColor('danger')
+            ->action(function (array $arguments) {
+                $order = Order::find($arguments['id']);
+
+                if($order->progress > 60)
+                {
+                    $this->dispatch('impossible');
+
+                }else{
+
+                    dd('annuler');
+
+                }
+
+
+
+            });
     }
 
     public function render()

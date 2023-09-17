@@ -3,7 +3,7 @@
 
 @include('include.head')
 
-<body class="font-sans antialiased bg-gray-100 dark:bg-gray-900">
+<body x-init="setTimeout(() => { loading = false }, 2000)" class="font-sans antialiased bg-gray-100 dark:bg-gray-900">
 
     <x-notifications z-index="z-[200]"/>
         <x-dialog />
@@ -22,9 +22,10 @@
 
 
 
-    <main class="min-h-screen pt-20 bg-gray-200 dark:bg-gray-900">
+    <main class="min-h-screen pt-20 bg-gray-100 dark:bg-gray-900">
         {{ $slot }}
     </main>
+
 
 
 
@@ -33,11 +34,7 @@
 <x-footer-user></x-footer-user>
 
 
-
-
-
-
-@livewireScriptConfig
+@include('include.footer')
 
 
 

@@ -12,14 +12,16 @@
 
     <x-app-preloader></x-app-preloader>
     <!-- Page Wrapper -->
-    <div id="root" class="flex min-h-100vh grow bg-slate-50 dark:bg-navy-900" x-cloak>
+    <div x-data="{loading : true}"
+     x-init="setTimeout(() => { loading = false }, 2000)"  id="root" class="flex min-h-100vh grow bg-slate-50 dark:bg-navy-900" x-cloak>
         <!-- Sidebar -->
         <div class="sidebar">
             <!-- Main Sidebar -->
             <x-app-partials.main-sidebar></x-app-partials.main-sidebar>
 
             <!-- Sidebar Panel -->
-         <x-sidebar-panel></x-sidebar-panel>
+
+            @livewire('freelance.other.sidebar-panel')
         </div>
 
         <!-- App Header -->
@@ -46,6 +48,10 @@
 
 
 
+
+
+
+
     </div>
 
     <!--
@@ -55,8 +61,11 @@
 
 
 
+@include('include.footer')
 
-@livewireScriptConfig
+
+
+
 
 
 

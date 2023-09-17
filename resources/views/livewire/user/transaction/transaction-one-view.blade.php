@@ -1,17 +1,24 @@
 <div class="min-h-screen px-4 mx-auto max-w-7xl lg:px-8">
-    {{-- <div>
-        @include('include.breadcumbUser',['transation'=>'transaction','transationID'=>$transaction->transaction_numero])
-    </div>--}}
 
 
     <div class="max-w-3xl mb-8">
         <h2 class="mb-8 text-xl font-semibold tracking-wide uppercase text-amber-600">Details Transaction</h2>
     </div>
 
-    <section class="grid max-w-6xl p-6 mx-auto bg-white rounded-lg shadow dark:text-gray-200 lg:grid-cols-2">
+    <div>
+        @include('include.bread-cumb-user',['transation'=>'transation','transationID'=>$transaction->transaction_numero ])
+    </div>
 
+    <section class="grid max-w-6xl gap-1 p-6 mx-auto bg-white rounded-lg shadow dark:text-gray-200 lg:grid-cols-2">
 
-        <div>
+        <div x-show="loading" class="w-full bg-gray-200 rounded-md h-72 dark:bg-gray-700">
+
+        </div>
+        <div x-show="loading" class="w-full bg-gray-200 rounded-md h-72 dark:bg-gray-700">
+
+        </div>
+
+        <div x-show="!loading" x-cloak>
             <h2 class="mb-4 text-xl font-semibold">Récapitulatif de la transaction</h2>
 
             <div class="flex items-center mb-4">
@@ -111,7 +118,7 @@
             @endif
         </div>
 
-        <div>
+        <div x-show="!loading" x-cloak>
             @if(!empty($transaction->orders) && isset($transaction->orders))
             <div class="p-6 bg-white rounded-lg ">
 
@@ -124,7 +131,7 @@
                     <span class="text-gray-900 dark:text-gray-200">{{ $order->order_numero }}</span>
                     <div class="px-2">
 
-                        <x-filament::button  tag="a" href="{{route('commandeOneView', $order->order_numero)}}"
+                        <x-filament::button outlined   tag="a" href="{{route('commandeOneView', $order->order_numero)}}"
                             icon="heroicon-m-eye" icon-position="after">
                             voir
                         </x-filament::button>

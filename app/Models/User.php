@@ -3,9 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Mail\welcomeMail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Mail;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
@@ -34,6 +37,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
     ];
 
     /**
@@ -91,6 +95,11 @@ class User extends Authenticatable
         return $this->hasOne(Freelance::class);
     }
 
+    public function userSetting()
+    {
+        return $this->hasOne(UserSetting::class);
+    }
+
     public function favoritesService()
     {
         return $this->belongsToMany(Service::class, 'favorites')
@@ -107,10 +116,7 @@ class User extends Authenticatable
         return $this->freelance->id;
     }
 
-    public function routeNotificationForPusherPushNotifications($notification): string
-    {
-        return 'App.Models.User.' . $this->id;
-    }
+
 
 
 }

@@ -32,7 +32,7 @@ return new class extends Migration
             $table->foreignUuid('user_id')->constrained();
             $table->foreignId('category_id')->constrained();
             $table->enum('level', ["1","2","3","4","5"]);
-            $table->decimal('solde', 8, 2);
+            $table->decimal('solde', 8, 2)->default(0);
             $table->json('realisations')->nullable();
             $table->timestamps();
         });

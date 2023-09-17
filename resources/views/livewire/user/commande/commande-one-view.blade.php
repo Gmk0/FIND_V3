@@ -1,14 +1,15 @@
 <div class="min-h-screen" x-data="{message:@entangle('openMessage')}">
 
     <!-- Exemple de section pour afficher les détails d'une commande avec options supplémentaires -->
-    <section class="px-2 py-6 dark:text-gray-400 md:px-6 lg:px-8 xl:px-20">
-        <div>
-            @include('include.bread-cumb-user',['commande'=>'commande','commandeID'=>
-            \Illuminate\Support\Str::limit($order->order_numero, 10) ])
-        </div>
+    <section class="px-4 py-6 dark:text-gray-400 md:px-6 lg:px-8 xl:px-20">
+
 
         <div class="max-w-3xl mb-8">
             <h2 class="mb-8 text-xl font-semibold tracking-wide uppercase text-amber-600">Details Commande</h2>
+        </div>
+        <div>
+            @include('include.bread-cumb-user',['commande'=>'commande','commandeID'=>
+            \Illuminate\Support\Str::limit($order->order_numero, 10) ])
         </div>
         <div class="mx-auto max-w-7xl">
 
@@ -156,6 +157,7 @@
                             <x-filament::button size="lg" tag="a" href="{{route('commandeRepaye',['order_number'=>$order->order_numero])}}" icon="heroicon-m-credit-card" icon-position="after" >
                                 Payer
                             </x-filament::button>
+
                             {{-- <x-button href="{{route('commandeRepaye',['order_numero'=>$Order->order_numero])}}"
                                 primary label="Proceder Au Paiement"> </x-button>--}}
 
@@ -203,8 +205,9 @@
                         </div>
 
                         <div class="">
-                             <x-button wire:click="$toggle('confirmModal')" negative label="Annuler la commande">
-                            </x-button>
+
+                            {{ ($this->annulerAction)(['id' => $order->id]) }}
+
 
 
                         </div>
@@ -316,7 +319,7 @@
                             </div>
                             <div class="p-2">
 
-                                <x-filament::button tag="a" href="{{route('transactionOneUser',[$order->transaction->transaction_numero])}}" icon="heroicon-m-eye"
+                                <x-filament::button outlined tag="a" href="{{route('transactionOneUser',[$order->transaction->transaction_numero])}}" icon="heroicon-m-eye"
                                     icon-position="after">
                                     voir
                                 </x-filament::button>
@@ -454,6 +457,8 @@
                             <span class="text-xs text-gray-500">Temps de réponse : 1 heures</span>
                         </div>
                     </div>
+
+                    @if(!$messageSent)
                     <div>
                         <form wire:submit.prevent='contacter' class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
                             <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
@@ -473,6 +478,17 @@
                             </div>
                         </form>
                     </div>
+                    @else
+
+                    <div class="mb-8 text-gray-800">
+                        <p>Votre message a ete envoyer avec succees</p>
+                    </div>
+                    <div>
+                        <x-filament::button outlined tag='a' href="{{route('MessageUser')}}" size="lg" color="success">
+                            Voir les messages
+                        </x-filament::button>
+                    </div>
+                    @endif
 
                 </div>
 
@@ -480,7 +496,7 @@
                 <x-slot name="footerActions">
 
 
-                    <x-filament::button outlined tag='a' href="" size="lg" color="success">
+                    <x-filament::button outlined tag='a' href="{{route('MessageUser')}}" size="lg" color="success">
                         Voir les messages
                     </x-filament::button>
 

@@ -28,7 +28,7 @@ use Livewire\Attributes\{Layout, Title};
 
 #[Layout('layouts.user-layout')]
 
-#[Title('Commande')]
+#[Title('Paiement')]
 
 class CheckoutPendig extends Component implements HasForms
 {

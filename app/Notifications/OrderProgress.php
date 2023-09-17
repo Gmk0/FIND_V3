@@ -71,7 +71,7 @@ class OrderProgress extends Notification implements ShouldQueue
                     $data = array(
                         "web" => array(
                             "notification" => array(
-                                "title" => "Nouvelle commande !",
+                                "title" => "Nouvelle Progression !",
                                 "body" => 'Nouvelle progression de ' . $this->feedback->order->progress . '% pour le service ' . $this->feedback->order->service->title,
                                 "deep_link" => "http://localhost:8000/user/commandes/" . $this->feedback->order->order_numero,
                                 "icon" => "http://localhost:8000/images/logo/find_01.png",
@@ -92,23 +92,5 @@ class OrderProgress extends Notification implements ShouldQueue
     }
 
 
-    public function toPushNotification($notifiable)
-    {
 
-        try{
-
-            $message = "Your {$notifiable->user} account was approved!";
-
-            return PusherMessage::create()
-                ->web()
-                ->badge(1)
-                ->body($message);
-
-
-        }catch(\Exception $e){
-
-            dd($e->getMessage());
-        }
-
-    }
 }

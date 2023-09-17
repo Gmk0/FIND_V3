@@ -2,7 +2,7 @@
 
 
     <div>
-        @include('include.bread-cumb-user',['projet'=>'Mission','projectId'=>$proposition_id])
+        @include('include.bread-cumb-user',['projet'=>'Mission','projectId'=>'projet'])
     </div>
 
 
@@ -42,7 +42,7 @@
                         @if($proposition->status=="approved")
                         <div class="flex flex-grow gap-4 py-4 ">
                             <div class="p-2">
-                                <h1 class="font-bold dark:text-gray-300 text-gray-600">Vous avez accepter cette proposition </h1>
+                                <h1 class="font-bold text-gray-600 dark:text-gray-300">Vous avez accepter cette proposition </h1>
                             </div>
                             <div>
 

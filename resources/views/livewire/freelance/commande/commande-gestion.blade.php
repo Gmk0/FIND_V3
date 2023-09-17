@@ -121,7 +121,7 @@
 
 
                                 <x-filament::button  wire:click='modifier()'>
-                                    <span wire:loading.remove wire:target='modifier'>Modifier</span>
+                                    <span>Modifier</span>
 
                                 </x-filament::button>
 

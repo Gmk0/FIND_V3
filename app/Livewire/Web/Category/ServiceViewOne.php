@@ -16,10 +16,22 @@ use App\Tools\Cart;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
+use Livewire\WithPagination;
+use Filament\Actions\Concerns\InteractsWithActions;
+use Filament\Actions\Contracts\HasActions;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
+
+use Filament\Actions\Action;
 
 #[Layout('layouts.web-layout')]
 class ServiceViewOne extends Component
+
+implements HasForms, HasActions
 {
+    use InteractsWithActions;
+    use InteractsWithForms;
+
     public Service $service;
     public $images;
     public $products;
@@ -43,6 +55,7 @@ class ServiceViewOne extends Component
         $category = Category::where('name', $category)->exists();
 
         $services = Service::where('service_numero', $service_numero)->exists();
+
 
 
 
@@ -70,6 +83,8 @@ class ServiceViewOne extends Component
             });
         })->where('commentaires', '!=', null)->where('is_publish', 1)
         ->get();
+
+
 
 
         $this->servicesOther = $this->GetOther();
@@ -200,52 +215,7 @@ class ServiceViewOne extends Component
 
 
 
-    public function contacters()
-    {
 
-
-        $freelanceId = $this->service->freelance->id;
-
-        $conversation = Conversation::where('freelance_id', $freelanceId)
-            ->whereHas('user', function ($query) {
-                $query->where('id', auth()->id());
-            })
-            ->first();
-
-        if ($conversation) {
-            $createdMessage = Message::create([
-                'sender_id' => auth()->user()->id,
-                'receiver_id' => $freelanceId,
-                'conversation_id' => $conversation->id,
-                'service_id' => $this->service->id,
-                'body' => "salut je suis interrser par ce service",
-                'is_read' => '0',
-                'type' => "text",
-
-            ]);
-            return redirect()->route('MessageUser');
-        }
-
-
-        $conversation = new Conversation();
-        $conversation->freelance_id = $freelanceId;
-        $conversation->last_time_message = now();
-        $conversation->status = 'pending';
-        $conversation->save();
-
-
-        $createdMessage = Message::create([
-            'sender_id' => auth()->user()->id,
-            'receiver_id' => $freelanceId,
-            'conversation_id' => $conversation->id,
-            'service_id' => $this->service->id,
-            'body' => "salut je suis interrser par ce service",
-            'is_read' => '0',
-            'type' => "text",
-
-        ]);
-        return redirect()->route('MessageUser');
-    }
     public function add_cart()
     {
 
@@ -255,6 +225,9 @@ class ServiceViewOne extends Component
         $cart->add($items, $items->id, $this->images, $this->price, $this->level);
         Session::put('cart', $cart);
         $this->dispatch('refreshComponent');
+
+        $this->dispatch('notify', ['message' => "Service ajouter dans le panier", 'icon' => 'success',]);
+
 
        //::send()->success();
     }
@@ -272,7 +245,10 @@ class ServiceViewOne extends Component
             $title = "le Service a ete ajouté dans le panier",
 
         );
+        $this->dispatch('notify', ['message' => "Service ajouter dans le panier", 'icon' => 'success',]);
+
     }
+
     public function addPremium()
     {
 
@@ -286,6 +262,9 @@ class ServiceViewOne extends Component
             $title = "le Service a ete ajouté dans le panier",
 
         );
+
+        $this->dispatch('notify', ['message' => "Service ajouter dans le panier", 'icon' => 'success',]);
+
     }
     public function addExtra()
     {
@@ -300,6 +279,8 @@ class ServiceViewOne extends Component
             $title = "le Service a ete ajouté dans le panier",
 
         );
+        $this->dispatch('notify', ['message' => "Service ajouter dans le panier", 'icon' => 'success',]);
+
     }
 
 

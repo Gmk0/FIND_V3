@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 
 class UserSetting extends Model
 {
@@ -18,6 +19,9 @@ class UserSetting extends Model
         'number_notifications_enabled',
         'theme',
         'user_id',
+        'addresse_facturation',
+        'feedback_submitted',
+        'feedback'
     ];
 
 
@@ -26,5 +30,8 @@ class UserSetting extends Model
         'email_notifications_enabled'=>'boolean',
         'send_invoice_enabled' => 'boolean',
         'number_notifications_enabled' => 'boolean',
+        'feedback_submitted'=>'boolean',
+        'feedback'=>'array',
+        'addresse_facturation'=> AsArrayObject::class,
     ];
 }

@@ -11,7 +11,7 @@ use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\{TextInput, RichEditor};
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
@@ -73,6 +73,9 @@ class MissionEdit extends Component implements HasForms
                 Textarea::make('description')
                     ->minLength(2)
                     ->maxLength(1024)->required(),
+
+
+                     RichEditor::make('exigences')->label('Exigences Pour la mission'),
 
 
                 Select::make('category_id')->label('categorie')

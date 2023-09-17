@@ -189,7 +189,7 @@
                                         <tbody>
                                             <tr>
                                                 <td style="line-height: 24px; font-size: 16px; margin: 0;" align="left">
-                                                    <table class="w-full s-6" role="presentation" border="0"
+                                                    <table class="s-6 w-full" role="presentation" border="0"
                                                         cellpadding="0" cellspacing="0" style="width: 100%;"
                                                         width="100%">
                                                         <tbody>
@@ -205,7 +205,7 @@
                                                         src="https://www.find-freelance.com/images/logo/find_02.png"
                                                         style="height: auto; line-height: 100%; outline: none; text-decoration: none; display: block; width: 64px; border-style: none; border-width: 0;"
                                                         width="64">
-                                                    <table class="w-full s-6" role="presentation" border="0"
+                                                    <table class="s-6 w-full" role="presentation" border="0"
                                                         cellpadding="0" cellspacing="0" style="width: 100%;"
                                                         width="100%">
                                                         <tbody>
@@ -222,7 +222,7 @@
                                                             style="padding-top: 0; padding-bottom: 0; font-weight: 800 !important; vertical-align: baseline; font-size: 36px; line-height: 43.2px; margin: 0;"
                                                             align="left">Merci pour votre commande,
                                                             {{$orders->user->name}}</h1>
-                                                        <table class="w-full s-4" role="presentation" border="0"
+                                                        <table class="s-4 w-full" role="presentation" border="0"
                                                             cellpadding="0" cellspacing="0" style="width: 100%;"
                                                             width="100%">
                                                             <tbody>
@@ -235,7 +235,7 @@
                                                             </tbody>
                                                         </table>
 
-                                                        <table class="w-full s-4" role="presentation" border="0"
+                                                        <table class="s-4 w-full" role="presentation" border="0"
                                                             cellpadding="0" cellspacing="0" style="width: 100%;"
                                                             width="100%">
                                                             <tbody>
@@ -247,7 +247,7 @@
                                                                 </tr>
                                                             </tbody>
                                                         </table>
-                                                        <table class="w-full px-6 rounded-full btn btn-red-500 w-lg-48"
+                                                        <table class="btn btn-red-500 rounded-full px-6 w-full w-lg-48"
                                                             role="presentation" border="0" cellpadding="0"
                                                             cellspacing="0"
                                                             style="border-radius: 9999px; border-collapse: separate !important; width: 192px;"
@@ -264,7 +264,7 @@
                                                             </tbody>
                                                         </table>
                                                     </div>
-                                                    <table class="w-full s-6" role="presentation" border="0"
+                                                    <table class="s-6 w-full" role="presentation" border="0"
                                                         cellpadding="0" cellspacing="0" style="width: 100%;"
                                                         width="100%">
                                                         <tbody>
@@ -276,7 +276,7 @@
                                                             </tr>
                                                         </tbody>
                                                     </table>
-                                                    <table class="px-4 py-8 card rounded-3xl p-lg-10"
+                                                    <table class="card rounded-3xl px-4 py-8 p-lg-10"
                                                         role="presentation" border="0" cellpadding="0" cellspacing="0"
                                                         style="border-radius: 24px; border-collapse: separate !important; width: 100%; overflow: hidden; border: 1px solid #e2e8f0;"
                                                         bgcolor="#ffffff">
@@ -291,7 +291,7 @@
                                                                         style="line-height: 24px; font-size: 16px; color: #718096; width: 100%; margin: 0;"
                                                                         align="center">Facture
                                                                         #{{$orders->transaction_numero}}</p>
-                                                                    <table class="w-full p-2" border="0" cellpadding="0"
+                                                                    <table class="p-2 w-full" border="0" cellpadding="0"
                                                                         cellspacing="0" style="width: 100%;"
                                                                         width="100%">
                                                                         <tbody>
@@ -316,7 +316,7 @@
                                                                                     style="line-height: 24px; font-size: 16px; border-top-width: 1px !important; border-top-color: #e2e8f0 !important; border-top-style: solid !important; width: 100%; font-weight: 700 !important; margin: 0; padding: 8px;"
                                                                                     align="left" width="100%">Montant
                                                                                     payer</td>
-                                                                                <td class="text-right fw-700 border-top"
+                                                                                <td class="fw-700 text-right border-top"
                                                                                     style="line-height: 24px; font-size: 16px; border-top-width: 1px !important; border-top-color: #e2e8f0 !important; border-top-style: solid !important; width: 100%; font-weight: 700 !important; margin: 0; padding: 8px;"
                                                                                     align="right" width="100%">
                                                                                     {{$orders->amount}}
@@ -332,7 +332,7 @@
                                                                             </tr>
                                                                         </tbody>
                                                                     </table>
-                                                                    <table class="w-full s-6" role="presentation"
+                                                                    <table class="s-6 w-full" role="presentation"
                                                                         border="0" cellpadding="0" cellspacing="0"
                                                                         style="width: 100%;" width="100%">
                                                                         <tbody>
@@ -356,7 +356,7 @@
                                                                             </tr>
                                                                         </tbody>
                                                                     </table>
-                                                                    <table class="w-full s-6" role="presentation"
+                                                                    <table class="s-6 w-full" role="presentation"
                                                                         border="0" cellpadding="0" cellspacing="0"
                                                                         style="width: 100%;" width="100%">
                                                                         <tbody>
@@ -383,7 +383,7 @@
 
                                                         </tbody>
                                                     </table>
-                                                    <table class="w-full s-6" role="presentation" border="0"
+                                                    <table class="s-6 w-full" role="presentation" border="0"
                                                         cellpadding="0" cellspacing="0" style="width: 100%;"
                                                         width="100%">
                                                         <tbody>
@@ -409,7 +409,7 @@
         </tbody>
 
     </table>
-    <div class="text-center text-muted" style="color: #718096;" align="center">
+    <div class="text-muted text-center" style="color: #718096;" align="center">
         <div class="flex flex-col items-center justify-center p-3 mt-2 text-gray-600 md:flex-row">
             Copyright ©
             <script>

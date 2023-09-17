@@ -3,6 +3,10 @@
         <h2 class="mb-8 text-xl font-semibold tracking-wide uppercase text-amber-600">Modifier</h2>
     </div>
 
+    <div>
+        @include('include.bread-cumb-user',['projet'=>'Mission'])
+    </div>
+
     <div class="max-w-4xl mx-auto">
 
         <form wire:submit="save">

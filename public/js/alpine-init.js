@@ -33,6 +33,7 @@ function data() {
         linkActive: false,
         navOpen: false,
         loading: true,
+        isOpenSearch:false,
         isSidebarOpen: false,
         currentSidebarTab: null,
         isNotificatication: false,
@@ -54,7 +55,7 @@ function data() {
         },
         isSearch: false,
         toggleSearch() {
-            this.isSearch = !this.isSearch
+            this.isOpenSearch = !this.isOpenSearch
         },
         closeSideMenu() {
             this.isSideMenuOpen = false

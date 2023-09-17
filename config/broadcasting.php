@@ -36,8 +36,7 @@ return [
             'secret' => env('PUSHER_APP_SECRET'),
             'app_id' => env('PUSHER_APP_ID'),
             'options' => [
-                'cluster' => env('PUSHER_APP_CLUSTER'),
-                'host' => env('PUSHER_HOST') ?: 'api-'.env('PUSHER_APP_CLUSTER', 'mt1').'.pusher.com',
+                'host' => env('PUSHER_HOST') ?: 'api-' . env('PUSHER_APP_CLUSTER', 'mt1') . '.pusher.com',
                 'port' => env('PUSHER_PORT', 443),
                 'scheme' => env('PUSHER_SCHEME', 'https'),
                 'encrypted' => true,
@@ -45,6 +44,21 @@ return [
             ],
             'client_options' => [
                 // Guzzle client options: https://docs.guzzlephp.org/en/stable/request-options.html
+            ],
+
+            'beams' => [
+                'secret_key' => env('BEAMS_INSTANCE_KEY'),
+                'instance_id' => env('BEAMS_INSTANCE_ID'),
+            ],
+
+        ],
+        'pusher_beams' => [
+            'driver' => 'pusher_beams',
+            'instance_id' => env('BEAMS_INSTANCE_ID'),
+            'secret_key' => env('BEAMS_INSTANCE_ID'),
+            'app_id' => env('PUSHER_APP_ID'),
+            'options' => [
+                // Options supplémentaires pour Pusher Beams
             ],
         ],
 

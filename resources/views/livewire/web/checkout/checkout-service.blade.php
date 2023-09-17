@@ -241,7 +241,7 @@
                         </div>
 
                         <div
-                            class="w-full mx-auto mb-6 font-light text-gray-800 bg-white border border-gray-200 rounded-lg top-8 dark:bg-gray-900">
+                            class="w-full mx-auto mb-6 text-gray-800 bg-white border border-gray-200 rounded-lg top-8 dark:bg-gray-900">
                             <div class="w-full p-3 border-b border-gray-200 ">
                                 <div class="mb-5">
                                     <label for="type1" class="flex items-center cursor-pointer">
@@ -299,7 +299,7 @@
 
                                     <div class="mt-4">
 
-                                        <button wire:click="pay()" wire:loading.attr='disabled'
+                                        <button wire:click="addAddress()" wire:loading.attr='disabled'
                                             class=" block w-full select-none rounded-lg bg-amber-600 py-2 px-2 text-center align-middle
                                                                                                                                                                 font-sans text-sm font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all
                                                                                                                                                                 hover:shadow-lg hover:shadow-amber-500/40 focus:opacity-[0.85] focus:shadow-none

@@ -16,6 +16,8 @@ use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Contracts\Pagination\Paginator;
+use Filament\Tables\Actions\{BulkAction, Action};
+
 
 class CommandeTableFreelance extends Component implements HasForms, HasTable
 {
@@ -102,7 +104,13 @@ class CommandeTableFreelance extends Component implements HasForms, HasTable
 
             ])
             ->actions([
-                //
+            //
+
+            Action::make('Voir')
+            ->url(fn (Order $record): string => route('freelance.Order.view', $record->order_numero))
+            // ->openUrlInNewTab()
+            ->icon('heroicon-s-pencil')
+            ->tooltip('Voir les services'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

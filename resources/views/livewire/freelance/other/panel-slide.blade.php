@@ -62,13 +62,32 @@
                     class="pt-1 overflow-y-auto is-scrollbar-hidden overscroll-contain">
 
                     <div class="mt-4">
-                        <h2
-                            class="px-3 text-xs+ font-medium tracking-wide text-slate-700 line-clamp-1 dark:text-navy-100">
-                            Solde
-                        </h2>
-                        <div class="px-3 mt-3 swiper"
-                            x-init="$nextTick(() => new Swiper($el, { slidesPerView: 'auto', spaceBetween: 16 }))">
-                            <div class="swiper-wrapper">
+
+
+                        <div>
+                            <div class="flex flex-col items-center mt-5">
+                                <div class="w-20 h-20 avatar ">
+
+                                    @if (!empty(Auth::user()->profile_photo_path))
+                                    <img class="object-cover rounded-full" src="{{Storage::disk('local')->url(Auth::user()->profile_photo_path) }}"
+                                        alt="">
+                                    @else
+                                    <img class="rounded-full" src="{{ Auth::user()->profile_photo_url }}" alt="">
+                                    @endif
+
+
+
+
+                                </div>
+                                <h3 class="mt-2 text-lg font-medium text-slate-700 dark:text-navy-100">{{Auth::user()->name}}
+                                </h3>
+                                <p>{{Auth::user()->freelance?->category->name}}</p>
+
+                            </div>
+                        </div>
+
+                        <div class="px-3 mt-3 swiper">
+                            <div class="">
                                 <div
                                     class="relative flex flex-col w-48 p-3 overflow-hidden swiper-slide h-28 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600">
                                     <div class="grow">
@@ -76,7 +95,7 @@
                                     </div>
                                     <div class="text-white">
                                         <p class="text-lg font-semibold tracuking-wide">
-{{$soldeFreelance}} $
+                                        {{$soldeFreelance}} $
                                         </p>
 
 

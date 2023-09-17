@@ -819,6 +819,26 @@ implements HasForms, HasActions
 
 
 
+    Public function updateDescription()
+    {
+        $this->validate(['freelance.description' => ['required', 'min:150']]);
+
+        try{
+
+
+
+            $this->freelanceUpdate->description = $this->freelance['description'];
+
+            $this->freelanceUpdate->update();
+            $this->notifyUser();
+            $this->dispatch('refresh');
+
+        }catch(\Exception $e){
+            $this->notifyError($e->getMessage());
+
+        }
+    }
+
     public function render()
     {
         $this->user = User::find(auth()->user()->id)->toArray();

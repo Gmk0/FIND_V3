@@ -65,7 +65,10 @@ class PayementController extends Controller
 
 
 
+
                 $payment->update();
+
+                $payment->sendMail();
 
                 // Parcourir toutes les commandes pour les mettre à jour
                 foreach ($datas as $order) {
@@ -77,7 +80,7 @@ class PayementController extends Controller
                     $orderToUpdate->transaction_id = $payment->id; // Lier la commande au paiement effectué
                     $orderToUpdate->save();
 
-                    // $orderToUpdate->notifyUser();
+                     $orderToUpdate->notifyUser();
                 }
 
                 // Valider et terminer la transaction de base de données

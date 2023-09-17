@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" :class="{ 'dark': dark }" x-data="data()">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,9 +10,10 @@
 
     <!-- Fonts -->
     <link rel="stylesheet" href="/css/tailwindcss2.css">
+    <script src="/js/alpine-init.js"></script>
     <link rel="preconnect" href="https://fonts.bunny.net">
 
-@vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
@@ -46,13 +46,17 @@
         }
     </style>
 
+@filamentStyles
+
+
+@filamentScripts
     <!-- Styles -->
     @livewireStyles
 
 </head>
 
 <body>
-    <div class="font-sans antialiased text-gray-900 dark:text-gray-100">
+    <div class="font-sans antialiased text-gray-900 bg-white dark:bg-gray-900 dark:text-gray-100">
         {{ $slot }}
     </div>
 

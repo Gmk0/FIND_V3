@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 
+use App\Mail\welcomeFreelance;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+
 class Freelance extends Model
 {
     use HasFactory;
@@ -103,6 +107,27 @@ class Freelance extends Model
         return $this->belongsToMany(User::class, 'favorites', 'freelance_id')
         ->withTimestamps();
     }
+
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($freelance) {
+
+            $freelance->user_id = auth()->id();
+            $freelance->identifiant ='CMD' . date('YmdHms');
+            $freelance->solde = 0;
+        });
+
+
+        static::created(function ($freelance) {
+
+
+        });
+    }
+
+
 
 
     public function isFavorite()

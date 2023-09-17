@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\CategoryGet;
+use App\Http\Controllers\AuthSocial;
 use App\Http\Controllers\PayementController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,7 +30,7 @@ Route::get('/registration', \App\Livewire\Web\Registration\RegisterBegin::class)
 
 Route::get('/registration/info', \App\Livewire\Web\Registration\RegisterEtape1::class)->name('register.etape.1');
 
-Route::get('/registration/freelance', \App\Livewire\Web\Registration\RegistrationFreelance::class)->name('freelancer.register');
+Route::get('/registration/freelance', \App\Livewire\Web\Registration\RegistrationFreelance::class)->name('freelancer.register')->middleware('freelance_exist');
 Route::get('/create-mission', \App\Livewire\Web\Mission\CreateMission::class)->name('createProject');
 
 Route::get('/find-freelance/profile/{identifiant}', \App\Livewire\Web\Freelance\ProfileFreelance::class)->where('identifiant', '(.*)')->name('profileFreelance');
@@ -57,7 +59,7 @@ Route::controller(PayementController::class)->group(function () {
 
 
 
-
+Route::get('/api/category', CategoryGet::class)->name('api.services');
 
 
 
@@ -70,6 +72,7 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
+    'socialMedia',
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
@@ -132,64 +135,98 @@ Route::middleware([
 
 
 
-    Route::group(
-        ['prefix' => "freelance"],
+    Route::group(['prefix' => "freelance"],
         function () {
 
+                Route::middleware([
+                    'freelance', 'auth:sanctum', 'socialMedia',
+                    config('jetstream.auth_session'),
+                    'verified'
+                ])->group(
+                    function () {
 
-            Route::get('/assistance', \App\Livewire\Freelance\Other\AssistanceFreelance::class)->name('freelance.assistance');
-            Route::get('/dashboard', \App\Livewire\Freelance\Dashboard\DashboardFreelance::class)->name('freelance.dashboard');
+                    Route::get('/dashboard', \App\Livewire\Freelance\Dashboard\DashboardFreelance::class)->name('freelance.dashboard');
 
-            Route::group(['prefix' => "service"], function () {
+                    Route::group(['prefix' => "service"], function () {
 
-                Route::get('/', \App\Livewire\Freelance\Services\ServiceList::class)->name('freelance.service.list');
-                Route::get('/creation', \App\Livewire\Freelance\Services\ServiceCreation::class)->name('freelance.service.create');
-                Route::get('/edit/{service_numero}', \App\Livewire\Freelance\Services\ServiceEdit::class)->name('freelance.service.edit');
-                Route::get('/level/{service_numero}', \App\Livewire\Freelance\Services\ServiceAddLevel::class)->name('freelance.service.level');
-                // Route::get('/view/{service_numero}', [ServiceController::class, 'ViewOneService'])->name('freelance.service.feedback');
-            });
-            Route::group(['prefix' => "commande"], function () {
-                Route::get('/', \App\Livewire\Freelance\Commande\CommandeFreelance::class)->name('freelance.commande.list');
-                Route::get('/{order_numero}', \App\Livewire\Freelance\Commande\CommandeGestion::class)->name('freelance.Order.view');
-            });
-            Route::group(['prefix' => "transaction"], function () {
-                Route::get('/', \App\Livewire\Freelance\Transaction\TransactionList::class)->name('freelance.transaction.list');
-                //Route::get('/{transaction_numero}', [CommandeControler::class, 'TransactionOneFreelance'])->name('freelance.transaction.view');
-                //Route::get('/edit/{id}', \App\Http\Livewire\Freelance\Services\EditService::class)->name('freelance.service.edit');
-            });
+                        Route::get('/', \App\Livewire\Freelance\Services\ServiceList::class)->name('freelance.service.list');
+                        Route::get('/creation', \App\Livewire\Freelance\Services\ServiceCreation::class)->name('freelance.service.create');
+                        Route::get('/edit/{service_numero}', \App\Livewire\Freelance\Services\ServiceEdit::class)->name('freelance.service.edit');
+                        Route::get('/level/{service_numero}', \App\Livewire\Freelance\Services\ServiceAddLevel::class)->name('freelance.service.level');
+                        // Route::get('/view/{service_numero}', [ServiceController::class, 'ViewOneService'])->name('freelance.service.feedback');
+                    });
+                    Route::group(['prefix' => "commande"], function () {
+                        Route::get('/', \App\Livewire\Freelance\Commande\CommandeFreelance::class)->name('freelance.commande.list');
+                        Route::get('/{order_numero}', \App\Livewire\Freelance\Commande\CommandeGestion::class)->name('freelance.Order.view');
+                    });
+                    Route::group(['prefix' => "transaction"], function () {
+                        Route::get('/', \App\Livewire\Freelance\Transaction\TransactionFreelance::class)->name('freelance.transaction.list');
+                        //Route::get('/{transaction_numero}', [CommandeControler::class, 'TransactionOneFreelance'])->name('freelance.transaction.view');
+                        //Route::get('/edit/{id}', \App\Http\Livewire\Freelance\Services\EditService::class)->name('freelance.service.edit');
+                    });
+                    Route::group(['prefix' => "messages"], function () {
+                        Route::get('/', \App\Livewire\Freelance\Conversation\ConversationComponent::class)->name('freelance.messages');
+                    });
+                    Route::group(['prefix' => "profile"], function () {
+                        Route::get('/', \App\Livewire\Freelance\Profile\ProfileFreelance::class)->name('freelance.profile');
+                        //Route::get('/securite', \App\Http\Livewire\Freelance\Profile\Securite::class)->name('freelance.securite');
+                        //Route::get('/edit/{id}', \App\Http\Livewire\Freelance\Services\EditService::class)->name('freelance.service.edit');
+                    });
+                    Route::group(['prefix' => "paiement"], function () {
+                        Route::get('/', \App\Livewire\Freelance\Paiement\PaiementFreelance::class)->name('freelance.PaiementInfo');
 
+                        //Route::get('/edit/{id}', \App\Http\Livewire\Freelance\Services\EditService::class)->name('freelance.service.edit');
+                    });
 
-            Route::group(['prefix' => "messages"], function () {
-                Route::get('/', \App\Livewire\Freelance\Conversation\ConversationComponent::class)->name('freelance.messages');
-            });
-            Route::group(['prefix' => "profile"], function () {
-                Route::get('/', \App\Livewire\Freelance\Profile\ProfileFreelance::class)->name('freelance.profile');
-                //Route::get('/securite', \App\Http\Livewire\Freelance\Profile\Securite::class)->name('freelance.securite');
-                //Route::get('/edit/{id}', \App\Http\Livewire\Freelance\Services\EditService::class)->name('freelance.service.edit');
-            });
-
-
-            Route::group(['prefix' => "paiement"], function () {
-                Route::get('/', \App\Livewire\Freelance\Paiement\PaiementFreelance::class)->name('freelance.PaiementInfo');
-
-                //Route::get('/edit/{id}', \App\Http\Livewire\Freelance\Services\EditService::class)->name('freelance.service.edit');
-            });
-
-
-
-            Route::group(['prefix' => "mission"], function () {
-
-                Route::get('/en_attente', \App\Livewire\Freelance\Mission\MissionList::class)->name('freelance.projet.list');
+                    Route::get('/assistance', \App\Livewire\Freelance\Other\AssistanceFreelance::class)->name('freelance.assistance');
 
 
-                Route::get('/mission_active/{mission_numero}', \App\Livewire\Freelance\Mission\MissionWork::class)->name('freelance.proposition.accepted');
-                Route::get('/mission_active', \App\Livewire\Freelance\Mission\MissionEnCours::class)->name('freelance.proposition');
-                Route::get('/en_attente/{mission_numero}', \App\Livewire\Freelance\Mission\MissionProposition::class)->name('freelance.projet.view');
-            });
+                    Route::group(['prefix' => "mission"], function () {
+
+                        Route::get('/en_attente', \App\Livewire\Freelance\Mission\MissionList::class)->name('freelance.projet.list');
+
+
+                        Route::get('/mission_active/{mission_numero}', \App\Livewire\Freelance\Mission\MissionWork::class)->name('freelance.proposition.accepted');
+                        Route::get('/mission_active', \App\Livewire\Freelance\Mission\MissionEnCours::class)->name('freelance.proposition');
+                        Route::get('/en_attente/{mission_numero}', \App\Livewire\Freelance\Mission\MissionProposition::class)->name('freelance.projet.view');
+                    });
+
+
+
+                    });
+
+
         }
     );
 
 
 });
 
+
+
+
+
+//Facebook controller
+Route::controller(AuthSocial::class)->group(function () {
+    Route::get('auth/facebook', 'redirectToFacebook')->name('auth.facebook');
+    Route::get('auth/facebook/callback', 'handleFacebookCallback');
+    Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
+    Route::get('auth/google/callback', 'handleGoogleCallback');
+});
+
+
+
+Route::get('/storage-link', function () {
+    Artisan::call('storage:link');
+});
+
+Route::get('/view-cache', function () {
+    Artisan::call('view:cache');
+});
+
+
+
+Route::middleware(['auth:sanctum', 'socialMedia'])->group(function () {
+    Route::get('/add-password', \App\Livewire\User\Auth\AddPassword::class)->name('changePassword');
+});
 

@@ -29,7 +29,7 @@ class ServiceAddCardTwo extends Component
                 'service_id' => $serviceId,
             ]);
         }
-        $this->emit('refreshFavorite'); 
+        $this->emit('refreshFavorite');
     }
 
     public function add_cart($id)
@@ -53,6 +53,8 @@ class ServiceAddCardTwo extends Component
         $this->dispatch('refreshComponent');
 
 
+
+        $this->dispatch('notify', ['message' => "Service ajouter dans le panier", 'icon' => 'success',]);
 
 
         // dd(Session::get('cart'));

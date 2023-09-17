@@ -56,6 +56,8 @@ class ServiceAddCard extends Component
 
         $this->dispatch('refreshComponent');
 
+        $this->dispatch('notify', ['message' => "Service ajouter dans le panier", 'icon' => 'success',]);
+
        // $this->notification()->success($title = "le Service a ete ajouté dans le panier",);
 
 

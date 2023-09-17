@@ -69,7 +69,12 @@
             <div class="flex items-end justify-end mt-2 md:mt-5">
 
 
-                <a href="{{route('freelancer.register')}}" wire:navigate class="btn btn-primary">Continuer</a>
+
+                <x-filament::button size="lg" icon-position="after"  icon="heroicon-m-arrow-right-circle" tag="a" href="{{route('freelancer.register')}}">
+                   Continuer
+                </x-filament::button>
+
+
 
             </div>
         </div>

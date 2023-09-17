@@ -3,7 +3,7 @@
 
 @include('include.head')
 
-<body class="font-sans antialiased bg-white dark:bg-gray-900">
+<body class="font-sans antialiased bg-gray-100 dark:bg-gray-900">
 
     <x-notifications z-index="z-[200]" />
 
@@ -11,6 +11,8 @@
 
     @livewire('web.header-web')
 
+
+    @livewire('web.other.tools-search-pc')
 
 
 
@@ -54,7 +56,7 @@
 
 
 
-    <main class="min-h-screen pt-16">
+    <main x-show="!isOpenSearch" class="min-h-screen pt-16">
         {{ $slot }}
     </main>
 
@@ -67,8 +69,7 @@
 
 
 
-    @livewireScriptConfig
-
+@include('include.footer')
 
 
 

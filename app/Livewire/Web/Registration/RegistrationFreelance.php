@@ -3,13 +3,14 @@
 namespace App\Livewire\Web\Registration;
 
 use Livewire\Component;
+use Livewire\Attributes\On;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
 use Livewire\Attributes\Layout;
-
+use Illuminate\Support\Facades\DB;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
@@ -20,6 +21,14 @@ use Illuminate\Support\Collection;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\FileUpload;
 use Livewire\WithFileUploads;
+use App\Models\User;
+use Filament\Notifications\Notification;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use WireUi\Traits\Actions;
+use App\Models\Freelance;
+use App\Mail\welcomeFreelance;
+use Illuminate\Support\Facades\Mail;
 
 #[Layout('layouts.web-layout')]
 class RegistrationFreelance extends Component implements HasForms
@@ -28,6 +37,9 @@ class RegistrationFreelance extends Component implements HasForms
     use WithFileUploads;
 
     public $step = 1;
+    public ?array $userAuth = [];
+    public $user;
+
     public $totalStep = 5;
     public $category;
     public $competences = array();
@@ -35,7 +47,7 @@ class RegistrationFreelance extends Component implements HasForms
     public $selectedSkill = array();
     public $experience;
     public $sub_category;
-    public $newFreelance = ['name' => '', 'tax' => '', 'prenom' => '', 'description' => '', 'site' => ''];
+    public $newFreelance = ['name' => '', 'tax' => '', 'prenom' => '', 'description' => '', 'site' => '', 'experience'];
     public $localisation = ['avenue' => "", 'commune' => '', 'ville' => ""];
     public $image = null;
     public $newLanguage = ['language' => '', 'level' => ''];
@@ -60,7 +72,13 @@ class RegistrationFreelance extends Component implements HasForms
         $this->imageForm->fill();
         $this->annee = $this->dateAnne();
         $this->addCompteForm->fill();
+        $this->langueForm->fill();
         $this->step = 1;
+
+        $this->user = auth()->user();
+        $this->userAuth = $this->user->toArray();
+
+        //dd($this->userAuth);
     }
 
 
@@ -69,7 +87,7 @@ class RegistrationFreelance extends Component implements HasForms
         switch ($this->step) {
             case 1:
                 $this->validate([
-                    'newFreelance.tax' => "required",
+                    'currency' => "required",
                     "localisation" => "required",
                     'category' => 'required',
                     "sub_category" => 'required',
@@ -122,7 +140,8 @@ class RegistrationFreelance extends Component implements HasForms
                     'md' => 2,
 
                 ])->schema([
-                    Select::make('category')->label('categorie')
+                    Select::make('category')
+                    ->label('categorie')
                     ->options(Category::query()->pluck('name', 'id'))
                         ->live()
                         ->searchable()
@@ -141,6 +160,7 @@ class RegistrationFreelance extends Component implements HasForms
                         ->visible(fn (Get $get): bool => filled($get('category')))
                         ->multiple()
                         ->searchable()
+                    ->maxItems(4)
                         ->native(false),
 
                     Select::make('experience')
@@ -171,7 +191,7 @@ class RegistrationFreelance extends Component implements HasForms
                         'Debutant' => 'Debutant',
                         'Intermédiaire' => 'Intermédiaire',
                         'expert' => 'expert',
-                    ]),
+                    ])->native(false),
 
 
                 ]),
@@ -207,25 +227,6 @@ class RegistrationFreelance extends Component implements HasForms
     }
 
 
-    public function taxForm(Form $form): Form
-    {
-        return $form->schema([
-            Grid::make(['md' => 2])
-                ->schema([
-                    TextInput::make('newFreelance.tax')->label('Taux journalier')
-                    ->numeric()
-                        ->prefix('$')
-                        ->inputMode('decimal')
-                        ->required(),
-
-
-
-                ]),
-
-
-
-        ]);
-    }
     public function imageForm(Form $form): Form
     {
         return $form->schema([
@@ -233,15 +234,16 @@ class RegistrationFreelance extends Component implements HasForms
                 ->schema([
                     FileUpload::make('image')->label('image')
 
-                    ->imagePreviewHeight('200')
+                    ->imagePreviewHeight('100')
                     ->loadingIndicatorPosition('left')
                     ->panelAspectRatio('2:1')
                     ->panelLayout('integrated')
-
+                    ->directory('profile-photos')
+                    ->preserveFilenames()
                     ->uploadButtonPosition('left')
                     ->uploadProgressIndicatorPosition('left')
                     ->image()
-                        ->imageEditor()
+                    ->imageEditor()
 
 
 
@@ -417,11 +419,121 @@ class RegistrationFreelance extends Component implements HasForms
         return [
             'editPostForm',
             'skillForm',
-            'taxForm',
+
             'imageForm',
             'langueForm',
             'addCompteForm'
         ];
+    }
+
+    public function register()
+    {
+
+        $this->validate([
+            "userAuth.email" => "required",
+            //"userAuth.phone" => "required|numeric|integer",
+        ]);
+
+
+
+        try {
+
+
+            if (empty($this->selectedLanguages) || empty($this->selectedSkill)  || empty($this->sub_category)) {
+
+
+
+                $this->dispatch('error', [
+                    'message' => "Veuillez Remplir tout les champs",
+                    'icon' => 'error',
+                    'title' => 'error'
+                ]);
+
+            } else {
+
+                DB::beginTransaction();
+
+                $this->addImage();
+
+                $data = [
+                    'nom' => $this->newFreelance['name'],
+                    'prenom' => $this->newFreelance['prenom'],
+                    'description' => $this->newFreelance['description'],
+                    'langue' => $this->selectedLanguages,
+                    'diplome' => $this->selectedDiplome,
+                    'certificat' => $this->selectedCertificat,
+                    'site' => $this->newFreelance['site'],
+                    'experience' => $this->experience,
+                    'competences' => $this->selectedSkill,
+                    'taux_journalier' => $this->currency,
+                    'comptes' => $this->selectedComptes,
+                    'sub_categorie' => $this->sub_category,
+                    'localisation' => $this->localisation,
+                    'category_id' => $this->category,
+                    'level' => 1
+                ];
+
+
+
+
+
+                Freelance::create($data);
+
+                Db::commit();
+
+                $this->dispatch('sendMail');
+                // dd($data);
+
+                $this->step = 1;
+                //$this->resetAll();
+                Session::flash('success', 'Bienvenue Freelance');
+
+
+                Db::commit();
+
+                return redirect()->intended('freelance/dashboard');
+
+            };
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+            $this->dispatch('error', [
+                'message' => "Une erreur s'est produite". $e->getMessage(),
+                'icon' => 'error',
+                'title' => 'error'
+            ]);
+
+        }
+    }
+
+
+
+
+      #[On('sendMail')]
+    public function sendMail()
+    {
+        try {
+            Mail::to(auth()->user()->email)->send(new welcomeFreelance(auth()->user()));
+        } catch (\Exception $e) {
+
+            error_log($e->getMessage());
+        }
+
+    }
+
+    function addImage()
+    {
+        $fileNames = $this->imageForm->getState();
+
+
+
+
+        if (!empty($fileNames['image'])) {
+
+
+            $this->user->profile_photo_path = $fileNames['image'];
+            $this->user->update();
+        }
     }
 
     public function render()

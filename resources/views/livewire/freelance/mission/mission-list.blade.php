@@ -1,7 +1,7 @@
-<div class="min-h-screen">
+<div class="min-h-screen" x-data="{isOpen:false}">
 
 <div class="max-w-3xl mb-2">
-    <h2 class="mb-2 text-lg font-semibold tracking-wide text-gray-700 uppercase dark:text-gray-200 lg:text-xl">Mission
+    <h2 class="mb-2 text-lg font-semibold tracking-wide uppercase text-amber-600 lg:text-xl">Mission
     </h2>
 </div>
 <div>
@@ -11,13 +11,106 @@
 
     <div class="container lg:mx-auto">
 
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:gap-6">
+        <div>
+
+            <div>
+                <div x-bind:class="isOpen ? 'fixed inset-0  top-0  bottom-0  overflow-hidden dark:bg-gray-900 bg-white z-50 p-4 transition-all duration-200 w-full' : 'w-full hidden md:flex mt-0'"
+                    class="">
+                    <div class="container px-4 mx-auto">
+
+                        <div class="mb-8">
+                            <div class="grid -mx-2 md:grid-cols-4">
+                                <div class="w-full px-2 mb-4">
+
+                                    <x-select wire:model.live.debounce.100ms="category" placeholder="Categories" :async-data="route('api.services')"
+                                        option-label="name" option-value="id" />
+
+
+                                </div>
+                                <div class="w-full gap-2 px-2 mb-4">
+
+                                    <x-select placeholder="Prix" wire:model.live.debounce.100ms="price_range">
+
+                                        <x-select.option label="10$-100$" value="10-100" />
+                                        <x-select.option label="100$-500$" value="100-500" />
+                                        <x-select.option label="500$ plus" value="500-10000" />
+                                    </x-select>
+                                </div>
+                                <div class="w-full gap-2 px-2 mb-4">
+                                  <x-datetime-picker without-time='true'  placeholder="Date debut"
+                                    wire:model.live="dateDebut" />
+                                </div>
+                                <div class="w-full gap-2 px-2 mb-4">
+
+                                    <x-select placeholder="Trier par" wire:model.live.debounce.100ms="trie" >
+
+                                        <x-select.option label="Budget ascendant" value="budget-asc" />
+                                        <x-select.option label="Budget Descendant" value="budget-desc" />
+                                        <x-select.option label="Date debut ascendant" value="begin_mission-asc" />
+                                        <x-select.option label="Date debu Descendant" value="begin_mission-desc" />
+
+
+                                    </x-select>
+                                </div>
+
+
+                            </div>
+                            <div class="flex gap-4 md:hidden">
+
+                                <button x-on:click="isOpen=!isOpen"
+                                    class="middle none center mr-4 rounded-lg bg-blue-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                                    data-ripple-light="true">
+                                    Resultat ({{$count}})
+                                </button>
+
+                                <x-button @click="isOpen=false" label="Fermer" />
+
+
+
+
+                                {{--
+                                <x-button label="Resultat ({{$count}})" @click="isOpen=false" />
+                                --}}
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <button @click="isOpen=!isOpen" class="flex pl-3 no-underline dark:text-white md:hidden hover:text-amber-600"
+                    href="#">
+                    <svg class="w-8 fill-current hover:text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24">
+                        <path d="M7 11H17V13H7zM4 7H20V9H4zM10 15H14V17H10z" />
+                    </svg> <span>
+                        filtre
+                    </span>
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div>
+            <div class="flex items-center justify-center">
+
+                <div class="flex items-center justify-center p-2">
+                    <div wire:loading.delay class="spinner"></div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="grid grid-cols-1 gap-4 px-6 mt-4 lg:mt-2 lg:px-0 sm:grid-cols-2 sm:gap-5 lg:gap-6">
 
             @forelse($projets as $projet)
 
 
             <div class="card lg:flex-row">
-                <img class="object-cover object-center w-full h-48 bg-center bg-cover rounded-t-lg shrink-0 lg:h-auto lg:w-48 lg:rounded-t-none lg:rounded-l-lg"
+                <img class="object-cover object-center w-full bg-center bg-cover rounded-t-lg h-52 shrink-0 lg:h-auto lg:w-48 lg:rounded-t-none lg:rounded-l-lg"
                     src="{{ asset('images/illustrations/missionF.svg') }}" alt="image" />
                 <div class="flex flex-col w-full px-4 py-3 grow sm:px-5">
                     <div class="flex items-center justify-between">
@@ -43,7 +136,7 @@
                                     </svg>
                                 </button>
 
-                                <div x-ref="popperRoot" class="popper-root" :class="isShowPopper && 'show'">
+                                <div  wire:ignore x-cloak x-ref="popperRoot" class="popper-root" :class="isShowPopper && 'show'">
                                     <div
                                         class="popper-box rounded-md border border-slate-150 bg-white py-1.5 font-inter dark:border-navy-500 dark:bg-navy-700">
                                         <ul>

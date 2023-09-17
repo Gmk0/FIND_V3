@@ -22,6 +22,9 @@ use Filament\Forms\Form;
 
 use Filament\Support\RawJs;
 use Illuminate\Support\Facades\DB;
+use App\Models\UserSetting;
+use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
+use Ysfkaya\FilamentPhoneInput\PhoneInputNumberType;
 
 
 #[Layout('layouts.web-layout')]
@@ -51,6 +54,21 @@ implements HasForms
 
         $this->month = $this->getMonth();
         $this->year = $this->getYear();
+
+
+
+
+        if (isset(auth()->user()->userSetting->addresse_facturation)) {
+
+            $address = auth()->user()->userSetting->addresse_facturation;
+
+            $this->addressForm->fill([
+                'localisation.adresse'=>$address['adresse'],
+                'localisation.commune' => $address['commune'],
+                'localisation.ville' => $address['ville'],
+
+                ]);
+        }
     }
 
 
@@ -58,9 +76,9 @@ implements HasForms
     {
         return $form->schema([
 
-            TextInput::make('localisation.adresse'),
-            TextInput::make('localisation.commune'),
-            TextInput::make('localisation.ville'),
+            TextInput::make('localisation.adresse')->required(),
+            TextInput::make('localisation.commune')->required(),
+            TextInput::make('localisation.ville')->required(),
 
 
 
@@ -72,17 +90,32 @@ implements HasForms
 
         return $form->schema([
 
-            TextInput::make('maxi.name')->required(),
-            TextInput::make('maxi.number')->hint("+243 844720350")->required()->length(10),
+            TextInput::make('maxi.name')
+            ->label('Nom')
+            ->required(),
+            PhoneInput::make('maxi.number')
+            ->label("telephone")
+            ->required()
+            ->countryStatePath('phone_country')
+            ->initialCountry('cd')
+            ->onlyCountries(['cd'])
+            ->displayNumberFormat(PhoneInputNumberType::E164)
+
+                ->unique(table: User::class)
+                ->focusNumberFormat(PhoneInputNumberType::E164),
+
         ]);
     }
 
     public function  creditForm(Form $form): Form
     {
         return $form->schema([
-            TextInput::make('card.name')->required(),
+            TextInput::make('card.name')
+            ->label('Nom')
+            ->required(),
 
             TextInput::make('card.cardNumber')
+            ->label('Numero de carte')
             ->mask(RawJs::make(<<<'JS'
                          $input.startsWith('34') || $input.startsWith('37') ? '9999 999999 99999' : '9999 9999 9999 9999'
                 JS))->required(),
@@ -172,13 +205,16 @@ implements HasForms
     }
 
 
+
     public function pay()
     {
+        $this->addressForm->validate();
         $this->creditForm->validate();
-
 
         $card =  $this->creditForm->getState();
         $card['card'];
+
+        $this->addAddress();
 
 
         $payement = new Paiement();
@@ -238,6 +274,7 @@ implements HasForms
 
     public function checkoutmaxi()
     {
+        $this->addressForm->validate();
         $this->maxiForm->validate();
 
 
@@ -260,6 +297,7 @@ implements HasForms
                 = $this->totalPrice() / 100;;
             $payment->payment_method = ['last4' => "", 'brand' => "maxicash"];
             $payment->payment_token = $this->references();
+            $payment->type= "paiement";
             $payment->save();
 
             return $checkout->checkoutmaxi($this->totalPrice(),  $data['maxi']['number'],$payment->payment_token, $succesUrl, $cancelurl, $faileurUrl);
@@ -285,6 +323,38 @@ implements HasForms
         return  $finalId = 'TR' . $uniqueId . $counter;
     }
 
+
+
+    public function addAddress()
+    {
+
+
+
+            try{
+
+            $element = $this->addressForm->getState();
+
+
+            $data = auth()->user()->userSetting;
+            $data->addresse_facturation = $element['localisation'];
+
+            $data->update();
+
+
+            }catch(\Exception $e){
+
+
+
+               // dd($e->getMessage());
+
+            };
+
+
+
+
+
+
+    }
 
 
 

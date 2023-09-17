@@ -139,7 +139,7 @@
 
                             <li>
 
-                                <x-dropdown align="left" width="48">
+                                <x-jet-dropdown align="left" width="48">
                                     <x-slot name="trigger">
 
                                         <span class="inline-flex rounded-md">
@@ -167,7 +167,7 @@
 
 
 
-                                        <x-dropdown-link href="{{ route('profile.show') }}">
+                                        <x-dropdown-link wire:navigate href="{{ route('profile.show') }}">
                                             <ion-icon name="albums-outline" class="w-4 h-4"></ion-icon>
                                             <span class="ml-2">{{__('Profile')}}</span>
                                         </x-dropdown-link>
@@ -186,7 +186,7 @@
 
 
                                     </x-slot>
-                                </x--dropdown>
+                                </x-jet-dropdown>
                                 {{-- <button id="dropdownNavbarLink" data-dropdown-toggle=""
                                     class="flex justify-between w-full py-2 pl-3 pr-4 font-medium text-gray-700 border-b border-gray-100 s-center hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-primary-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">Outils
                                     <svg class="w-4 h-4 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
@@ -271,8 +271,8 @@
         <div x-cloak x-show="isSidebarOpen" @click="isSidebarOpen = false"
             class="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden">
         </div>
-        <div x-show="isSidebarOpen" class="fixed inset-y-0 z-10 w-16 bg-white"></div>
-        <div x-transition:enter="transform transition-transform duration-300"
+        <div x-cloak x-show="isSidebarOpen" class="fixed inset-y-0 z-10 w-16 bg-white"></div>
+        <div  x-transition:enter="transform transition-transform duration-300"
             x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0"
             x-transition:leave="transform transition-transform duration-300" x-transition:leave-start="translate-x-0"
             x-transition:leave-end="-translate-x-full" x-show="isSidebarOpen" x-cloak

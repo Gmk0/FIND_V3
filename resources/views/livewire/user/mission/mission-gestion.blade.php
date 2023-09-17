@@ -1,6 +1,18 @@
 <div>
 
-    <div class="min-h-screen" x-data="{message:@entangle('openMessage')}">
+    <div class="min-h-screen  x-data="{message:@entangle('openMessage')}">
+
+
+        <div class="lg:px-8 md:px-6 xl:px-20">
+            <div class="max-w-3xl mb-8">
+                <h2 class="mb-8 text-xl font-semibold tracking-wide uppercase text-amber-600">Détails de la Mission</h2>
+            </div>
+
+            <div>
+                @include('include.bread-cumb-user',['projet'=>'Mission','projectId'=>$projet->mission_numero])
+            </div>
+
+        </div>
 
 
         <section class="px-2 py-6 dark:text-gray-400 md:px-6 lg:px-8 xl:px-20">
@@ -10,7 +22,6 @@
             <div class="max-w-6xl mx-auto">
 
                 <!-- Titre de la section -->
-                <h2 class="mb-4 text-xl font-semibold text-gray-800 dark:text-gray-300">Détails de la Mission</h2>
 
                 <!-- Contenu de la section -->
                 <div class="overflow-hidden bg-white rounded-lg shadow-md">
@@ -132,14 +143,14 @@
                         <div x-data="{open:false}" class="relative mb-3">
                             <h6 class="mb-0">
                                 <button @click="open=!open"
-                                    class="border-slate-100 text-gray-600 dark:text-gray-500 text-base rounded-t-1 group relative flex w-full cursor-pointer items-center border-b border-solid p-4 text-left font-semibold text-dark-500 transition-all ease-in"
+                                    class="relative flex items-center w-full p-4 text-base font-semibold text-left text-gray-600 transition-all ease-in border-b border-solid cursor-pointer border-slate-100 dark:text-gray-500 rounded-t-1 group text-dark-500"
                                     data-collapse-target="animated-collapse-1">
                                     <span>Rapport Envoyer</span>
                                     <i :class="open? 'rotate-180 transition-transform':''"
-                                        class="fa fa-chevron-down absolute right-0 pt-1 text-base transition-transform "></i>
+                                        class="absolute right-0 pt-1 text-base transition-transform fa fa-chevron-down "></i>
                                 </button>
                             </h6>
-                            <div x-show="open" x-collapse class=" overflow-hidden transition-all duration-300 ease-in-out">
+                            <div x-show="open" x-collapse class="overflow-hidden transition-all duration-300 ease-in-out ">
                                 <div class="p-4 text-sm leading-normal">
                                     @forelse ($projet->rapports as $rappors)
                                     <div>
@@ -162,7 +173,7 @@
                     </div>
                     <div class="px-6 py-4 bprojet-t bprojet-gray-200">
                         <p class="mb-2 text-lg text-gray-800">Options supplémentaires</p>
-                        <div class="flex flex-col  gap-2 md:flex-row">
+                        <div class="flex flex-col gap-2 md:flex-row">
 
                             <div class="flex gap-2 lg:flex-row">
 
@@ -226,14 +237,14 @@
                         <div x-data="{open:false}" class="relative mb-3">
                             <h6 class="mb-0">
                                 <button @click="open=!open"
-                                    class="border-slate-100 text-gray-600 dark:text-gray-500 text-lg rounded-t-1 group relative flex w-full cursor-pointer items-center border-b border-solid p-4 text-left font-semibold text-dark-500 transition-all ease-in"
+                                    class="relative flex items-center w-full p-4 text-lg font-semibold text-left text-gray-600 transition-all ease-in border-b border-solid cursor-pointer border-slate-100 dark:text-gray-500 rounded-t-1 group text-dark-500"
                                     data-collapse-target="animated-collapse-1">
                                     <span>Transaction lier</span>
                                     <i :class="open? 'rotate-180 transition-transform':''"
-                                        class="fa fa-chevron-down absolute right-0 pt-1 text-base transition-transform "></i>
+                                        class="absolute right-0 pt-1 text-base transition-transform fa fa-chevron-down "></i>
                                 </button>
                             </h6>
-                            <div x-show="open" x-collapse class=" overflow-hidden transition-all duration-300 ease-in-out">
+                            <div x-show="open" x-collapse class="overflow-hidden transition-all duration-300 ease-in-out ">
                                 <div class="p-4 text-sm leading-normal">
                                     @if (!empty($projet->transaction))
 
@@ -297,7 +308,7 @@
                                             @endif
                                         </p>
 
-                                        <div class="flex mt-4 gap-4">
+                                        <div class="flex gap-4 mt-4">
                                             <div>
                                                 <p class="text-sm text-gray-600 dark:text-gray-300">Montant payé :
                                                     {{$projet->transaction->amount}}
@@ -422,7 +433,7 @@
                     </div>
                 </x-filament::modal>
 
-                <x-filament::modal slide-over id="contacter">
+            <x-filament::modal slide-over id="contacter">
 
                 <x-slot name="heading">
                     Contacter

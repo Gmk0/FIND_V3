@@ -7,15 +7,13 @@ import * as PusherPushNotifications from "@pusher/push-notifications-web";
 
 import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
 import collapse from '@alpinejs/collapse'
+import Clipboard from "@ryangjchandler/alpine-clipboard"
 
 import jQuery from 'jquery';
 import Swal from 'sweetalert2';
 
-//import FormsAlpinePlugin from '../../vendor/filament/forms/dist/module.esm';
-//import NotificationsAlpinePlugin from '../../vendor/filament/notifications/dist/module.esm';
 
-
-import persist from "@alpinejs/persist"; // @see https://alpinejs.dev/plugins/persist
+//import persist from "@alpinejs/persist"; // @see https://alpinejs.dev/plugins/persist
 // @see https://alpinejs.dev/plugins/collapse
 import intersect from "@alpinejs/intersect"; // @see https://alpinejs.dev/plugins/intersect
 
@@ -81,7 +79,7 @@ import inputMask from "./directives/inputMask";
 
 // Alpine Magic Functions
 import notification from "./magics/notification";
-import clipboard from "./magics/clipboard";
+//import clipboard from "./magics/clipboard";
 
 import SimpleBar from "simplebar";
 
@@ -130,13 +128,23 @@ window.pages = pages;
 
 Alpine.plugin(intersect);
 Alpine.plugin(collapse)
+Alpine.plugin(Clipboard.configure({
+    onCopy: () => {
+        notification({
+            text: "Lien copier ",
+            variant: "info",
+            duration: 1500,
+            position: 'right-bottom'
+        });
+    }
+}))
 //Alpine.plugin(focus)
 Alpine.directive("tooltip", tooltip);
 Alpine.directive("input-mask", inputMask);
 
 
 Alpine.magic("notification", () => notification);
-Alpine.magic("clipboard", () => clipboard);
+//Alpine.magic("clipboard", () => clipboard);
 
 Alpine.store("breakpoints", breakpoints);
 

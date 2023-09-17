@@ -141,23 +141,14 @@
 
                                         {{$this->editPostForm}}
 
-                                        {{--
-                                        <x-select x-on:selected="showDateInputs = true" wire:model="category"
-                                            placeholder="Compentences" :async-data="route('api.services')"
-                                            option-label="name" option-value="id" />--}}
+
 
 
                                         <div x-cloak x-show="showDateInputs">
                                             <div class="grid grid-cols-2 gap-6 mt-3 md:mt-0">
 
 
-                                                {{-- <x-select wire:model.defer="freelancer.experience"
-                                                    placeholder="Anciennete" wire:model.defer="freelancer.experience">
-                                                    <x-select.option label="0-2 ans" value="2" />
-                                                    <x-select.option label="2-7 ans" value="5" />
-                                                    <x-select.option label="+7ans" value="7" />
 
-                                                </x-select>--}}
 
                                             </div>
                                         </div>
@@ -173,36 +164,7 @@
                                                 competences speciales au
                                                 max:3</p>
 
-                                            {{-- <div x-data="{sousSkills:[]}" class="">
-                                                @empty (!$SousCategory)
 
-                                                <div class="grid grid-cols-2 md:px-3 md:grid-cols-3">
-                                                    @forelse ($SousCategory as $item)
-                                                    <div class="">
-                                                        <label class="inline-flex items-center">
-                                                            <input type="checkbox" wire:model.defer="SousCategorie"
-                                                                class="w-5 h-5 text-gray-600 rounded-full form-checkbox"
-                                                                name="example" value="{{$item->name}}">
-                                                            <span
-                                                                class="ml-2 text-sm text-gray-700 md:text-base dark:text-gray-300">{{$item->name}}</span>
-                                                        </label>
-                                                    </div>
-                                                    @empty
-                                                    <div class="flex items-center justify-center">
-                                                        <p class="italic text-grey">Chargement ...</p>
-                                                    </div>
-                                                    @endforelse
-
-
-
-                                                </div>
-                                                @else
-                                                <div class="flex items-center justify-center">
-                                                    <p class="italic text-grey">Choisissez une categorie</p>
-                                                </div>
-                                                @endempty
-
-                                            </div>--}}
                                         </div>
 
                                     </div>
@@ -253,6 +215,8 @@
                                                     }}
                                                 </span>
 
+                                                <x-filament::icon-button icon="heroicon-m-trash" tooltip="Effacer" wire:click="removeLanguage({{$index}},'skill')" />
+
                                             </li>
                                             @empty
                                             <li>Cliquer sur ajouter </li>
@@ -262,22 +226,13 @@
 
 
                                     <div class="grid gap-2 mb-4 ">
-                                        {{--
-                                        <x-input placeholder="ajouter une compentence"
-                                            wire:model.defer="newSkill.skill" />
-                                        <x-select label="" placeholder="Choisissez un niveau"
-                                            :options="['Débutant', 'Intermédiaire', 'expert']"
-                                            wire:model.defer="newSkill.level" />
-                                        <div>
-                                            <x-button sm outline stone wire:click="addSkill()" icon="plus-circle"
-                                                spinner="addSkill" label="Ajouter" />
-                                        </div>--}}
+
                                         {{$this->skillForm}}
 
 
                                         <div>
 
-                                            <x-filament::button type="button" wire:click='addSkill()'>
+                                            <x-filament::button outlined type="button" wire:click='addSkill()'>
                                                 <span wire:loading.remove wire:target='addSkill'>Ajouter</span><span wire:loading
                                                     wire:target='addSkill'>Ajout...</span>
                                             </x-filament::button>
@@ -322,12 +277,9 @@
                             <div
                                 class="px-4 py-5 bg-white dark:bg-gray-800 dark:border dark:border-gray-200 rounded-lg  sm:p-6 shadow {{ isset($actions) ? 'sm:rounded-tl-md sm:rounded-tr-md' : 'sm:rounded-md' }}">
                                 <div class="">
-                                    {{--<div class="grid gap-4 mb-4 md:grid-cols-2">
-                                        <x-inputs.currency placeholder="Taux" icon="currency-dollar" thousands="."
-                                            decimal="," precision="4" wire:model.defer="currency" />
-                                    </div>--}}
 
-                                    {{$this->taxForm}}
+                                <x-inputs.currency placeholder="Taux" icon="currency-dollar" thousands="." decimal="," precision="4"
+                                wire:model="currency" />
                                 </div>
                             </div>
                         </div>
@@ -525,10 +477,8 @@
 
 
 
-                                    <textarea id="description" rows="4" x-model="message" x-on:keyup="validateTextarea"
-                                        label="Description" wire:model="newFreelance.description"
-                                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="Description..."></textarea>
+
+                                        <x-textarea x-model="message" x-on:keyup="validateTextarea" wire:model="newFreelance.description"/>
 
                                     <div class="mt-4 text-sm italic text-gray-700 dark:text-gray-100"
                                         x-show="message.length < 150">
@@ -537,7 +487,7 @@
                                     <div class="text-sm text-right text-gray-500">
                                         <span x-text="message.length"></span>/6000
                                     </div>
-                                    <x-input-error for="description" class="mt-2" />
+
 
 
                                 </div>
@@ -606,6 +556,7 @@
                                                     }}
                                                 </span>
 
+                                                <x-filament::icon-button icon="heroicon-m-trash" tooltip="Effacer" wire:click="removeLanguage({{$index}},'langue')" />
 
 
                                             </li>
@@ -625,7 +576,7 @@
 
                                         <div>
 
-                                            <x-filament::button type="button"  wire:click='addLanguage()'>
+                                            <x-filament::button type="button" outlined  wire:click='addLanguage()'>
                                                 <span wire:loading.remove wire:target='addLanguage'>Ajouter</span><span wire:loading
                                                     wire:target='addLanguage'>Ajout...</span>
                                             </x-filament::button>
@@ -715,22 +666,11 @@
 
                                                                 <td
                                                                     class="px-6 py-4 text-sm text-gray-500 dark:text-gray-200 whitespace-nowrap">
-                                                                    {{--
-                                                                    <x-button.circle xs icon="x"
-                                                                        wire:click="removeLanguage({{$index}},'universite')" />
-                                                                    --}}
 
-                                                                    <button
-                                                                        wire:click="removeLanguage({{$index}},'universite')"
-                                                                        class="btn btn-sm btn-circle btn-outline">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                            class="w-5 h-5" fill="none"
-                                                                            viewBox="0 0 24 24" stroke="currentColor">
-                                                                            <path stroke-linecap="round"
-                                                                                stroke-linejoin="round" stroke-width="2"
-                                                                                d="M6 18L18 6M6 6l12 12" />
-                                                                        </svg>
-                                                                    </button>
+
+                                                                    <x-filament::icon-button icon="heroicon-m-trash" tooltip="Effacer" wire:click="removeLanguage({{$index}},'universite')" />
+
+
                                                                 </td>
                                                             <tr>
                                                                 @empty
@@ -753,27 +693,16 @@
                                         <x-input id="name" placeholder="{{__('avenue')}}" type="text"
                                             wire:model='newDiplome.universite' />
                                         <div class="grid gap-2 md:grid-cols-2">
+                                            <x-select placeholder="Annee" :options=$annee wire:model="newDiplome.annee" />
+
+
 
                                             <div>
+                                                <x-filament::button type="button" outlined wire:click='addDiplome()'>
+                                                    <span wire:loading.remove wire:target='addDiplome'>Ajouter</span><span wire:loading
+                                                        wire:target='addDiplome'>Ajout...</span>
+                                                </x-filament::button>
 
-
-                                                <select id="countries" wire:model='newDiplome.annee'
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-amber-500 focus:border-amber-500 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-amber-500 dark:focus:border-amber-500">
-                                                    <option selected>annee</option>
-
-                                                    @foreach ($annee as $item)
-                                                    <option value="{{$item}}">{{$item}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-
-                                            <div>
-                                                <button wire:click="addDiplome()"
-                                                    class="flex select-none items-center gap-3 rounded-lg border border-green-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-green-500 transition-all hover:opacity-75 focus:ring focus:ring-green-200 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                                                    data-ripple-light="true">
-                                                    <span wire:loading.remove wire:target='addDiplome'>Ajouter</span>
-                                                    <span wire:loading wire:target='addDiplome'>Ajout...</span>
-                                                </button>
                                             </div>
 
                                         </div>
@@ -866,18 +795,10 @@
                                                                 <td
                                                                     class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
 
+                                                                    <x-filament::icon-button icon="heroicon-m-trash" tooltip="Effacer"
+                                                                            wire:click="removeLanguage({{$index}},'certificate')" />
 
-                                                                    <button
-                                                                        wire:click="removeLanguage({{$index}},'certificate')"
-                                                                        class="btn btn-sm btn-circle btn-outline">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                            class="w-6 h-6" fill="none"
-                                                                            viewBox="0 0 24 24" stroke="currentColor">
-                                                                            <path stroke-linecap="round"
-                                                                                stroke-linejoin="round" stroke-width="2"
-                                                                                d="M6 18L18 6M6 6l12 12" />
-                                                                        </svg>
-                                                                    </button>
+
                                                                 </td>
                                                             <tr>
                                                                 @empty
@@ -902,27 +823,18 @@
                                         <x-input id="name" placeholder="{{__('Certifier Par')}}" type="text"
                                             wire:model='newCertificate.delivrer' />
                                         <div class="grid gap-2 md:grid-cols-2">
+                                            <x-select placeholder="Annee" :options=$annee wire:model="newCertificate.annee" />
+
+
 
                                             <div>
 
+                                                <x-filament::button type="button" outlined wire:click='addCertificate()'>
+                                                        <span wire:loading.remove wire:target='addCertificate'>Ajouter</span><span wire:loading
+                                                            wire:target='addCertificate'>Ajout...</span>
+                                            </x-filament::button>
 
-                                                <select id="countries" wire:model.defer="newCertificate.annee"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-amber-500 focus:border-amber-500 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-amber-500 dark:focus:border-amber-500">
-                                                    <option selected>annee</option>
-                                                    @foreach ($annee as $item)
-                                                    <option value="{{$item}}">{{$item}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
 
-                                            <div>
-                                                <button wire:click="addCertificate()"
-                                                    class="flex select-none items-center gap-3 rounded-lg border border-green-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-green-500 transition-all hover:opacity-75 focus:ring focus:ring-green-200 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                                                    data-ripple-light="true">
-                                                    <span wire:loading.remove
-                                                        wire:target='addCertificate'>Ajouter</span>
-                                                    <span wire:loading wire:target='addCertificate'>Ajout...</span>
-                                                </button>
                                             </div>
 
                                         </div>
@@ -968,7 +880,8 @@
 
 
 
-                                    <x-input id="name" placeholder="{{__('Lien du site web ou portfolio ')}}"
+
+                                    <x-input  class="!pl-[6.5rem]" label="Website" placeholder="your-website.com" prefix="https://www."  placeholder="{{__('Lien du site web ou portfolio ')}}"
                                         type="text" wire:model='newFreelance.site' />
 
                                 </div>
@@ -1031,27 +944,13 @@
                         <div class="grid grid-cols-2 gap-4">
                             <label for="google">Google</label>
                             @if (!empty($user->google_id))
-                            <div>
-                                <button wire:click="addComptes()"
-                                    class="flex select-none items-center gap-3 rounded-lg border border-green-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-green-500 transition-all hover:opacity-75 focus:ring focus:ring-green-200 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                                    data-ripple-light="true">
-                                    <span wire:loading.remove wire:target='addComptes'>Ajouter</span>
-                                    <span wire:loading wire:target='addComptes'>Ajout...</span>
-                                </button>
-                            </div>
+
 
                             @else
-                            <div>
 
-                                <button wire:click="addComptes()"
-                                    class="flex select-none items-center gap-3 rounded-lg border border-green-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-green-500 transition-all hover:opacity-75 focus:ring focus:ring-green-200 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                                    data-ripple-light="true">
-                                    <span wire:loading.remove wire:target='addComptes'>Ajouter</span>
-                                    <span wire:loading wire:target='addComptes'>Ajout...</span>
-                                </button>
-
-
-                            </div>
+                            <x-filament::button type="button" outlined>
+                                connecter
+                            </x-filament::button>
 
                             @endif
 
@@ -1101,14 +1000,10 @@
                                                 <span class="mr-1">{{ $comptes['comptes'] }} - {{ $comptes['lien']
                                                     }}
                                                 </span>
-                                                <button wire:click="removeLanguage({{$index}},'skill')"
-                                                    class="btn btn-sm btn-circle btn-outline">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none"
-                                                        viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                                    </svg>
-                                                </button>
+
+                                                <x-filament::icon-button icon="heroicon-m-trash" tooltip="Effacer"
+                                                    wire:click="removeLanguage({{$index}},'skill')" />
+
 
                                             </li>
                                             @empty
@@ -1124,13 +1019,11 @@
 
                                         <div>
 
+                                            <x-filament::button type="button" outlined wire:click='addComptes()'>
+                                                <span wire:loading.remove wire:target='addComptes'>Ajouter</span><span wire:loading
+                                                    wire:target='addComptes'>Ajout...</span>
+                                            </x-filament::button>
 
-                                            <button wire:click="addComptes()"
-                                                class="flex select-none items-center gap-3 rounded-lg border border-green-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-green-500 transition-all hover:opacity-75 focus:ring focus:ring-green-200 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                                                data-ripple-light="true">
-                                                <span wire:loading.remove wire:target='addComptes'>Ajouter</span>
-                                                <span wire:loading wire:target='addComptes'>Ajout...</span>
-                                            </button>
 
                                         </div>
                                     </div>
@@ -1150,7 +1043,7 @@
 
             </div>
 
-            <div class="px-6" x-show.transition.opacity.duration.100ms="step === 5">
+            <div class="px-6"x-show.transition.opacity.duration.100ms="step === 5">
 
                 <div class='mb-4 md:grid md:mb-0 md:grid-cols-3 md:gap-6'>
                     <div class="flex justify-between md:col-span-1">
@@ -1194,8 +1087,9 @@
 
                         <div class="grid gap-4 mb-4 md:grid-cols-2">
 
-                            {{--
-                            <x-input wire:model.defer="userAuth.email" />
+
+                            <x-input wire:model="userAuth.email" />
+
                             @if (empty($userAuth['email_verified_at']))
                             <div>
                                 <x-button spinner="sendMail" label="Verifier" outline gray sm icon="check-circle" />
@@ -1203,7 +1097,7 @@
                             @else
                             <div class="italic text-gray-600">Email verifier</div>
                             @endif
-                            --}}
+
 
 
 
@@ -1258,8 +1152,8 @@
 
                         <div class="grid gap-4 md:grid-cols-2">
 
-                            {{--
-                            <x-input wire:model.defer="userAuth.phone" placeholder="(243)0844720350" />
+
+                            <x-input wire:model="userAuth.phone" placeholder="" />
 
 
 
@@ -1268,7 +1162,7 @@
                                     icon="check-circle" />
                                 <p class="hidden text-sm italic text-red-600">fonctionalites no disponible</p>
                             </div>
-                            --}}
+
 
                         </div>
 
@@ -1310,6 +1204,9 @@
                     <span wire:loading wire:target='addComptes'>Inscription...</span>
 
                 </button>
+
+
+
 
                 {{--
                 <x-button label="Envoyer" spinner="register" wire:click="register()" positive x-show="step == 5" />--}}

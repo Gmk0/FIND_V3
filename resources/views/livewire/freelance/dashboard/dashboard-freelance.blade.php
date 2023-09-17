@@ -1,6 +1,6 @@
-<div class="grid grid-cols-12 gap-4 mt-4 sm:mt-5 sm:gap-5 lg:mt-6 lg:gap-6">
+<div class="grid min-h-screen grid-cols-12 gap-4 mt-4 sm:mt-5 sm:gap-5 lg:mt-6 lg:gap-6">
 
-    <div class="col-span-12 card lg:col-span-8">
+    <div class="col-span-12 dark:bg-navy-800 card lg:col-span-8">
         <div class="flex flex-col justify-between px-4 mt-3 sm:flex-row sm:items-center sm:px-5">
             <div class="flex items-center justify-between flex-1 space-x-2 sm:flex-initial">
                 <h2 class="text-sm+ font-medium tracking-wide text-slate-700 dark:text-navy-100">
@@ -19,7 +19,7 @@
 
                     <div x-ref="popperRoot" class="popper-root" :class="isShowPopper && 'show'">
                         <div
-                            class="popper-box rounded-md border border-slate-150 bg-white py-1.5 font-inter dark:border-navy-500 dark:bg-navy-700">
+                            class="popper-box rounded-md border border-slate-150 bg-white py-1.5 font-inter dark:border-navy-500 dark:bg-navy-600">
                             <ul>
                                 <li>
                                     <a href="#"
@@ -109,7 +109,7 @@
 
     </div>
     <div class="grid grid-cols-2 col-span-12 gap-4 sm:grid-cols-4 sm:gap-5 lg:col-span-4 lg:grid-cols-2 lg:gap-6">
-        <div class="col-span-2 px-4 pb-5 card sm:px-5">
+        <div class="col-span-2 px-4 pb-5 dark:bg-navy-800 card sm:px-5">
             <div class="flex items-center justify-between py-3">
                 <h2 class="font-medium tracking-wide text-slate-700 dark:text-navy-100">
                     Budget
@@ -172,12 +172,7 @@
                     </p>
                 </div>
 
-                <div class="flex items-end hidden w-1/2 ax-transparent-gridline">
-                    <div x-init="$nextTick(() => {
-                                    $el._x_chart = new ApexCharts($el, pages.charts.orderBudget);
-                                    $el._x_chart.render()
-                                });"></div>
-                </div>
+
             </div>
         </div>
         <div class="hidden card">
@@ -232,10 +227,7 @@
                 $169.6k
             </p>
             <div class="ax-transparent-gridline">
-                <div x-init="$nextTick(() => {
-                                $el._x_chart = new ApexCharts($el, pages.charts.orderIncome);
-                                $el._x_chart.render()
-                            });"></div>
+
             </div>
         </div>
         <div class="hidden card">
@@ -290,10 +282,7 @@
                 $34.6k
             </p>
             <div class="ax-transparent-gridline">
-                <div x-init="$nextTick(() => {
-                                $el._x_chart = new ApexCharts($el, pages.charts.orderExpense);
-                                $el._x_chart.render()
-                            });"></div>
+
             </div>
         </div>
     </div>

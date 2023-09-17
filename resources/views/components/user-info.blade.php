@@ -45,7 +45,7 @@
 
         @if(Auth::user()->freelance()->exists())
 
-        <x-dropdown-link wire:navigate href="{{route('freelance.dashboard')}}">
+        <x-dropdown-link  href="{{route('freelance.dashboard')}}">
             <ion-icon name="person-outline" class="w-4 h-4"></ion-icon>
             <span class="ml-2">{{__('Dashbord Freelance')}}</span>
         </x-dropdown-link>
@@ -57,10 +57,7 @@
             <span class="ml-2">{{__('Mes mission')}}</span>
         </x-dropdown-link>
 
-        <x-dropdown-link href="{{-- route('parametreUser') --}}">
-            <ion-icon name="settings-outline" class="w-4 h-4"></ion-icon>
-            <span class="ml-2">{{__('Parametres')}}</span>
-        </x-dropdown-link>
+
 
         <x-dropdown-link href="{{ url('/user/favoris') }}">
 

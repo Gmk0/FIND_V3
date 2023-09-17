@@ -211,11 +211,10 @@
 
                                             </div>
                                             <div>
-                                                <ul class="flex gap-2 text-sm text-gray-300">
-                                                    <a class="hidden" id="clipboardContent1"
-                                                        href="{{route('ServicesViewOne',['service_numero'=>$service->service_numero,'category'=>$service->category->name])}}"></a>
+                                                <ul x-data="{ input: '{{ route('ServicesViewOne', ['service_numero' => $service->service_numero, 'category' => $service->category->name]) }}' }" class="z-50 flex gap-2 text-sm text-gray-300">
 
-                                                    {{--<x-dropdown>
+
+                                                    <x-dropdown>
                                                         <x-slot name="trigger">
                                                             <button type="button" class="flex gap-1 cursor-pointer">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -229,68 +228,48 @@
                                                         </x-slot>
 
                                                         <x-dropdown.item icon="hashtag" label="Facebook" />
-                                                        <x-dropdown.item @click="$clipboard({
-                                                content:document.querySelector('#clipboardContent1').innerText,
-                                                success:()=>$notification({text:'Text Copied',variant:'success'}),
-                                                error:()=>$notification({text:'Error',variant:'error'})
-                                              })" icon="clipboard" separator label="Copier Lien" />
+                                                        <x-dropdown.item @click="$clipboard(input)" icon="clipboard" separator label="Copier Lien" />
 
-                                                    </x-dropdown>--}}
+                                                    </x-dropdown>
+
+
 
 
                                                 </ul>
                                             </div>
                                         </div>
-{{--
-                                        @if(!empty($service->recomandations()) && $service->recomandations()->count()
-                                        >2)
-                                        <div class="mt-4">
-
-
-                                            <div class="flex gap-1 space-x-0 font-mono text-sm text-gray-600">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                    stroke-width="1.5" stroke="currentColor"
-                                                    class="w-4 h-4 text-red-500">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
-                                                </svg>
 
 
 
-                                                <strong
-                                                    class="text-red-500">{{$service->recomandations()->count()}}</strong>
-                                                Personnes ont recommandés ce
-                                                service
-                                            </div>
-                                        </div>
 
-                                        @endif--}}
                                     </div>
                                 </section>
                             </div>
-                        </div>
-                        <div class="sticky flex gap-2 p-6 bg-white rounded-lg dark:bg-gray-800">
+
+                            <div  class="flex gap-2 p-6 bg-white rounded-lg dark:bg-gray-800">
 
 
 
 
 
-                            <div>
+                                <div>
 
                                 <x-filament::button x-on:click="contactMe = !contactMe" color="success">
                                     Message
                                 </x-filament::button>
 
 
-                            </div>
-                            <div class="hidden">
-                                <x-button primary x-on:click="isOpen=true" x-on:click="$openModal('modal')"
-                                    label="Recommander" success spinner="recommander" />
+                                </div>
+                                <div class="hidden">
+                                    <x-button primary x-on:click="isOpen=true" x-on:click="$openModal('modal')" label="Recommander" success
+                                        spinner="recommander" />
+
+                                </div>
+
 
                             </div>
-
-
                         </div>
+
 
                     </div>
 
@@ -776,7 +755,7 @@
                         <div x-show.transition="step==4" class="py-5 min-h-72">
 
 
-                            @if(!empty($commentaires))
+                            @if(!empty($service->orders))
                             @foreach ($commentaires as $commentaire)
 
                             @if ($loop->index < 6) <div class="p-4 mb-4 bg-gray-100 rounded-lg dark:bg-gray-600">
@@ -892,14 +871,16 @@
 
     </div>
 
-    <div x-show="contactMe" x-cloak
-        class="fixed bottom-[4rem] top-[8rem] left-[2rem] z-[85] flex flex-col bg-white shadow-lg bg-opacity-20"
-        x-transition:enter="transition ease-out duration-300"
-        x-transition:enter-start="opacity-0 transform -translate-x-full"
-        x-transition:enter-end="opacity-100 transform -translate-x-0"
-        x-transition:leave="transition ease-in duration-300"
-        x-transition:leave-start="opacity-100 transform -translate-x-0"
-        x-transition:leave-end="opacity-0 transform -translate-x-full">
+
+<div x-show="contactMe" x-cloak
+class="fixed bottom-[4rem] top-[8rem] left-[2rem] sm:top-1/2 sm:left-1/2 transform sm:-translate-x-1/2 sm:-translate-y-1/2 md:top-[8rem] md:left-[2rem] md:transform-none z-[85] flex flex-col bg-white dark:bg-gray-900 shadow-lg bg-opacity-20"
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="opacity-0 transform -translate-x-full"
+    x-transition:enter-end="opacity-100 transform -translate-x-0" x-transition:leave="transition ease-in duration-300"
+    x-transition:leave-start="opacity-100 transform -translate-x-0"
+    x-transition:leave-end="opacity-0 transform -translate-x-full">
+
+
 
         @if(!$messageSent)
 
@@ -1015,8 +996,8 @@
                     <div class="flex justify-around">
 
 
-                        <x-filament::button icon="heroicon-m-eye" href="{{route('MessageUser')}}" tag="a">
-voir les messages
+                        <x-filament::button color="success" icon="heroicon-m-eye" href="{{route('MessageUser')}}" tag="a">
+                                voir les messages
                         </x-filament::button>
 
 
@@ -1028,12 +1009,7 @@ voir les messages
 
                 </div>
             </div>
-            <!-- Corps du chat -->
 
-
-
-
-            <!-- Champ de texte et bouton pour envoyer -->
             <div class="flex justify-between mt-4 space-x-2">
                 <div class="flex gap-3">
                     <button
@@ -1061,76 +1037,7 @@ voir les messages
 
 </div>
 
-{{--<x-modal wire:model.defer="modal">
-    <x-card title="Success">
 
-        <div class="flex flex-col">
-            <div>
-
-                <div class="flex items-center">
-                    <p class="mr-2"> Pourquoi recommander vous ce service(facultatif) :</p>
-                    <div wire:ignore class="justify-center hidden ">
-                        <div class="flex items-center ">
-                            <input value="0" type="" class="hidden" id="rating" name="rating">
-                            <label for="star1" class="text-gray-400 cursor-pointer" onclick="updateRating(1)">
-                                <svg id="star1" class="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24">
-                                    <path
-                                        d="M12 2L14.1386 7.26493L20.831 9.25184L16.6281 13.8239L17.9716 20.0291L12 17.6066L6.02837 20.0291L7.3719 13.8239L3.169 9.25184L9.86144 7.26493L12 2Z" />
-                                </svg>
-                            </label>
-                            <label for="star2" class="text-gray-400 cursor-pointer" onclick="updateRating(2)">
-                                <svg id="star2" class="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24">
-                                    <path
-                                        d="M12 2L14.1386 7.26493L20.831 9.25184L16.6281 13.8239L17.9716 20.0291L12 17.6066L6.02837 20.0291L7.3719 13.8239L3.169 9.25184L9.86144 7.26493L12 2Z" />
-                                </svg>
-                            </label>
-                            <label for="star3" class="text-gray-400 cursor-pointer" onclick="updateRating(3)">
-                                <svg id="star3" class="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24">
-                                    <path
-                                        d="M12 2L14.1386 7.26493L20.831 9.25184L16.6281 13.8239L17.9716 20.0291L12 17.6066L6.02837 20.0291L7.3719 13.8239L3.169 9.25184L9.86144 7.26493L12 2Z" />
-                                </svg>
-                            </label>
-                            <label for="star4" class="text-gray-400 cursor-pointer" onclick="updateRating(4)">
-                                <svg id="star4" class="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24">
-                                    <path
-                                        d="M12 2L14.1386 7.26493L20.831 9.25184L16.6281 13.8239L17.9716 20.0291L12 17.6066L6.02837 20.0291L7.3719 13.8239L3.169 9.25184L9.86144 7.26493L12 2Z" />
-                                </svg>
-                            </label>
-                            <label for="star5" class="text-gray-400 cursor-pointer" onclick="updateRating(5)">
-                                <svg id="star5" class="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24">
-                                    <path
-                                        d="M12 2L14.1386 7.26493L20.831 9.25184L16.6281 13.8239L17.9716 20.0291L12 17.6066L6.02837 20.0291L7.3719 13.8239L3.169 9.25184L9.86144 7.26493L12 2Z" />
-                                </svg>
-                            </label>
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <x-textarea wire:model.defer="comment" />
-        </div>
-
-        <x-slot name="footer">
-            <div class="flex justify-end gap-x-4">
-                <x-button flat label="Cancel" x-on:click="close" />
-
-                <x-button flat label="Envoyer" spinner="recommander" wire:click="recommander()" primary />
-
-
-            </div>
-        </x-slot>
-
-    </x-card>
-
-</x-modal>--}}
 </div>
 
 

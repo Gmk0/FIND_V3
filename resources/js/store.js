@@ -6,11 +6,14 @@ export default {
     isSearchbarActive: false,
     isSidebarExpanded: false,
     isRightSidebarExpanded: false,
+    loading: true,
+
 
     init() {
         let firstTime = true;
 
         // Initialisation à partir de localStorage
+
 
 
         this.isDarkModeEnabled = JSON.parse(localStorage.getItem("_x_darkMode_on") || "false");
