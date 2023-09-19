@@ -13,7 +13,9 @@
     <script src="/js/alpine-init.js"></script>
     <link rel="preconnect" href="https://fonts.bunny.net">
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+  <link rel="stylesheet" href="/build/assets/app.css">
+
+<script src="/js/alpine-init.js"></script>
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
@@ -52,6 +54,8 @@
 @filamentScripts
     <!-- Styles -->
     @livewireStyles
+
+    <script src="/build/assets/app.js" defer></script>
 
 </head>
 
