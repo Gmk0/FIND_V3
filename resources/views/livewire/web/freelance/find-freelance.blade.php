@@ -70,23 +70,13 @@
                                             d="M14.293 15.293a1 1 0 01-1.414 0L10 12.414l-2.293 2.293a1 1 0 01-1.414-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 010 1.414z" />
                                     </svg>
                                 </button>
-                                <div x-show="showCategoryFilter" x-collapse class="relative w-full p-1 mt-2">
-
-                                    <select wire:model.live.debounce.300ms='category'
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                        <option value="" selected>Choisir une category</option>
-                                        @foreach ($categories as $item)
+                                <div x-bind:class="showCategoryFilter ?'flex relative w-full p-1 mt-2':'hidden'"  class="">
 
 
-                                        <option value="{{$item->id}}">{{$item->name}}</option>
-                                        @endforeach
-
-                                    </select>
-                                    {{--
 
 
-                                    <x-select wire:model.debounce.500ms="category" placeholder="Compentences"
-                                        :async-data="route('api.services')" option-label="name" option-value="id" />--}}
+                                    <x-select wire:model.live.debounce.100ms="category" placeholder="Compentences"
+                                        :async-data="route('api.services')" option-label="name" option-value="name" />
                                 </div>
                             </div>
 
@@ -105,30 +95,18 @@
                                             d="M14.293 15.293a1 1 0 01-1.414 0L10 12.414l-2.293 2.293a1 1 0 01-1.414-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 010 1.414z" />
                                     </svg>
                                 </button>
-                                <div x-collapse x-show="Specialite" class="p-1 mt-2">
+                                <div  x-bind:class="Specialite ?'flex relative w-full p-1 mt-2':'hidden'" class="p-1 mt-2">
 
-                                    {{-- <x-select placeholder="Specialite">
-                                        @forelse($specialites as $specialite)
+                                     <x-select searchable wire:model.live.debounce.100ms='sub_category' placeholder="Specialite">
+                                        @forelse($subcategories as $specialite)
 
                                         <x-select.option label="{{$specialite->name}}" value="{{$specialite->name}}" />
 
                                         @empty
                                         @endforelse
 
-                                    </x-select>--}}
+                                    </x-select>
 
-                                    <select wire:model.live.debounce.300ms='sub_category'
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                        <option value="" selected>Choisir une category</option>
-                                        @forelse ($subcategories as $item)
-
-
-                                        <option value="{{$item->name}}">{{$item->name}}</option>
-
-                                        @empty
-                                        @endforelse
-
-                                    </select>
 
 
                                 </div>
@@ -152,12 +130,12 @@
                                 </button>
                                 <div x-collapse x-show="Experience" class="mt-2">
 
-                                    {{--
-                                    <x-radio label="0-2 Ans" id="radio" value="0-2" wire:model="experience" />
-                                    <x-radio label="2-7 Ans" id="radio" value="2-7" wire:model="experience" />
-                                    <x-radio label="7 + Ans" id="radio" value="7-20" wire:model="experience" />--}}
 
-                                    <select wire:model.live.debounce.300ms='experience'
+                                    <x-radio label="0-2 Ans" id="radio" value="0-2" wire:model.live.debounce.300ms="experience" />
+                                    <x-radio label="2-7 Ans" id="radio" value="2-7" wire:model.live.debounce.300ms="experience" />
+                                    <x-radio label="7 + Ans" id="radio" value="7-20" wire:model.live.debounce.300ms="experience" />
+
+                                  {{--  <select wire:model.live.debounce.300ms='experience'
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                         <option selected>Choisir l'experience</option>
 
@@ -168,7 +146,7 @@
                                         <option value="+ 7 ans">7 + Ans</option>
 
 
-                                    </select>
+                                    </select>--}}
 
                                 </div>
                             </div>
@@ -239,20 +217,10 @@
 
                         <div class="flex justify-between w-full md:hidden ">
 
-                            <button x-on:click="showFilters=!showFilters"
-                                class="middle none center mr-4 rounded-lg bg-blue-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                                data-ripple-light="true">
-                                appliquer
-                            </button>
 
-                            <button x-on:click="showFilters=!showFilters"
-                                class="middle none center mr-3 rounded-lg border border-pink-500 py-3 px-6 font-sans text-xs font-bold uppercase text-pink-500 transition-all hover:opacity-75 focus:ring focus:ring-pink-200 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                                data-ripple-dark="true">
-                                Button
-                            </button>
-                            {{-- <x-button x-on:click="showFilters=!showFilters" label="appliquer"></x-button>
+                             <x-button x-on:click="showFilters=!showFilters" label="appliquer"></x-button>
 
-                            <x-button x-on:click="showFilters=!showFilters" label="Fermer"></x-button>--}}
+                            <x-button x-on:click="showFilters=!showFilters" label="Fermer"></x-button>-
 
                         </div>
 
@@ -292,7 +260,7 @@
                                     </div>
                                     <input type="search" id="default-search" wire:model.live.debounce.300ms="query"
                                         class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-amber-500 focus:border-amber-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-amber-500 dark:focus:border-amber-500"
-                                        placeholder="Search Mockups, Logos..." required>
+                                        placeholder="Recherche competences, Nom..." required>
                                     <button type="submit"
                                         class="text-white absolute right-2.5 bottom-2.5 bg-amber-700 hover:bg-amber-800 focus:ring-4 focus:outline-none focus:ring-amber-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-amber-600 dark:hover:bg-amber-700 dark:focus:ring-amber-800">Search</button>
                                 </div>
@@ -415,13 +383,20 @@
 
 
 
-                <div class="grid grid-cols-1 gap-8 mx-auto md:px-2 md:grid-cols-3">
+                <div class="grid grid-cols-1 gap-8 md:mx-auto md:px-2 lg:grid-cols-3 md:grid-cols-2">
 
 
 
                     @forelse($freelances as $freelance)
 
-                    <livewire:web.card.freelance-card :$freelance :key="$freelance->id" />
+
+
+                            <livewire:web.card.freelance-card :$freelance :key="$freelance->id" />
+
+
+
+
+
 
 
 
@@ -580,27 +555,12 @@
         var fixedNav= document.getElementById('fixed-nav');
 
         // Récupérer la position de l'élément div par rapport au haut de la page
-        var divOffsetTop = fixedDiv.offsetTop;
+     ///   var divOffsetTop = fixedDiv.offsetTop;
 
 
 
         // Ajouter un événement de défilement à la fenêtre
-        window.addEventListener("scroll", function() {
-        // Récupérer la position de défilement actuelle de la fenêtre
-        var scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
 
-        // Vérifier si l'élément div est en haut de la page
-        if (scrollPosition >= divOffsetTop) {
-        // Ajouter la classe "fixed" à l'élément div
-        fixedDiv.classList.add("fixed-top");
-
-
-        } else {
-        // Supprimer la classe "fixed" de l'élément div
-        fixedDiv.classList.remove("fixed-top");
-
-        }
-        });
     </script>
 
 

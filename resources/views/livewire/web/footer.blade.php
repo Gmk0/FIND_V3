@@ -1,4 +1,4 @@
-<div class="w-full bg-base-200 ">
+<div class="w-full bg-base-200 dark:bg-gray-900">
 
     <div class="text-white border-t border-gray-800 bg-base-200 md:hidden">
 

@@ -29,3 +29,30 @@ window.Echo = new Echo({
     forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
     enabledTransports: ['ws', 'wss'],
 });
+
+
+window.Echo.connector.pusher.connection.bind('error', function (err) {
+    if (err.error.data.code === 4004) {
+        console.error('Détecté une erreur de surcharge de quota avec Pusher');
+    } else if (err.error.data.code === 2001) {
+        // Affichez une notification à l'utilisateur
+        displayNotification("Vous semblez être hors ligne. Veuillez vérifier votre connexion Internet.");
+    } else {
+        displayNotification("Une erreur s'est produite. Veuillez réessayer plus tard.");
+    }
+});
+
+// Fonction pour afficher une notification
+function displayNotification(message) {
+    // Utilisez votre système de notification préféré ici
+    // Par exemple, pour une simple alerte JavaScript :
+    alert(message);
+}
+
+
+
+
+
+
+
+

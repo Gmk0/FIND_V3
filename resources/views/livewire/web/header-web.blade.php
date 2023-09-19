@@ -67,7 +67,7 @@
 
 
 
-                                    <a href="{{route('categoryByName',[$categorie->name])}}" wire:navigate
+                                    <a href="{{route('categoryByName',[$categorie->name])}}" 
                                         class="block p-2 -mx-2 font-semibold text-gray-800 transition duration-300 ease-in-out rounded-lg dark:text-gray-50 hover:bg-gradient-to-br hover:dark:text-gray-200 hover:text-indigo-600">
                                         {{$categorie->name}}
 
@@ -158,7 +158,7 @@
                 </li>
 
                 <li class="relative px-3 py-2 ">
-                    <a href="{{url("/services")}}" wire:navigate
+                    <a href="{{url("/services")}}" wire:navigate.hover
                         class="flex flex-row items-center px-3 py-2 font-medium text-white rounded-md  text-md focus:outline-none @if(request()->routeIs('services')) border-b border-gray-100 dark:border-amber-800 @endif focus:text-white focus:bg-gray-700">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-5 h-5">

@@ -7,7 +7,11 @@
 
             <img src="/images/hero/team.svg" class="object-cover w-full p-2 bg-white rounded-md h-11/12 " alt="">
         </div>
-        <div class="flex flex-col w-full mx-auto lg:mx-0 lg:w-6/12 ">
+
+        <div x-show="loading" class="h-screen bg-gray-200 dark:bg-gray-800 lg:w-6/12 animate-pulse">
+
+        </div>
+        <div x-cloak x-show="!loading" class="flex flex-col w-full mx-auto lg:mx-0 lg:w-6/12 ">
 
             <form wire:submit.prevent='register'>
                 {{$this->missionForm}}

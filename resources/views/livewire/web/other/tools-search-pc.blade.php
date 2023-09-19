@@ -65,7 +65,7 @@
         <div class="flex items-center justify-center">
 
             <div class="flex items-center justify-center p-2">
-                <div wire:loading.delay class="spinner"></div>
+                <div wire:loading.delay class="spinners"></div>
             </div>
 
         </div>

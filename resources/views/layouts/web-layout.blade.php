@@ -3,7 +3,7 @@
 
 @include('include.head')
 
-<body class="font-sans antialiased bg-gray-100 dark:bg-gray-900">
+<body x-init="setTimeout(() => { loading = false }, 2000)" class="font-sans antialiased bg-gray-100 dark:bg-gray-900">
 
     <x-notifications z-index="z-[200]" />
 

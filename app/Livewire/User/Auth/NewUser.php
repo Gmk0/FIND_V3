@@ -74,7 +74,7 @@ implements HasForms
 
 
 
-        return redirect()->intended('user');
+        return redirect()->intended('user/dashboard');
     }
 
 

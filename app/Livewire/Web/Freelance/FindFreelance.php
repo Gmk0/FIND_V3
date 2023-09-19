@@ -55,7 +55,7 @@ implements HasForms
 
     protected $queryString = [
 
-        'query',
+
 
     ];
 
@@ -110,22 +110,32 @@ implements HasForms
     }
     public function render()
     {
+
+
+
+
+
+
         return view('livewire.web.freelance.find-freelance', [
             'freelances' => Freelance::when($this->category, function ($query) {
-                $query->where('category_id', '=', $this->category);
+                $query->whereHas('category', function($q){
+                    $q->where('name',$this->category);
+                });
             })->when($this->sub_category, function ($query) {
                 $query->where('sub_categorie', 'LIKE', '%"' . $this->sub_category . '"%');
             })->when($this->experience, function ($q) {
                 $q->where('experience', 'LIKE', '%"' . $this->experience . '"%');
             })->WhereHas('category', function ($query) {
                 $query->where('name', 'LIKE', "%" . $this->query . "%");
+            })->when($this->taux, function ($query) {
+                    $query->whereBetween('taux_journalier', [10, $this->taux]);
             })
-                ->when($this->taux, function ($query) {
-                    $query->whereBetween('daily_tax', [10, $this->taux]);
-                })
                 ->paginate(9),
             'categories' => Category::all(),
-            'subcategories' => Subcategory::where('category_id', $this->category)->get(),
+            'subcategories' => Subcategory::whereHas('category',function($q){
+                $q->where('name',$this->category);
+
+            })->get(),
         ]);
     }
 
