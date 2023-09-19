@@ -123,6 +123,14 @@ implements HasForms, HasTable
                     // ->openUrlInNewTab()
                     ->icon('heroicon-s-pencil')
                     ->tooltip('Voir transaction'),
+
+            Action::make('Facture')
+                ->url(fn (Transaction $record): string => route('facturation', $record->transaction_numero))
+                    ->openUrlInNewTab()
+                    ->icon('heroicon-s-pencil')
+                    ->tooltip('Facture'),
+
+    
                 //
 
                 //

@@ -29,7 +29,7 @@ class FeedbackComponent extends Component
 
         if (!$this->feedbackSubmitted) {
             // Si non, affichez la section de feedback après 10 minutes
-            sleep(60);
+            //sleep(60);
             // attendez 10 minutes
 
          $this->showFeedback = true;

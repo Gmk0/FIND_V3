@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\CategoryGet;
 use App\Http\Controllers\AuthSocial;
 use App\Http\Controllers\PayementController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -86,6 +87,7 @@ Route::middleware([
 
 
 
+    Route::get('facturaction/{facture}', [ReportController::class, 'facture'])->where('facture', '(.*)')->name('facturation');
 
 
 
@@ -201,6 +203,8 @@ Route::middleware([
 
 
 });
+
+
 
 
 

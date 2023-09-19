@@ -253,7 +253,7 @@ implements HasForms
                 $payment->sendMail();
 
                 $this->dispatch('notify', [
-                    'message' => "Mission creer avec success",
+                    'message' => "Paiement effectuer avec success",
                     'icon' => 'success',
                 ]);
 

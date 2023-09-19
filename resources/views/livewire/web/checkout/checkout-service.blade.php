@@ -299,7 +299,7 @@
 
                                     <div class="mt-4">
 
-                                        <button wire:click="addAddress()" wire:loading.attr='disabled'
+                                        <button wire:click="pay()" wire:loading.attr='disabled'
                                             class=" block w-full select-none rounded-lg bg-amber-600 py-2 px-2 text-center align-middle
                                                                                                                                                                 font-sans text-sm font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all
                                                                                                                                                                 hover:shadow-lg hover:shadow-amber-500/40 focus:opacity-[0.85] focus:shadow-none

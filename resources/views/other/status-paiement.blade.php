@@ -33,7 +33,7 @@
                     <p class="text-green-700">Nous vous remercions de votre achat et espérons vous revoir bientôt !</p>
 
                     <div class="mt-8 space-x-4">
-                        <a href="{{--route('facturation',$transaction->transaction_numero)--}}"
+                        <a href="{{route('facturation',$transaction->transaction_numero)}}"
                             class="px-4 py-2 font-semibold text-white bg-green-500 rounded-md hover:bg-green-600">Imprimer
                             facture</a>
                         <a href="{{route('commandeUser')}}"
