@@ -3,10 +3,17 @@
 
 
 
-    <div x-data="{showModal:@entangle('showFeedback')}" >
+<div x-data="{ showModal: false, delay: 300000 }" x-init="
+    const startTime = localStorage.getItem('startTime') || Date.now();
+    localStorage.setItem('startTime', startTime);
+    const elapsedTime = Date.now() - startTime;
+    const remainingTime = delay - elapsedTime;
+    if (@entangle('showFeedback') && remainingTime > 0) {
+        setTimeout(() => showModal = true, remainingTime);
+    }
+">
 
-
-            <div class="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden px-4 py-6 sm:px-5"
+            <div x-cloak class="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden px-4 py-6 sm:px-5"
                 x-show="showModal" role="dialog" @keydown.window.escape="showModal = false">
                 <div class="absolute inset-0 transition-opacity duration-300 bg-slate-900/60" @click="showModal = false"
                     x-show="showModal" x-transition:enter="ease-out" x-transition:enter-start="opacity-0"

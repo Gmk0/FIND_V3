@@ -13,11 +13,19 @@ class ReportController extends Controller
     //
 
 
+
+    public function exportExcel($id)
+    {
+
+        dd($id);
+    }
+
+
     public function facture($facture)
     {
 
 
-       
+
         $order = Transaction::where('transaction_numero', $facture)->first();
 
         if (!$order) {
@@ -32,6 +40,6 @@ class ReportController extends Controller
         }
 
 
-      
+
     }
 }

@@ -10,7 +10,7 @@
 
 
 
-    <div class="container mx-auto bg-white rounded-lg ">
+    <div class="container mx-auto bg-white rounded-lg dark:bg-navy-800 ">
 
         <div class="max-w-6xl p-4 mx-auto ">
             <h1 class="mb-4 text-2xl font-bold text-center">Paiement</h1>

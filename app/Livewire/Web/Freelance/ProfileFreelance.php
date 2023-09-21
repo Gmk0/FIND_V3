@@ -4,6 +4,7 @@ namespace App\Livewire\Web\Freelance;
 
 use App\Models\FeedbackService;
 use App\Models\Freelance;
+use App\Models\SubCategory;
 use Livewire\Component;
 use Livewire\Attributes\{Layout, Title};
 
@@ -50,6 +51,8 @@ class ProfileFreelance extends Component
     }
     public function render()
     {
+        $subCategories = SubCategory::whereIn('id', $this->freelance->sub_categorie)->get();
+
 
 
         $this->commentaires = FeedbackService::whereHas('order.service', function ($query) {
@@ -64,6 +67,6 @@ class ProfileFreelance extends Component
             })->where('etat', 'Livré')->count();
 
         $this->commandeEn = $this->commandeEncours();
-        return view('livewire.web.freelance.profile-freelance');
+        return view('livewire.web.freelance.profile-freelance',['subCategories'=> $subCategories]);
     }
 }

@@ -332,10 +332,7 @@
                                     <div class="flex flex-col gap-4 px-3 mb-3">
 
 
-                                        {{--
-                                        <x-input label="Nom" wire:model.defer="name" />
-                                        <x-inputs.phone mask="['(###) ####-###-###']" placeholder="243 844720350"
-                                            label="Numero" wire:model.defer="telephone" />--}}
+                                     
 
                                         {{$this->maxiForm}}
 
@@ -347,9 +344,9 @@
                                                                                                                         hover:shadow-lg hover:shadow-amber-500/40 focus:opacity-[0.85] focus:shadow-none
                                                                                                                         active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50
                                                                                                                         disabled:shadow-none" data-ripple-light="true">
-                                            <span wire:loading.remove>PAYER
+                                            <span>PAYER
                                                 ({{$priceTotal}}$)</span>
-                                            <span wire:loading wire:target='checkoutmaxi'>PAIEMENT...</span>
+                                          
                                         </button>
 
                                     </div>

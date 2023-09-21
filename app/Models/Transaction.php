@@ -24,6 +24,7 @@ class Transaction extends Model
         'payment_method',
         'payment_token',
         'status',
+        'description',
         'type',
     ];
 

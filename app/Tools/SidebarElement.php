@@ -621,9 +621,27 @@ class SidebarElement
                         'route_name' => 'freelance.transaction.list'
                     ],
 
-                    'Paiement' => [
-                        'title' => 'Paiement',
-                        'route_name' => 'freelance.PaiementInfo'
+                    'Paiment' => [
+                        'title' => 'Paiment',
+                        'submenu' => [
+                            'Paiement' => [
+                                'title' => 'Paiement',
+                                'route_name' => 'freelance.PaiementList'
+                            ],
+                            'DemandeR' => [
+                                'title' => 'Demande retrait',
+                                'route_name' => 'freelance.PaiementInfo'
+                            ],
+                            'Releves' => [
+                                'title' => 'Releves',
+                                'route_name' => 'freelance.PaiemntReleves'
+                            ],
+
+                        ]
+                    ],
+                    'realisation' => [
+                        'title' => 'Realisation',
+                        'route_name' => 'freelance.realisation'
                     ],
 
 

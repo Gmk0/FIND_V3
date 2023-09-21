@@ -96,12 +96,11 @@ implements HasForms
             PhoneInput::make('maxi.number')
             ->label("telephone")
             ->required()
-            ->countryStatePath('phone_country')
+        
             ->initialCountry('cd')
-            ->onlyCountries(['cd'])
             ->displayNumberFormat(PhoneInputNumberType::E164)
 
-                ->unique(table: User::class)
+            
                 ->focusNumberFormat(PhoneInputNumberType::E164),
 
         ]);

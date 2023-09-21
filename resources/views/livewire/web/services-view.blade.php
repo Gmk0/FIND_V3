@@ -177,7 +177,7 @@
         </div>
 
 
-        <div class="flex flex-col p-2 mx-4 mt-4 bg-white rounded-lg md:mx-6 justify-beetwen">
+        <div wire:ignore class="flex flex-col p-2 mx-4 mt-4 bg-white rounded-lg md:mx-6 justify-beetwen">
 
             <div class="mb-4">
                 <h1 class="text-xl font-bold text-gray-800 dark:text-gray-300">Services que vous pourriez aimer</h1>

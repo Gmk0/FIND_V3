@@ -18,10 +18,11 @@ return new class extends Migration
             $table->string('transaction_numero');
             $table->foreignUuid('user_id')->constrained();
             $table->decimal('amount', 8, 2);
-            $table->string('payment_method');
+            $table->string('payment_method')->nullable();
             $table->string('payment_token', 40)->nullable();
+            $table->text('description')->nullable();
             $table->enum('status', ["pending","completed","failed"])->default("pending");
-            $table->string('type')->nullable();
+            $table->enum('type', ["paiement", "crediter", "debiter"])->nullable();
             $table->timestamps();
         });
 

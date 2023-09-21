@@ -6,7 +6,7 @@
     </div>
 
     <div>
-        @include('include.bread-cumb-user',['transation'=>'transation', ])
+        @include('include.bread-cumb-user',['transation'=>'transaction', ])
     </div>
 
 

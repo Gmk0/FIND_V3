@@ -6,16 +6,14 @@
     </div>
 
     <div>
-        @include('include.bread-cumb-user',['transation'=>'transation','transationID'=>$transaction->transaction_numero ])
+        @include('include.bread-cumb-user',['transation'=>'transaction','transationID'=>$transaction->transaction_numero ])
     </div>
 
     <section class="grid max-w-6xl gap-1 p-6 mx-auto bg-white rounded-lg shadow dark:text-gray-200 lg:grid-cols-2">
 
         <div x-show="loading" class="w-full bg-gray-200 rounded-md h-72 dark:bg-gray-700">
-
         </div>
         <div x-show="loading" class="w-full bg-gray-200 rounded-md h-72 dark:bg-gray-700">
-
         </div>
 
         <div x-show="!loading" x-cloak>

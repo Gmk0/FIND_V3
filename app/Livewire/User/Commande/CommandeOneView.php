@@ -18,6 +18,9 @@ use Filament\Actions\EditAction;
 use Filament\Forms\Components\{TextInput, Select};
 use WireUi\Traits\Actions;
 use Filament\Actions\Action;
+use Illuminate\Support\Facades\DB;
+use App\Models\Commission;
+use App\Models\Transaction;
 
 #[Layout('layouts.user-layout')]
 
@@ -46,6 +49,8 @@ implements HasForms, HasActions
     public $userId;
 
     public $messageSent=false;
+    public $paidFreealance = false;
+
 
 
 
@@ -209,6 +214,92 @@ implements HasForms, HasActions
 
     }
 
+    #[On('paid')]
+    public function paid(){
+
+        $this->paidFreealance = true;
+
+        DB::beginTransaction();
+        try{
+
+
+            $this->order->is_paid = now();
+            $this->order->update();
+
+
+            $freelance = $this->order->service->freelance;
+
+            // Calculer 70% du montant total de la commande
+            $amountToAdd = $this->order->total_amount * 0.70;
+            $commissionAmount = $this->order->total_amount * 0.30;
+
+            $freelance->solde += $amountToAdd;
+            $freelance->save();
+
+            // 30% de commission
+
+            $transaction =Transaction::create([
+                'user_id' => $freelance->user_id,
+                'type' => 'debit',
+                'amount' => $amountToAdd,
+                'description' => 'Débit pour la commande #' . $this->order->order_numero . ' après déduction de la commission',
+                'status'=>'completed'
+
+            ]);
+            $commission = new Commission();
+            $commission->order_id = $this->order->id;
+            $commission->amount = $commissionAmount;
+            $commission->user_id = $freelance->user_id;
+            $commission->net_amount = $amountToAdd;
+            $commission->percent = '30%';
+            $commission->description = 'Commission de 30% prélevée sur la commande.';
+            $commission->transaction_id = $transaction->id;
+            $commission->save();
+
+
+
+            DB::commit();
+
+
+
+            $this->paidFreealance = false;
+
+            $this->dispatch('notify', ['message' => "Confirmation reussie", 'icon' => 'success',]);
+
+
+            $this->dispatch('notifier');
+
+
+
+        }catch(\Exception $e){
+
+
+
+                DB::rollback();
+            $this->dispatch('error', [
+                'message' => "Une errer s'est produite lors de la confirmation du paiement". $e->getMessage(),
+                'icon' => 'error',
+                'title' => 'error'
+            ]);
+        }
+
+    }
+
+    #[On('notifier')]
+    public function notifier()
+    {
+        try{
+
+            $this->order->notifyPaid();
+
+            $this->order->brodacastFreelance();
+
+        }catch(\Exception $e){
+
+            dd($e->getMessage());
+        }
+    }
+
     public function annulerAction(): Action
     {
         return Action::make('annuler')
@@ -237,6 +328,28 @@ implements HasForms, HasActions
 
             });
     }
+
+    public function confirmAction(): Action
+    {
+        return Action::make('confirm')
+        ->label('Confirmer Comannde Finis')
+        ->requiresConfirmation()
+            ->modalHeading('Confirmez la réception de votre commande')
+            ->modalDescription('En confirmant la réception, vous attestez que la commande a été réalisée à votre satisfaction. Cela permettra au freelance de recevoir son paiement. Êtes-vous prêt à procéder?')
+            ->modalSubmitActionLabel('Oui, je confirme')
+
+            ->color('success')
+
+            ->modalIconColor('success')
+            ->action(function (array $arguments) {
+                $order = Order::find($arguments['id']);
+
+
+                    $this->dispatch('paid');
+
+            });
+    }
+
 
     public function render()
     {

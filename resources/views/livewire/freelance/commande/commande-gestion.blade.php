@@ -15,7 +15,7 @@
 
 
             <!-- Contenu de la section -->
-            <div class="relative overflow-hidden bg-white rounded-lg shadow-md">
+            <div class="relative overflow-hidden bg-white rounded-lg shadow-md dark:bg-navy-800">
                 <!-- Informations sur la order -->
                 <div class="grid grid-cols-1 px-6 py-4 md:grid-cols-2 ">
                     <p class="mb-2 text-lg text-gray-800 font-inter dark:text-gray-200">Commande
@@ -33,6 +33,18 @@
 
                     <p class="mt-4 text-base text-gray-600 dark:text-gray-300">Paiement : <span
                             class="font-bold text-green-600">{{$order->status}}</span>
+                    </p>
+                    <p class="mt-4 text-base text-gray-600 dark:text-gray-300">Versement :
+                    
+                        @if($order->is_paid !=null)
+                    
+                        <span class="text-green-500 px-1.5 py-0.5 rounded-lg ">{{$order->is_paid->formatLocalized('%e
+                        %B %G')}}</span>
+                        @else
+                        <span class="text-red-300 px-1.5 py-0.5 rounded-lg ">en Attente</span>
+                        @endif
+                    
+                    
                     </p>
                     <p class="mt-4 text-base text-gray-600 dark:text-gray-300">statut :
                         @if ($order->feedback->etat=='Livré')
@@ -120,10 +132,13 @@
 
 
 
-                                <x-filament::button  wire:click='modifier()'>
-                                    <span>Modifier</span>
+       
+                                <div class="mb-2">
 
-                                </x-filament::button>
+                                    <x-filament::icon-button icon="heroicon-m-pencil" tooltip="Effacer" wire:click="modifier()" />
+                                </div>
+
+                              
 
 
                                 {{--
@@ -168,7 +183,7 @@
                 <!-- Avancement de la order -->
 
 
-                <div class="w-full p-4 bg-white border-t border-gray-200 rounded-lg shadow-md">
+                <div class="w-full p-4 bg-white border-t border-gray-200 rounded-lg shadow-md dark:bg-navy-800">
                     <!-- Titre de la section -->
 
                     <!-- Barre de progression -->

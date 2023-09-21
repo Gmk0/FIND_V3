@@ -30,14 +30,11 @@
         <!-- Mobile Searchbar -->
         {{-- <x-app-partials.mobile-searchbar></x-app-partials.mobile-searchbar>--}}
 
-        <!-- Right Sidebar -->
-       {{-- @livewire("tools.panel-tools")--}}
-
-      {{--  <Livewire.freelance.other.panel-slide />--}}
+    
 
         @livewire('freelance.other.panel-slide')
 
-        <div class="main-content pt-4 w-full px-[var(--margin-x)] pb-8">
+        <div x-init="setTimeout(() => { loading = false }, 2000)" class="main-content pt-4 w-full px-[var(--margin-x)] pb-8">
             {{ $slot }}
 
 

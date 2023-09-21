@@ -67,7 +67,8 @@ class Freelance extends Model
         AsArrayObject::class,
         'user_id' => 'string',
         'category_id' => 'integer',
-        'realisations' => 'array',
+        'realisations' =>
+        AsArrayObject::class,
     ];
 
     public function user(): BelongsTo

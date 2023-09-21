@@ -26,7 +26,7 @@ class NotificationComponent extends Component
         return [
             //"echo-private:notify.{$auth_id},ProgressOrderEvent" => '$refresh',
             "echo-private:notify.{$auth_id},ProgressOrderEvent" => 'Notify',
-            "echo-private:notify.{$auth_id},OrderCreated" => '$refresh',
+            "echo-private:notify.{$auth_id},OrderCreated" => 'NotifyFreelance',
             //"echo-private:notify.{$auth_id},ProjectResponse" => '$refresh',
             //'ServiceOrdered' => '$refresh',
             //"echo-private:chat.{$auth_id},MessageSent" => '$refresh',
@@ -46,6 +46,14 @@ class NotificationComponent extends Component
         $this->dispatch('refreshNotifications');
 
 
+    }
+    public function NotifyFreelance()
+    {
+
+        $this->dispatch('notify', ['message' => "Vous recu une notification", 'icon' => 'info',]);
+
+
+        $this->dispatch('refreshNotifications');
     }
 
     public function markRead($id)

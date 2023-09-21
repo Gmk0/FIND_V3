@@ -67,10 +67,10 @@ implements HasForms, HasTable
                     ->toggleable(isToggledHiddenByDefault: false),
                 BadgeColumn::make('status')
                 ->colors([
-                    'primary',
+                    
                     'secondary' => 'pending',
-                    'warning' => 'rejeted',
-                    'success' => 'completed',
+                    'warning' => 'failed',
+                'primary' => 'completed',
 
                 ])
 

@@ -54,7 +54,7 @@
             <div class="p-4 rounded-lg bg-slate-100 dark:bg-navy-600">
                 <div class="flex justify-between space-x-1">
                     <p class="text-xl font-semibold text-slate-700 dark:text-navy-100">
-                        {{$amount}}
+                        {{$solde}}
                     </p>
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary dark:text-accent" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -80,7 +80,7 @@
             <div class="p-4 rounded-lg bg-slate-100 dark:bg-navy-600">
                 <div class="flex justify-between">
                     <p class="text-xl font-semibold text-slate-700 dark:text-navy-100">
-                        {{$orderCount}}
+                        {{$pendings}}
                     </p>
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-warning" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor" stroke-width="2">
@@ -93,7 +93,7 @@
             <div class="p-4 rounded-lg bg-slate-100 dark:bg-navy-600">
                 <div class="flex justify-between">
                     <p class="text-xl font-semibold text-slate-700 dark:text-navy-100">
-                        {{$orderCount}}
+                        {{$pendings}}
                     </p>
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-info" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor" stroke-width="2">
@@ -125,7 +125,7 @@
                         </svg>
                     </button>
 
-                    <div x-ref="popperRoot" class="popper-root" :class="isShowPopper && 'show'">
+                    <div x-cloak x-ref="popperRoot" class="popper-root" :class="isShowPopper && 'show'">
                         <div
                             class="popper-box rounded-md border border-slate-150 bg-white py-1.5 font-inter dark:border-navy-500 dark:bg-navy-700">
                             <ul>
@@ -192,7 +192,7 @@
                         </svg>
                     </button>
 
-                    <div x-ref="popperRoot" class="popper-root" :class="isShowPopper && 'show'">
+                    <div x-cloak x-ref="popperRoot" class="popper-root" :class="isShowPopper && 'show'">
                         <div
                             class="popper-box rounded-md border border-slate-150 bg-white py-1.5 font-inter dark:border-navy-500 dark:bg-navy-700">
                             <ul>

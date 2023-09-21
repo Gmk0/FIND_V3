@@ -24,7 +24,7 @@ class OrderCreatedNotification extends Notification implements ShouldQueue
 
     public function via($notifiable)
     {
-        return ["database"];
+        return ["database", PusherChannel::class];
     }
 
     public function toDatabase($notifiable)
@@ -55,8 +55,7 @@ class OrderCreatedNotification extends Notification implements ShouldQueue
         ));
 
         $interests = "App.Models.User.{$notifiable->id}";
-        $url = 'http://localhost:8000/freelance/commande/' . $this->order->order_numero;
-
+      
         $data = array(
             "web" => array(
                 "notification" => array(

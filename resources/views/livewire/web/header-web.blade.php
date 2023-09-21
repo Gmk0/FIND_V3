@@ -67,7 +67,7 @@
 
 
 
-                                    <a href="{{route('categoryByName',[$categorie->name])}}" 
+                                    <a href="{{route('categoryByName',[$categorie->name])}}" wire:navigate
                                         class="block p-2 -mx-2 font-semibold text-gray-800 transition duration-300 ease-in-out rounded-lg dark:text-gray-50 hover:bg-gradient-to-br hover:dark:text-gray-200 hover:text-indigo-600">
                                         {{$categorie->name}}
 
@@ -528,7 +528,7 @@
                 @auth
                 <div class="container mt-4 border-t border-gray-800 dark:border-gray-50 ">
                     <div class="pt-2 pb-3">
-                        <a href="{{url('/user')}}" @click="navOpen = false"
+                        <a href="{{url('/user/profile')}}" @click="navOpen = false"
                             class="flex flex-row items-center px-3 py-2 text-base font-medium text-gray-800 rounded-md hover:text-gray-900 hover:bg-gray-200 dark:hover:bg-gray-600 focus:outline-none focus:text-gray-900 focus:bg-gray-200"
                             role="menuitem">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none"

@@ -13,7 +13,7 @@
             <div class="relative">
 
                 <x-input wire:model.live.debounce.100ms="search" class="w-3/4 py-3 rounded-full focus:border-amber-600"
-                    placeholder="Serach">
+                    placeholder="Recherche">
                     <x-slot name="append">
                         <div class="absolute inset-y-0 right-0 flex items-center p-0.5">
                             <x-button class="h-full rounded-r-md" label="filtre" icon="search" amber squared x-on:click="filtre=!filtre" />

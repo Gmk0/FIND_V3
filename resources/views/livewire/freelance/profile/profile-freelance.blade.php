@@ -121,6 +121,8 @@
 
         @include('livewire.freelance.profile.profile-update')
 
+
+
         <div x-show="activeTab === 'AccountP'" x-transition:enter="transition-all duration-300 easy-in-out"
             x-transition:enter-start="opacity-0 [transform:translate3d(1rem,0,0)]"
             x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]" class="col-span-12 lg:col-span-8">

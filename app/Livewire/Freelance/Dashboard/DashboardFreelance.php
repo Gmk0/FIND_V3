@@ -36,8 +36,7 @@ class DashboardFreelance extends Component
         $this->freelance_id = auth()->user()->freelance->id;
 
         $this->freelance = auth()->user()->freelance;
-        // $donne =
-        // dd($donne);
+
     }
 
 
@@ -222,6 +221,20 @@ class DashboardFreelance extends Component
             ->get();;
     }
 
+    public function servicesCommandesEnAttente()
+    {
+        return
+            Order::whereHas('service', function ($query) {
+                $query->where('freelance_id', $this->freelance_id); // Ajoutez cette condition pour vérifier que la progression n'est pas de 100%
+            })
+            ->where('status', 'completed')
+            ->whereHas('feedback', function ($query) {
+                $query->where('etat','!=','Livré');
+            })
+            ->count();
+    }
+
+
     public function servicesTop()
     {
         return
@@ -233,11 +246,13 @@ class DashboardFreelance extends Component
     {
         return view('livewire.freelance.dashboard.dashboard-freelance', [
             'amount' => $this->total(),
+            'solde' => auth()->user()->freelance->solde,
             'totalR' => $this->totalCompleted(),
             'order' => Order::whereHas('service', function ($query) {
                 $query->where('freelance_id', $this->freelance_id);
             })->paginate(10),
             'orderCount' => $this->OrderWeek(),
+            'pendings' => $this->servicesCommandesEnAttente(),
             'mission' => $this->getMission(),
             'transactionN' => $this->getTransaction(),
             'topOrder' => $this->servicesTop(),

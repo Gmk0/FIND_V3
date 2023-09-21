@@ -424,69 +424,6 @@
 
         </div>
 
-        {{--<div class="fixed bottom-0 right-0 z-10 mb-4 mr-4">
-            <button
-                class="flex items-center justify-center w-12 h-12 text-white rounded-full bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5h6M9 12h6m-6 7h6">
-                    </path>
-                </svg>
-            </button>
-
-            <div x-cloak x-show="message" class=" sm:block">
-                <div class="w-64 rounded-lg shadow-lg h-96">
-                    <div class="flex flex-col h-full">
-                        <div class="flex items-center justify-between p-4 bg-gray-800 rounded-t-lg">
-                            <h3 class="text-lg font-medium text-white">Chat</h3>
-                            <button class="text-gray-400 hover:text-white focus:outline-none focus:text-white"
-                                @click="message=false">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M6 18L18 6M6 6l12 12"></path>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="flex-1 p-4 overflow-y-auto bg-white">
-                            <!-- contenu de la discussion -->
-
-                            <div class="flex flex-col space-y-2">
-
-                                @if($freelance_id !== null)
-                                @if($conversations !== null)
-
-                                @foreach($conversations as $message)
-                                <!-- message de l'expéditeur -->
-                                <div
-                                    class="flex items-start {{auth()->id() == $message->sender_id ? 'justify-end':''}}">
-                                    <div
-                                        class="px-4 py-2 bg-amber-600 {{auth()->id() == $message->sender_id ? 'bg-gray-200':'bg-amber-600'}} rounded-lg text-white max-w-xs">
-                                        <p class="text-sm text-gray-700">{{$message->body}}</p>
-                                    </div>
-                                </div>
-                                <!-- message du récepteur -->
-
-                                @endforeach
-                                @else
-                                <p>Ecrivez lui un message</p>
-                                @endif
-                                @else
-                                <p>Chargement de messages</p>
-                                @endif
-
-                            </div>
-                        </div>
-                        <div class="flex items-center p-4 bg-gray-200 rounded-b-lg">
-                            <input wire:model.defer='body'
-                                class="flex-1 w-full px-3 py-2 mr-4 text-gray-700 bg-white border border-gray-400 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500"
-                                type="text" placeholder="Message">
-                            <x-button primary wire:click="sendMessage()" label='Envoyer'>
-
-                            </x-button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>--}}
 
 
 

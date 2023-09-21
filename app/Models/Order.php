@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Events\OrderCreated;
 use App\Notifications\OrderCreatedNotification;
+use App\Notifications\PaidFreelance;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -75,6 +76,38 @@ class Order extends Model
 
 
 
+    public function notifyPaid(){
+
+        try{
+            $service = $this->service;
+
+            if ($service) {
+                $freelance = $service->freelance;
+
+                if ($freelance) {
+                    $user = $freelance->user;
+
+
+                    $user->notify(new PaidFreelance($this->total_amount, $service->title));
+                }
+            }
+
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
+
+
+    }
+    public function brodacastFreelance()
+    {
+
+        try{
+            broadcast(new OrderCreated($this));
+        }catch (\Exception $e) {
+
+            error_log($e->getMessage());
+        }
+    }
 
     public function notifyUser()
     {
@@ -118,5 +151,12 @@ class Order extends Model
     public function feedback(): HasOne
     {
         return $this->hasOne(FeedbackService::class, 'order_id');
+    }
+
+    public function isReadyForPayment(): bool
+    {
+        return is_null($this->is_paid)
+            && $this->progress == 100
+            && optional($this->feedback)->etat == 'Livré';
     }
 }

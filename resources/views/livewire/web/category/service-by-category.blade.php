@@ -1,7 +1,9 @@
 <div class="pt-4">
     <div x-data="{isOpen : false}" class="min-h-screen lg:py-8 md:px-8">
 
-
+<div class="px-2">
+    @include('include.bread-cumb',['category'=>'cagegory','categoryName'=>$categoryName])
+</div>
 
         <div class="container px-4 ">
             <h2 class="mb-4 text-lg font-bold text-gray-600 md:text-2xl dark:text-gray-400">Recherche de
@@ -132,7 +134,7 @@
                     @empty
                     <div class="px-6">
                         <div>
-                            <h3>Pas de services trouveeer</h3>
+                            <h3>Pas de resultat</h3>
                         </div>
 
                     </div>

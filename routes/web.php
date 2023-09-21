@@ -147,6 +147,8 @@ Route::middleware([
                 ])->group(
                     function () {
 
+                    Route::get('/export-data/{id}', [ReportController::class,'exportExcel'])->name('freelance.transaction.export');
+
                     Route::get('/dashboard', \App\Livewire\Freelance\Dashboard\DashboardFreelance::class)->name('freelance.dashboard');
 
                     Route::group(['prefix' => "service"], function () {
@@ -171,11 +173,15 @@ Route::middleware([
                     });
                     Route::group(['prefix' => "profile"], function () {
                         Route::get('/', \App\Livewire\Freelance\Profile\ProfileFreelance::class)->name('freelance.profile');
-                        //Route::get('/securite', \App\Http\Livewire\Freelance\Profile\Securite::class)->name('freelance.securite');
+                        Route::get('/realisations', \App\Livewire\Freelance\Profile\RealisationForm::class)->name('freelance.realisation');
                         //Route::get('/edit/{id}', \App\Http\Livewire\Freelance\Services\EditService::class)->name('freelance.service.edit');
                     });
                     Route::group(['prefix' => "paiement"], function () {
-                        Route::get('/', \App\Livewire\Freelance\Paiement\PaiementFreelance::class)->name('freelance.PaiementInfo');
+                        Route::get('/retrait', \App\Livewire\Freelance\Paiement\PaiementFreelance::class)->name('freelance.PaiementInfo');
+
+                        Route::get('/effectue', \App\Livewire\Freelance\Paiement\PaimentList::class)->name('freelance.PaiementList');
+                        Route::get('/releves', \App\Livewire\Freelance\Paiement\Releves::class)->name('freelance.PaiemntReleves');
+
 
                         //Route::get('/edit/{id}', \App\Http\Livewire\Freelance\Services\EditService::class)->name('freelance.service.edit');
                     });

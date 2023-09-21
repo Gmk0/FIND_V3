@@ -33,7 +33,7 @@
 
 
 
-        <div class="max-w-6xl p-6 mx-auto bg-white rounded-lg shadow-md">
+        <div class="max-w-6xl p-6 mx-auto bg-white rounded-lg shadow-md dark:bg-navy-800">
             <h1 class="mb-4 text-2xl font-bold">Assistance pour Freelance</h1>
             <ul>
                 <!-- Démarrage -->
@@ -41,8 +41,10 @@
                     <button @click="openSection === 'demarrage' ? openSection = null : openSection = 'demarrage'"
                         class="flex justify-between w-full text-left">
                         Démarrage
-                        <span x-collapse x-show="openSection === 'demarrage'">-</span>
-                        <span x-collapse x-show="openSection !== 'demarrage'">+</span>
+
+                        <i :class="openSection === 'demarrage'? 'rotate-180 transition-transform':''"
+                                    class="text-base transition-transform fa fa-chevron-down "></i>
+                        
                     </button>
                     <ul x-collapse x-show="openSection === 'demarrage'" class="pl-4 mt-2">
                         <li><a href="#creer-profil" class="text-blue-500 hover:underline">Créer un profil de freelance</a> - Découvrez
@@ -59,8 +61,9 @@
                     <button @click="openSection === 'recherche' ? openSection = null : openSection = 'recherche'"
                         class="flex justify-between w-full text-left">
                         Recherche de Projets
-                        <span x-collapse x-show="openSection === 'recherche'">-</span>
-                        <span x-collapse x-show="openSection !== 'recherche'">+</span>
+                        <i :class="openSection === 'recherche'? 'rotate-180 transition-transform':''"
+                            class="text-base transition-transform fa fa-chevron-down "></i>
+                       
                     </button>
                     <ul x-collapse x-show="openSection === 'recherche'" class="pl-4 mt-2">
                         <li><a href="#recherche-projets" class="text-blue-500 hover:underline">Rechercher des projets pertinents</a> -
@@ -75,8 +78,10 @@
                     <button @click="openSection === 'soumission' ? openSection = null : openSection = 'soumission'"
                         class="flex justify-between w-full text-left">
                         Soumission de Propositions
-                        <span x-collapse x-show="openSection === 'soumission'">-</span>
-                        <span x-collapse x-show="openSection !== 'soumission'">+</span>
+
+                        <i :class="openSection === 'soumission'? 'rotate-180 transition-transform':''"
+                            class="text-base transition-transform fa fa-chevron-down "></i>
+                     
                     </button>
                     <ul x-collapse x-show="openSection === 'soumission'" class="pl-4 mt-2">
                         <li><a href="#rediger-proposition" class="text-blue-500 hover:underline">Rédiger une proposition efficace</a> -
@@ -91,8 +96,10 @@
                     <button @click="openSection === 'communication' ? openSection = null : openSection = 'communication'"
                         class="flex justify-between w-full text-left">
                         Communication avec les Clients
-                        <span x-collapse x-show="openSection === 'communication'">-</span>
-                        <span x-collapse x-show="openSection !== 'communication'">+</span>
+
+                        <i :class="openSection === 'communication'? 'rotate-180 transition-transform':''"
+                            class="text-base transition-transform fa fa-chevron-down "></i>
+                    
                     </button>
                     <ul x-collapse x-show="openSection === 'communication'" class="pl-4 mt-2">
                         <li><a href="#communication-efficace" class="text-blue-500 hover:underline">Best practices pour une communication
@@ -106,7 +113,7 @@
 
 
 
-        <div class="max-w-6xl p-6 mx-auto mt-12 bg-white rounded-lg shadow-md">
+        <div class="max-w-6xl p-6 mx-auto mt-12 bg-white rounded-lg shadow-md dark:bg-navy-800">
             <section id="creer-profil" class="space-y-4">
                 <h2 class="pb-2 text-xl font-bold border-b">Créer un profil de freelance</h2>
                 <p>Voici comment optimiser votre profil pour attirer plus de clients. Assurez-vous d'avoir une photo de profil

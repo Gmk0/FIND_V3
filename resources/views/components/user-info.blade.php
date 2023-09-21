@@ -35,25 +35,36 @@
         </div>
 
         <x-dropdown-link  href="{{ route('dashboardUser') }}">
-            <ion-icon name="person-outline" class="w-4 h-4"></ion-icon>
-            <span class="ml-2">{{__('Dashboard')}}</span>
+           
+            <span class="flex">
+                <x-icon name="user" class="w-4 h-5" />
+                <span class="ml-2">{{__('Dashboard')}}</span>
+
+            </span>
+         
         </x-dropdown-link>
         <x-dropdown-link href="{{ url('/user/profile') }}">
-            <ion-icon name="person-outline" class="w-4 h-4"></ion-icon>
-            <span class="ml-2">{{__('Profile')}}</span>
+                            <span class="flex">
+                <x-icon name="user-add" class="w-5 h-5" />
+
+                <span class="ml-2">{{__('Profile')}}</span>
+                            </span>
+          
         </x-dropdown-link>
 
         @if(Auth::user()->freelance()->exists())
 
         <x-dropdown-link  href="{{route('freelance.dashboard')}}">
-            <ion-icon name="person-outline" class="w-4 h-4"></ion-icon>
+
+           <x-icon name="user-add" class="w-5 h-5" />
             <span class="ml-2">{{__('Dashbord Freelance')}}</span>
         </x-dropdown-link>
         @endif
 
 
         <x-dropdown-link href="{{ route('MissionUser')}}">
-            <ion-icon name="albums-outline" class="w-4 h-4"></ion-icon>
+            <x-icon name="collection" class="w-5 h-5" />
+          
             <span class="ml-2">{{__('Mes mission')}}</span>
         </x-dropdown-link>
 
@@ -61,7 +72,7 @@
 
         <x-dropdown-link href="{{ url('/user/favoris') }}">
 
-            <ion-icon class="w-4 h-4" name="star-outline"></ion-icon>
+            <x-icon name="star" class="w-5 h-5" />
             <span class="ml-2">{{__('Favoris')}}</span>
         </x-dropdown-link>
 
@@ -90,8 +101,8 @@
 
 
         <x-dropdown-link href="{{route('MessageUser')}}">
-            <ion-icon name="chatbox-ellipses-outline" class="w-4 h-4"></ion-icon>
-
+          
+            <x-icon name="chat" class="w-5 h-5" />
             <span class="ml-2">{{__('Mes messages')}}</span>
         </x-dropdown-link>
 
@@ -104,7 +115,8 @@
             @csrf
 
             <x-dropdown-link href="{{ url('/logout') }}" @click.prevent="$root.submit();">
-                <ion-icon name="log-in-outline" class="w-4 h-4text-white"></ion-icon>
+              <x-icon name="logout" class="w-5 h-5" />
+                
                 <span class="ml-2">{{__('se deconnecter')}}</span>
             </x-dropdown-link>
         </form>

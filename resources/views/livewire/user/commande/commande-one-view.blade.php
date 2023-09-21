@@ -48,6 +48,17 @@
 
 
                     </p>
+                    <p class="mb-4 text-base text-gray-600 md:mb-2 dark:text-gray-300">Paiement au Freelance :
+
+                        @if($order->is_paid !=null)
+
+                        <span class="text-green-500 px-1.5 py-0.5 rounded-lg ">Payé</span>
+                        @else
+                     <span class="text-red-300 px-1.5 py-0.5 rounded-lg ">en Attente</span>
+                        @endif
+
+
+                    </p>
                     <p class="mb-4 text-base text-gray-600 md:mb-2 dark:text-gray-300">statut :
 
 
@@ -150,21 +161,14 @@
 
                 <div class="px-6 py-4 border-t border-gray-200">
                     <p class="mb-2 text-lg text-gray-800">Options supplémentaires</p>
-                    <div class="flex flex-col justify-end gap-4 lg:flex-row">
+                    <div class="grid grid-cols-2 gap-2 lg:grid-cols-5 md:grid-cols-4 lg:flex-row">
                         @if (empty($order->transaction))
                         <div>
-
                             <x-filament::button size="lg" tag="a" href="{{route('commandeRepaye',['order_number'=>$order->order_numero])}}" icon="heroicon-m-credit-card" icon-position="after" >
                                 Payer
                             </x-filament::button>
 
-                            {{-- <x-button href="{{route('commandeRepaye',['order_numero'=>$Order->order_numero])}}"
-                                primary label="Proceder Au Paiement"> </x-button>--}}
-
-
-
                         </div>
-
                         @endif
 
                         @if($order->feedback->etat=="Livré")
@@ -175,45 +179,33 @@
                             <x-filament::button x-on:click="$dispatch('open-modal', { id: 'evaluer' })" icon="" size="lg" color="success">
                                 Evaluer
                             </x-filament::button>
-                            {{--
-                            <x-button wire:click='openModal()' spinner="openModal" positive class="mr-2"
-                                label='Evaluer' />-}}
 
-                        </div>
-
-                        @else
-
-                        <div class="w-full">
-                            {{--
-                            <x-button wire:click='openModal()' spinner="openModal" positive class="mr-2"
-                                label='Revaluer ' />--}}
 
                         </div>
                         @endif
 
                         @endif
+
                         <div>
-                            {{-- <x-button primary wire:click="sendMessag()" spinner="sendMessag" label="contacter">--
-                            </x-button>--}}
-
-                        <x-filament::button x-on:click="$dispatch('open-modal', { id: 'contacter' })" color="success">
+                        <x-filament::button x-on:click="$dispatch('open-modal', { id: 'contacter' })"  color="success">
                             Contacter
                         </x-filament::button>
+                        </div>
 
-
+                        @if($order->isReadyForPayment())
+                        <div>
+                            {{ ($this->confirmAction)(['id' => $order->id]) }}
 
                         </div>
 
+                        @endif
+
+                        @if( $order->progress != 100 )
                         <div class="">
-
                             {{ ($this->annulerAction)(['id' => $order->id]) }}
-
-
-
                         </div>
 
-
-
+                        @endif
                     </div>
 
                 </div>
@@ -508,6 +500,87 @@
 
                 </x-slot>
             </x-filament::modal>
+
+
+            <x-load-paid></x-load-paid>
+
+
+            <div>
+                @if($paidFreealance)
+
+                <div>
+                    <style>
+                        .loader-dots div {
+                            animation-timing-function: cubic-bezier(0, 1, 1, 0);
+                        }
+
+                        .loader-dots div:nth-child(1) {
+                            left: 8px;
+                            animation: loader-dots1 0.6s infinite;
+                        }
+
+                        .loader-dots div:nth-child(2) {
+                            left: 8px;
+                            animation: loader-dots2 0.6s infinite;
+                        }
+
+                        .loader-dots div:nth-child(3) {
+                            left: 32px;
+                            animation: loader-dots2 0.6s infinite;
+                        }
+
+                        .loader-dots div:nth-child(4) {
+                            left: 56px;
+                            animation: loader-dots3 0.6s infinite;
+                        }
+
+                        @keyframes loader-dots1 {
+                            0% {
+                                transform: scale(0);
+                            }
+
+                            100% {
+                                transform: scale(1);
+                            }
+                        }
+
+                        @keyframes loader-dots3 {
+                            0% {
+                                transform: scale(1);
+                            }
+
+                            100% {
+                                transform: scale(0);
+                            }
+                        }
+
+                        @keyframes loader-dots2 {
+                            0% {
+                                transform: translate(0, 0);
+                            }
+
+                            100% {
+                                transform: translate(24px, 0);
+                            }
+                        }
+                    </style>
+                    <div class="fixed top-0 left-0 z-50 flex items-center justify-center w-screen h-screen"
+                        style="background: rgba(0, 0, 0, 0.3);">
+                        <div class="flex flex-col items-center px-5 py-2 bg-white border rounded-lg">
+                            <div class="relative block w-20 h-5 mt-2 loader-dots">
+                                <div class="absolute top-0 w-3 h-3 mt-1 bg-green-500 rounded-full"></div>
+                                <div class="absolute top-0 w-3 h-3 mt-1 bg-green-500 rounded-full"></div>
+                                <div class="absolute top-0 w-3 h-3 mt-1 bg-green-500 rounded-full"></div>
+                                <div class="absolute top-0 w-3 h-3 mt-1 bg-green-500 rounded-full"></div>
+                            </div>
+                            <div class="mt-2 text-xs font-medium text-center text-gray-500">
+                                Paiement en cours...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endif
+            </div>
 
 
     </section>

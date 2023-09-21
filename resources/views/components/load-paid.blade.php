@@ -1,4 +1,4 @@
-<div wire:loading wire:target='checkoutmaxi,pay'>
+<div wire:loading wire:target='checkoutmaxi,pay,paid'>
     <div>
         <style>
             .loader-dots div {

@@ -17,12 +17,26 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Contracts\Pagination\Paginator;
 use Filament\Tables\Actions\{BulkAction, Action};
+use App\Events\OrderCreated;
 
 
 class CommandeTableFreelance extends Component implements HasForms, HasTable
 {
     use InteractsWithForms;
     use InteractsWithTable;
+
+    public function  getListeners()
+    {
+
+        $auth_id = auth()->user()->id;
+        return [
+            // "echo-private:notify.{$auth_id},ProjectResponse" => 'broadcastedMessageReceived',
+            "echo-private:notify.{$auth_id},OrderCreated" => '$refresh',
+            // 'ServiceOrdered' => '$refresh',
+
+
+        ];
+    }
 
     protected function getTableQuery(): Builder
     {
@@ -63,14 +77,18 @@ class CommandeTableFreelance extends Component implements HasForms, HasTable
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
-                Tables\Columns\BadgeColumn::make('status')
-                ->colors([
-                    'primary',
-                    'secondary' => 'pending',
-                    'warning' => 'rejeted',
-                    'success' => 'completed',
+            Tables\Columns\TextColumn::make('status')
+            ->badge()
+            ->color(fn (string $state): string => match ($state) {
+               
+                'completed' => 'success',
+                'pending' => 'warning',
+                'failed' => 'danger',
+            })
+            , Tables\Columns\TextColumn::make('is_paid')->label('Verser')
+                ->since()
+                
 
-                ])
             ])->striped()
             ->filters([
                 Filter::make('created_at')

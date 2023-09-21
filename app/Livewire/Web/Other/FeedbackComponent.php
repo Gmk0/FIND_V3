@@ -14,26 +14,16 @@ class FeedbackComponent extends Component
     public function mount()
     {
 
-        sleep(2);
+
         // attendez 10 minutes
 
 
+       
+        
 
+        $this->showFeedback = !auth()->user()->userSetting->feedback_submitted;
 
-        // Vérifiez si l'utilisateur a déjà soumis un feedback
-        $this->feedbackSubmitted = auth()->user()->userSetting->feedback_submitted;
-        //sleep(2);
-
-
-
-
-        if (!$this->feedbackSubmitted) {
-            // Si non, affichez la section de feedback après 10 minutes
-            //sleep(60);
-            // attendez 10 minutes
-
-         $this->showFeedback = true;
-        }
+      
     }
 
     public function sendFeedback()
@@ -55,7 +45,6 @@ class FeedbackComponent extends Component
             $userSetting->update([
                 'feedback_submitted' => true,
                 'feedback' => $data,
-                ''
             ]);
             $this->feedbackSubmitted = true;
             $this->showFeedback = false;

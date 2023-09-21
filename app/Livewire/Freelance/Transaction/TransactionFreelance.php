@@ -100,18 +100,6 @@ class TransactionFreelance extends Component implements HasForms, HasTable
                         'completed' => 'Complet',
                     ]),
 
-                /*SelectFilter::make('state')->label('Status Paiement')
-                ->multiple()
-                ->relationship('feedback', 'state')
-                ->options([
-                    'En attente de traitement' => 'En attente de traitement',
-                    'En cours de préparation' => 'En cours de préparation',
-                    'En transit' => 'En transit',
-                    'Livré' => 'Livré',
-                ]),
-
-
-                */
             ])
             ->actions([
 

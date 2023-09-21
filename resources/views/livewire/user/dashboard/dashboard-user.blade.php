@@ -191,6 +191,7 @@
                 </div>
             </div>
         </div>
+        
         <div x-show="!isLoading" x-cloak class="pt-4">
 
            <livewire:user.commande.commande-table lazy />
