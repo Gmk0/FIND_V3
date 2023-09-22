@@ -125,6 +125,12 @@ class Releves extends Component implements HasForms, HasTable
                 ]),
             ])->filtersFormColumns(3)
             ->actions([
+
+            Action::make('Gerer')
+                //->url(fn (transaction $record): string => route('freelance.Order.view', $record->order_numero))
+                // ->openUrlInNewTab()
+                ->icon('heroicon-s-pencil')
+                ->tooltip('Voir les services'),
                 //
             ])->headerActions([
                 Action::make('Exporter')

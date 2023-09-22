@@ -13,7 +13,7 @@
 
     <div class="container py-8 lg:px-2">
 
-        <div class="p-6 mb-3 bg-white rounded-lg shadow-md">
+        <div class="p-6 mb-3 bg-white rounded-lg shadow-md dark:bg-navy-800">
             <h2 class="mb-4 text-lg font-bold text-gray-800 lg:text-xl">{{$projet->title}}</h2>
             <p class="mb-4 text-gray-600 dark:text-gray-400">Description de la mission :</p>
             <p class="mb-4 leading-loose text-gray-800">
@@ -92,8 +92,8 @@
             @else
             <div>
 
-                <x-filament::button size="lg" wire:click='openModalEdit()'>
-                    <span>Voir le message</span>
+                <x-filament::button outlined size="lg" wire:click='openModalEdit()'>
+                    <span>Voir la proposition</span>
                 </x-filament::button>
             </div>
             @endif

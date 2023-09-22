@@ -117,7 +117,7 @@
                         <a class="text-xs+ text-info" href="#">{{$projet->category->name}}</a>
                         <div class="-mr-1.5 flex space-x-1">
                             <button
-                                class="p-0 rounded-full btn2 h-7 w-7 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                                class="hidden p-0 rounded-full btn2 h-7 w-7 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -125,47 +125,7 @@
                                 </svg>
                             </button>
 
-                            <div x-data="usePopper({ placement: 'bottom-end', offset: 4 })"
-                                @click.outside="if(isShowPopper) isShowPopper = false" class="inline-flex">
-                                <button x-ref="popperRef" @click="isShowPopper = !isShowPopper"
-                                    class="p-0 rounded-full btn2 h-7 w-7 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
-                                    </svg>
-                                </button>
 
-                                <div  wire:ignore x-cloak x-ref="popperRoot" class="popper-root" :class="isShowPopper && 'show'">
-                                    <div
-                                        class="popper-box rounded-md border border-slate-150 bg-white py-1.5 font-inter dark:border-navy-500 dark:bg-navy-700">
-                                        <ul>
-                                            <li>
-                                                <a href="#"
-                                                    class="flex items-center h-8 px-3 pr-8 font-medium tracking-wide transition-all outline-none hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Action</a>
-                                            </li>
-                                            <li>
-                                                <a href="#"
-                                                    class="flex items-center h-8 px-3 pr-8 font-medium tracking-wide transition-all outline-none hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Another
-                                                    Action</a>
-                                            </li>
-                                            <li>
-                                                <a href="#"
-                                                    class="flex items-center h-8 px-3 pr-8 font-medium tracking-wide transition-all outline-none hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Something
-                                                    else</a>
-                                            </li>
-                                        </ul>
-                                        <div class="h-px my-1 bg-slate-150 dark:bg-navy-500"></div>
-                                        <ul>
-                                            <li>
-                                                <a href="#"
-                                                    class="flex items-center h-8 px-3 pr-8 font-medium tracking-wide transition-all outline-none hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Separated
-                                                    Link</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div>
@@ -199,6 +159,10 @@
 
 
                     </p>
+                    <div class="mt-4 text-gray-800">
+                                        {{$projet->budget}} $
+
+                                    </div>
                     <div class="grow">
                         <div class="flex items-center mt-2 text-xs">
                             <a href="#"
@@ -221,6 +185,7 @@
                             </span>
                         </div>
                     </div>
+
                     <div class="flex justify-end mt-1">
                         <a href="{{route('freelance.projet.view',[$projet->mission_numero])}}"
                             class="btn2 px-2.5 py-1.5 font-medium text-primary hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:text-accent-light dark:hover:bg-accent-light/20 dark:focus:bg-accent-light/20 dark:active:bg-accent-light/25">

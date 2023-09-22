@@ -105,17 +105,20 @@ implements HasForms
 
             if (empty($this->response)) {
 
-                $data = MissionResponse::create([
+                $$this->response = MissionResponse::create([
                     'mission_id' => $this->projet->id,
                     'freelance_id' => auth()->user()->getIdFreelance(),
                     'content' => $data['description'],
-                    'budget' => $this->amount ? $this->amount : $this->projet->budget,
+                    'budget' => $this->amount ?? $this->projet->budget,
                 ]);
 
-                $data->notifyUser();
+                $this->response->notifyUser();
 
 
             }
+            $this->dispatch('notify', ['message' => "Votre message a ete envoyer avec success", 'icon' => 'success',]);
+
+
 
 
             $this->modalEdit = true;
@@ -123,8 +126,6 @@ implements HasForms
             $this->propositionForm->fill();
 
             $this->reset( 'amount');
-
-            $this->dispatch('notify', ['message' => "Votre message a ete envoyer avec success", 'icon' => 'success',]);
 
 
 
@@ -143,6 +144,7 @@ implements HasForms
 
     public function openModalEdit()
     {
+
 
 
 

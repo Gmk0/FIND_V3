@@ -3,6 +3,7 @@
 namespace App\Livewire\User\Mission;
 
 use App\Models\Mission;
+use App\Models\{Transaction,Commission};
 use App\Models\MissionResponse;
 use Exception;
 use Livewire\Component;
@@ -16,11 +17,12 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\{TextInput, Select};
 
-
+use Livewire\Attributes\On;
 use Livewire\Attributes\{Layout, Title};
 use Illuminate\Database\Eloquent\Model;
 
 use Filament\Actions\Action;
+use Illuminate\Support\Facades\DB;
 
 #[Layout('layouts.user-layout')]
 
@@ -35,7 +37,7 @@ implements HasForms, HasActions
     use InteractsWithForms;
     public $response;
     public $projet;
-   // public $modal = false;
+   public $paidFreealance = false;
     public $feedback=['description'=>''];
     public $satisfaction = 0;
     public $conversation = null;
@@ -47,7 +49,7 @@ implements HasForms, HasActions
     public $confirmModal;
     public $modalStatus;
     public $status;
-    public $projetEncours;
+    //public $projetEncours;
 
 
     public function mount($mission_numero)
@@ -115,9 +117,9 @@ implements HasForms, HasActions
                 ->modalIconColor('success')
                 ->action( function(){
 
-                    $this->projet->update(['status' => 'completed']);
-                    $this->dispatch('notify', ['message' => "Paiement debloquer", 'icon' => 'success',]);
-                    $this->dispatch('refresh');
+
+
+                    $this->dispatch('accept');
                 }
 
                  );
@@ -129,25 +131,77 @@ implements HasForms, HasActions
     }
 
 
+    #[On('accept')]
 
     public function accept()
     {
-        try {
-            $this->projetEncours->status = 'finis';
-            $this->projetEncours->update();
-            $this->modalStatus = false;
+        $this->paidFreealance = true;
 
-            $this->dialog()->success(
-                $title = "Status changer",
-                $description = "Vous avez debloquer le paimement",
-            );
+        DB::beginTransaction();
+        try {
+
+            $date= now();
+
+            $this->projet->update([
+                'is_paid' => $date,
+                'status' => 'completed',
+
+                ]);
+            $this->response->update(['is_paid' =>$date]);
+
+
+            $freelance = $this->response->freelance;
+
+            // Calculer 70% du montant total de la commande
+            $amountToAdd = $this->response->budget * 0.70;
+            $commissionAmount = $this->response->budget * 0.30;
+
+            $freelance->solde += $amountToAdd;
+            $freelance->save();
+
+            // 30% de commission
+
+            $transaction = Transaction::create([
+                'user_id' => $freelance->user_id,
+                'type' => 'debit',
+                'amount' => $amountToAdd,
+                'description' => 'Débit pour la mission #' . $this->projet->order_numero . ' après déduction de la commission',
+                'status' => 'completed'
+
+            ]);
+            $commission = new Commission();
+            $commission->mission_id = $this->projet->id;
+            $commission->amount = $commissionAmount;
+            $commission->user_id = $freelance->user_id;
+            $commission->net_amount = $amountToAdd;
+            $commission->percent = '30%';
+            $commission->description = 'Commission de 30% prélevée sur le projet.';
+            $commission->transaction_id = $transaction->id;
+            $commission->save();
+
+
+
+            DB::commit();
+
+
+
+            $this->paidFreealance = false;
+
+            $this->dispatch('notify', ['message' => "Confirmation reussie", 'icon' => 'success',]);
+
+
+            $this->dispatch('notifier');
         } catch (\Exception $e) {
 
 
-            $this->dialog()->error(
-                $title = "Error !!!",
-                $description = "Une erreur est survenue lors de la validation" . $e->getMessage(),
-            );
+
+            $this->paidFreealance = false;
+            DB::rollback();
+            $this->dispatch('error', [
+                'message' => "Une errer s'est produite lors de la confirmation du paiement" . $e->getMessage(),
+                'icon' => 'error',
+                'title' => 'error'
+            ]);
         }
     }
 
@@ -155,6 +209,7 @@ implements HasForms, HasActions
     {
 
         try{
+
 
 
 

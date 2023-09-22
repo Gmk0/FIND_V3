@@ -246,7 +246,7 @@ class DashboardFreelance extends Component
     {
         return view('livewire.freelance.dashboard.dashboard-freelance', [
             'amount' => $this->total(),
-            'solde' => auth()->user()->freelance->solde,
+            'solde' => auth()->user()->freelance->solde . ' $',
             'totalR' => $this->totalCompleted(),
             'order' => Order::whereHas('service', function ($query) {
                 $query->where('freelance_id', $this->freelance_id);

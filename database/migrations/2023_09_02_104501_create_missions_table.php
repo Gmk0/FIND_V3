@@ -29,6 +29,7 @@ return new class extends Migration
             $table->integer('progress')->nullable();
             $table->foreignId('transaction_id')->nullable()->constrained();
             $table->dateTime('is_paid')->nullable();
+            $table->boolean('masquer')->default(false);
             $table->enum('status', ['pending',"active","inactive","completed"])->default('pending');
             $table->timestamps();
         });

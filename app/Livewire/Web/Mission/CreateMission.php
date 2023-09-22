@@ -94,7 +94,7 @@ class CreateMission extends Component implements HasForms
                     RichEditor::make('mission.exigences')->label('Exigences Pour la mission')
 
                         ,
-                        TextInput::make('mission.tax')->label('Taux journalier')
+                        TextInput::make('mission.tax')->label('Budget')
                             ->numeric()
                             ->prefix('$')
                             ->inputMode('decimal')

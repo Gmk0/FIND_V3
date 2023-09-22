@@ -5,6 +5,7 @@ namespace App\Livewire\Web\Card;
 use App\Models\Conversation;
 use App\Models\Favorite;
 use App\Models\Freelance;
+use App\Models\SubCategory;
 use Livewire\Component;
 
 class FreelanceCard extends Component
@@ -82,6 +83,7 @@ class FreelanceCard extends Component
 
     public function render()
     {
-        return view('livewire.web.card.freelance-card');
+        $subCategories = SubCategory::whereIn('id', $this->freelance->sub_categorie)->get();
+        return view('livewire.web.card.freelance-card',['subCategories'=>$subCategories]);
     }
 }

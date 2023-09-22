@@ -67,29 +67,26 @@
             </p>
             <div class="!h-12 inline-flex flex-wrap items-center gap-3 mt-4 group">
 
-                @empty(!$freelance->sub_categorie)
-                @forelse ($freelance->sub_categorie as $key => $value)
+                @empty(!$subCategories)
 
-                @php
-                $shortValue = Str::limit($value, 18);
-                @endphp
-                @if ($loop->index < 3) <span data-tooltip-target="{{$value}}"
-                    class="items-center py-1 cursor-default px-2 rounded-md text-[10px] font-medium border border-secondary-200 shadow-sm bg-secondary-100 text-secondary-700 dark:bg-secondary-700 dark:text-secondary-400 dark:border-none">
-                    {{$shortValue}}</span>
+                @forelse ($subCategories as $subCategory)
+                @if ($loop->index < 5)
+                <span x-tooltip='"{{$subCategory->name}}"'
+                    class="items-center py-1 cursor-default px-2 rounded-md text-[10px] lg:text-[10px] font-medium border border-secondary-200 shadow-sm bg-secondary-100 text-secondary-700 dark:bg-secondary-700 dark:text-secondary-400 dark:border-none">
+                    {{$subCategory->name}}
+                    </span>
 
-                    <div id="{{$value}}" role="tooltip"
-                        class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">
-                        {{$value}}
-                        <div class="tooltip-arrow" data-popper-arrow></div>
-                    </div>
+
                     @endif
                     @if ($loop->last && $loop->remaining > 0)
                     <span class="ml-2 text-sm text-gray-500">(+{{$loop->remaining}} de plus)</span>
                     @endif
+
                     @empty
 
-                    @endforelse
-                    @endempty
+                @endforelse
+
+                @endempty
 
 
             </div>

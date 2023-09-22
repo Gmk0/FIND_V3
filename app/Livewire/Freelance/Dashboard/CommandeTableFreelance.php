@@ -80,14 +80,14 @@ class CommandeTableFreelance extends Component implements HasForms, HasTable
             Tables\Columns\TextColumn::make('status')
             ->badge()
             ->color(fn (string $state): string => match ($state) {
-               
+
                 'completed' => 'success',
                 'pending' => 'warning',
                 'failed' => 'danger',
             })
             , Tables\Columns\TextColumn::make('is_paid')->label('Verser')
-                ->since()
-                
+                ->dateTime(),
+
 
             ])->striped()
             ->filters([

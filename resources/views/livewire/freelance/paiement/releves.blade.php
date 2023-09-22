@@ -1,7 +1,7 @@
 <div class="min-h-screen p-2">
 
     <div class="max-w-3xl mb-2">
-        <h2 class="mb-2 text-lg font-semibold tracking-wide text-gray-600 uppercase lg:text-xl">Paiement
+        <h2 class="mb-2 text-lg font-semibold tracking-wide uppercase text-amber-600 lg:text-xl">Paiement
         </h2>
     </div>
     <div>

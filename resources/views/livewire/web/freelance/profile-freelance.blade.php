@@ -1,14 +1,17 @@
 <div class="min-h-screen">
     <div class="flex flex-col h-full bg-gray-100 dark:bg-gray-900 lg:flex-row">
-        <aside class="w-full bg-white shadow-md ov lg:w-4/12">
 
-        <div class="sticky top-6 ">
+
+
+        <aside x-show="!loading"  class="w-full bg-white shadow-md ov lg:w-4/12">
+
+        <div style="" class="sticky pt-6 top-6">
 
                 <div style="" class="p-6 overflow-y-auto scrollbar-sm lg:h-screen ">
 
 
-                    <div class="flex items-center justify-center ">
-                        @component("components.user-photo" ,['user'=>$freelance->user,'taille'=>32])
+                    <div class="flex items-center justify-center top-2">
+                        @component("components.user-photo" ,['user'=>$freelance->user,'taille'=>36])
                         @endcomponent
                     </div>
                     <h1 class="mt-4 text-lg font-bold text-gray-800 lg:text-lg xl:text-xl 2xl:text-3xl">
@@ -359,14 +362,12 @@
 
         </div>
         </aside>
-        <main class="w-full p-6 rounded lg:w-8/12">
+        <main x-show="!loading" class="w-full p-6 rounded lg:w-8/12">
 
-            <div class="hidden">
-                {{-- @include('include.breadcumbUser',['findFreelance'=>'findFreelance'])--}}
-            </div>
+
 
             <section class="bg-white rounded-md dark:bg-gray-800">
-                <div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                <div class="px-4 py-12 mx-auto mb-4 max-w-7xl sm:px-6 lg:px-8">
                     <div class="max-w-3xl mx-auto ">
                         <h2
                             class="text-lg font-bold text-center text-gray-800 xl:text-3xl md:text-xl dark:text-gray-200">
@@ -406,7 +407,7 @@
 
 
 
-            <section class="bg-gray-200 dark:bg-gray-900 ">
+            <section class="bg-gray-100 dark:bg-gray-900 ">
                 <div class="px-2 py-12 mx-auto max-w-7xl sm:px-4 lg:px-4">
                     <div class="mx-auto text-center ">
                         <h2 class="text-3xl font-bold text-gray-800">Mes Services</h2>
@@ -425,14 +426,14 @@
                                     <div class="flex gap-4 p-2">
 
                                         <button
-                                            class="p-0 rounded-full btn btn-outline btn-circle btn-sm prev-btn hover:bg-slate-300/20 focus:bg-slate-300/20 dark:active:bg-slate-300/25 active:bg-slate-100/25 disabled:pointer-events-none disabled:select-none disabled:opacity-60 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                                            class="p-0 rounded-full btn2 btn-outline btn-circle btn-sm prev-btn hover:bg-slate-300/20 focus:bg-slate-300/20 dark:active:bg-slate-300/25 active:bg-slate-100/25 disabled:pointer-events-none disabled:select-none disabled:opacity-60 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
                                                 stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7" />
                                             </svg>
                                         </button>
                                         <button
-                                            class="p-0 rounded-full btn btn-outline btn-circle btn-sm next-btn hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 disabled:pointer-events-none disabled:select-none disabled:opacity-60 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                                            class="p-0 rounded-full btn2 btn-outline btn-circle btn-sm next-btn hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 disabled:pointer-events-none disabled:select-none disabled:opacity-60 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
                                                 stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
@@ -459,7 +460,7 @@
                 </div>
             </section>
 
-            <section class="hidden bg-gray-200 dark:bg-gray-900">
+            <section class="hidden bg-white dark:bg-gray-900">
                 <div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div class="max-w-4xl mx-auto text-center">
                         <h2 class="text-3xl font-bold text-gray-800">Mes Projets</h2>
@@ -504,49 +505,79 @@
 
             @empty(!$commentaires)
 
-            <section class="bg-gray-100 dark:bg-gray-800">
+            <section class="bg-white dark:bg-gray-800">
                 <div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div class="max-w-4xl mx-auto text-center">
                         <h2 class="text-3xl font-bold text-gray-800">Témoignages</h2>
                         <p class="mt-4 text-gray-500">Voici ce que mes clients satisfaits ont à dire :</p>
-                        <div class="grid grid-cols-1 gap-4 mt-8 sm:grid-cols-2 lg:grid-cols-3">
+                        <div class="mt-8 ">
 
-                            @forelse ($commentaires as $commentaire)
-                            <div class="overflow-hidden bg-gray-900 border-b border-gray-300 rounded-lg ">
-                                <div class="flex flex-col items-center justify-center gap-2 p-4">
-                                    <p class="mt-2 text-gray-500">{{$commentaire->commentaires}}</p>
+                            <div class="swiper"
+                                x-init="$nextTick(() => $el._x_swiper = new Swiper($el, { slidesPerView: '2', breakpoints:{0:{slidesPerView:1,},520:{slidesPerView:1,},950:{slidesPerView:2,},1100:{slidesPerView:3,}}, spaceBetween: 15, navigation: { nextEl: '.next-btn', prevEl: '.prev-btn' } }))">
+                                <div class="flex items-center justify-between">
 
-                                    <p class="mt-2 text-base text-gray-400 dark:text-gray-600">
-                                        Serivice: <span class="text-gray-300 dark:text-gray- 700"><a
-                                                href="">{{$commentaire->order->service->title}}</a></span>
-                                    </p>
+                                    <div>
 
-                                    <div class="flex items-center mx-auto space-x-1">
-                                        @for ($i = 1; $i <= 5; $i++) @if ($i <=$commentaire->satisfaction)
-                                            <svg class="w-4 h-4 text-yellow-300" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                viewBox="0 0 22 20">
-                                                <path
-                                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                            </svg>
-                                            @else
-                                            <svg class="w-4 h-4 text-gray-300 dark:text-gray-500" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                viewBox="0 0 22 20">
-                                                <path
-                                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                            </svg>
-                                            @endif
-                                            @endfor
                                     </div>
+                                    <div class="flex gap-4 p-2">
+
+                                        <button
+                                            class="p-0 rounded-full btn2 btn-outline btn-circle btn-sm prev-btn hover:bg-slate-300/20 focus:bg-slate-300/20 dark:active:bg-slate-300/25 active:bg-slate-100/25 disabled:pointer-events-none disabled:select-none disabled:opacity-60 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                                                stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7" />
+                                            </svg>
+                                        </button>
+                                        <button
+                                            class="p-0 rounded-full btn2 btn-outline btn-circle btn-sm next-btn hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 disabled:pointer-events-none disabled:select-none disabled:opacity-60 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                                                stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="mt-5 swiper-wrapper" x-data="{ selected: 'slide-1' }">
+
+                                    @forelse ($commentaires as $commentaire)
+                                    <div class="overflow-hidden border-b border-gray-300 rounded-lg swiper-slide dark:bg-gray-900 bg-gray-50 ">
+                                        <div class="flex flex-col items-center justify-center gap-2 p-4">
+                                            <p class="mt-2 text-gray-500">{{$commentaire->commentaires}}</p>
+
+                                            <p class="mt-2 text-base text-gray-400 dark:text-gray-600">
+                                                Serivice: <span class="text-gray-300 dark:text-gray- 700"><a
+                                                        href="">{{$commentaire->order->service->title}}</a></span>
+                                            </p>
+
+                                            <div class="flex items-center mx-auto space-x-1">
+                                                @for ($i = 1; $i <= 5; $i++) @if ($i <=$commentaire->satisfaction)
+                                                    <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                        fill="currentColor" viewBox="0 0 22 20">
+                                                        <path
+                                                            d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                    </svg>
+                                                    @else
+                                                    <svg class="w-4 h-4 text-gray-300 dark:text-gray-500" aria-hidden="true"
+                                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                                        <path
+                                                            d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                    </svg>
+                                                    @endif
+                                                    @endfor
+                                            </div>
 
 
-                                    <p class="mt-2 font-medium text-gray-800">{{$commentaire->order->user->name}}</p>
+                                            <p class="mt-2 font-medium text-gray-800">{{$commentaire->order->user->name}}</p>
+                                        </div>
+                                    </div>
+                                    @empty
+
+                                    @endforelse
+
                                 </div>
                             </div>
-                            @empty
 
-                            @endforelse
+
 
                         </div>
                     </div>
@@ -613,14 +644,6 @@
 
 
 
-<div x-data="{ showButton: false }" @scroll.window="showButton = (window.pageYOffset > 200) ? true : false">
-    <!-- Bouton Retour en haut -->
-    <button x-collapse x-show="showButton" @click="window.scrollTo({top: 0, behavior: 'smooth'})"
-        class="fixed p-2 text-white transition duration-300 ease-in-out rounded-full shadow-lg bottom-4 right-4 bg-gradient-to-r from-blue-500 to-purple-600 hover:shadow-xl focus:outline-none">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-        </svg>
-    </button>
-</div>
+
 
 </div>

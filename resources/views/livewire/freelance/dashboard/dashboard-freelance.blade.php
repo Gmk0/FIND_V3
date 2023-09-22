@@ -17,7 +17,7 @@
                         </svg>
                     </button>
 
-                    <div x-ref="popperRoot" class="popper-root" :class="isShowPopper && 'show'">
+                    <div x-cloak x-ref="popperRoot" class="popper-root" :class="isShowPopper && 'show'">
                         <div
                             class="popper-box rounded-md border border-slate-150 bg-white py-1.5 font-inter dark:border-navy-500 dark:bg-navy-600">
                             <ul>
@@ -114,47 +114,7 @@
                 <h2 class="font-medium tracking-wide text-slate-700 dark:text-navy-100">
                     Budget
                 </h2>
-                <div x-data="usePopper({ placement: 'bottom-end', offset: 4 })"
-                    @click.outside="if(isShowPopper) isShowPopper = false" class="inline-flex">
-                    <button x-ref="popperRef" @click="isShowPopper = !isShowPopper"
-                        class="btn2 -mr-1.5 h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
-                        </svg>
-                    </button>
 
-                    <div x-cloak x-ref="popperRoot" class="popper-root" :class="isShowPopper && 'show'">
-                        <div
-                            class="popper-box rounded-md border border-slate-150 bg-white py-1.5 font-inter dark:border-navy-500 dark:bg-navy-700">
-                            <ul>
-                                <li>
-                                    <a href="#"
-                                        class="flex items-center h-8 px-3 pr-8 font-medium tracking-wide transition-all outline-none hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Action</a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        class="flex items-center h-8 px-3 pr-8 font-medium tracking-wide transition-all outline-none hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Another
-                                        Action</a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        class="flex items-center h-8 px-3 pr-8 font-medium tracking-wide transition-all outline-none hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Something
-                                        else</a>
-                                </li>
-                            </ul>
-                            <div class="h-px my-1 bg-slate-150 dark:bg-navy-500"></div>
-                            <ul>
-                                <li>
-                                    <a href="#"
-                                        class="flex items-center h-8 px-3 pr-8 font-medium tracking-wide transition-all outline-none hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Separated
-                                        Link</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="flex space-x-5 grow">
                 <div class="flex flex-col w-1/2">
@@ -175,119 +135,11 @@
 
             </div>
         </div>
-        <div class="hidden card">
-            <div class="flex items-center justify-between px-4 mt-3 sm:px-5">
-                <h2 class="font-medium tracking-wide text-slate-700 dark:text-navy-100">
-                    Income
-                </h2>
 
-                <div x-data="usePopper({ placement: 'bottom-end', offset: 4 })"
-                    @click.outside="if(isShowPopper) isShowPopper = false" class="inline-flex">
-                    <button x-ref="popperRef" @click="isShowPopper = !isShowPopper"
-                        class="p-0 -mr-2 rounded-full btn h-7 w-7 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
-                        </svg>
-                    </button>
 
-                    <div x-cloak x-ref="popperRoot" class="popper-root" :class="isShowPopper && 'show'">
-                        <div
-                            class="popper-box rounded-md border border-slate-150 bg-white py-1.5 font-inter dark:border-navy-500 dark:bg-navy-700">
-                            <ul>
-                                <li>
-                                    <a href="#"
-                                        class="flex items-center h-8 px-3 pr-8 font-medium tracking-wide transition-all outline-none hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Action</a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        class="flex items-center h-8 px-3 pr-8 font-medium tracking-wide transition-all outline-none hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Another
-                                        Action</a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        class="flex items-center h-8 px-3 pr-8 font-medium tracking-wide transition-all outline-none hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Something
-                                        else</a>
-                                </li>
-                            </ul>
-                            <div class="h-px my-1 bg-slate-150 dark:bg-navy-500"></div>
-                            <ul>
-                                <li>
-                                    <a href="#"
-                                        class="flex items-center h-8 px-3 pr-8 font-medium tracking-wide transition-all outline-none hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Separated
-                                        Link</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <p class="px-4 text-xl font-semibold grow text-slate-700 dark:text-navy-100 sm:px-5">
-                $169.6k
-            </p>
-            <div class="ax-transparent-gridline">
-
-            </div>
-        </div>
-        <div class="hidden card">
-            <div class="flex items-center justify-between px-4 mt-3 sm:px-5">
-                <h2 class="font-medium tracking-wide text-slate-700 dark:text-navy-100">
-                    Expense
-                </h2>
-
-                <div x-data="usePopper({ placement: 'bottom-end', offset: 4 })"
-                    @click.outside="if(isShowPopper) isShowPopper = false" class="inline-flex">
-                    <button x-ref="popperRef" @click="isShowPopper = !isShowPopper"
-                        class="p-0 -mr-2 rounded-full btn h-7 w-7 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
-                        </svg>
-                    </button>
-
-                    <div x-ref="popperRoot" class="popper-root" :class="isShowPopper && 'show'">
-                        <div
-                            class="popper-box rounded-md border border-slate-150 bg-white py-1.5 font-inter dark:border-navy-500 dark:bg-navy-700">
-                            <ul>
-                                <li>
-                                    <a href="#"
-                                        class="flex items-center h-8 px-3 pr-8 font-medium tracking-wide transition-all outline-none hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Action</a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        class="flex items-center h-8 px-3 pr-8 font-medium tracking-wide transition-all outline-none hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Another
-                                        Action</a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        class="flex items-center h-8 px-3 pr-8 font-medium tracking-wide transition-all outline-none hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Something
-                                        else</a>
-                                </li>
-                            </ul>
-                            <div class="h-px my-1 bg-slate-150 dark:bg-navy-500"></div>
-                            <ul>
-                                <li>
-                                    <a href="#"
-                                        class="flex items-center h-8 px-3 pr-8 font-medium tracking-wide transition-all outline-none hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Separated
-                                        Link</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <p class="px-4 text-xl font-semibold grow text-slate-700 dark:text-navy-100 sm:px-5">
-                $34.6k
-            </p>
-            <div class="ax-transparent-gridline">
-
-            </div>
-        </div>
     </div>
 
-    <div class="col-span-12">
+    <div class="col-span-12 lg:min-h-48">
         <div class="flex flex-col gap-2">
             <h2 class="text-base font-medium tracking-wide text-slate-700 line-clamp-1 dark:text-navy-100">
                 Commandes

@@ -49,6 +49,7 @@ class Mission extends Model
         'begin_mission' => 'date',
         'end_mission' => 'date',
         'transaction_id' => 'integer',
+        'masquer'=>'boolean',
 
         'is_paid' => 'datetime',
         'user_id' => 'string',
@@ -108,10 +109,7 @@ class Mission extends Model
     }
 
 
-    public function getApprovedMissionResponse()
-    {
-        return $this->missionResponses()->where('status', 'approved')->first();
-    }
+
 
 
 
@@ -122,14 +120,18 @@ class Mission extends Model
     }
 
 
-    public function isFinish()
+    public function getApprovedMissionResponse()
+    {
+        return $this->missionResponses()->where('status', 'approved')->first();
+    }
+
+
+    public function isReadyForPayment(): bool
     {
 
-        if ($this->status == 'completed') {
-            return true;
-        } else {
-            return false;
-        }
+
+        return $this->progress == 100
+            && optional($this->feedbackmission)->etat == 'Livré';
     }
 
 

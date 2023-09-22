@@ -276,22 +276,7 @@
                     <div class="flex flex-wrap justify-between mt-4 ">
 
                         <div class='flex flex-wrap gap-2'>
-                            @empty(!$query)
-                            <div class="flex items-center gap-1 flex-nowrap">
 
-                                <span
-                                    class=" items-center py-1 pl-2 pr-0.5 rounded-md text-[12px] font-medium border border-secondary-200 shadow-sm bg-secondary-100 text-secondary-700 dark:bg-secondary-700 dark:text-secondary-400 dark:border-none">
-                                    <span style="" class="">{{$query}} </span>
-                                    <button
-                                        class="flex items-center justify-center w-4 h-4 shrink-0 text-secondary-400 hover:text-secondary-500"
-                                        wire:click="unselect('query')" type="button">
-                                        <ion-icon wire:ignore name="close-circle-outline" class="w-4 h-4"></ion-icon>
-
-                                    </button>
-                                </span>
-
-                            </div>
-                            @endempty
                             @empty(!$category)
                             <div class="flex items-center gap-1 flex-nowrap">
 

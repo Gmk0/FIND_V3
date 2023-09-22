@@ -13,6 +13,12 @@ use Livewire\Component;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Attributes\{Layout, Title};
+use Filament\Forms;
+
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Actions\Action;
+
 
 
 
@@ -49,11 +55,12 @@ class PaimentList extends Component implements HasForms, HasTable
         return $table
             ->query($this->getTableQuery())
             ->paginated([10, 25, 50, 100, 'all'])
+
             ->columns([
-                Tables\Columns\TextColumn::make('id'),
+
             Tables\Columns\TextColumn::make('order.order_numero')->label('commande'),
-                       Tables\Columns\TextColumn::make('order.total_amount')->money('usd', true)->label('Montant'),
-                Tables\Columns\TextColumn::make('net_amount')->label('Montant percu')->money('usd',true)
+            Tables\Columns\TextColumn::make('mission.mission_numero')->label('Mission'),
+            Tables\Columns\TextColumn::make('net_amount')->label('Montant percu')->money('usd',true)
                 ->summarize([
                     Tables\Columns\Summarizers\Sum::make()
                         ->money(),
@@ -64,17 +71,44 @@ class PaimentList extends Component implements HasForms, HasTable
             Tables\Columns\TextColumn::make('created_at')->label('Date Paiment ')
             ->dateTime()
                 ->sortable()
-                ->toggleable(isToggledHiddenByDefault: true),
+                ->toggleable(isToggledHiddenByDefault: false),
 
 
 
                 //
             ])
             ->filters([
-                //
+            //
+
+            Filter::make('created_at')
+                ->form([
+                    Forms\Components\DatePicker::make('created_from')->label('Du'),
+                    Forms\Components\DatePicker::make('created_until')->label('Au')->default(now()),
+                ])->query(function (Builder $query, array $data): Builder {
+                    return $query
+                        ->when(
+                            $data['created_from'],
+                            fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                        )
+                        ->when(
+                            $data['created_until'],
+                            fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                        );
+                }),
             ])
             ->actions([
-                //
+            //
+            Action::make('voir')
+                //  //->url(fn (transaction $record): string => route('freelance.Order.view', $record->order_numero))
+
+                ->icon('heroicon-s-eye')
+                ->tooltip('Voir'),
+            ])
+            ->headerActions([
+                Action::make('Exporter')
+                    ->url(route('freelance.transaction.export', auth()->id()))
+                    ->icon('heroicon-s-printer'),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
