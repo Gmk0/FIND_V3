@@ -543,8 +543,8 @@
                         @if(Auth::user()->freelance()->exists())
 
 
-                        <a href="{{--route('freelance.dashboard')--}}" @click="navOpen = false"
-                            class="flex flex-row items-center px-4 py-2 text-gray-800 text-md focus:text-gray-900 hover:text-gray-900 focus:outline-none hover:bg-gray-100 focus:bg-gray-100"
+                        <a href="{{route('freelance.dashboard')}}" @click="navOpen = false"
+                            class="flex flex-row font-medium items-center px-4 py-2 text-gray-800 text-md focus:text-gray-900 hover:text-gray-900 focus:outline-none hover:bg-gray-100 focus:bg-gray-100"
                             role="menuitem">
                             <ion-icon name="person-outline" class="w-6 h-6"></ion-icon>
                             <span class="ml-2">{{__('Dashboard Freelance')}}</span>
@@ -552,17 +552,12 @@
                         @endif
 
                         <a href="{{url('/user/messages')}}" @click="navOpen = false"
-                            class="flex flex-row items-center px-4 py-2 text-gray-800 text-md focus:text-gray-900 hover:text-gray-900 focus:outline-none hover:bg-gray-100 focus:bg-gray-100"
+                            class="flex flex-row items-center font-medium px-4 py-2 text-gray-800 text-md focus:text-gray-900 hover:text-gray-900 focus:outline-none hover:bg-gray-100 focus:bg-gray-100"
                             role="menuitem">
                             <ion-icon name="chatbox-outline" class="w-6 h-6"></ion-icon>
                             <span class="ml-2">{{__('Conversation')}}</span>
                         </a>
-                        <a href="{{--route('paiementUser')--}}"
-                            class="flex flex-row items-center px-4 py-2 text-gray-800 text-md focus:text-gray-900 hover:text-gray-900 focus:outline-none hover:bg-gray-100 focus:bg-gray-100"
-                            role="menuitem">
-                            <ion-icon name="cash-outline" class="w-6 h-6"></ion-icon>
-                            <span class="ml-2">{{__('Paiment')}}</span>
-                        </a>
+
 
                         <form method="POST" action="{{ url('/logout') }}" x-data>
                             @csrf

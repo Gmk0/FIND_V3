@@ -70,7 +70,7 @@
         </div>
 
 
-        <div id="features" class=" dark:bg-gray-900">
+        <div id="features" class=" dark:bg-gray-900 bg-white">
 
             <div data-aos="" class="z-10 px-8 py-8 mx-auto overflow-hidden max-w-7xl md:px-6">
                 <div class="flex ">
@@ -222,7 +222,7 @@
     </div>
 
 
-    <div x-show="loading" x-cloak id="monde2" class="lg:min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div x-show="loading" x-cloak id="monde2" class="lg:min-h-screen bg-white dark:bg-gray-900">
 
         <div class="py-16 ">
             <div class="px-6 m-auto text-gray-600 xl:container md:px-12 xl:px-16">
