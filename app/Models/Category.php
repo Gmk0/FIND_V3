@@ -30,6 +30,11 @@ class Category extends Model
         'id' => 'integer',
     ];
 
+
+    public function services()
+    {
+        return $this->hasMany(Service::class);
+    }
     public function freelances(): HasMany
     {
         return $this->hasMany(Freelance::class);

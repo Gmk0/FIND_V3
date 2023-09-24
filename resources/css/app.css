@@ -35,6 +35,40 @@ ol {
 }
 
 
+/* Style the track */
+input[type="range"]::-webkit-slider-runnable-track {
+    @apply w-full h-2 cursor-pointer bg-white rounded;
+}
+
+input[type="range"]::-moz-range-track {
+    @apply w-full h-2 cursor-pointer bg-white rounded;
+}
+
+/* Style the thumb */
+input[type="range"]::-webkit-slider-thumb {
+/* Style the track */
+input[type="range"]::-webkit-slider-runnable-track {
+    @apply w-full h-2 cursor-pointer bg-amber-600 rounded;
+}
+
+input[type="range"]::-moz-range-track {
+    @apply w-full h-2 cursor-pointer bg-amber-600 rounded;
+}
+
+/* Style the thumb */
+input[type="range"]::-webkit-slider-thumb {
+    @apply h-4 w-4 bg-amber-500 cursor-pointer rounded-full appearance-none -mt-1;
+}
+
+input[type="range"]::-moz-range-thumb {
+    @apply h-4 w-4 bg-amber-500 cursor-pointer rounded-full;
+}
+}
+
+input[type="range"]::-moz-range-thumb {
+    @apply h-4 w-4 bg-green-500 cursor-pointer rounded-full;
+}
+
 
 .button-amber {
     --tw-bg-opacity: 1;

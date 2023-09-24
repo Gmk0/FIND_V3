@@ -244,3 +244,14 @@ document.addEventListener('Keydown', (e) => {
         Alpine.navigate(e.target.href);
 
 });
+
+
+  window.addEventListener('gotoTop',function(){
+
+                window.scrollTo({
+                top: 15,
+                left: 15,
+                behaviour: 'smooth'
+                })
+
+    });

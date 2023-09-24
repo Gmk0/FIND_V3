@@ -155,4 +155,8 @@ class Service extends Model
             $service->freelance_id = auth()->user()->freelance->id;
         });
     }
+
+
+
+
 }

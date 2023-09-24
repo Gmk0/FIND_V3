@@ -52,8 +52,6 @@ class UserPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ])->plugin(
-                \Hasnayeen\Themes\ThemesPlugin::make()
-        );
+            ]);
     }
 }

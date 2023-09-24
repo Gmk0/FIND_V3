@@ -106,7 +106,7 @@ implements HasForms
     public function previousPage()
     {
         $this->setPage(max($this->page - 1, 1));
-        $this->emit('gotoTop');
+        $this->dispatch('gotoTop');
     }
     public function render()
     {
