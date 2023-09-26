@@ -85,7 +85,7 @@ export default {
                 "accent-focus": "#4d47f5",
                 navy: navyColor,
                 secondary: colors.slate,
-
+                fila: "#fcf9f6",
                 find: colors.orange,
                 danger: colors.rose,
                 primary: colors.amber,

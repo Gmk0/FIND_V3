@@ -1,4 +1,4 @@
-<div x-data="{showFiltre: false}" class="min-h-screen py-8 px-4 bg-[#fcf9f6] md:pt-4 md:px-8">
+<div x-data="{showFiltre: false}" class="min-h-screen py-8 px-4 bg-fila md:pt-4 md:px-8">
 
     <div class="mx-2">
         @include('include.bread-cumb',['category'=>'category'])

@@ -1,5 +1,5 @@
-<div class="pt-4">
-    <div x-data="{isOpen : false}" class="min-h-screen lg:py-8 md:px-8">
+<div class="">
+    <div x-data="{isOpen : false}" class="min-h-screen lg:py-4 md:px-8">
 
 <div class="px-2">
     @include('include.bread-cumb',['category'=>'cagegory','categoryName'=>$categoryName])
@@ -127,7 +127,7 @@
         <div class="py-2 dark:text-gray-100">
             <div class="container p-6 mx-auto space-y-8 bg-gray-100 dark:bg-gray-800">
 
-                <div class="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-4 lg:grid-cols-5">
+                <div class="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-4 lg:grid-cols-4">
                     @forelse ($services as $service)
 
                     @livewire('web.card.service-card',['service' => $service], key($service->id))

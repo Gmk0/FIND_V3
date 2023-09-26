@@ -37,11 +37,11 @@ ol {
 
 /* Style the track */
 input[type="range"]::-webkit-slider-runnable-track {
-    @apply w-full h-2 cursor-pointer bg-white rounded;
+    @apply w-full h-2 cursor-pointer bg-amber-600 rounded;
 }
 
 input[type="range"]::-moz-range-track {
-    @apply w-full h-2 cursor-pointer bg-white rounded;
+    @apply w-full h-2 cursor-pointer bg-amber-600 rounded;
 }
 
 /* Style the thumb */
@@ -69,6 +69,17 @@ input[type="range"]::-moz-range-thumb {
     @apply h-4 w-4 bg-green-500 cursor-pointer rounded-full;
 }
 
+ #support ul {
+     list-style-type: disc;
+     /* Type de puce */
+     padding-left: 20px;
+     /* Espacement à gauche */
+ }
+
+ #support li {
+     margin-bottom: 5px;
+     /* Espacement entre chaque élément de la liste */
+ }
 
 .button-amber {
     --tw-bg-opacity: 1;

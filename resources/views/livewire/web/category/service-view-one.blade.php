@@ -1,23 +1,7 @@
-@push('style')
 
-<style>
-    #support ul {
-        list-style-type: disc;
-        /* Type de puce */
-        padding-left: 20px;
-        /* Espacement à gauche */
-    }
-
-    #support li {
-        margin-bottom: 5px;
-        /* Espacement entre chaque élément de la liste */
-    }
-</style>
-
-@endpush
 
 <div>
-    <div class="min-h-screen py-2 bg-gray-100 md:px-8 dark:bg-gray-900"
+    <div class="min-h-screen py-2 bg-fila md:px-4 dark:bg-gray-900"
         x-data="{ isOpen:false,contactMe:false,isLoading: true,showFilters: false,showSearch: false }"
         x-init="setTimeout(() => { isLoading = false }, 3000)">
 
@@ -48,257 +32,114 @@
 
         </div>
 
-        <div x-show="!isLoading" x-cloak class="container px-4 py-8 mx-auto">
+        <div x-show="!isLoading" x-cloak class="container px-4 py-4 mx-auto">
 
 
             <div class="flex flex-col md:flex-row md:space-x-8">
 
-                <div class="flex-col mx-2 mb-4 md:flex md:order-2 md:mb-0 md:w-1/3">
-                    <div style="top:8rem; position:sticky;" class="flex flex-col gap-2 px-2 pt-2 card-sticky ">
+                @include('livewire.web.category.header-card')
 
 
-                        <div style="top:8rem; position:sticky;" class="sticky p-2 bg-white shadow-lg dark:bg-gray-800">
-                            <div class="p-3 sm:col-span-8 lg:col-span-7">
-                                <h2 class="text-2xl font-bold text-gray-800 truncate dark:text-gray-300 sm:pr-12">
-                                    {{$service->title}}</h2>
-
-                                <section aria-labelledby="information-heading" class="px-4 mt-1">
-                                    <h3 id="information-heading" class="sr-only">Product information</h3>
-                                    <div class="my-3">
-                                        <h4 class="sr-only">Reviews</h4>
-                                        <div class="flex items-center">
-                                            <div class="flex items-center">
-                                                <svg class="w-4 h-4 mr-1 text-yellow-500 fill-current"
-                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                                    <path
-                                                        d="M10 14.155L4.284 17.84l.828-5.076L.898 7.865l5.059-.736L10 2l2.043 5.129 5.059.736-3.215 3.9.828 5.076z" />
-                                                </svg>
-
-                                                <span
-                                                    class="text-sm font-semibold text-gray-700 dark:text-gray-100">({{$service->averageFeedback()}})
-                                                </span>
-                                            </div>
-
-                                            <p class="sr-only">3 out of 5 stars</p>
-                                            <a href="#"
-                                                class="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">{{$service->orderCount()}}
-                                                reviews</a>
-                                        </div>
-                                    </div>
-
-
-                                    @if (!empty($service->premium_price) && !empty($service->extra_price))
-                                    <div class="mt-4 mb-3 ">
-
-
-                                        <ul
-                                            class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                            <li
-                                                class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                                                <div class="flex items-center pl-3">
-                                                    <input id="horizontal-list-radio-license" type="radio" value="Basic"
-                                                        wire:model.live="level" name="list-radio"
-                                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                                    <label for="horizontal-list-radio-license"
-                                                        class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                                        Basic </label>
-                                                </div>
-                                            </li>
-                                            <li
-                                                class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                                                <div class="flex items-center pl-3">
-                                                    <input id="horizontal-list-radio-id" type="radio" value="Premium"
-                                                        wire:model.live="level" name="list-radio"
-                                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                                    <label for="horizontal-list-radio-id"
-                                                        class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Premium
-                                                    </label>
-                                                </div>
-                                            </li>
-                                            <li
-                                                class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                                                <div class="flex items-center pl-3">
-                                                    <input id="horizontal-list-radio-millitary" type="radio"
-                                                       wire:model.live="level" value="Extra" name="list-radio"
-                                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                                    <label for="horizontal-list-radio-millitary"
-                                                        class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                                        Extra</label>
-                                                </div>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-                                    @endif
-
-                                    <div class="flex gap-2">
-                                        <span class="py-2 text-gray-400">A partir de </span>
-                                        <p class="text-2xl font-bold text-green-500">{{$price}} $</p>
-                                    </div>
-
-                                    <!-- Reviews -->
-                                </section>
-
-                                <section aria-labelledby="options-heading" class="px-4 mt-1">
-                                    <h3 id="options-heading" class="sr-only">Service options</h3>
-
-                                    <div>
-                                        <!-- Colors -->
-                                        <div id="support" class="hidden">
-                                            <h4 class="mb-2 text-lg font-medium text-gray-900 unde dark:text-gray-200">
-                                                Support</h4>
-                                            <div class="px-4">
-                                                <ul class=list-disc>
-                                                    @foreach ($service->basic_support as $key=>$value)
-                                                    <li>{{$value}}</li>
-                                                    @endforeach
-
-                                                </ul>
-
-                                            </div>
-                                        </div>
-
-
-                                        <!-- Sizes -->
-
-                                        <div class="flex">
-                                            <button wire:click="add_cart()" type="button" id=""
-                                                class="flex items-center justify-center w-full gap-1 px-8 py-3 mt-4 text-base font-medium text-white bg-indigo-600 border border-transparent hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-                                                </svg>
-
-                                                <span wire:loading.remove wire:target='add_cart'>Ajouter
-                                                    au Panier</span>
-                                                <span wire:loading wire:target='add_cart'>Ajout...
-                                                </span>
-                                            </button>
-                                        </div>
-
-                                        <div class="flex justify-between mt-3">
-                                            <div x-data="{ like: @json($service->isFavorite()) }"
-                                                class="flex items-center">
-                                                <button class="flex gap-1 mr-2" x-on:click="like=!like"
-                                                    @click="$wire.toogleFavorite({{$service->id}})">
-
-
-                                                    <span x-cloak x-show="!like" class="">
-                                                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
-                                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                stroke-width="2"
-                                                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                                        </svg>
-
-                                                    </span>
-                                                    <span x-cloak x-show="like">
-                                                        <svg class="w-5 h-5 text-red-500"
-                                                            xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                            viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                stroke-width="2"
-                                                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                                        </svg>
-                                                    </span>
-                                                    <span x-show="!like" class="text-sm"> a jouter aux favoris</span>
-                                                    <span x-show="like" class="text-sm"> retirer de favoris</span>
-
-                                                </button>
-
-
-
-                                            </div>
-                                            <div>
-                                                <ul x-data="{ input: '{{ route('ServicesViewOne', ['service_numero' => $service->service_numero, 'category' => $service->category->name]) }}' }" class="z-50 flex gap-2 text-sm text-gray-300">
-
-
-                                                    <x-dropdown>
-                                                        <x-slot name="trigger">
-                                                            <button type="button" class="flex gap-1 cursor-pointer">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                                    viewBox="0 0 24 24" stroke-width="1.5"
-                                                                    stroke="currentColor" class="w-5 h-5">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                                        d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
-                                                                </svg>
-                                                                <span class="text-sm">Share</span>
-                                                            </button>
-                                                        </x-slot>
-
-                                                        <x-dropdown.item icon="hashtag" label="Facebook" />
-                                                        <x-dropdown.item @click="$clipboard(input)" icon="clipboard" separator label="Copier Lien" />
-
-                                                    </x-dropdown>
-
-
-
-
-                                                </ul>
-                                            </div>
-                                        </div>
-
-
-
-
-                                    </div>
-                                </section>
-                            </div>
-
-                            <div  class="flex gap-2 p-6 bg-white rounded-lg dark:bg-gray-800">
-
-
-
-
-
-                                <div>
-
-                                <x-filament::button x-on:click="contactMe = !contactMe" color="success">
-                                    Message
-                                </x-filament::button>
-
-
-                                </div>
-                                <div class="hidden">
-                                    <x-button primary x-on:click="isOpen=true" x-on:click="$openModal('modal')" label="Recommander" success
-                                        spinner="recommander" />
-
-                                </div>
-
-
-                            </div>
-                        </div>
-
-
-                    </div>
-
-
-
-                </div>
                 <div x-data="{step:1, showExemple:false}" class="w-full md:w-2/3">
-                    <div class="p-6 bg-white rounded-lg shadow-lg dark:bg-gray-800">
+                    <div class="p-4 dark:bg-gray-800">
+                        <div class="flex flex-col mb-4">
+
+                            <div>
+                                <p class="mb-4 text-lg font-bold text-gray-700 md:text-xl dark:text-gray-200">
+                                    {{$service->title}}
+                                </p>
+
+                            </div>
 
 
-                        <div x-data="{ image: @entangle('images') }" class="flex flex-col items-center justify-center">
+                        <div class="flex gap-4 mt-2">
+                            @component("components.user-photo" ,['user'=>$service->freelance->user,'taille'=>18])
+                            @endcomponent
+                            <div class="flex flex-col gap-3 my-auto">
+                                <a class="text-base font-medium text-gray-500 underline">Georges</a>
+                                <div class="flex flex-row gap-2">
+                                    <span class="text-base font-medium">3(20)</span>
+                                    <span class="text-base font-medium">3 commande en cours</span>
+                                </div>
+
+                            </div>
+
+                        </div>
 
 
-                            <img x-bind:src="'/storage/' + image"
-                                class="object-contain  w-full mr-4 rounded-md max:h-[100px]" alt="Product Name">
 
-                            <div class="flex justify-between mt-4 space-x-2 items-cetnter">
-                                @foreach ($service->files as $key=>$value)
-                                <img @click="image = '{{$value}}'" src="{{ url('/storage/' . $value) }}"
-                                    alt="Product Name"
-                                    class="w-24 h-24 border rounded-lg cursor-pointer 2xl:w-24 hover:opacity-80">
-                                @endforeach
+                        </div>
 
+
+
+
+
+
+
+                       {{-- <div x-data="{ activeImage: 0, images: {{ json_encode($service->files) }} }"
+                            class="relative flex flex-col items-center justify-center transition-all duration-300 group hover:bg-opacity-90">
+
+                            <!-- Display the active image -->
+                            <div class="w-full">
+                                <template x-for="(img, index) in images" :key="index">
+                                    <img x-show="activeImage === index" :src="'/storage/' + img"
+                                        class="object-contain w-full bg-center rounded-md lg:w-10/12 h-10/12" alt="Product Name">
+                                </template>
+                            </div>
+
+                            <!-- Thumbnails (hidden on mobile) -->
+                            <div class="items-center justify-between hidden mt-4 space-x-2 md:flex">
+                                <template x-for="(img, index) in images" :key="index">
+                                    <img @click="activeImage = index" :src="'/storage/' + img" alt="Product Name"
+                                        class="border rounded-lg cursor-pointer w-18 h-18 2xl:w-24 hover:opacity-80">
+                                </template>
+                            </div>
+
+                            <!-- Dots (visible only on mobile) -->
+                            <div class="flex justify-center mt-4 space-x-2 md:hidden">
+                                <template x-for="(img, index) in images" :key="index">
+                                    <span @click="activeImage = index" class="w-3 h-3 bg-gray-400 rounded-full cursor-pointer hover:bg-gray-500"
+                                        x-bind:class="activeImage === index ? 'bg-gray-600' : ''"></span>
+                                </template>
+                            </div>
+
+                            <!-- Navigation buttons -->
+                            <template x-if="images.length > 1">
+                                <div>
+                                    <button @click="activeImage = activeImage === 0 ? images.length - 1 : activeImage - 1"
+                                        class="absolute left-0 transition-opacity duration-300 transform -translate-y-1/2 opacity-0 top-1/2 group-hover:opacity-100">Previous</button>
+                                    <button @click="activeImage = activeImage === images.length - 1 ? 0 : activeImage + 1"
+                                        class="absolute transition-opacity duration-300 transform -translate-y-1/2 opacity-0 right-4 top-1/2 group-hover:opacity-100">Next</button>
+                                </div>
+                            </template>
+                        </div>--}}
+
+                        <div class="">
+                            <div x-init="$nextTick(()=>$el._x_swiper = new Swiper($el,{ navigation: {prevEl: '.swiper-button-prev', nextEl: '.swiper-button-next'}, pagination: { el: '.swiper-pagination',type: 'progressbar'},lazy: true,}))"
+                                class="w-10/12 rounded-lg swiper">
+                                <div class="swiper-wrapper">
+
+                                    @foreach($service->files as $key=> $image)
+
+
+                                    <div class="p-2 swiper-slide">
+                                        <img class="object-fill rounded-md h-10/12 swiper-lazy" src="{{Storage::disk('local')->url($image) }}"
+                                            alt="" />
+                                        <div class="hidden swiper-lazy-preloader"></div>
+                                    </div>
+                                    @endforeach
+
+
+                                </div>
+                                <div class="swiper-pagination"></div>
+                                <div class="swiper-button-next btn2"></div>
+                                <div class="swiper-button-prev btn2"></div>
                             </div>
                         </div>
 
 
 
-                        <div>
+                        <div class="hidden">
                             <p class="mt-4 text-lg font-bold text-gray-800 md:text-2xl dark:text-gray-200">
                                 {{$service->title}}</p>
 
@@ -316,17 +157,11 @@
                             <a @click="step = 2" :class="step == 2 ? 'tab-active':''"
                                 class="tab md:tab-lg tab-bordered ">Example </a>
 
-                            @if(!empty($service->premium_support) &&
-                            !empty($service->premium_price) &&
-                            !empty($service->premium_delivery_time))
-                            <a @click="step = 3" :class="step == 3 ? 'tab-active':''"
-                                class="tab md:tab-lg tab-bordered ">Comparaison </a>
 
-                            @endif
 
 
                             <a @click="step = 4" :class="step == 4 ? 'tab-active':''"
-                                class="tab md:tab-lg tab-bordered">Review</a>
+                                class="tab md:tab-lg tab-bordered">Commentaires</a>
                         </div>
 
 
@@ -336,7 +171,7 @@
 
 
                         <div x-show.transition="step==1" class="py-5 min-h-64">
-                            <div class="mb-4 text-sm text-gray-800 md:text-base dark:text-gray-200">
+                            <div class="mb-4 text-base text-gray-800 md:text-base dark:text-gray-200">
 
 
                                 {!! $service->description !!}
@@ -363,17 +198,14 @@
 
                                 </div>
 
-                                <div>
-                                    <p class="font-bold text-gray-500 dark:text-gray-200">Révision :</p>
-                                    <p class="text-gray-700 dark:text-gray-300">{{$service->basic_revision}}</p>
-                                </div>
+
                             </div>
 
-                            <div class="grid grid-cols-2 gap-4 mb-4">
+                            <div class="grid hidden grid-cols-2 gap-4 mb-4">
                                 <div>
                                     <p class="font-bold text-gray-500 dark:text-gray-200">Prix :</p>
                                     <p class="px-2 mt-2 text-gray-700 dark:text-gray-300">à partir de
-                                        <span>{{$service->price()}}</span>
+                                        <span class="text-lg text-green-700">{{$service->price()}}</span>
                                     </p>
                                 </div>
                                 <div>
@@ -393,6 +225,15 @@
                                 @endif
 
                             </div>
+                            <div class="grid grid-cols-2 gap-4 mb-6">
+                                    <div>
+                                    <p class="font-bold text-gray-500 dark:text-gray-200">Besoin pour ce service :</p>
+                                     {!! $service->need_service !!}
+                                    </div>
+                            </div>
+
+
+                            @include('livewire.web.category.level')
                         </div>
 
 
@@ -400,363 +241,21 @@
 
                         <div x-show.transition="step==2" class="py-5 min-h-72">
 
+                            <div></div>
 
-                            {!! $service->samples !!}
-
-                        </div>
-
-
-                        @if(!empty($service->premium_support) &&
-                        !empty($service->premium_price) &&
-                        !empty($service->premium_delivery_time))
-                        <div x-show.transition="step==3" class="py-5 min-h-72">
-
-
-                            <div class="py-10 bg-gray-100 dark:bg-gray-900">
-                                <div class="container px-4 mx-auto">
-                                    <h2 class="mb-4 text-2xl font-semibold text-gray-800">Comparaison de Support</h2>
-                                    <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
-                                        <!-- Basic -->
-                                        <div class="p-6 bg-white rounded-lg shadow-md">
-                                            <div class="flex items-center justify-center mb-4">
-                                                <svg class="w-8 h-8 mr-2 text-blue-500" fill="none"
-                                                    stroke="currentColor" viewBox="0 0 24 24"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M4.732 4.732l14.536 14.536M19.268 4.732L4.732 19.268" />
-                                                </svg>
-                                                <h3 class="text-xl font-semibold text-gray-800">Basic</h3>
-                                            </div>
-                                            <ul class="text-gray-700">
-
-                                                @foreach ($service->basic_support as $key=>$value)
-
-                                                <li class="flex items-center mb-2">
-                                                    <svg class="flex-shrink-0 w-4 h-4 mr-2 text-green-500 dark:text-green-400"
-                                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                        fill="currentColor" viewBox="0 0 20 20">
-                                                        <path
-                                                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                                                    </svg>
-
-                                                    <span class="text-gray-600 dark:text-gray-200">{{$value}}</span>
-                                                </li>
-                                                @endforeach
-                                                @if(!empty($service->premium_support) &&
-                                                !empty($service->premium_price) &&
-                                                !empty($service->premium_delivery_time))
-                                                @forelse ($service->premium_support as $key=>$value)
-
-                                                <li class="flex items-center mb-2">
-                                                    <svg fill="#f00000" class="w-4 h-6 mr-2" version="1.1" id="Layer_1"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"
-                                                        xml:space="preserve">
-                                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
-                                                            stroke-linejoin="round"></g>
-                                                        <g id="SVGRepo_iconCarrier">
-                                                            <g>
-                                                                <g>
-                                                                    <g>
-                                                                        <path
-                                                                            d="M437.016,74.984c-99.979-99.979-262.075-99.979-362.033,0.002c-99.978,99.978-99.978,262.073,0.004,362.031 c99.954,99.978,262.05,99.978,362.029-0.002C536.995,337.059,536.995,174.964,437.016,74.984z M406.848,406.844 c-83.318,83.318-218.396,83.318-301.691,0.004c-83.318-83.299-83.318-218.377-0.002-301.693 c83.297-83.317,218.375-83.317,301.691,0S490.162,323.549,406.848,406.844z">
-                                                                        </path>
-                                                                        <path
-                                                                            d="M361.592,150.408c-8.331-8.331-21.839-8.331-30.17,0l-75.425,75.425l-75.425-75.425c-8.331-8.331-21.839-8.331-30.17,0 s-8.331,21.839,0,30.17l75.425,75.425L150.43,331.4c-8.331,8.331-8.331,21.839,0,30.17c8.331,8.331,21.839,8.331,30.17,0 l75.397-75.397l75.419,75.419c8.331,8.331,21.839,8.331,30.17,0c8.331-8.331,8.331-21.839,0-30.17l-75.419-75.419l75.425-75.425 C369.923,172.247,369.923,158.74,361.592,150.408z">
-                                                                        </path>
-                                                                    </g>
-                                                                </g>
-                                                            </g>
-                                                        </g>
-                                                    </svg>
-                                                    <span class="text-gray-600 dark:text-gray-200">{{$value}}</span>
-
-
-                                                </li>
-                                                @empty
-                                                @endforelse
-                                                @endif
-
-                                                @if(!empty($service->extra_support) &&
-                                                !empty($service->extra_price) &&
-                                                !empty($service->extra_delivery_time))
-                                                @forelse ($service->extra_support as $key=>$value)
-
-                                                <li class="flex items-center mb-2">
-                                                    <svg fill="#f00000" class="w-4 h-6 mr-2" version="1.1" id="Layer_1"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"
-                                                        xml:space="preserve">
-                                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
-                                                            stroke-linejoin="round"></g>
-                                                        <g id="SVGRepo_iconCarrier">
-                                                            <g>
-                                                                <g>
-                                                                    <g>
-                                                                        <path
-                                                                            d="M437.016,74.984c-99.979-99.979-262.075-99.979-362.033,0.002c-99.978,99.978-99.978,262.073,0.004,362.031 c99.954,99.978,262.05,99.978,362.029-0.002C536.995,337.059,536.995,174.964,437.016,74.984z M406.848,406.844 c-83.318,83.318-218.396,83.318-301.691,0.004c-83.318-83.299-83.318-218.377-0.002-301.693 c83.297-83.317,218.375-83.317,301.691,0S490.162,323.549,406.848,406.844z">
-                                                                        </path>
-                                                                        <path
-                                                                            d="M361.592,150.408c-8.331-8.331-21.839-8.331-30.17,0l-75.425,75.425l-75.425-75.425c-8.331-8.331-21.839-8.331-30.17,0 s-8.331,21.839,0,30.17l75.425,75.425L150.43,331.4c-8.331,8.331-8.331,21.839,0,30.17c8.331,8.331,21.839,8.331,30.17,0 l75.397-75.397l75.419,75.419c8.331,8.331,21.839,8.331,30.17,0c8.331-8.331,8.331-21.839,0-30.17l-75.419-75.419l75.425-75.425 C369.923,172.247,369.923,158.74,361.592,150.408z">
-                                                                        </path>
-                                                                    </g>
-                                                                </g>
-                                                            </g>
-                                                        </g>
-                                                    </svg>
-
-                                                    <span class="text-gray-600 dark:text-gray-200">{{$value}}</span>
-                                                </li>
-                                                @empty
-                                                @endforelse
-
-                                                @endif
-
-
-
-
-                                                <li class="flex items-center mb-2">
-                                                    <svg class="w-5 h-5 mr-2 text-blue-500" fill="none"
-                                                        stroke="currentColor" viewBox="0 0 24 24"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                                    </svg>
-                                                    <span class="text-gray-400 dark:text-gray-200">Delai :
-                                                        {{$service->basic_delivery_time}}-{{$service->delivery_time_unit?$service->delivery_time_unit:'jours'}}</span>
-                                                </li>
-
-
-                                            </ul>
-                                            <div class="mt-6">
-                                                <span
-                                                    class="text-2xl font-semibold text-gray-800">{{$service->basic_price}}
-                                                    $</span>
-                                            </div>
-                                            <button type="button" wire:click="addBasic()"
-                                                class="flex items-center justify-center w-full gap-1 px-5 py-2 mt-4 text-base font-medium text-white bg-indigo-600 border border-transparent hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Choisir</button>
-                                        </div>
-
-                                        <!-- Extra -->
-
-
-                                        @if(!empty($service->extra_support) &&
-                                        !empty($service->extra_price) &&
-                                        !empty($service->extra_delivery_time))
-                                        <div class="p-6 bg-white rounded-lg shadow-md">
-                                            <div class="flex items-center justify-center mb-4">
-                                                <svg class="w-8 h-8 mr-2 text-green-500" fill="none"
-                                                    stroke="currentColor" viewBox="0 0 24 24"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M4.732 4.732l14.536 14.536M19.268 4.732L4.732 19.268" />
-                                                </svg>
-                                                <h3 class="text-xl font-semibold text-gray-800">Extra</h3>
-                                            </div>
-                                            <ul class="text-gray-700">
-                                                @foreach ($service->basic_support as $key=>$value)
-
-                                                <li class="flex items-center mb-2">
-                                                    <svg class="flex-shrink-0 w-4 h-4 mr-2 text-green-500 dark:text-green-400"
-                                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                        fill="currentColor" viewBox="0 0 20 20">
-                                                        <path
-                                                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                                                    </svg>
-
-                                                    <span class="text-gray-600 dark:text-gray-200">{{$value}}</span>
-                                                </li>
-                                                @endforeach
-                                                @if(!empty($service->premium_support) &&
-                                                !empty($service->premium_price) &&
-                                                !empty($service->premium_delivery_time))
-                                                @forelse ($service->premium_support as $key=>$value)
-
-                                                <li class="flex items-center mb-2">
-                                                    <svg class="flex-shrink-0 w-4 h-4 mr-2 text-green-500 dark:text-green-400"
-                                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                        fill="currentColor" viewBox="0 0 20 20">
-                                                        <path
-                                                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                                                    </svg>
-                                                    <span class="text-gray-600 dark:text-gray-200">{{$value}}</span>
-
-
-                                                </li>
-                                                @empty
-                                                @endforelse
-                                                @endif
-
-                                                @if(!empty($service->extra_support) &&
-                                                !empty($service->extra_price) &&
-                                                !empty($service->extra_delivery_time))
-                                                @forelse ($service->extra_support as $key=>$value)
-
-                                                <li class="flex items-center mb-2">
-                                                    <svg fill="#f00000" class="w-4 h-6 mr-2" version="1.1" id="Layer_1"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"
-                                                        xml:space="preserve">
-                                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
-                                                            stroke-linejoin="round"></g>
-                                                        <g id="SVGRepo_iconCarrier">
-                                                            <g>
-                                                                <g>
-                                                                    <g>
-                                                                        <path
-                                                                            d="M437.016,74.984c-99.979-99.979-262.075-99.979-362.033,0.002c-99.978,99.978-99.978,262.073,0.004,362.031 c99.954,99.978,262.05,99.978,362.029-0.002C536.995,337.059,536.995,174.964,437.016,74.984z M406.848,406.844 c-83.318,83.318-218.396,83.318-301.691,0.004c-83.318-83.299-83.318-218.377-0.002-301.693 c83.297-83.317,218.375-83.317,301.691,0S490.162,323.549,406.848,406.844z">
-                                                                        </path>
-                                                                        <path
-                                                                            d="M361.592,150.408c-8.331-8.331-21.839-8.331-30.17,0l-75.425,75.425l-75.425-75.425c-8.331-8.331-21.839-8.331-30.17,0 s-8.331,21.839,0,30.17l75.425,75.425L150.43,331.4c-8.331,8.331-8.331,21.839,0,30.17c8.331,8.331,21.839,8.331,30.17,0 l75.397-75.397l75.419,75.419c8.331,8.331,21.839,8.331,30.17,0c8.331-8.331,8.331-21.839,0-30.17l-75.419-75.419l75.425-75.425 C369.923,172.247,369.923,158.74,361.592,150.408z">
-                                                                        </path>
-                                                                    </g>
-                                                                </g>
-                                                            </g>
-                                                        </g>
-                                                    </svg>
-
-                                                    <span class="text-gray-600 dark:text-gray-200">{{$value}}</span>
-                                                </li>
-                                                @empty
-                                                @endforelse
-
-                                                @endif
-                                                <li class="flex items-center mb-2">
-                                                    <svg class="w-5 h-5 mr-2 text-blue-500" fill="none"
-                                                        stroke="currentColor" viewBox="0 0 24 24"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                                    </svg>
-                                                    <span class="text-gray-400 dark:text-gray-200">Delai :
-                                                        {{$service->premium_delivery_time}} jours</span>
-                                                </li>
-
-
-                                            </ul>
-                                            <div class="mt-6">
-                                                <span
-                                                    class="text-2xl font-semibold text-gray-800">{{$service->premium_price}}
-                                                    $</span>
-                                            </div>
-                                            <button type="button" wire:click="addPremium()"
-                                                class="flex items-center justify-center w-full gap-1 px-5 py-2 mt-4 text-base font-medium text-white bg-indigo-600 border border-transparent hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Choisir</button>
-                                        </div>
-
-                                        @endif
-
-                                        <!-- Premium -->
-
-                                        @if(!empty($service->premium_support) &&
-                                        !empty($service->premium_price) &&
-                                        !empty($service->premium_delivery_time))
-                                        <div class="p-6 bg-white rounded-lg shadow-md">
-                                            <div class="flex items-center justify-center mb-4">
-                                                <svg class="w-8 h-8 mr-2 text-red-500" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M4.732 4.732l14.536 14.536M19.268 4.732L4.732 19.268" />
-                                                </svg>
-                                                <h3 class="text-xl font-semibold text-gray-800">Premium</h3>
-                                            </div>
-                                            <ul class="text-gray-700">
-                                                @foreach ($service->basic_support as $key=>$value)
-
-                                                <li class="flex items-center mb-2">
-                                                    <svg class="flex-shrink-0 w-4 h-4 mr-2 text-green-500 dark:text-green-400"
-                                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                        fill="currentColor" viewBox="0 0 20 20">
-                                                        <path
-                                                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                                                    </svg>
-
-                                                    <span class="text-gray-600 dark:text-gray-200">{{$value}}</span>
-                                                </li>
-                                                @endforeach
-                                                @forelse ($service->premium_support as $key=>$value)
-
-                                                <li class="flex items-center mb-2">
-                                                    <svg class="flex-shrink-0 w-4 h-4 mr-2 text-green-500 dark:text-green-400"
-                                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                        fill="currentColor" viewBox="0 0 20 20">
-                                                        <path
-                                                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                                                    </svg>
-                                                    <span class="text-gray-600 dark:text-gray-200">{{$value}}</span>
-
-
-                                                </li>
-
-                                                @empty
-
-                                                @endforelse
-                                                @forelse ($service->extra_support as $key=>$value)
-
-                                                <li class="flex items-center mb-2">
-
-                                                    <svg class="flex-shrink-0 w-4 h-4 mr-2 text-green-500 dark:text-green-400"
-                                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                        fill="currentColor" viewBox="0 0 20 20">
-                                                        <path
-                                                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                                                    </svg>
-                                                    <span class="text-gray-600 dark:text-gray-200">{{$value}}</span>
-                                                </li>
-                                                @empty
-                                                @endforelse
-
-
-
-
-                                                <li class="flex items-center mb-2">
-                                                    <svg class="w-5 h-5 mr-2 text-blue-500" fill="none"
-                                                        stroke="currentColor" viewBox="0 0 24 24"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                                    </svg>
-                                                    <span class="text-gray-400 dark:text-gray-200">Delai :
-                                                        {{$service->extra_delivery_time}} jours</span>
-                                                </li>
-
-
-                                            </ul>
-                                            <div class="mt-6">
-                                                <span
-                                                    class="text-2xl font-semibold text-gray-800">{{$service->extra_price}}
-                                                    $</span>
-                                            </div>
-                                            <button type="button" wire:click="addExtra()"
-                                                class="flex items-center justify-center w-full gap-1 px-5 py-2 mt-4 text-base font-medium text-white bg-indigo-600 border border-transparent hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Choisir</button>
-                                        </div>
-
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
+                            {!! $service->example !!}
 
                         </div>
 
-                        @endif
+
+
 
 
                         <div x-show.transition="step==4" class="py-5 min-h-72">
 
 
                             @if(!empty($service->orders))
-                            @foreach ($commentaires as $commentaire)
+                            @forelse ($commentaires as $commentaire)
 
                             @if ($loop->index < 6) <div class="p-4 mb-4 bg-gray-100 rounded-lg dark:bg-gray-600">
 
@@ -784,7 +283,15 @@
                         </div>
 
                         @endif
-                        @endforeach
+                        @empty
+
+                        <div class="p-4 mb-4 bg-gray-100 rounded-lg dark:bg-gray-700">
+                            <p class="text-sm text-gray-700 md:text-base dark:text-gray-300">
+                                Pas de commentaires .</p>
+
+                        </div>
+
+                        @endforelse
 
 
                         @else
@@ -805,13 +312,13 @@
                     </div>
 
 
-                    <div class="">
-                        <p class="mb-4 text-lg font-bold text-gray-800 dark:text-gray-200">À propos du freelance
+                    <div class="px-4">
+                        <p class="mb-4 text-lg font-medium text-gray-800 dark:text-gray-200">À propos du freelance
                         </p>
                         <div class="flex items-center gap-4 mb-8">
 
 
-                            @component("components.user-photo" ,['user'=>$service->freelance->user])
+                            @component("components.user-photo" ,['user'=>$service->freelance->user,'taille'=>18])
                             @endcomponent
 
 
@@ -873,7 +380,7 @@
 
 
 <div x-show="contactMe" x-cloak
-class="fixed bottom-[4rem] top-[8rem] left-[2rem] sm:top-1/2 sm:left-1/2 transform sm:-translate-x-1/2 sm:-translate-y-1/2 md:top-[8rem] md:left-[2rem] md:transform-none z-[85] flex flex-col bg-white dark:bg-gray-900 shadow-lg bg-opacity-20"
+        class="fixed bottom-[4rem] top-[8rem] left-[2rem] sm:top-1/2 sm:left-1/2 transform sm:-translate-x-1/2 sm:-translate-y-1/2 md:top-[8rem] md:left-[2rem] md:transform-none z-[85] flex flex-col bg-white dark:bg-gray-900 shadow-lg bg-opacity-20"
     x-transition:enter="transition ease-out duration-300"
     x-transition:enter-start="opacity-0 transform -translate-x-full"
     x-transition:enter-end="opacity-100 transform -translate-x-0" x-transition:leave="transition ease-in duration-300"

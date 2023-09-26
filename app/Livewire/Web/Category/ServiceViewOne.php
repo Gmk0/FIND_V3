@@ -240,11 +240,8 @@ implements HasForms, HasActions
         $cart = new Cart($oldCart);
         $cart->add($items, $items->id, $this->images, $this->service->basic_price);
         Session::put('cart', $cart);
-        $this->emit('refreshComponent');
-        $this->notification()->success(
-            $title = "le Service a ete ajouté dans le panier",
+        $this->dispatch('refreshComponent');
 
-        );
         $this->dispatch('notify', ['message' => "Service ajouter dans le panier", 'icon' => 'success',]);
 
     }
@@ -257,11 +254,8 @@ implements HasForms, HasActions
         $cart = new Cart($oldCart);
         $cart->add($items, $items->id, $this->images, $this->service->premium_price, 'Premium');
         Session::put('cart', $cart);
-        $this->emit('refreshComponent');
-        $this->notification()->success(
-            $title = "le Service a ete ajouté dans le panier",
+        $this->dispatch('refreshComponent');
 
-        );
 
         $this->dispatch('notify', ['message' => "Service ajouter dans le panier", 'icon' => 'success',]);
 
@@ -274,11 +268,8 @@ implements HasForms, HasActions
         $cart = new Cart($oldCart);
         $cart->add($items, $items->id, $this->images, $this->service->extra_price, 'Extra');
         Session::put('cart', $cart);
-        $this->emit('refreshComponent');
-        $this->notification()->success(
-            $title = "le Service a ete ajouté dans le panier",
+        $this->dispatch('refreshComponent');
 
-        );
         $this->dispatch('notify', ['message' => "Service ajouter dans le panier", 'icon' => 'success',]);
 
     }
