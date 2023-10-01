@@ -5,8 +5,8 @@
 
         <div id="">
 
-            <div x-cloak x-show="!loading" class="relative h-24">
-                <img class="w-full h-full object-cover opacity-70" src="/test/assets/images/cat-women2.jpg" alt="Women"
+            <div x-cloak x-show="!loading" class="relative bg-skin-fill h-24">
+                <img class="w-full h-full object-cover opacity-70" src="" alt="Women"
                     title="" />
                 <div class="absolute inset-0 flex items-center justify-center">
                     <h1 class="text-4xl font-bold text-white">{{$categoryName}}</h1>
