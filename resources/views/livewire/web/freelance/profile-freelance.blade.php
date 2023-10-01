@@ -1,4 +1,4 @@
-<div class="min-h-screen">
+<div class="min-h-screen pt-16">
     <div class="flex flex-col h-full bg-gray-100 dark:bg-gray-900 lg:flex-row">
 
 
@@ -177,7 +177,9 @@
 
 
                                 @forelse ($subCategories as $subCategory)
-                                @if ($loop->index < 5) <span data-tooltip-target="{{$subCategory->id}}"
+                                @if ($loop->index < 5) 
+                                
+                                <span data-tooltip-target="{{$subCategory->id}}"
                                     class="items-center py-1 cursor-default px-2 rounded-md text-[12px] lg:text-[14px] font-medium border border-secondary-200 shadow-sm bg-secondary-100 text-secondary-700 dark:bg-secondary-700 dark:text-secondary-400 dark:border-none">
                                     {{$subCategory->name}}
                                     </span>
@@ -598,6 +600,7 @@
 
 
                 <div class="grid grid-cols-1 gap-4 ">
+                    @empty(!$freelance->realisations)
                     @foreach($freelance->realisations as $realisation)
                     <div class="p-4 bg-white rounded-md shadow">
                         <div class="flex flex-row gap-2 p-4 mb-4">
@@ -626,6 +629,7 @@
                         </div>
                     </div>
                     @endforeach
+                    @endempty
                 </div>
             </section>
 

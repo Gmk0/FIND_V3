@@ -1,4 +1,4 @@
-<div class="min-h-screen px-4 mx-auto max-w-7xl lg:px-8">
+<div class="min-h-screen pt-16 mx-auto max-w-7xl lg:px-8">
 
     <section x-data="{
                                   faqs: [
@@ -55,7 +55,7 @@
                                       },
                                   ]
                               }"
-        class="relative z-20 overflow-hidden bg-gray-100 dark:bg-gray-900 pt-8 pb-12  lg:pb-[90px]">
+        class="relative  overflow-hidden bg-gray-100 dark:bg-gray-900 pt-8 pb-12  lg:pb-[90px]">
         <div class="container px-4 mx-auto">
             <div class="flex flex-wrap -mx-4">
                 <div class="w-full px-4">

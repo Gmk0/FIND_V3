@@ -1,4 +1,4 @@
-<div class="relative min-h-screen pt-8 pb-8 bg-gray-100 dark:bg-gray-900">
+<div class="relative min-h-screen pt-16 pb-8 bg-gray-100 dark:bg-gray-900">
     <div class="max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
         <div class="lg:text-center">
             <h2 class="text-base font-semibold tracking-wide uppercase text-amber-600">À Propos de FIND</h2>

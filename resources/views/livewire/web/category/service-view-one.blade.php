@@ -1,7 +1,7 @@
 
 
 <div>
-    <div class="min-h-screen py-2 bg-fila md:px-4 dark:bg-gray-900"
+    <div class="min-h-screen py-2 bg-gray-50 md:px-4 dark:bg-gray-900"
         x-data="{ isOpen:false,contactMe:false,isLoading: true,showFilters: false,showSearch: false }"
         x-init="setTimeout(() => { isLoading = false }, 3000)">
 
@@ -56,10 +56,17 @@
                             @component("components.user-photo" ,['user'=>$service->freelance->user,'taille'=>18])
                             @endcomponent
                             <div class="flex flex-col gap-3 my-auto">
-                                <a class="text-base font-medium text-gray-500 underline">Georges</a>
+                                <a class="text-base font-medium text-gray-500 underline">{{$service->freelance->user->name}}</a>
                                 <div class="flex flex-row gap-2">
-                                    <span class="text-base font-medium">3(20)</span>
-                                    <span class="text-base font-medium">3 commande en cours</span>
+
+                                    <span class="text-base font-medium">Niveau {{$service->freelance->level}}
+                                        @if($commandeFinis)
+                                        ({{$commandeFinis}})
+                                        @endif
+                                    </span>
+                                    @if($commandeEncours)
+                                    <span class="text-base font-medium">{{$commandeEncours}} commande en cours</span>
+                                    @endif
                                 </div>
 
                             </div>

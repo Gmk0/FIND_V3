@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 class HeaderWeb extends Component
 {
     public $products;
+    public $isHome =false;
     protected $listeners = ['refreshComponent' => 'refresh'];
 
     public function refresh()
@@ -21,6 +22,7 @@ class HeaderWeb extends Component
 
     public function mount()
     {
+        $this->isHome = request()->routeIs('home');
     }
 
     public function render()

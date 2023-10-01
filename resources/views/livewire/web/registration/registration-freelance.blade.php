@@ -1,7 +1,7 @@
-<div class="min-h-screen border-t border-gray-100" x-data="{step: @entangle('step') }" x-cloak>
+<div class="min-h-screen pt-16 relative border-t border-gray-100" x-data="{step: @entangle('step') }" x-cloak>
 
     <div>
-        <header class="bg-white shadow dark:bg-gray-800">
+        <header class="bg-white top-0 lg:relative sticky lg:z-0 z-[60] shadow dark:bg-gray-800">
             <div class="px-4 py-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="flex flex-col justify-between md:flex-row md:items-center">
                     <ul class="items-center justify-around hidden gap-6 lg:flex">
@@ -57,7 +57,7 @@
 
 
 
-                    <div class="block mb-2 rounded-lg dark:bg-gray-800 dark:p-3 lg:hidden">
+                    <div class="block mb-2 rounded-lg  dark:bg-gray-800 dark:p-3 lg:hidden">
                         <div class="mb-1 text-xs font-bold leading-tight tracking-wide uppercase text-dark"
                             x-text="`Etape: ${step} of 5`"></div>
 
@@ -314,13 +314,18 @@
 
 
 
+                                    <x-select class="w-full" wire:model.live="localisation.ville" placeholder="Ville"
+                                        :async-data="route('api.city')" option-label="ville" option-value="ville" />
+
+
+                                        <x-input id="name" placeholder="{{__('commune')}}" type="text" wire:model='localisation.commune' />
 
                                     <x-input id="name" placeholder="{{__('avenue')}}" type="text"
                                         wire:model='localisation.avenue' />
-                                    <x-input id="name" placeholder="{{__('commune')}}" type="text"
-                                        wire:model='localisation.commune' />
-                                    <x-input id="name" placeholder="{{__('ville')}}" type="text"
-                                        wire:model='localisation.ville' />
+
+
+
+
 
 
 

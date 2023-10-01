@@ -9,7 +9,7 @@ use App\Models\{Category, FeedbackService, Service, SubCategory};
 use Livewire\WithPagination;
 
 #[Layout('layouts.web-layout')]
-#[Title('Creer missiion')]
+#[Title('Categories')]
 
 class CategoryName extends Component
 {
@@ -32,7 +32,7 @@ class CategoryName extends Component
     {
         $this->setPage($this->page + 1);
 
-        dd('lolo');
+
         $this->dispatch('gotoTop');
     }
 
@@ -58,7 +58,7 @@ class CategoryName extends Component
 
     public function render()
     {
-        $query = Service::query();
+
 
         // Apply search filter
         $query = Service::query();
@@ -97,26 +97,32 @@ class CategoryName extends Component
 
             // Supposons que trie soit sous la forme "column-direction", par exemple "budget-asc"
             list($column, $direction) = explode('-', $this->trie);
-            $query->orderBy($column, $direction);
+
+
+            // Si les valeurs sont "populaire" ou "nouveau", ajustez le champ et la direction en conséquence
+            if ($column === 'populaire') {
+                $query->withCount('orders') // Assurez-vous que votre relation s'appelle "orders"
+                    ->orderBy('orders_count', $direction); // Triez par le nombre de commandes
+            } elseif ($column === 'nouveau') {
+                $query->orderBy('created_at', 'desc');
+            } elseif ($column === 'Ancien') {
+                $query->orderBy('created_at', 'asc');
+            } elseif ($column === 'cote') {
+                $query->leftJoinSub(
+                    FeedbackService::selectRaw('order_id, AVG(satisfaction) as avg_feedback')
+                        ->groupBy('order_id'),
+                    'feedbacks',
+                    'services.id',
+                    '=',
+                    'feedbacks.order_id'
+                )->orderBy('feedbacks.avg_feedback', 'desc');
+            }
+            else {
+                $query->orderBy($column, $direction);
+            }
         }
 
-        if ($this->filter == 'Populaire') {
-            $query->withCount('orders')
-                ->orderBy('orders_count', 'desc');
-        } elseif ($this->filter == 'Nouveau') {
-            $query->orderBy('created_at', 'desc');
-        } elseif ($this->filter == 'Ancien') {
-            $query->orderBy('created_at', 'asc');
-        } elseif ($this->filter == 'cote') {
-            $query->leftJoinSub(
-                FeedbackService::selectRaw('order_id, AVG(satisfaction) as avg_feedback')
-                    ->groupBy('order_id'),
-                'feedbacks',
-                'services.id',
-                '=',
-                'feedbacks.order_id'
-            )->orderBy('feedbacks.avg_feedback', 'desc');
-        }
+
 
         return view('livewire.web.category.category-name', [
             'categories' => Category::all(),

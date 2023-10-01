@@ -13,11 +13,11 @@
         @if(isset($category))
         <li class="flex items-center space-x-2">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" fill="currentColor"
-                class="w-2 h-2 mt-1 transform rotate-90 fill-current dark:text-gray-600">
+                class="w-2 h-2 mt-1 transform rotate-90 fill-current  dark:text-gray-600">
                 <path d="M32 30.031h-32l16-28.061z"></path>
             </svg>
             <a rel="noopener noreferrer" href="{{route('categories')}}"
-                class="flex items-center px-1 text-sm capitalize hover:underline">Categories</a>
+                class="flex items-center px-1 text-sm capitalize font-semibold hover:underline">Categories</a>
         </li>
         @endif
         @if(isset($categoryName))
@@ -58,6 +58,26 @@
             </svg>
             <a rel="noopener noreferrer" href="#"
                 class="flex items-center px-1 text-sm capitalize hover:underline">{{$ServiceId}}</a>
+        </li>
+        @endif
+        @if(isset($mission))
+        <li class="flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" fill="currentColor"
+                class="w-2 h-2 mt-1 transform rotate-90 fill-current dark:text-gray-600">
+                <path d="M32 30.031h-32l16-28.061z"></path>
+            </svg>
+            <a rel="noopener noreferrer" href="#"
+                class="flex items-center px-1 font-semibold text-sm capitalize hover:underline">{{$mission}}</a>
+        </li>
+        @endif
+        @if(isset($feedback))
+        <li class="flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" fill="currentColor"
+                class="w-2 h-2 mt-1 transform rotate-90 fill-current dark:text-gray-600">
+                <path d="M32 30.031h-32l16-28.061z"></path>
+            </svg>
+            <a rel="noopener noreferrer" href="#"
+                class="flex items-center px-1 font-semibold text-sm capitalize hover:underline">{{$feedback}}</a>
         </li>
         @endif
     </ol>

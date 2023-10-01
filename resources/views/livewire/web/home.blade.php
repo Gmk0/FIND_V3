@@ -1,8 +1,176 @@
 <div>
 
+    <div class="slideshow min-h-screen slideshow-wrapper relative pb-section sliderFull">
 
+        <div class="hidden lg:block">
+            <div class="home-slideshow">
+                <div class="slide slideshow--medium">
+                    <div class="blur-up lazyload bg-size">
+                        <img class="blur-up lazyload  bg-img" data-src="/canva/graceP.png" src="/canva/graceP.png"
+                            alt="New Season Styles" title="New Season Styles" />
+                        <div class="slideshow__text-wrap slideshow__overlay classic middle">
+                            <div class="slideshow__text-content classic middle">
+                                <div class="container">
+                                    <div class="wrap-caption  right">
+                                        <h2 class="h1 mega-title slideshow__title"></h2>
+                                        <span class="mega-subtitle slideshow__subtitle">Voir</span>
+                                        <span class=""></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="slide slideshow--medium">
+                    <div class="blur-up lazyload bg-size">
+                        <img class="blur-up lazyload  bg-img" data-src="/canva/filleC.png" src="/canva/filleC.png"
+                            alt="New Season Styles" title="New Season Styles" />
+                        <div class="slideshow__text-wrap slideshow__overlay classic middle">
+                            <div class="slideshow__text-content classic middle">
+                                <div class="container">
+                                    <div class="wrap-caption  right">
+                                        <h2 class="h1 mega-title slideshow__title"></h2>
+                                        <span class="mega-subtitle slideshow__subtitle"></span>
+                                        <span class=""></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="slide slideshow--medium">
+                    <div class="blur-up lazyload bg-size">
+                        <img class="blur-up  lazyload " data-src="/canva/brand2/7.png" src="/canva/brand2/7.png"
+                            alt="New Season Styles" title="New Season Styles" />
+                        <div class="slideshow__text-wrap slideshow__overlay classic middle">
+                            <div class="slideshow__text-content classic middle">
+                                <div class="container">
+                                    <div class="wrap-caption  right">
+                                        <h2 class="h1 mega-title slideshow__title"></h2>
+                                        <span class="mega-subtitle slideshow__subtitle"></span>
+                                        <span class="btn"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="bg-skin-fill dark:bg-gray-800 top-0 left-0 w-full lg:hidden absolute h-screen">
+
+            <div
+                class="hidden [mask-image:linear-gradient(to_bottom,white_20%,transparent_75%)] absolute bottom-[-100px] md:w-[800px] md:h-[750px] lg:top-[120px] lg:right-[-100px] xl:right-0 w-[500px] h-[500px] 2xl:w-[1026px] 2xl:h-[1026px]">
+                <svg viewBox="0 0 1026 1026" fill="none" aria-hidden="true"
+                    class="absolute inset-0 w-full h-full animate-spin-slow">
+                    <path d="M1025 513c0 282.77-229.23 512-512 512S1 795.77 1 513 230.23 1 513 1s512 229.23 512 512Z"
+                        stroke="#D4D4D4" stroke-opacity="0.7"></path>
+                    <path d="M513 1025C230.23 1025 1 795.77 1 513" stroke="url(#:R65m:-gradient-1)" stroke-linecap="round">
+                    </path>
+                    <defs>
+                        <linearGradient id=":R65m:-gradient-1" x1="1" y1="513" x2="1" y2="1025" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#f8fafc"></stop>
+                            <stop offset="1" stop-color="#f8fafc" stop-opacity="0"></stop>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <svg viewBox="0 0 1026 1026" fill="none" aria-hidden="true"
+                    class="absolute inset-0 w-full h-full animate-spin-slow">
+                    <path d="M913 513c0 220.914-179.086 400-400 400S113 733.914 113 513s179.086-400 400-400 400 179.086 400 400Z"
+                        stroke="#D4D4D4" stroke-opacity="0.7"></path>
+                    <path d="M913 513c0 220.914-179.086 400-400 400" stroke="url(#:R65m:-gradient-2)" stroke-linecap="round">
+                    </path>
+                    <defs>
+                        <linearGradient id=":R65m:-gradient-2" x1="913" y1="513" x2="913" y2="913" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#f8fafc"></stop>
+                            <stop offset="1" stop-color="#f8fafc" stop-opacity="0"></stop>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+
+            <div class="w-full  lg:-mt-10 relative" id="girl">
+
+                <!-- calendar -->
+                <div data-aos="fade-up" data-aos-delay="300" data-aos-once="true"
+                    class="absolute top-20 left-6 floating-4">
+                    <img class="bg-white bg-opacity-80 rounded-lg h-12 sm:h-16" src="/images/illustrations/calendar.svg">
+                </div>
+                <!-- red -->
+                <div data-aos="fade-up" data-aos-delay="400" data-aos-once="true"
+                    class="absolute  right-24 top-28  floating">
+                    <svg class="h-16 sm:h-24" viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g filter="url(#filter0_d)">
+                            <rect x="40" y="32" width="69" height="69" rx="14" fill="#F3627C" />
+                        </g>
+                        <rect x="51.35" y="44.075" width="47.3" height="44.85" rx="8" fill="white" />
+                        <path d="M74.5 54.425V78.575" stroke="#F25471" stroke-width="4" stroke-linecap="round" />
+                        <path d="M65.875 58.7375L65.875 78.575" stroke="#F25471" stroke-width="4" stroke-linecap="round" />
+                        <path d="M83.125 63.9125V78.575" stroke="#F25471" stroke-width="4" stroke-linecap="round" />
+                        <defs>
+                            <filter id="filter0_d" x="0" y="0" width="149" height="149" filterUnits="userSpaceOnUse"
+                                color-interpolation-filters="sRGB">
+                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+                                <feOffset dy="8" />
+                                <feGaussianBlur stdDeviation="20" />
+                                <feColorMatrix type="matrix"
+                                    values="0 0 0 0 0.825 0 0 0 0 0.300438 0 0 0 0 0.396718 0 0 0 0.26 0" />
+                                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                            </filter>
+                        </defs>
+                    </svg>
+                </div>
+                <!-- ux class -->
+                <div data-aos="fade-up" data-aos-delay="500" data-aos-once="true"
+                    class="absolute bottom-20 -left-4    floating">
+                    <img class="bg-white dark:bg-white bg-opacity-80 rounded-lg h-20 sm:h-28" src="/images/illustrations/ux-class.svg" alt="">
+                </div>
+                <!-- congrats -->
+                <div data-aos="fade-up" data-aos-delay="600" data-aos-once="true"
+                    class="absolute bottom-20  -right-6 floating-4">
+                    <img class="bg-white bg-opacity-80 rounded-lg h-12 sm:h-16" src="/images/illustrations/congrat.svg" alt="">
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+        <div data-aos="fade-right" data-aos-duration="800"
+            class="lg:col-span-6 px-6 py-8 mt-8 lg:py-12 md:mb-8 xl:place-self-center xl:mt-0 lg:mb-0 absolute top-0 left-0 lg:w-1/2">
+            <div class="pt-[8rem] px-1">
+
+                <h1 class="text-3xl text-white font-bold text-center md:text-3xl xl:text-5xl lg:text-left">
+                    Votre satisfaction dans nos services Freelance <br />
+                </h1>
+
+
+                @livewire('web.other.home-search')
+            </div>
+
+        </div>
+
+
+
+
+
+
+    </div>
+
+    {{--
     <div>
-        <div
+     <div
             class="relative grid grid-cols-1 gap-8 px-4 py-16 overflow-hidden lg:py-0 lg:h-screen text-neutral-50 2xl:px-60 lg:grid-cols-12 bg-skin-fill dark:bg-gray-800">
             <div
                 class="[mask-image:linear-gradient(to_bottom,white_20%,transparent_75%)] absolute bottom-[-100px] md:w-[800px] md:h-[750px] lg:top-[120px] lg:right-[-100px] xl:right-0 w-[500px] h-[500px] 2xl:w-[1026px] 2xl:h-[1026px]">
@@ -70,169 +238,170 @@
         </div>
 
 
-        <div id="features" class=" dark:bg-gray-900 bg-white">
-
-            <div data-aos="" class="z-10 px-8 py-8 mx-auto overflow-hidden max-w-7xl md:px-6">
-                <div class="flex ">
-                    <div data-aos="fade-up" data-aos-duration="800" class="w-full lg:w-5/12">
-                        <h1
-                            class="text-slate-800 mb-4  dark:text-white text-2xl font-bold leading-snug lg:text-[40px] xl:text-[42px]">
-
-                            {{__('Atteignez vos objectifs plus rapidement avec')}}
-
-                            <span class="text-amber-600">FIND</span>
-                        </h1>
-
-                        <div class="grid grid-cols-1 gap-2 mx-auto md:mx-0 md:grid-cols-2">
-
-                            <a href="{{url('find_freelance')}}"
-                                class="w-10/12 rounded-md mx-auto text-center bg-amber-600 px-8 py-2.5 font-semibold text-white shadow-md shadow-amber-500/20 hover:bg-amber-700 duration-200 sm:w-auto">Trouver
-                                un freelance</a>
-
-                            <a href="{{url('/registration')}}"
-                                class="mt-4 md:mt-0 mx-auto text-center box-border w-10/12   rounded-md border border-amber-500/20 px-8 py-2.5 font-semibold text-amber-600 shadow-md shadow-amber-500/10 hover:bg-gray-100 duration-200   ">Dévenir
-
-                                freelance</a>
-
-                        </div>
 
 
-                        <!-- brand -->
-                        <div class="mt-4 mb-2 text-center">
-                            <h1 class="text-xl text-gray-500">Nos partenaires</h1>
+    </div>--}}
 
-                        </div>
-                        <div class="grid grid-cols-2 gap-6 mx-6 mt-6 md:mx-0 px-auto md:gap-2 md:grid-cols-3 ">
-                            <img src="/images/brand/brand (1).png" alt="brand"
-                                class="w-32 h-16 px-5 py-3 duration-200 border rounded-lg shadow-md cursor-pointer bg-gray-50 border-blue-300/20 shadow-blue-500/5 hover:scale-95 sm:w-36">
-                            <img src="/images/brand/influeworld.png" alt="brand"
-                                class="w-32 h-16 px-5 py-3 duration-200 border rounded-lg shadow-md cursor-pointer bg-gray-50 border-blue-300/20 shadow-blue-500/5 hover:scale-95 sm:w-36">
-                            <img src="/images/brand/influnet2.jpg" alt="brand"
-                                class="w-32 h-16 px-5 py-3 bg-white border rounded-lg shadow-md cursor-pointer duration border-blue-300/20 shadow-blue-500/5 hover:scale-95 sm:w-36">
-                            <img src="/images/brand/udemy.PNG" alt="brand"
-                                class="w-32 h-16 px-5 py-3 duration-200 border rounded-lg shadow-md cursor-pointer bg-gray-50 border-blue-300/20 shadow-blue-500/5 hover:scale-95 sm:w-36">
-                            <img src="/images/brand/microsoft.svg" alt="brand"
-                                class="w-32 h-16 px-5 py-3 duration-200 border rounded-lg shadow-md cursor-pointer bg-gray-50 border-blue-300/20 shadow-blue-500/5 hover:scale-95 sm:w-36">
-                            <img src="/images/brand/airbnb.svg" alt="brand"
-                                class="w-32 h-16 px-5 py-3 duration-200 border rounded-lg shadow-md cursor-pointer bg-gray-50 md:h-none border-blue-300/20 shadow-blue-500/5 hover:scale-95 sm:w-36">
-                        </div>
+    <div id="features" class=" dark:bg-gray-900 bg-gray-100">
+
+        <div data-aos="" class="z-10 px-8  py-8 mx-auto overflow-hidden max-w-6xl md:px-6">
+            <div class="flex ">
+                <div data-aos="fade-up" data-aos-duration="500" class="w-full lg:w-5/12">
+                    <h1
+                        class="text-slate-800 mb-4  dark:text-white text-2xl font-bold leading-snug lg:text-[40px] xl:text-[42px]">
+
+                        {{__('Atteignez vos objectifs plus rapidement avec')}}
+
+                        <span class="text-amber-600">FIND</span>
+                    </h1>
+
+                    <div class="grid grid-cols-1 gap-2 mx-auto md:mx-0 md:grid-cols-2">
+
+                        <a href="{{url('find-freelance')}}"
+                            class="w-10/12 rounded-md mx-auto text-center bg-amber-600 px-8 py-2.5 font-semibold text-white shadow-md shadow-amber-500/20 hover:bg-amber-700 duration-200 sm:w-auto">Trouver
+                            un freelance</a>
+
+                        <a href="{{url('/registration')}}"
+                            class="mt-4 md:mt-0 mx-auto text-center box-border w-10/12   rounded-md border border-amber-500/20 px-8 py-2.5 font-semibold text-amber-600 shadow-md shadow-amber-500/10 hover:bg-gray-100 duration-200   ">Dévenir
+
+                            freelance</a>
+
                     </div>
 
-                    <div class="hidden px-4 lg:block lg:w-1/12"></div>
 
-                    <div data-aos="fade-left" data-aos-duration="800" class="hidden w-full px-4 lg:block md:w-6/12">
-                        <div class="lg:ml-auto lg:text-right">
-                            <div class="relative z-10 inline-block pt-11 lg:pt-0">
-                                <img src="/images/hero/women.jpeg" alt="hero div img" class="w-3/4 rounded-full lg:ml-auto">
-                            </div>
+                    <!-- brand -->
+                    <div class="mt-4 mb-2 text-center">
+                        <h1 class="text-xl text-gray-500">Nos partenaires</h1>
+
+                    </div>
+                    <div class="grid grid-cols-2 gap-6 mx-6 mt-6 md:mx-0 px-auto md:gap-2 md:grid-cols-3 ">
+                        <img src="/images/brand/brand (1).png" alt="brand"
+                            class="w-32 h-16 px-5 py-3 duration-200 border rounded-lg shadow-md cursor-pointer bg-gray-50 border-blue-300/20 shadow-blue-500/5 hover:scale-95 sm:w-36">
+                        <img src="/images/brand/influeworld.png" alt="brand"
+                            class="w-32 h-16 px-5 py-3 duration-200 border rounded-lg shadow-md cursor-pointer bg-gray-50 border-blue-300/20 shadow-blue-500/5 hover:scale-95 sm:w-36">
+                        <img src="/images/brand/influnet2.jpg" alt="brand"
+                            class="w-32 h-16 px-5 py-3 bg-white border rounded-lg shadow-md cursor-pointer duration border-blue-300/20 shadow-blue-500/5 hover:scale-95 sm:w-36">
+                        <img src="/images/brand/udemy.PNG" alt="brand"
+                            class="w-32 h-16 px-5 py-3 duration-200 border rounded-lg shadow-md cursor-pointer bg-gray-50 border-blue-300/20 shadow-blue-500/5 hover:scale-95 sm:w-36">
+                        <img src="/images/brand/microsoft.svg" alt="brand"
+                            class="w-32 h-16 px-5 py-3 duration-200 border rounded-lg shadow-md cursor-pointer bg-gray-50 border-blue-300/20 shadow-blue-500/5 hover:scale-95 sm:w-36">
+                        <img src="/images/brand/airbnb.svg" alt="brand"
+                            class="w-32 h-16 px-5 py-3 duration-200 border rounded-lg shadow-md cursor-pointer bg-gray-50 md:h-none border-blue-300/20 shadow-blue-500/5 hover:scale-95 sm:w-36">
+                    </div>
+                </div>
+
+                <div class="hidden px-4 lg:block lg:w-1/12"></div>
+
+                <div data-aos="fade-left" data-aos-duration="500" class="hidden w-full px-4 lg:block md:w-6/12">
+                    <div class="lg:ml-auto lg:text-right">
+                        <div class="relative z-10 inline-block pt-11 lg:pt-0">
+                            <img src="/images/hero/women.jpeg" alt="hero div img" class="w-3/4 rounded-full lg:ml-auto">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
 
-        <div id="talkAbout" class="bg-gray-100 dark:bg-gray-800 lg:min-h-screen">
+    <div id="talkAbout" class="bg-white dark:bg-gray-800 lg:min-h-screen">
 
-          <div class="container max-w-6xl p-4 m-4 mx-auto md:p-6">
-                <div class="mb-10 text-center">
-                    <span class="font-medium text-amber-600">Presentation</span>
-                    <h1 class="text-2xl font-bold text-slate-700 dark:text-gray-200 ">Ils en Parlent mieux Que nous</h1>
-
-                </div>
-
-                <div x-init="$nextTick(() => $el._x_swiper = new Swiper($el,{effect: 'cube', cubeEffect: { shadow: false}, pagination: { el: '.swiper-pagination', clickable: true}}))"
-                    class="swiper">
-                    <div class="pb-8 swiper-wrapper ">
-                        <div class="swiper-slide !bg-transparent px-2 md:px-0">
-                            <div
-                                class="px-2 bg-white border border-gray-100 dark:border-gray-300 rounded-3xl dark:bg-gray-800 dark:shadow-none md:mx-auto lg:w-11/12 xl:w-8/12">
-                                <div class="grid md:grid-cols-5">
-
-                                    <div class="w-full m-2 h-50 aspect-w-8 aspect-h-9 md:col-span-2 rounded-2xl">
-
-                                        <iframe class="rounded-sm w-11/2 h-9/12 aspect-video hover:aspect-square"
-                                            src="https://www.youtube.com/embed/rw_3Yv-rhZM" frameborder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                            allowfullscreen></iframe>
-                                    </div>
-                                    <div class="p-6 mx-auto space-y-6 text-center md:col-span-3 sm:p-8">
-                                        <div class="w-20 mx-auto">
-                                            <img src="images/brand/influnet.jpg" alt="company logo" loading="lazy" />
-                                        </div>
-                                        <p class="dark:text-gray-200">
-                                            <span class="font-serif "></span> Find est une plateforme incontournable pour tous
-                                            les demandeurs de services. J'ai été impressionné par la qualité des
-                                            freelances proposés.
-                                            <span class="font-serif">"</span>
-                                        </p>
-                                        <h6 class="text-lg font-semibold leading-none dark:text-gray-200">Georges Mk</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="swiper-slide !bg-transparent px-2 md:px-0">
-                            <div
-                                class="px-2 bg-white border border-gray-100 dark:border-gray-300 rounded-3xl dark:bg-gray-800 dark:shadow-none md:mx-auto lg:w-11/12 xl:w-8/12">
-                                <div class="grid md:grid-cols-5">
-
-
-                                    <div class="w-full m-2 h-50 aspect-w-8 aspect-h-9 md:col-span-2 rounded-2xl">
-
-                                        <iframe class="rounded-sm w-11/2 h-9/12 aspect-video hover:aspect-square"
-                                            src="https://www.youtube.com/embed/rw_3Yv-rhZM" frameborder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                            allowfullscreen></iframe>
-                                    </div>
-                                    <div class="p-6 mx-auto space-y-6 text-center md:col-span-3 sm:p-8">
-                                        <div class="w-20 mx-auto">
-                                            <img src="images/brand/influnet.jpg" alt="company logo" loading="lazy" />
-                                        </div>
-                                        <p class="dark:text-gray-200">
-                                            <span class="font-serif "></span> Find est un outil essentiel pour tous ceux qui
-                                            cherchent à trouver des freelances qualifiés. La plateforme est vraiment
-                                            bien conçue et facile à utiliser
-                                            <span class="font-serif">"</span>
-                                        </p>
-                                        <h6 class="text-lg font-semibold leading-none dark:text-gray-200">Ulrich Lukemba</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
-
-                    </div>
-
-                    <div class="swiper-pagination"></div>
-                </div>
-
-
-
-
-                <!-- single-blog -->
+        <div class="container max-w-6xl p-4 m-4 mx-auto md:p-6">
+            <div class="mb-10 text-center">
+                <span class="font-medium text-amber-600">Presentation</span>
+                <h1 class="text-2xl font-bold text-slate-700 dark:text-gray-200 ">Ils en Parlent mieux Que nous</h1>
 
             </div>
+
+            <div x-init="$nextTick(() => $el._x_swiper = new Swiper($el,{effect: 'cube', cubeEffect: { shadow: false}, pagination: { el: '.swiper-pagination', clickable: true}}))"
+                class="swiper">
+                <div class="pb-8 swiper-wrapper ">
+                    <div class="swiper-slide !bg-transparent px-2 md:px-0">
+                        <div
+                            class="px-2 bg-white border border-gray-100 dark:border-gray-300 rounded-3xl dark:bg-gray-800 dark:shadow-none md:mx-auto lg:w-11/12 xl:w-8/12">
+                            <div class="grid md:grid-cols-5">
+
+                                <div class="w-full m-2 h-50 aspect-w-8 aspect-h-9 md:col-span-2 rounded-2xl">
+
+                                    <iframe class="rounded-sm w-11/2 h-9/12 aspect-video hover:aspect-square"
+                                        src="https://www.youtube.com/embed/rw_3Yv-rhZM" frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen></iframe>
+                                </div>
+                                <div class="p-6 mx-auto space-y-6 text-center md:col-span-3 sm:p-8">
+                                    <div class="w-20 mx-auto">
+                                        <img src="images/brand/influnet.jpg" alt="company logo" loading="lazy" />
+                                    </div>
+                                    <p class="dark:text-gray-200">
+                                        <span class="font-serif "></span> Find est une plateforme incontournable pour tous
+                                        les demandeurs de services. J'ai été impressionné par la qualité des
+                                        freelances proposés.
+                                        <span class="font-serif">"</span>
+                                    </p>
+                                    <h6 class="text-lg font-semibold leading-none dark:text-gray-200">Georges Mk</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide !bg-transparent px-2 md:px-0">
+                        <div
+                            class="px-2 bg-white border border-gray-100 dark:border-gray-300 rounded-3xl dark:bg-gray-800 dark:shadow-none md:mx-auto lg:w-11/12 xl:w-8/12">
+                            <div class="grid md:grid-cols-5">
+
+
+                                <div class="w-full m-2 h-50 aspect-w-8 aspect-h-9 md:col-span-2 rounded-2xl">
+
+                                    <iframe class="rounded-sm w-11/2 h-9/12 aspect-video hover:aspect-square"
+                                        src="https://www.youtube.com/embed/rw_3Yv-rhZM" frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen></iframe>
+                                </div>
+                                <div class="p-6 mx-auto space-y-6 text-center md:col-span-3 sm:p-8">
+                                    <div class="w-20 mx-auto">
+                                        <img src="images/brand/influnet.jpg" alt="company logo" loading="lazy" />
+                                    </div>
+                                    <p class="dark:text-gray-200">
+                                        <span class="font-serif "></span> Find est un outil essentiel pour tous ceux qui
+                                        cherchent à trouver des freelances qualifiés. La plateforme est vraiment
+                                        bien conçue et facile à utiliser
+                                        <span class="font-serif">"</span>
+                                    </p>
+                                    <h6 class="text-lg font-semibold leading-none dark:text-gray-200">Ulrich Lukemba</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+
+                <div class="swiper-pagination"></div>
+            </div>
+
+
+
+
+            <!-- single-blog -->
 
         </div>
 
     </div>
 
+    <div  id="monde2" class="lg:min-h-screen bg-white dark:bg-gray-900">
 
-    <div x-show="loading" x-cloak id="monde2" class="lg:min-h-screen bg-white dark:bg-gray-900">
-
-        <div class="py-16 ">
+        <div class="p-4">
             <div class="px-6 m-auto text-gray-600 xl:container md:px-12 xl:px-16">
                 <div
                     class="flex-row-reverse justify-center p-4 space-y-6 bg-gray-100 rounded-lg dark:bg-gray-800 lg:p-16 md:flex md:gap-6 md:space-y-0 lg:items-center">
-                    <div data-aos="flip-left" data-aos-duration="800" class="md:5/12 lg:w-1/2">
+                    <div data-aos="flip-left" data-aos-duration="500" class="md:5/12 lg:w-1/2">
                         <img src="/images/services/presentation3.png" alt="image"
-                            class="rounded-lg dark:bg-gray-800 bg-skin-fill" loading="lazy" width="" height="" />
+                            class="rounded-lg dark:bg-gray-800 floating bg-skin-fill" loading="lazy" width="" height="" />
                     </div>
-                    <div data-aos="fade-right" data-aos-duration="800" class="md:7/12 lg:w-1/2">
+                    <div data-aos="fade-right" data-aos-duration="300" class="md:7/12 lg:w-1/2">
                         <h2 class="text-2xl font-bold text-gray-900 md:text-4xl dark:text-white">
                             Trouvez dès aujourd'hui la personne idéale pour votre projet !
                         </h2>
@@ -310,9 +479,9 @@
 
     </div>
 
-    <div id="Services" class="bg-gray-100 lg:min-h-screen dark:bg-gray-800">
+    <div id="Services" class="bg-gray-100  lg:min-h-screen dark:bg-gray-800">
 
-        <div class="px-8 py-6 mx-auto max-w-7xl md:px-6">
+        <div class="px-8 py-6 mx-auto max-w-6xl md:px-6">
             <!-- heading text -->
             <div class="mb-10 text-center">
                 <span class="font-medium text-amber-600">{{__('messages.OurServices')}}</span>
@@ -326,7 +495,7 @@
                 @forelse ($categories as $category)
 
                 <a href="{{route('categoryByName',[$category->name])}}"
-                    class="flex flex-col items-center px-2 py-4 duration-200 border shadow-lg cursor-pointer bg-gray-50 group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
+                    class="flex flex-col items-center px-2 py-4 duration-200 border shadow-lg cursor-pointer bg-white group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
                     <img src="{{Storage::disk('local')->url('public/'.$category->illustration) }}"
                         class="w-20 h-20 rounded-md" alt="">
                     <h4
@@ -535,14 +704,11 @@
     </div>
 
     <div id="getStarted" class="bg-gray-900 lg:min-h-screen">
-
-
-
         <div class="py-16 ">
             <div class="container px-6 m-auto space-y-8 text-gray-500 md:px-12 lg:px-20">
                 <div
                     class="justify-center gap-6 p-3 mx-auto text-center rounded-lg md:flex md:text-left lg:items-center lg:gap-16">
-                    <div class="mb-6 space-y-6 md:mb-0 md:w-6/12 lg:w-6/12">
+                    <div data-aos="fade-up" data-aos-duration="500" class="mb-6 space-y-6 md:mb-0 md:w-6/12 lg:w-6/12">
                         <h1 class="text-3xl font-bold text-white md:text-4xl dark:text-white">Vous êtes un freelance à la
                             recherche
                             de
@@ -583,7 +749,7 @@
     </div>
 
     <div id="presentation" class="bg-gray-100 dark:bg-gray-950 lg:min-h-screen ">
-        <div class="px-8 py-6 mx-auto max-w-7xl md:px-4">
+        <div class="px-8 py-6 mx-auto max-w-6xl md:px-4">
 
             <!-- heading text -->
             <div class="mb-10 text-center">
@@ -596,7 +762,7 @@
                 <div data-aos="fade-in" data-aos-duration="500"
                     class="grid gap-4 mb-4 sm:grid-cols-2 md:grid-cols-3 xl:gap-8">
                     <div
-                        class="flex flex-col items-center w-full px-8 py-8 duration-200 border shadow-lg cursor-pointer bg-gray-50 dark:bg-gray-800 group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
+                        class="flex flex-col items-center w-full px-8 py-8 duration-200 border shadow-lg cursor-pointer bg-white dark:bg-gray-800 group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
                         <ion-icon name="people-outline"
                             class="text-[55px] text-amber-600 duration-200  group-hover:text-white">
                         </ion-icon>
@@ -607,7 +773,7 @@
                     </div>
 
                     <div
-                        class="flex flex-col items-center px-5 py-8 duration-200 border shadow-lg cursor-pointer bg-gray-50 group rounded-xl dark:bg-gray-800 border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
+                        class="flex flex-col items-center px-5 py-8 duration-200 border shadow-lg cursor-pointer bg-white group rounded-xl dark:bg-gray-800 border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
                         <ion-icon name="bag-check-outline"
                             class="text-[55px] text-amber-600 duration-200 group-hover:text-white">
                         </ion-icon>
@@ -619,7 +785,7 @@
 
                     </div>
                     <div
-                        class="flex flex-col items-center px-5 py-8 duration-200 border shadow-lg cursor-pointer bg-gray-50 dark:bg-gray-800 group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
+                        class="flex flex-col items-center px-5 py-8 duration-200 border shadow-lg cursor-pointer bg-white dark:bg-gray-800 group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
                         <ion-icon name="albums-outline"
                             class="text-[55px] text-amber-600 duration-200 group-hover:text-white">
                         </ion-icon>
@@ -636,7 +802,7 @@
 
                 <div
                     class="p-2 bg-white border border-gray-100 dark:border-gray-700 rounded-3xl dark:bg-gray-800 dark:shadow-none md:mx-auto lg:w-10/12 xl:w-8/12">
-                    <div class="grid px-2 py-4 md:py-6 md:grid-cols-5 ">
+                    <div class="flex px-2 py-4 md:py-6 flex-col ">
 
                         <div class="space-y-6 py-auto justify md:col-span-2 sm:p-8">
                             <div class="px-6">
@@ -653,7 +819,7 @@
                             </p>
 
                         </div>
-                        <div class="order-2 w-full h-64 mx-2 my-4 aspect-w-16 aspect-h-9 md:col-span-3 rounded-2xl">
+                        <div class="order-2 w-full h-48 mx-2 my-4 aspect-w-16 aspect-h-9 md:col-span-3 rounded-2xl">
 
 
                             <iframe class="w-full h-full aspect-video" src="https://www.youtube.com/embed/rw_3Yv-rhZM"
@@ -724,7 +890,7 @@
                             <template x-for="(faq, index) in faqs" :key="faq.question">
                                 <div>
                                     <button
-                                        class="flex items-center justify-between w-full py-3 mt-4 font-bold text-gray-800 dark:text-white"
+                                        class="flex border-b items-center justify-between w-full py-3 mt-4 font-bold text-gray-800 dark:text-white"
                                         :class="index !== faqs.length - 1 && 'border-b border-gray-400'"
                                         @click="faqs = faqs.map(f => ({ ...f, isOpen: f.question !== faq.question ? false : !f.isOpen}))">
                                         <!-- Specs has it that only one component can be open at a time and also you should be able to toggle the open state of the active component too -->

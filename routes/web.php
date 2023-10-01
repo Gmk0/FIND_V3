@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\Api\CategoryGet;
+use App\Http\Controllers\Api\CityApi;
 use App\Http\Controllers\AuthSocial;
 use App\Http\Controllers\PayementController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ToolsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +23,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', \App\Livewire\Web\Home::class)->name('home');
 
+Route::view('/test2','Tests.home')->name('hometest');
+Route::view('/test3', 'Tests.home2')->name('hometest2');
+
 Route::get('/services', \App\Livewire\Web\ServicesView::class)->name('services');
 Route::get('/faq', \App\Livewire\Web\Other\Faq::class)->name('faq');
 Route::get('/apropos', \App\Livewire\Web\Other\About::class)->name('apropos');
@@ -32,7 +37,6 @@ Route::get('/registration', \App\Livewire\Web\Registration\RegisterBegin::class)
 Route::get('/registration/info', \App\Livewire\Web\Registration\RegisterEtape1::class)->name('register.etape.1');
 
 Route::get('/registration/freelance', \App\Livewire\Web\Registration\RegistrationFreelance::class)->name('freelancer.register')->middleware('freelance_exist');
-Route::get('/create-mission', \App\Livewire\Web\Mission\CreateMission::class)->name('createProject');
 
 Route::get('/find-freelance/profile/{identifiant}', \App\Livewire\Web\Freelance\ProfileFreelance::class)->where('identifiant', '(.*)')->name('profileFreelance');
 
@@ -40,13 +44,15 @@ Route::get('/find-freelance', \App\Livewire\Web\Freelance\FindFreelance::class)-
 
 Route::get('/categories', \App\Livewire\Web\Category\CategoryName::class)->name('categories');
 
+
+Route::get('/test/{category}/{sub_name}', \App\Livewire\Web\Category\SubCatategoryName::class)->where('sub_name', '(.*)')->name('SubcategoryName');
+
 Route::get('/categories/{category}/{service_numero}', \App\Livewire\Web\Category\ServiceViewOne::class)->where('service_numero', '(.*)')->name('ServicesViewOne');
 
 Route::get('/categories/{category}', \App\Livewire\Web\Category\ServiceByCategory::class)->where('category', '(.*)')->name('categoryByName');
 
 
 
-Route::get('/checkout', \App\Livewire\Web\Checkout\CheckoutService::class)->name('checkout');
 
 
 
@@ -61,6 +67,12 @@ Route::controller(PayementController::class)->group(function () {
 
 
 Route::get('/api/category', CategoryGet::class)->name('api.services');
+
+Route::get('/api/city', CityApi::class)->name('api.city');
+
+Route::get('/api/search', [ToolsController::class,'search'])->name('api.search');
+
+Route::get('/blog/view', \App\Livewire\Web\Blog\BlogView::class)->name('blogView');
 
 
 
@@ -80,8 +92,16 @@ Route::middleware([
     })->name('dashboard');
 
 
+    Route::get('/create-mission', \App\Livewire\Web\Mission\CreateMission::class)->name('createProject');
+
 
     Route::get('/checkout', \App\Livewire\Web\Checkout\CheckoutService::class)->name('checkout');
+
+    Route::get('/feedback-view', \App\Livewire\Web\Other\FeedbackView::class)->name('FeedbackView');
+
+    Route::get('/blog/view', \App\Livewire\Web\Blog\BlogView::class)->name('blogView');
+
+
 
 
 
@@ -191,12 +211,14 @@ Route::middleware([
 
                     Route::group(['prefix' => "mission"], function () {
 
-                        Route::get('/en_attente', \App\Livewire\Freelance\Mission\MissionList::class)->name('freelance.projet.list');
 
 
                         Route::get('/mission_active/{mission_numero}', \App\Livewire\Freelance\Mission\MissionWork::class)->name('freelance.proposition.accepted');
                         Route::get('/mission_active', \App\Livewire\Freelance\Mission\MissionEnCours::class)->name('freelance.proposition');
                         Route::get('/en_attente/{mission_numero}', \App\Livewire\Freelance\Mission\MissionProposition::class)->name('freelance.projet.view');
+
+                        Route::get('/en_attente', \App\Livewire\Freelance\Mission\MissionList::class)->name('freelance.projet.list');
+
                     });
 
 

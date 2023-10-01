@@ -1,156 +1,385 @@
-<div class="">
-    <div x-data="{isOpen : false}" class="min-h-screen lg:py-4 md:px-8">
 
-<div class="px-2">
-    @include('include.bread-cumb',['category'=>'cagegory','categoryName'=>$categoryName])
-</div>
+<div class="py-16 pb-12 min-h-screen relative">
 
-        <div class="container px-4 ">
-            <h2 class="mb-4 text-lg font-bold text-gray-600 md:text-2xl dark:text-gray-400">Recherche de
-                Services
-                "{{$categoryName}}" ({{$count}}) </h2>
+    <div x-data="{showFiltre: false}" class="">
 
-        </div>
-        <div>
-            <div x-bind:class="isOpen ? 'fixed inset-0  top-0  bottom-0  overflow-hidden dark:bg-gray-900 bg-white z-50 p-4 transition-all duration-200 w-full' : 'w-full hidden md:flex mt-0'"
-                class="">
-                <div class="container px-4 mx-auto">
+        <div id="">
 
-                    <div class="mb-8">
-                        <div class="grid -mx-2 md:grid-cols-4">
-                            <div class="w-full px-2 mb-4">
-                        <x-select placeholder="sous categories"  wire:model.live.debounce.100ms="sous_category">
-
-                        @forelse($subCategorie as $subCategory)
-                        <x-select.option label="{{$subCategory->name}}" value="{{$subCategory->name}}" />
-                        @empty
-                        <x-select.option label="empty" value="" />
-                        @endforelse
-
-
-                            </x-select>
-
-                            </div>
-
-
-                            <div class="w-full px-2 mb-4">
-
-
-                                <x-select  placeholder="Temps de livraison" wire:model.live.debounce.100ms="delivery_time"
-                                    :options="['1-5'=>'1-5 jours',
-                                                '5-10'=>'5-10 jours',
-                                                '10-50'=>'plus de 10 jours',
-
-                                                ]" />
-
-                            </div>
-                            <div class="w-full px-2 mb-4">
-
-
-
-                                <x-select class="!dark:bg-gray-900" placeholder="Niveau du Freelance" wire:model.live.debounce.100ms="freelance_niveau" :options="['1'=>'niveau 1',
-                                                                    '2'=>'niveau 2',
-                                                                    '3'=>'niveau 3',
-                                                                    '4'=>'niveau 4',
-                                                                    '5'=>'niveau 5'
-
-                                                                    ]" />
-
-
-                            </div>
-                            <div class="flex w-full gap-2 px-2 mb-4">
-
-                                <x-select placeholder="Prix" wire:model.live.debounce.100ms="price_range"
-                                :options="[
-                                '1'=>'10$-50$',
-                                '2'=>'50$-100$',
-                                '3'=>'100$ +',
-                                ]" />
-
-
-                               {{-- <select wire:model.live.debounce.300ms='price_range'
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option value="" selected>Choisir le prix</option>
-
-
-
-                                    <option value="1">10$-50$</option>
-                                    <option value="2">50$-100$</option>
-                                    <option value="3">100$ +</option>
-
-
-                                </select>}}
-                                {{--<x-select wire:model.debounce.100ms="orderBy" placeholder="trier par">
-                                    <x-select.option label="Prix" value="basic_price" />
-                                    <x-select.option label="Delai" value="basic_delivery_time" />
-                                    <x-select.option label="Niveau" value="basic_delivery_time" />
-                                </x-select>----}}
-                            </div>
-
-
-                        </div>
-                        <div class="flex gap-4 md:hidden">
-
-                            <button x-on:click="isOpen=!isOpen"
-                                class="middle none center mr-4 rounded-lg bg-blue-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                                data-ripple-light="true">
-                                Resultat ({{$count}})
-                            </button>
-
-                            <x-button @click="isOpen=false" label="Fermer" />
-
-
-
-
-                            {{--
-                            <x-button label="Resultat ({{$count}})" @click="isOpen=false" />
-                       --}}
-
-                        </div>
-                    </div>
+            <div x-cloak x-show="!loading" class="relative h-24">
+                <img class="w-full h-full object-cover opacity-70" src="/test/assets/images/cat-women2.jpg" alt="Women"
+                    title="" />
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <h1 class="text-4xl font-bold text-white">{{$categoryName}}</h1>
                 </div>
-
             </div>
 
+            <div x-show="loading" class="relative h-36 w-full bg-gray-300 animate-pulse">
 
-            <button @click="isOpen=!isOpen"
-                class="flex pl-3 no-underline dark:text-white md:hidden hover:text-amber-600" href="#">
-                <svg class="w-6 fill-current hover:text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                    viewBox="0 0 24 24">
-                    <path d="M7 11H17V13H7zM4 7H20V9H4zM10 15H14V17H10z" />
-                </svg> <span>
-                    filtre
-                </span>
-            </button>
+            </div>
+            <div x-show="loading">
 
-        </div>
-        <div class="py-2 dark:text-gray-100">
-            <div class="container p-6 mx-auto space-y-8 bg-gray-100 dark:bg-gray-800">
-
-                <div class="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-4 lg:grid-cols-4">
-                    @forelse ($services as $service)
-
-                    @livewire('web.card.service-card',['service' => $service], key($service->id))
-                    @empty
-                    <div class="px-6">
+                <div class="flex flex-row flex-1 h-screen p-8 overflow-y-hidden">
+                    <div
+                        class="order-first hidden w-64 h-screen p-2 px-2 mx-2 overflow-y-auto bg-gray-300 rounded-md animate-pulse custom-scrollbar md:flex ">
                         <div>
-                            <h3>Pas de resultat</h3>
+
+                        </div>
+                    </div>
+                    <div
+                        class="flex-1 h-screen p-4 overflow-y-auto text-xs bg-gray-200 border-r border-indigo-300 rounded-md animate-pulse custom-scrollbar">
+                        <div class="h-8 mb-2 bg-gray-200 rounded-md animate-pulse">
+
+                        </div>
+                        <div class="grid grid-cols-1 gap-4 mt-6 md:grid-cols-3">
+                            <div class="h-64 bg-gray-300 rounded-md animate-pulse"></div>
+                            <div class="h-64 bg-gray-300 rounded-md animate-pulse"></div>
+                            <div class="h-64 bg-gray-300 rounded-md animate-pulse"></div>
                         </div>
 
                     </div>
-                    @endforelse
+                </div>
+            </div>
+            <!--End Collection Banner-->
+
+            <div x-cloak x-show="!loading" class=" relative mt-4 ">
+
+                <div class="grid px-4 h-auto grid-cols-12 h-auto lg:z-0 top-0 z-30 bg-white lg:bg-transparent sticky lg:relative  py-2">
+                    <div class="lg:col-span-3"></div>
+
+                   <div class="lg:col-span-9 col-span-12 grid lg:grid-cols-12  gap-4 lg:gap-2 ">
+                        <div class="px-4 lg:col-span-10">
+                            <x-input class="!rounded-full   !shadow-md" wire:model.live.debounce.100ms='search' placeholder="recherche"
+                                icon='search' />
+                        </div>
+                        <div class="lg:col-span-2 flex px-4 flex-row justify-between gap-2">
+                            <div class="">
+                                <div class="block lg:hidden">
+
+                                    <x-button @click="showFiltre=!showFiltre" label="filtre">
+
+                                    </x-button>
+                                </div>
+
+                            </div>
+                            <div class="flex gap-2">
+
+
+                                <div>
+                                    <x-select placeholder="Trier par" class="!rounded-xl !shadow-md" wire:model.live.debounce.100ms="trie">
+                                        <x-select.option label="Prix ascendant" value="basic_price-asc" />
+                                        <x-select.option label="Prix Descendant" value="basic_price-desc" />
+                                        <x-select.option label="Niveau ascendant" value="level-asc" />
+                                        <x-select.option label="Niveau Descendant" value="level-desc" />
+                                        <x-select.option label="Populaire" value="populaire-desc" />
+                                        <x-select.option label="Nouveau" value="nouveau-desc" />
+
+                                    </x-select>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class="grid px-4 grid-cols-12">
+                    <!--Sidebar-->
+                    <div class="col-span-3 p-2 relative">
+
+                        <div x-bind:class="showFiltre? 'fixed inset-0   top-0  bottom-0  dark:bg-gray-800 bg-white z-50 p-4 transition-all duration-200 w-full' : 'hidden w-full mt-0   z-20'"
+                            class="overflow-x-hidden overflow-y-auto   rounded-md   lg:h-auto lg:block">
+                            <div class="p-2 flex flex-col">
+                                <h1 class="text-lg font-bold mb-2 text-gray-800">Sous category</h1>
+
+                                <div class="grid lg:grid-cols-1 grid-cols-2 gap-2">
+
+                                    @forelse ($subcat as $item)
+                                    <div>
+                                        <button wire:click="setCategory({{ $item->id }})"
+                                            class="flex gap-2 transition-all rounded-lg shadow-sm transform p-2 {{ $sous_category == $item->id ? 'border-2 border-amber-500 bg-amber-100 text-amber-700 translate-x-4 ' : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200' }} hover:translate-x-4 focus:translate-x-4 active:translate-x-4">
+                                            <img src="{{Storage::disk('local')->url('public/'.$item->illustration) }}"
+                                                class="w-8 p-1 object-fill rounded-md" alt="">
+                                            <span class="">{{$item->name}}</span>
+                                            <!-- Adjusted span for the number -->
+                                            <span
+                                                class="ml-2 bg-white text-gray-600  px-1 py-0.5 text-[10px] rounded-full">{{count($item->services())}}</span>
+                                        </button>
+                                    </div>
+                                    @empty
+                                    <!-- Handle empty case here -->
+
+                                    @endforelse
+
+                                </div>
+
+                                <div class="mt-4">
+
+                                    <h1 class="text-lg font-bold mb-4 text-gray-800">Prix</h1>
+                                    <fieldset x-data="{message:'10'}" class="space-y-1  w-full dark:text-gray-100">
+                                        <input type="range" x-model="message" wire:model.live.debounce.100ms="price_range"
+                                            class="w-full accent-amber-400" min="10" max="10000">
+
+                                        <div aria-hidden="true" class="flex justify-between px-1">
+
+                                            <div class="flex gap-4 p-2 border ">
+                                                <span>10$</span>
+
+                                                <span class="flex">
+
+                                                    <span x-text="message"></span>
+                                                    <span>$</span>
+                                                </span>
+                                            </div>
+                                            @if(!empty($price_range))
+                                            <div>
+                                                <x-button @click="message='10'" wire:click='PriceRest' sm label='annuler' />
+                                            </div>
+                                            @endif
+
+
+
+                                        </div>
+                                    </fieldset>
+
+                                </div>
+
+
+                                <div x-data="{showCategoryFilter:false}"
+                                    class="mt-4 mb-4 border-t py-3  relative border-gray-400 ">
+                                    <button @click="showCategoryFilter=!showCategoryFilter"
+                                        class="flex items-center justify-between w-full mb-2 font-bold text-gray-700 focus:outline-none">
+                                        <span class="text-base dark:text-gray-100"> Niveau Freelannce</span>
+                                        <svg x-show="!showCategoryFilter" class="w-4 h-4 fill-current"
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                            <path
+                                                d="M5.293 6.293a1 1 0 011.414 0L10 9.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" />
+                                        </svg>
+                                        <svg x-show="showCategoryFilter" class="w-4 h-4 fill-current"
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                            <path
+                                                d="M14.293 15.293a1 1 0 01-1.414 0L10 12.414l-2.293 2.293a1 1 0 01-1.414-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 010 1.414z" />
+                                        </svg>
+                                    </button>
+                                    <div x-bind:class="showCategoryFilter ?'flex relative w-full p-1 mt-2':'hidden'"
+                                        class="">
+
+                                        <div>
+
+                                            <x-checkbox wire:click='level(1)' value="1" label='Nouveau' />
+                                            <x-checkbox wire:click='level(2)' value="2" label='Niveau 2' />
+                                            <x-checkbox wire:click='level(3)' value="3" label='Niveau 3' />
+                                            <x-checkbox wire:click='level(4)' value="4" label='Niveau 4' />
+                                            <x-checkbox wire:click='level(4)' value="5" label='Top prestataire' />
+
+
+                                        </div>
+                                    </div>
+
+                                    <div x-data="{showCategoryFilter:false}"
+                                        class="mt-4 mb-4 border-t py-3  relative border-gray-400 ">
+                                        <button @click="showCategoryFilter=!showCategoryFilter"
+                                            class="flex items-center justify-between w-full mb-2 font-bold text-gray-700 focus:outline-none">
+                                            <span class="text-base dark:text-gray-100"> Temps de livraison</span>
+                                            <svg x-show="!showCategoryFilter" class="w-4 h-4 fill-current"
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                <path
+                                                    d="M5.293 6.293a1 1 0 011.414 0L10 9.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" />
+                                            </svg>
+                                            <svg x-show="showCategoryFilter" class="w-4 h-4 fill-current"
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                <path
+                                                    d="M14.293 15.293a1 1 0 01-1.414 0L10 12.414l-2.293 2.293a1 1 0 01-1.414-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 010 1.414z" />
+                                            </svg>
+                                        </button>
+                                        <div x-bind:class="showCategoryFilter ?'flex relative w-full p-1 mt-2':'hidden'"
+                                            class="">
+
+
+                                            <x-select wire:model.live.100ms='delivery_time' class="!w-full" :options="['1-5'=>'1-5 jours',
+                                                        '5-10'=>'5-10 jours',
+                                                        '10-50'=>'plus de 10 jours',]" />
+
+
+
+                                        </div>
+                                    </div>
+                                    <div x-data="{showCategoryFilter:false}"
+                                        class="mt-4 mb-4 border-t py-3  relative border-gray-400 ">
+                                        <button @click="showCategoryFilter=!showCategoryFilter"
+                                            class="flex items-center justify-between w-full mb-2 font-bold text-gray-700 focus:outline-none">
+                                            <span class="text-base dark:text-gray-100"> Localisation</span>
+                                            <svg x-show="!showCategoryFilter" class="w-4 h-4 fill-current"
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                <path
+                                                    d="M5.293 6.293a1 1 0 011.414 0L10 9.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" />
+                                            </svg>
+                                            <svg x-show="showCategoryFilter" class="w-4 h-4 fill-current"
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                <path
+                                                    d="M14.293 15.293a1 1 0 01-1.414 0L10 12.414l-2.293 2.293a1 1 0 01-1.414-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 010 1.414z" />
+                                            </svg>
+                                        </button>
+                                        <div x-bind:class="showCategoryFilter ?'flex relative w-full p-1 mt-2':'hidden'"
+                                            class="">
+
+                                            <x-select class="w-full" wire:model.live.debounce.100ms="localisation"
+                                                placeholder="Ville" :async-data="route('api.city')" option-label="ville"
+                                                option-value="id" />
+                                        </div>
+                                    </div>
+                                    <div x-data="{showCategoryFilter:true}"
+                                        class="mt-4 mb-4 border-t py-3  relative border-gray-400 ">
+                                        <button @click="showCategoryFilter=!showCategoryFilter"
+                                            class="flex items-center justify-between w-full mb-2 font-bold text-gray-700 focus:outline-none">
+                                            <span class="text-base dark:text-gray-100"> Tag de recherche</span>
+                                            <svg x-show="!showCategoryFilter" class="w-4 h-4 fill-current"
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                <path
+                                                    d="M5.293 6.293a1 1 0 011.414 0L10 9.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" />
+                                            </svg>
+                                            <svg x-show="showCategoryFilter" class="w-4 h-4 fill-current"
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                <path
+                                                    d="M14.293 15.293a1 1 0 01-1.414 0L10 12.414l-2.293 2.293a1 1 0 01-1.414-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 010 1.414z" />
+                                            </svg>
+                                        </button>
+                                        <div x-bind:class="showCategoryFilter ? 'flex flex-wrap relative w-full p-1 mt-2' : 'hidden'"
+                                            class="">
+                                            @foreach($tags as $tag)
+                                            <span
+                                                class="inline-block cursor-pointer rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2
+                                                    {{ $selectedTag === $tag ? 'border-2 border-amber-500 bg-amber-100 text-amber-700' : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200' }}"
+                                                wire:click="filterByTag('{{ $tag }}')">
+                                                {{ $tag }}
+                                            </span>
+                                            @endforeach
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="flex gap-4 lg:hidden">
+                                <x-button amber x-on:click="showFiltre=!showFiltre" label="appliquer">
+                                </x-button>
+                                <x-button x-on:click="showFiltre=!showFiltre" label="Fermer">
+
+
+                                </x-button>
+                            </div>
+
+                        </div>
+                        <!--End Sidebar-->
+                        <!--Main Content-->
+
+
+                    </div>
+
+                    <div class="lg:col-span-9 pt-8 col-span-12">
+
+                        <div class="py-4 px-4">
+                            @if($count = $this->countFiltersApplied())
+                            <div class="mb-4  flex gap-4 p-2 rounded">
+
+                                <span class="text-sm text-amber-600">Filtres appliqués : {{ $count }}</span>
+
+
+                                <x-button.circle icon="x" wire:click='resetAll' />
+                            </div>
+                            @endif
+
+
+                            <div class="hidden lg:block">
+                                {{$services->links()}}
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+                            @forelse ($services as $service)
+
+                            @livewire('web.card.service-card',['service' => $service], key($service->id))
+
+
+
+                            @empty
+                            <div class="flex justify-center items-center h-64">
+                                <span class="text-gray-500 text-lg font-medium">
+                                    Aucun élément trouvé.
+                                </span>
+                            </div>
+                            @endforelse
+
+
+
+
+
+                        </div>
+
+                        <div class="py-4">
+
+
+                            <div>
+                                {{$services->links()}}
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="pt-16  grid lg:grid-cols-12 ">
+                    <div class="lg:col-span-3 lg:block hidden">
+
+                    </div>
+                    <div class="lg:col-span-9">
+
+                        <div class="items-center mb-4">
+                            <h1 class="text-center text-lg font-semibold">Autres Categories</h1>
+                        </div>
+                        <div class="flex flex-wrap gap-4">
+                            @forelse ($categoriesElement as $item)
+                            <div>
+                                <a href="{{route('categoryByName',[$item->name])}}"
+                                    class="flex gap-2 transition-all rounded-lg shadow-sm transform bg-gray-200 dark:bg-gray-700 p-2  hover:scale-95 active:bg-amber-400 focus:bg-amber-400  focus:text-gray-50 ">
+                                    <img src="{{Storage::disk('local')->url('public/'.$item->illustration) }}"
+                                        class="w-8 p-1 object-fill rounded-md" alt="">
+                                    <span class="">{{$item->name}}</span>
+                                    <!-- Adjusted span for the number -->
+
+                                        <div
+                                            class="absolute inline-flex items-center justify-center w-4 h-4 text-[10px] font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2 dark:border-gray-900">
+                                            {{count($item->services)}}</div>
+                                </a>
+                            </div>
+                            @empty
+
+
+                            @endforelse
+
+                        </div>
+
+
+
+                    </div>
 
 
 
                 </div>
 
-
             </div>
 
-            <div>
-                {{$services->links()}}
-            </div>
-        </div>
-
-    </div>
 </div>

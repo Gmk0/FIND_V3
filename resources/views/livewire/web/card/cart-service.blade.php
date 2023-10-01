@@ -10,8 +10,8 @@
         x-transition:leave="transition ease-out duration-300"
         x-transition:leave-start="opacity-0 transform translate-x-0"
         x-transition:leave-end="opacity-0 transform translate-x-40"
-        class="fixed inset-y-0 right-0 z-[85] flex flex-col bg-white shadow-lg bg-opacity-20 w-80"
-        style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)">
+        class="fixed inset-y-0 right-0 z-[400] flex flex-col bg-white shadow-lg soft-scrollbar  w-80"
+        style="backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px)">
         <div class="flex items-center justify-between flex-shrink-0 p-2">
             <h6 class="p-2 text-lg text-gray-800">Panier</h6>
             <button @click="linkActive = false" class="p-2 rounded-md focus:outline-none focus:ring">
@@ -21,7 +21,7 @@
                 </svg>
             </button>
         </div>
-        <div class="flex-1 max-h-full p-4 overflow-auto ">
+        <div class="flex-1 max-h-full p-4 overflow-auto soft-scrollbar ">
 
             <!-- Settings Panel Content ... -->
 

@@ -3,17 +3,21 @@ import './bootstrap';
 import 'flowbite';
 import AOS from 'aos';
 
+
+
 import * as PusherPushNotifications from "@pusher/push-notifications-web";
 
 import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
 import collapse from '@alpinejs/collapse'
 import Clipboard from "@ryangjchandler/alpine-clipboard"
 
-import jQuery from 'jquery';
+
+import $ from 'jquery';
 import Swal from 'sweetalert2';
 
 
-//import persist from "@alpinejs/persist"; // @see https://alpinejs.dev/plugins/persist
+
+
 // @see https://alpinejs.dev/plugins/collapse
 import intersect from "@alpinejs/intersect"; // @see https://alpinejs.dev/plugins/intersect
 
@@ -93,7 +97,7 @@ import SimpleBar from "simplebar";
 //Alpine.plugin(NotificationsAlpinePlugin);
 
 
-window.$ = jQuery;
+
 
 window.Swal = Swal;
 
@@ -120,6 +124,8 @@ window.Swiper = Swiper;
 //window.flatpickr = flatpickr;
 //window.Quill = Quill;
 //window.Tom = Tom;
+
+//window.$ = jQuery;
 
 window.helpers = helpers;
 window.pages = pages;
@@ -158,6 +164,9 @@ Alpine.data("accordionItem", accordionItem);
 
 AOS.init();
 //Alpine.start();
+
+
+
 
 Livewire.start();
 

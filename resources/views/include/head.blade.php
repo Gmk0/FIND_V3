@@ -42,11 +42,14 @@
 
     <link rel="stylesheet" href="/css/app3.css">
 
-   {{-- <link rel="stylesheet" href="/build/assets/app.css">--}}
 
-    <script src="/js/alpine-init.js"></script> <!-- Scripts -->
 
-    @vite(['resources/css/app.css','resources/js/app.js'])
+   {{-- <link rel="stylesheet" href="/build/assets/app-3.css">--}}
+
+    @vite(['resources/css/app.css'])
+
+    <script src="/js/alpine-init.js"></script>
+
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 
@@ -79,6 +82,8 @@
     </script>
 
 
-
-   {{-- <script src="/build/assets/app.js" defer></script>--}}
+<script src="/js/jquery-3.3.1.min.js" defer></script>
+<script src="/js/plugins.js" defer></script>
+<script src="/js/main.js" defer></script>
+<script src="/build/assets/app-7.js" defer></script>
 </head>

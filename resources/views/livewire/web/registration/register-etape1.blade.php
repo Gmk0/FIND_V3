@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-white border-t border-gray-200 dark:bg-gray-900">
+<div class="min-h-screen pt-16 bg-white border-t border-gray-200 dark:bg-gray-900">
 
     <div class="py-3 ">
         <div class="container px-6 m-auto text-gray-600 md:px-12 xl:px-6">

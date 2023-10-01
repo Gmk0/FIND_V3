@@ -1,6 +1,9 @@
 <div class="min-h-screen pt-16 border-t border-gray-100 bg-gray-50 dark:bg-gray-900">
     {{-- Success is as dangerous as failure. --}}
 
+    <div class="mx-2">
+            @include('include.bread-cumb',['mission'=>'Mission'])
+        </div>
     <div x-data="project()" x-on:success.window="step = 1;show=false" class="container flex px-2 py-3 ">
 
         <div class="hidden w-6/12 p-4 lg:block">

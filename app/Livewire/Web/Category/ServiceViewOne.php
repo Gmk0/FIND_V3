@@ -45,6 +45,9 @@ implements HasForms, HasActions
     public $messageSent = false;
 
     public $body = "";
+    public $commandeEncours;
+    public $commandeFinis;
+
 
     protected $queryString = ['messageSent' => ['expect' => '']];
 
@@ -292,9 +295,29 @@ implements HasForms, HasActions
     }
 
 
+    public function commandeEncours()
+    {
+        $commandeEncours
+            = FeedbackService::whereHas('order.service', function ($query) {
+                $query->where('freelance_id', $this->service->freelance->id);
+            })->where('etat', '!=', 'Livré')->count();
+        return $commandeEncours;
+    }
+    public function commandeFinis()
+    {
+        $commandeEncours
+            = FeedbackService::whereHas('order.service', function ($query) {
+                $query->where('freelance_id', $this->service->freelance->id);
+            })->where('etat', '=', 'Livré')->count();
+        return $commandeEncours;
+    }
+
 
     public function render()
     {
+         $this->commandeEncours
+        = $this->commandeEncours();
+     $this->commandeFinis=$this->commandeFinis();
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
         $this->products = $cart->items;

@@ -2,7 +2,7 @@
     <div class="flex flex-col w-full mt-6">
         <div class="relative">
 
-            <div class="relative flex p-1 mb-4 bg-white shadow-2xl rounded-xl md:p-2">
+            <div class="relative flex p-1 mb-4 bg-white lg:dark:bg-white shadow-2xl rounded-xl md:p-2">
 
                 <input wire:model.live="search" x-model="message"
                     class="w-full p-4 mr-2 text-gray-600 border-white focus:border-white rounded-xl " type="text">
@@ -24,7 +24,7 @@
 
             </div>
 
-          
+
             <div x-show="message.length > 1" x-cloak
                 class="absolute w-full mt-1 overflow-y-auto bg-white border divide-y rounded-lg shadow z-[60] custom-scrollbar max-h-72">
                 @forelse($results as $index => $result)
@@ -42,11 +42,11 @@
                 @endforelse
 
                     <div wire:loading class="flex items-center justify-center p-2">
-                        <div class="spinner"></div>
+                        <div class="spinners"></div>
                     </div>
 
             </div>
-         
+
 
         </div>
 

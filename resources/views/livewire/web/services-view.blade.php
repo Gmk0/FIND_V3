@@ -1,6 +1,6 @@
 <div x-data="{ isOpen:false,isLoading: true,showFilters: false,showSearch: false }"
         x-init="setTimeout(() => { isLoading = false }, 2000)">
-    <div class="flex flex-col min-h-screen pt-8 mb-6">
+    <div class="flex flex-col min-h-screen pt-16 mb-6">
 
         <div x-show="!isLoading" x-cloak class="flex flex-col p-2 mx-6 my-8 bg-white rounded-lg md:min-h-64 dark:bg-gray-800">
             <div class="mb-2">
@@ -186,7 +186,7 @@
 
 
             <div
-                class="grid grid-cols-1 gap-4 mx-1 lg:max-w-5xl lg:mx-2 lg:p-4 md:grid-cols-3 lg:md:grid-cols-4 md:gap-4">
+                class="grid grid-cols-1 gap-4 mx-auto lg:max-6-5xl lg:mx-auto lg:p-4 md:grid-cols-3 lg:md:grid-cols-4 md:gap-4">
                 @forelse ($services as $service)
 
 
