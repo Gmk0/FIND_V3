@@ -44,9 +44,9 @@
 
 
 
-   {{-- <link rel="stylesheet" href="/build/assets/app-3.css">--}}
+   <link rel="stylesheet" href="/build/assets/app.css">
 
-    @vite(['resources/css/app.css'])
+
 
     <script src="/js/alpine-init.js"></script>
 
@@ -85,5 +85,5 @@
 <script src="/js/jquery-3.3.1.min.js" defer></script>
 <script src="/js/plugins.js" defer></script>
 <script src="/js/main.js" defer></script>
-<script src="/build/assets/app-7.js" defer></script>
+<script src="/build/assets/app.js" defer></script>
 </head>

@@ -102,7 +102,7 @@
                 <!-- calendar -->
                 <div data-aos="fade-up" data-aos-delay="300" data-aos-once="true"
                     class="absolute top-20 left-6 floating-4">
-                    <img class="bg-white bg-opacity-80 rounded-lg h-12 sm:h-16" src="/images/illustrations/calendar.svg">
+                    <img class="bg-white bg-opacity-80 rounded-lg h-12 sm:h-16" src="/canva/feedback.png">
                 </div>
                 <!-- red -->
                 <div data-aos="fade-up" data-aos-delay="400" data-aos-once="true"

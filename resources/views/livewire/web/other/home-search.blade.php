@@ -56,20 +56,20 @@
         <div class="flex justify-center gap-4 mt-4">
             <div class="flex items-center space-x-2">
 
-                <a href=""
+                <a href="{{route('categories')}}"
                     class="flex items-center h-8 px-2 text-gray-100 border border-gray-100 rounded-full dark:border-purple-500">
                     Photographie</a>
             </div>
             <div class="flex items-center space-x-2">
 
-                <a href=""
+                <a href="{{route('categories')}}"
                     class="flex items-center h-8 px-2 text-gray-100 border border-gray-100 rounded-full dark:border-purple-500">
                     Design
                 </a>
             </div>
             <div class="flex items-center space-x-2">
 
-                <a href=""
+                <a href="{{route('categories')}}"
                     class="flex items-center h-8 px-2 text-gray-100 border border-gray-100 rounded-full dark:border-purple-500">
                     Technologie</a>
             </div>

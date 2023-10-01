@@ -239,13 +239,13 @@
 
 
 
-    <div x-cloak x-show.in.out.opacity="navOpen" class="fixed inset-0 z-[100] bg-black bg-opacity-20 lg:hidden"
+    <div x-cloak x-show.in.out.opacity="navOpen" class="fixed inset-0 z-[400] bg-black bg-opacity-20 lg:hidden"
         style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)"></div>
 
 
     <div x-cloak x-show="navOpen" @click.away="navOpen = false"
         style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)"
-        class="fixed inset-0 bottom-0 left-0 z-[150] w-10/12 overflow-auto origin-left transform shadow-lg bg-gray-50 dark:bg-gray-800 custom-scrollbar lg:hidden"
+        class="fixed inset-0 bottom-0 left-0 z-[500] w-10/12 overflow-auto origin-left transform shadow-lg bg-gray-50 dark:bg-gray-800 custom-scrollbar lg:hidden"
         x-transition:enter=" transition ease-in duration-300" x-transition:enter-start="opacity-0 transform -translate-x-40"
         x-transition:enter-end="opacity-100 transform translate-x-0" x-transition:leave="transition ease-out duration-500"
         x-transition:leave-start="opacity-0 transform translate-x-0"
@@ -317,7 +317,7 @@
                                 <ion-icon name="albums-outline" class="w-6 h-6 dark:text-white"></ion-icon>
                                 <span class="ml-2">{{__('Categories')}}</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" :class="{'rotate-180': open, 'rotate-0': !open}"
-                                    class="w-6 h-6 mt-1 transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    class="w-5 h-5 px-1 mt-1 transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down">
                                     <polyline points="6 9 12 15 18 9"></polyline>
                                 </svg>
@@ -334,7 +334,7 @@
 
                                         <span class="ml-3">{{$categorie->name}}</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" :class="{'rotate-180': open, 'rotate-0': !open}"
-                                            class="w-5 h-5 mt-1 transform" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            class="w-5 h-5 px-1 mt-1 transform" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                             class="feather feather-chevron-down">
                                             <polyline points="6 9 12 15 18 9"></polyline>
@@ -350,7 +350,7 @@
                                             {{$categorie->name}}
                                         </a>
                                         @forelse($categorie->subCategories as $item)
-                                       <a @click="navOpen = false" href="{{route('categoryByName',[$categorie->name])}}" wire:navigate @click="navOpen = false"
+                                       <a @click="navOpen = false" href="{{route('SubcategoryName',[$category->name,$item->name])}}" wire:navigate @click="navOpen = false"
                                             class="flex flex-row items-center px-3 py-2 text-base font-medium text-gray-800 rounded-md dark:text-white hover:text-gray-900 hover:bg-gray-200 dark:hover:bg-gray-600 focus:outline-none focus:text-gray-900 focus:bg-gray-200"
                                             role="menuitem">
                                             {{$item->name}}
@@ -400,6 +400,11 @@
                             class="flex flex-row items-center px-3 py-2 mt-1 text-base font-medium text-gray-800 rounded-md dark:text-gray-50 hover:dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 focus:outline-none focus:dark:text-white focus:text-white focus:bg-amber-600">
                             <ion-icon name="chatbubbles-outline" class="w-6 h-6 dark:text-white"></ion-icon>
                             <span class="ml-2">{{__('Apropos')}}</span>
+                        </a>
+                        <a href="{{url('/faq')}}" @click="navOpen = false" wire:navigate
+                            class="flex flex-row items-center px-3 py-2 mt-1 text-base font-medium text-gray-800 rounded-md dark:text-gray-50 hover:dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 focus:outline-none focus:dark:text-white focus:text-white focus:bg-amber-600">
+                            <ion-icon name="chatbubbles-outline" class="w-6 h-6 dark:text-white"></ion-icon>
+                            <span class="ml-2">{{__('Foire aux Questions')}}</span>
                         </a>
 
                         <button
