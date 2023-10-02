@@ -3,14 +3,11 @@
 
 <div wire:ignore x-data="{isDark: false, isSearchBoxOpen:false}" @scroll.window="isDark = (window.pageYOffset > 150) ? true : false">
 
-
-
-
     <div x-data="{isWhite: false, isHome: @entangle('isHome')}" @scroll.window="isWhite = (window.pageYOffset > 150) ? true : false"
 
         :class="isDark?'dark:bg-gray-800 ':''" class="{{request()->routeIs('home') ? 'header-wrap2':' bg-white '}} header-wrap  classicHeader animated flex">
-        <div class="w-full px-8 lg:px-12">
-            <div class="grid items-center justify-between w-full grid-cols-12 mx-auto">
+        <div class="w-full px-4 lg:px-12">
+            <div class="grid items-center justify-between w-full grid-cols-12 lg:mx-auto">
                 <!--Desktop Logo-->
                 <div class="logo md:col-span-2 lg:block hidden">
                     <a href="{{url('home')}}">
@@ -177,9 +174,6 @@
                 <div  class="col-span-3   flex items-center justify-end gap-2 lg:col-span-2 ">
 
                     @auth
-
-
-
 
                     <div class="site-header__search">
                         <button @click="isSearchBoxOpen=!isSearchBoxOpen" type="button" class="search-trigger">

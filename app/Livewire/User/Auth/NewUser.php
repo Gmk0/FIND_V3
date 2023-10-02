@@ -61,6 +61,7 @@ implements HasForms
 
 
 
+       $this->validate(['data.phone'=>'unique:users,phone']);
 
 
         $newUser = User::create([
@@ -100,9 +101,10 @@ implements HasForms
             ->required()
             ->countryStatePath('phone_country')
             ->initialCountry('cd')
+            ->unique(table: User::class)
             ->displayNumberFormat(PhoneInputNumberType::E164)
 
-                ->unique(table: User::class)
+
             ->focusNumberFormat(PhoneInputNumberType::E164),
            // ->inputNumberFormat(PhoneInputNumberType::E164),
 

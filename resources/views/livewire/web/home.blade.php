@@ -13,7 +13,7 @@
                                 <div class="container">
                                     <div class="wrap-caption  right">
                                         <h2 class="h1 mega-title slideshow__title"></h2>
-                                        <span class="mega-subtitle slideshow__subtitle">Voir</span>
+                                        <span class="mega-subtitle slideshow__subtitle"></span>
                                         <span class=""></span>
                                     </div>
                                 </div>
@@ -53,7 +53,7 @@
                                     <div class="wrap-caption  right">
                                         <h2 class="h1 mega-title slideshow__title"></h2>
                                         <span class="mega-subtitle slideshow__subtitle"></span>
-                                        <span class="btn"></span>
+                                        <span class=""></span>
                                     </div>
                                 </div>
                             </div>
@@ -131,15 +131,7 @@
                     </svg>
                 </div>
                 <!-- ux class -->
-                <div data-aos="fade-up" data-aos-delay="500" data-aos-once="true"
-                    class="absolute bottom-20 -left-4    floating">
-                    <img class="bg-white dark:bg-white bg-opacity-80 rounded-lg h-20 sm:h-28" src="/images/illustrations/ux-class.svg" alt="">
-                </div>
-                <!-- congrats -->
-                <div data-aos="fade-up" data-aos-delay="600" data-aos-once="true"
-                    class="absolute bottom-20  -right-6 floating-4">
-                    <img class="bg-white bg-opacity-80 rounded-lg h-12 sm:h-16" src="/images/illustrations/congrat.svg" alt="">
-                </div>
+
             </div>
 
         </div>

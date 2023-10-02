@@ -197,7 +197,7 @@ implements HasForms
             'freelances' => $this->filteredFreelances(),
             'categories' => Category::all(),
             'nowOnline'=>Freelance::whereHas('user',function($q){
-                $q->where('isOnline',true);
+                $q->where('is_online',true);
 
             })->count(),
             'subcategories' => Subcategory::whereHas('category', function ($q) {
@@ -247,7 +247,7 @@ implements HasForms
                 }
             })->when($this->isonLine, function ($query) {
             $query->whereHas('user', function ($q) {
-                $q->where('isOnline', true);
+                $q->where('is_online', true);
             });
         })
         ->paginate(9);

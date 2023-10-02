@@ -1,5 +1,5 @@
 
-<div class="min-h-screen">
+<div class="min-h-screen pt-16">
     <div class="pb-8">
 
         <div class="px-6 m-auto text-gray-900 xl:container md:px-12 xl:px-16">

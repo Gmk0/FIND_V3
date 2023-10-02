@@ -3,7 +3,7 @@
 namespace App\Livewire\User\User;
 
 use Livewire\Component;
-use App\Models\Notification;
+use App\Models\notification;
 //use App\Events\ProjectResponse;
 //use WireUi\Traits\Actions;
 use App\Events\ProgressOrderEvent;
@@ -108,7 +108,7 @@ class NotificationComponent extends Component
 
         return view('livewire.user.user.notification-component', [
             'notification' => auth()->user()->unreadNotifications()->latest()->take(8)->get(),
-            'count'=>Notification::where('notifiable_id', '=', auth()->id())->where('is_read','=', null)->count(),
+            'count'=> notification::where('notifiable_id', '=', auth()->id())->where('read_at','=', null)->count(),
             'commande' => auth()->user()->unreadNotifications()->where('type', '=', "App\Notifications\OrderNotification")->latest()->take(8)->get(),
             'Progress' => auth()->user()->unreadNotifications()->where('type', '=', "App\Notifications\ProgressOrder")->Where('type', '=', "App\Notifications\progressProjet")->orWhere('type', '=', " App\Notifications\feedbackNotification")->latest()->take(8)->get(),
             'tabEvents' => auth()->user()->unreadNotifications()->where('type', '=', "App\Notifications\OrderNotification")->orWhere('type', '=', "App\Notifications\orderUser")->latest()->take(8)->get(),

@@ -10,7 +10,7 @@
                         d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
             </span>
-            <input type="text" placeholder="Search" wire:model.live.debounce.100ms="search"
+            <input type="text" placeholder="Search" wire:model.live="search"
                 class="w-full px-4 py-3 text-gray-600 rounded-md focus:bg-gray-100 focus:outline-none" />
 
 
