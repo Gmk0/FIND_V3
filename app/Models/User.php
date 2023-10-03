@@ -90,6 +90,12 @@ class User extends Authenticatable
         });
     }
 
+    public function canAccessFilament(): bool
+    {
+        return str_ends_with($this->email, '@find-freelance.com') && $this->hasVerifiedEmail();
+    }
+
+
     public function freelance()
     {
         return $this->hasOne(Freelance::class);

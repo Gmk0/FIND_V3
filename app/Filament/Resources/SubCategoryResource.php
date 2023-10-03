@@ -19,6 +19,10 @@ class SubCategoryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationGroup = 'Categories';
+
+
+
     public static function form(Form $form): Form
     {
         return $form
@@ -28,7 +32,9 @@ class SubCategoryResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('name')
                     ->required(),
-                Forms\Components\TextInput::make('illustration'),
+            Forms\Components\FileUpload::make('illustration')
+            ->preserveFilenames()
+            ->directory('subcategory'),
             ]);
     }
 
@@ -41,8 +47,7 @@ class SubCategoryResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('illustration')
-                    ->searchable(),
+            Tables\Columns\ImageColumn::make('illustration'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -69,11 +74,11 @@ class SubCategoryResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ]);
     }
-    
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ManageSubCategories::route('/'),
         ];
-    }    
+    }
 }

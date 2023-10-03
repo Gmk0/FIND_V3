@@ -19,6 +19,9 @@ class CategoryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+
+    protected static ?string $navigationGroup = 'Categories';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -38,10 +41,11 @@ class CategoryResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('description')
+                Tables\Columns\TextColumn::make('description')->wrap()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('illustration')
-                    ->searchable(),
+            Tables\Columns\TextColumn::make('count_freelance')->counts('freelances'),
+                Tables\Columns\ImageColumn::make('illustration')
+                    ,
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

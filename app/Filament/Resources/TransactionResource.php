@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class TransactionResource extends Resource
 {
     protected static ?string $model = Transaction::class;
+    protected static ?string $navigationGroup = 'Freelances';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -81,14 +82,14 @@ class TransactionResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -97,5 +98,5 @@ class TransactionResource extends Resource
             'view' => Pages\ViewTransaction::route('/{record}'),
             'edit' => Pages\EditTransaction::route('/{record}/edit'),
         ];
-    }    
+    }
 }

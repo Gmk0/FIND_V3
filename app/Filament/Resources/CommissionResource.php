@@ -17,6 +17,8 @@ class CommissionResource extends Resource
 {
     protected static ?string $model = Commission::class;
 
+    protected static ?string $navigationGroup = 'Paiement';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
@@ -46,21 +48,34 @@ class CommissionResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->groups([
+            'order.status',
+            'mission.status',
+            ])
+            ->defaultGroup('order.status')
             ->columns([
-                Tables\Columns\TextColumn::make('order.id')
+                Tables\Columns\TextColumn::make('order.order_numero')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('user.name')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('mission.title')
+                Tables\Columns\TextColumn::make('mission.mission_numero')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('amount')
-                    ->numeric()
-                    ->sortable(),
+                    ->money('usd', true)
+                ->summarize([
+                    Tables\Columns\Summarizers\Sum::make()
+                        ->money(),
+                ]),
+
                 Tables\Columns\TextColumn::make('net_amount')
-                    ->numeric()
+            ->money('usd', true)
+            ->summarize([
+                Tables\Columns\Summarizers\Sum::make()
+                    ->money(),
+            ])
                     ->sortable(),
                 Tables\Columns\TextColumn::make('percent')
                     ->searchable(),
@@ -89,14 +104,14 @@ class CommissionResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -105,5 +120,5 @@ class CommissionResource extends Resource
             'view' => Pages\ViewCommission::route('/{record}'),
             'edit' => Pages\EditCommission::route('/{record}/edit'),
         ];
-    }    
+    }
 }

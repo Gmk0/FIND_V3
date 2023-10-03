@@ -16,8 +16,9 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class FreelanceResource extends Resource
 {
     protected static ?string $model = Freelance::class;
+    protected static ?string $navigationGroup = 'Freelances';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
 
     public static function form(Form $form): Form
     {
@@ -117,14 +118,14 @@ class FreelanceResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -133,5 +134,5 @@ class FreelanceResource extends Resource
             'view' => Pages\ViewFreelance::route('/{record}'),
             'edit' => Pages\EditFreelance::route('/{record}/edit'),
         ];
-    }    
+    }
 }

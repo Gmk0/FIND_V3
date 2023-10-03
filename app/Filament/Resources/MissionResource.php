@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class MissionResource extends Resource
 {
     protected static ?string $model = Mission::class;
+    protected static ?string $navigationGroup = 'Freelances';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -114,14 +115,14 @@ class MissionResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -130,5 +131,5 @@ class MissionResource extends Resource
             'view' => Pages\ViewMission::route('/{record}'),
             'edit' => Pages\EditMission::route('/{record}/edit'),
         ];
-    }    
+    }
 }
