@@ -1,24 +1,24 @@
-<div class="py-16 pb-12 min-h-screen">
+<div class="min-h-screen py-16 pb-12">
 
     <div x-data="{showFiltre: false}" class="">
 
         <div id="page-content">
 
-            <div x-cloak x-show="!loading" class="relative bg-skin-fill h-24">
-                <img class="w-full h-full object-cover opacity-70 hidden" src="" alt=""
+            <div x-cloak x-show="!loading" class="relative h-24 bg-skin-fill">
+                <img class="hidden object-cover w-full h-full opacity-70" src="" alt=""
                     title="" />
                 <div class="absolute inset-0 flex items-center justify-center">
-                    <h1 class="lg:text-4xl text-lg font-bold text-white">{{$subcategoryName}}</h1>
+                    <h1 class="text-lg font-bold text-white lg:text-4xl">{{$subcategoryName}}</h1>
                 </div>
             </div>
             <!--End Collection Banner-->
 
-            <div x-show="loading" class="relative h-36 w-full bg-gray-300 animate-pulse">
+            <div x-show="loading" class="relative w-full bg-gray-300 h-36 animate-pulse">
 
             </div>
 
 
-           <div class=" mt-4 ">
+           <div class="mt-4 ">
             <div x-show="loading">
 
             <div class="flex flex-row flex-1 h-screen p-8 overflow-y-hidden">
@@ -43,10 +43,10 @@
             </div>
         </div>
 
-                <div class="grid px-4 h-auto grid-cols-12 h-auto lg:z-0 top-0 z-30 bg-white lg:bg-transparent sticky lg:relative  py-2">
-                    <div class="lg:col-span-3 flex items-center">
+                <div class="sticky top-0 z-30 grid h-auto grid-cols-12 px-4 py-2 bg-white lg:z-0 lg:bg-transparent lg:relative">
+                    <div class="flex items-center lg:col-span-3">
 
-                        <nav class="py-4 hidden">
+                        <nav class="hidden py-4">
                             <ul class="flex items-center space-x-2 text-sm text-gray-600">
                                <li class="flex items-center">
                                     <a rel="noopener noreferrer" href="{{url('/')}}" title="Back to homepage" class="hover:underline">
@@ -75,12 +75,12 @@
 
                     </div>
 
-                    <div class="lg:col-span-9 col-span-12 grid lg:grid-cols-12  gap-4 lg:gap-2 ">
+                    <div class="grid col-span-12 gap-4 lg:col-span-9 lg:grid-cols-12 lg:gap-2 ">
                         <div class="px-4 lg:col-span-10">
                             <x-input class="!rounded-full   !shadow-md" wire:model.live.debounce.100ms='search'
                                 placeholder="recherche" icon='search' />
                         </div>
-                        <div class="lg:col-span-2 flex px-4 flex-row justify-between gap-2">
+                        <div class="flex flex-row justify-between gap-2 px-4 lg:col-span-2">
                             <div class="">
                                 <div class="block lg:hidden">
 
@@ -119,21 +119,21 @@
                 </div>
                 <div class="grid grid-cols-12">
                     <!--Sidebar-->
-                    <div class="col-span-3 p-2 relative">
+                    <div class="relative col-span-3 p-2">
 
                         <div x-bind:class="showFiltre? 'fixed inset-0   top-0  bottom-0  dark:bg-gray-800 bg-white z-50 p-4 transition-all duration-200 w-full' : 'hidden w-full mt-0   z-20'"
-                            class="overflow-x-hidden overflow-y-auto   rounded-md   lg:h-auto lg:block">
-                            <div class="p-2 flex flex-col">
-                                <h1 class="text-lg font-bold mb-2 text-gray-800">Sous category</h1>
+                            class="overflow-x-hidden overflow-y-auto rounded-md lg:h-auto lg:block">
+                            <div class="flex flex-col p-2">
+                                <h1 class="mb-2 text-lg font-bold text-gray-800">Sous category</h1>
 
-                                <div class="grid lg:grid-cols-1 grid-cols-2 gap-2">
+                                <div class="grid grid-cols-2 gap-2 lg:grid-cols-1">
 
                                    {{-- @forelse ($subcat as $item)
                                     <div>
                                         <button wire:click="setCategory({{ $item->id }})"
                                             class="flex gap-2 transition-all rounded-lg shadow-sm transform p-2 {{ $sous_category == $item->id ? 'border-2 border-amber-500 bg-amber-100 text-amber-700 translate-x-4 ' : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200' }} hover:translate-x-4 focus:translate-x-4 active:translate-x-4">
                                             <img src="{{Storage::disk('local')->url('public/'.$item->illustration) }}"
-                                                class="w-8 p-1 object-fill rounded-md" alt="">
+                                                class="object-fill w-8 p-1 rounded-md" alt="">
                                             <span class="">{{$item->name}}</span>
                                             <!-- Adjusted span for the number -->
                                             <span
@@ -149,8 +149,8 @@
 
                                 <div class="mt-4">
 
-                                    <h1 class="text-lg font-bold mb-4 text-gray-800">Prix</h1>
-                                    <fieldset x-data="{message:'10'}" class="space-y-1  w-full dark:text-gray-100">
+                                    <h1 class="mb-4 text-lg font-bold text-gray-800">Prix</h1>
+                                    <fieldset x-data="{message:'10'}" class="w-full space-y-1 dark:text-gray-100">
                                         <input type="range" x-model="message"
                                             wire:model.live.debounce.100ms="price_range" class="w-full accent-amber-400"
                                             min="10" max="10000">
@@ -182,7 +182,7 @@
 
 
                                 <div x-data="{showCategoryFilter:false}"
-                                    class="mt-4 mb-4 border-t py-3  relative border-gray-400 ">
+                                    class="relative py-3 mt-4 mb-4 border-t border-gray-400 ">
                                     <button @click="showCategoryFilter=!showCategoryFilter"
                                         class="flex items-center justify-between w-full mb-2 font-bold text-gray-700 focus:outline-none">
                                         <span class="text-base dark:text-gray-100"> Niveau Freelannce</span>
@@ -212,7 +212,7 @@
                                     </div>
 
                                     <div x-data="{showCategoryFilter:false}"
-                                        class="mt-4 mb-4 border-t py-3  relative border-gray-400 ">
+                                        class="relative py-3 mt-4 mb-4 border-t border-gray-400 ">
                                         <button @click="showCategoryFilter=!showCategoryFilter"
                                             class="flex items-center justify-between w-full mb-2 font-bold text-gray-700 focus:outline-none">
                                             <span class="text-base dark:text-gray-100"> Temps de livraison</span>
@@ -240,7 +240,7 @@
                                         </div>
                                     </div>
                                     <div x-data="{showCategoryFilter:false}"
-                                        class="mt-4 mb-4 border-t py-3  relative border-gray-400 ">
+                                        class="relative py-3 mt-4 mb-4 border-t border-gray-400 ">
                                         <button @click="showCategoryFilter=!showCategoryFilter"
                                             class="flex items-center justify-between w-full mb-2 font-bold text-gray-700 focus:outline-none">
                                             <span class="text-base dark:text-gray-100"> Localisation</span>
@@ -264,7 +264,7 @@
                                         </div>
                                     </div>
                                     <div x-data="{showCategoryFilter:true}"
-                                        class="mt-4 mb-4 border-t py-3  relative border-gray-400 ">
+                                        class="relative py-3 mt-4 mb-4 border-t border-gray-400 ">
                                         <button @click="showCategoryFilter=!showCategoryFilter"
                                             class="flex items-center justify-between w-full mb-2 font-bold text-gray-700 focus:outline-none">
                                             <span class="text-base dark:text-gray-100"> Tag de recherche</span>
@@ -312,11 +312,11 @@
 
                     </div>
 
-                    <div class="lg:col-span-9 pt-8 col-span-12">
+                    <div class="col-span-12 pt-8 lg:col-span-9">
 
-                        <div class="py-4 px-4">
+                        <div class="px-4 py-4">
                             @if($count = $this->countFiltersApplied())
-                            <div class="mb-4  flex gap-4 p-2 rounded">
+                            <div class="flex gap-4 p-2 mb-4 rounded">
 
                                 <span class="text-sm text-amber-600">Filtres appliqués : {{ $count }}</span>
 
@@ -326,9 +326,9 @@
                             @endif
                             <div wire:loading class="flex items-center justify-center p-2">
                                <div class="flex gap-2">
-                                <div class="w-5 h-5 rounded-full animate-pulse bg-blue-600"></div>
-                                <div class="w-5 h-5 rounded-full animate-pulse bg-blue-600"></div>
-                                <div class="w-5 h-5 rounded-full animate-pulse bg-blue-600"></div>
+                                <div class="w-5 h-5 bg-blue-600 rounded-full animate-pulse"></div>
+                                <div class="w-5 h-5 bg-blue-600 rounded-full animate-pulse"></div>
+                                <div class="w-5 h-5 bg-blue-600 rounded-full animate-pulse"></div>
                             </div>
                             </div>
 
@@ -341,7 +341,7 @@
 
                         </div>
 
-                        <div class="grid md:grid-cols-2 lg:grid-cols-3 px-4 gap-4">
+                        <div class="grid gap-4 px-4 md:grid-cols-2 lg:grid-cols-3">
 
                             @forelse ($services as $service)
 
@@ -350,8 +350,8 @@
 
 
                             @empty
-                            <div class="flex justify-center items-center h-64">
-                                <span class="text-gray-500 text-lg font-medium">
+                            <div class="flex items-center justify-center h-64">
+                                <span class="text-lg font-medium text-gray-500">
                                     Aucun élément trouvé.
                                 </span>
                             </div>
@@ -378,23 +378,23 @@
                 </div>
 
 
-                <div class="pt-16 px-4 grid lg:grid-cols-12 ">
-                    <div class="lg:col-span-3 lg:block hidden">
+                <div class="grid px-4 pt-16 lg:grid-cols-12 ">
+                    <div class="hidden lg:col-span-3 lg:block">
 
                     </div>
                     <div class="lg:col-span-9">
 
                         <div class="items-center mb-4">
-                            <h1 class="text-center text-lg font-semibold">Du meme Categories</h1>
+                            <h1 class="text-lg font-semibold text-center">Du meme Categories</h1>
                         </div>
                         <div class="flex flex-wrap gap-4">
                             @forelse ($subcatgeoryElement as $item)
                             <div>
                                 <a href="{{route('SubcategoryName',[$categoryElement->name,$item->name])}}"
-                                    class="flex gap-2 transition-all rounded-lg shadow-sm transform bg-gray-200 dark:bg-gray-700 p-2  hover:scale-95 active:bg-amber-400 focus:bg-amber-400  focus:text-gray-50 ">
+                                    class="flex gap-2 p-2 transition-all transform bg-gray-200 rounded-lg shadow-sm dark:bg-gray-700 hover:scale-95 active:bg-amber-400 focus:bg-amber-400 focus:text-gray-50 ">
                                    @if(!empty($item->illustration))
                                     <img src="{{Storage::disk('local')->url('public/'.$item->illustration) }}"
-                                        class="w-8 p-1 object-fill rounded-md" alt="">
+                                        class="object-fill w-8 p-1 rounded-md" alt="">
                                     @endif
                                     <span class="">{{$item->name}}</span>
                                     <!-- Adjusted span for the number -->

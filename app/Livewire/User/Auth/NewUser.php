@@ -61,11 +61,11 @@ implements HasForms
 
 
 
-       $this->validate(['data.phone'=>'unique:users,phone', 'password'=> 'string']);
+       $this->validate(['data.phone'=>'unique:users,phone']);
 
 
 
-          dd($data);
+
 
         $newUser = User::create([
             'name' => $data['name'],

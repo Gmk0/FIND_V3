@@ -36,8 +36,10 @@
                 <button type="submit" wire:loading.attr='disabled'
                     class="inline-block w-full px-6 py-3 mt-6 mb-2 text-xs font-bold text-center text-white uppercase align-middle transition-all bg-transparent border-0 rounded-lg cursor-pointer active:opacity-85 hover:scale-102 hover:shadow-soft-xs leading-pro ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 gradient hover:border-slate-700 hover:bg-slate-700 hover:text-white">
 
-                    <span >{{__('messages.enregistre')}}</span>
+                    <span wire:loading.remove >{{__('messages.enregistre')}}</span>
 
+
+                    <SPAN wire:loading>Inscription....</SPAN>
 
 
                 </button>

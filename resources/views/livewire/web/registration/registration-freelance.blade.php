@@ -1,4 +1,4 @@
-<div class="min-h-screen pt-16 relative border-t border-gray-100" x-data="{step: @entangle('step') }" x-cloak>
+<div class="relative min-h-screen pt-16 border-t border-gray-100" x-data="{step: @entangle('step') }" x-cloak>
 
     <div>
         <header class="bg-white top-0 lg:relative sticky lg:z-0 z-[60] shadow dark:bg-gray-800">
@@ -57,7 +57,7 @@
 
 
 
-                    <div class="block mb-2 rounded-lg  dark:bg-gray-800 dark:p-3 lg:hidden">
+                    <div class="block mb-2 rounded-lg dark:bg-gray-800 dark:p-3 lg:hidden">
                         <div class="mb-1 text-xs font-bold leading-tight tracking-wide uppercase text-dark"
                             x-text="`Etape: ${step} of 5`"></div>
 
@@ -144,8 +144,9 @@
 
 
 
-                                        <div x-cloak x-show="showDateInputs">
-                                            <div class="grid grid-cols-2 gap-6 mt-3 md:mt-0">
+                                        <div wire:loading wire:target='category'>
+                                            <div class="flex items-center justify-center">
+                                                <div class="spinners"></div>
 
 
 
