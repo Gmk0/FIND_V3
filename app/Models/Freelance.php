@@ -117,7 +117,7 @@ class Freelance extends Model
         static::creating(function ($freelance) {
 
             $freelance->user_id = auth()->id();
-            $freelance->identifiant ='CMD' . date('YmdHms');
+            $freelance->identifiant ='FR' . date('YmdHms');
             $freelance->solde = 0;
         });
 

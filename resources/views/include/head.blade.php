@@ -3,7 +3,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="csrf_token" value="{{ csrf_token() }}" />
+
 
     <title>{{ config('app.name', 'FIND')}}
         @isset($title)
@@ -42,10 +42,12 @@
     @wireUiScripts
 
     <link rel="stylesheet" href="/css/app3.css">
+    <link rel="stylesheet" href="/css/important.css">
+    <link rel="stylesheet" href="/css/plugin.css">
 
 
 
-   <link rel="stylesheet" href="/build/assets/app.css">
+    @vite(['resources/css/app.css','resources/js/app.js'])
 
 
 
@@ -54,14 +56,11 @@
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 
-    @livewireStyles
     @filamentStyles
-
-
     @filamentScripts
 
 
-
+@livewireStyles
      <script>
         localStorage.getItem("dark") === "true" &&
                 document.documentElement.classList.add("dark");
@@ -86,5 +85,5 @@
 <script src="/js/jquery-3.3.1.min.js" defer></script>
 <script src="/js/plugins.js" defer></script>
 <script src="/js/main.js" defer></script>
-<script src="/build/assets/app.js" defer></script>
+
 </head>

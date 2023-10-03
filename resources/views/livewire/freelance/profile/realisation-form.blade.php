@@ -2,7 +2,8 @@
 
 
     <div class="flex flex-col items-start py-3 space-x-4 lg:py-3">
-        <h2 class="mb-4 text-xl font-medium text-slate-800 dark:text-navy-50 lg:text-2xl">
+        <h2 class="mb-4 tex
+        t-xl font-medium text-slate-800 dark:text-navy-50 lg:text-2xl">
             Vos Realisations
         </h2>
 
@@ -17,6 +18,9 @@
 
 
             <div class="grid gap-4 py-4 space-y-4 lg:grid-cols-2">
+
+
+                @empty(!$record->realisations)
                 @foreach ($record->realisations as $cle => $value)
                 <div class="flex flex-col space-y-4 md:space-y-0 md:space-x-4">
 
@@ -42,6 +46,10 @@
                     </div>
                 </div>
                 @endforeach
+
+                @else
+
+                @endempty
             </div>
 
 

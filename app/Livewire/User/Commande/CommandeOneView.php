@@ -179,7 +179,7 @@ implements HasForms, HasActions
 
 
 
-            $this->dispatch('notify', ['message' => "Message enboyer", 'icon' => 'success',]);
+            $this->dispatch('notify', ['message' => "Message envoyer avec success", 'icon' => 'success',]);
         } catch (\Exception $e) {
 
 
@@ -240,7 +240,7 @@ implements HasForms, HasActions
 
             $transaction =Transaction::create([
                 'user_id' => $freelance->user_id,
-                'type' => 'debit',
+                'type' => 'debiter',
                 'amount' => $amountToAdd,
                 'description' => 'Débit pour la commande #' . $this->order->order_numero . ' après déduction de la commission',
                 'status'=>'completed'

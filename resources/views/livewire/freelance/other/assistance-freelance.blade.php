@@ -28,7 +28,7 @@
         </h2>
     </div>
     <div>
-        @include('include.bread-cumb-Freelance',['assistance'=>'Assistance'])
+        @include('include.bread-cumb-freelance',['assistance'=>'Assistance'])
     </div>
 
 
@@ -44,7 +44,7 @@
 
                         <i :class="openSection === 'demarrage'? 'rotate-180 transition-transform':''"
                                     class="text-base transition-transform fa fa-chevron-down "></i>
-                        
+
                     </button>
                     <ul x-collapse x-show="openSection === 'demarrage'" class="pl-4 mt-2">
                         <li><a href="#creer-profil" class="text-blue-500 hover:underline">Créer un profil de freelance</a> - Découvrez
@@ -63,7 +63,7 @@
                         Recherche de Projets
                         <i :class="openSection === 'recherche'? 'rotate-180 transition-transform':''"
                             class="text-base transition-transform fa fa-chevron-down "></i>
-                       
+
                     </button>
                     <ul x-collapse x-show="openSection === 'recherche'" class="pl-4 mt-2">
                         <li><a href="#recherche-projets" class="text-blue-500 hover:underline">Rechercher des projets pertinents</a> -
@@ -81,7 +81,7 @@
 
                         <i :class="openSection === 'soumission'? 'rotate-180 transition-transform':''"
                             class="text-base transition-transform fa fa-chevron-down "></i>
-                     
+
                     </button>
                     <ul x-collapse x-show="openSection === 'soumission'" class="pl-4 mt-2">
                         <li><a href="#rediger-proposition" class="text-blue-500 hover:underline">Rédiger une proposition efficace</a> -
@@ -99,7 +99,7 @@
 
                         <i :class="openSection === 'communication'? 'rotate-180 transition-transform':''"
                             class="text-base transition-transform fa fa-chevron-down "></i>
-                    
+
                     </button>
                     <ul x-collapse x-show="openSection === 'communication'" class="pl-4 mt-2">
                         <li><a href="#communication-efficace" class="text-blue-500 hover:underline">Best practices pour une communication

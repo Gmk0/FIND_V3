@@ -137,7 +137,7 @@
 
                         @forelse ($order->rapports as $rappors)
                         <div>
-                            <p class="text-base text-gray-600 dark:text-gray-300">{{$rappors->description}}</p>
+                            <p class="text-base text-gray-600 dark:text-gray-300">{!! $rappors->description !!}</p>
                             <Span class="mt-4 text-sm text-gray-500">{{$rappors->created_at->formatLocalized('%e
                                 %B')}}</Span>
 

@@ -96,7 +96,7 @@
                                 <ul class="dropdown">
                                     <li><a href="{{url('/registration')}}" class="site-nav">Devenir Freelance</a></li>
                                     <li><a href="{{url('/find-freelance')}}" class="site-nav">Trouver un freelance</a></li>
-                                    <li><a href="{{url('/affiliation-freelance')}}" class="site-nav">Affilier un Freelance</a></li>
+
 
                                 </ul>
                             </li>

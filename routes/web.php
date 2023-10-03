@@ -26,7 +26,7 @@ Route::get('/', \App\Livewire\Web\Home::class)->name('home');
 Route::view('/test2','Tests.home')->name('hometest');
 Route::view('/test3', 'Tests.home2')->name('hometest2');
 
-Route::get('/services', \App\Livewire\Web\ServicesView::class)->name('services');
+
 Route::get('/faq', \App\Livewire\Web\Other\Faq::class)->name('faq');
 Route::get('/apropos', \App\Livewire\Web\Other\About::class)->name('apropos');
 Route::get('/contact', \App\Livewire\Web\Other\ContactView::class)->name('contact');
@@ -45,7 +45,9 @@ Route::get('/find-freelance', \App\Livewire\Web\Freelance\FindFreelance::class)-
 Route::get('/categories', \App\Livewire\Web\Category\CategoryName::class)->name('categories');
 
 
-Route::get('/test/{category}/{sub_name}', \App\Livewire\Web\Category\SubCatategoryName::class)->where('sub_name', '(.*)')->name('SubcategoryName');
+Route::get('/services/{category}/{sub_name}', \App\Livewire\Web\Category\SubCatategoryName::class)->where('sub_name', '(.*)')->name('SubcategoryName');
+
+Route::get('/services', \App\Livewire\Web\ServicesView::class)->name('services');
 
 Route::get('/categories/{category}/{service_numero}', \App\Livewire\Web\Category\ServiceViewOne::class)->where('service_numero', '(.*)')->name('ServicesViewOne');
 

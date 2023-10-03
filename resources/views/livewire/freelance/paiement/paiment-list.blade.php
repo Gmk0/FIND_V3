@@ -5,7 +5,7 @@
             </h2>
         </div>
         <div>
-            @include('include.bread-cumb-Freelance',['paiementEffectuer'=>'Paiement effectuer'])
+            @include('include.bread-cumb-freelance',['paiementEffectuer'=>'Paiement effectuer'])
         </div>
 
 

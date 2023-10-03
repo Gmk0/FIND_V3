@@ -61,8 +61,11 @@ implements HasForms
 
 
 
-       $this->validate(['data.phone'=>'unique:users,phone']);
+       $this->validate(['data.phone'=>'unique:users,phone', 'password'=> 'string']);
 
+
+
+          dd($data);
 
         $newUser = User::create([
             'name' => $data['name'],
@@ -101,12 +104,9 @@ implements HasForms
             ->required()
             ->countryStatePath('phone_country')
             ->initialCountry('cd')
-            ->unique(table: User::class)
-            ->displayNumberFormat(PhoneInputNumberType::E164)
-
-
-            ->focusNumberFormat(PhoneInputNumberType::E164),
-           // ->inputNumberFormat(PhoneInputNumberType::E164),
+            ->separateDialCode(false)
+            //->displayNumberFormat(PhoneInputNumberType::E164)
+            ->inputNumberFormat(PhoneInputNumberType::NATIONAL),
 
             TextInput::make('password')
             ->placeholder("Mot de passe")

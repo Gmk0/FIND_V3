@@ -2,13 +2,13 @@
     <div class="flex flex-col w-full mt-6">
         <div class="relative">
 
-            <div class="relative flex p-1 mb-4 bg-white lg:dark:bg-white shadow-2xl rounded-xl md:p-2">
+            <div class="relative flex p-1 mb-4 bg-white shadow-2xl lg:dark:bg-white rounded-xl md:p-2">
 
                 <input wire:model.live="search" x-model="message"
                     class="w-full p-4 mr-2 text-gray-600 border-white focus:border-white rounded-xl " type="text">
                 <button wire:click="search()" class="px-6 py-3 ml-auto text-center transition rounded-lg bg-skin-fill">
                     <span class="hidden font-semibold text-white md:block">
-                        Search
+                        Recherche
                     </span>
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 mx-auto text-white md:hidden" fill="currentColor"
                         class="bi bi-search" viewBox="0 0 16 16">

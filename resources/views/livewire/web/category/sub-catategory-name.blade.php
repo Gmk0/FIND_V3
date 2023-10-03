@@ -5,10 +5,10 @@
         <div id="page-content">
 
             <div x-cloak x-show="!loading" class="relative bg-skin-fill h-24">
-                <img class="w-full h-full object-cover opacity-70" src="/test/assets/images/cat-women2.jpg" alt="Women"
+                <img class="w-full h-full object-cover opacity-70 hidden" src="" alt=""
                     title="" />
                 <div class="absolute inset-0 flex items-center justify-center">
-                    <h1 class="text-4xl font-bold text-white">{{$subcategoryName}}</h1>
+                    <h1 class="lg:text-4xl text-lg font-bold text-white">{{$subcategoryName}}</h1>
                 </div>
             </div>
             <!--End Collection Banner-->
@@ -46,7 +46,7 @@
                 <div class="grid px-4 h-auto grid-cols-12 h-auto lg:z-0 top-0 z-30 bg-white lg:bg-transparent sticky lg:relative  py-2">
                     <div class="lg:col-span-3 flex items-center">
 
-                        <nav class="py-4">
+                        <nav class="py-4 hidden">
                             <ul class="flex items-center space-x-2 text-sm text-gray-600">
                                <li class="flex items-center">
                                     <a rel="noopener noreferrer" href="{{url('/')}}" title="Back to homepage" class="hover:underline">
@@ -341,7 +341,7 @@
 
                         </div>
 
-                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 px-4 gap-4">
 
                             @forelse ($services as $service)
 
@@ -378,7 +378,7 @@
                 </div>
 
 
-                <div class="pt-16  grid lg:grid-cols-12 ">
+                <div class="pt-16 px-4 grid lg:grid-cols-12 ">
                     <div class="lg:col-span-3 lg:block hidden">
 
                     </div>
@@ -392,8 +392,10 @@
                             <div>
                                 <a href="{{route('SubcategoryName',[$categoryElement->name,$item->name])}}"
                                     class="flex gap-2 transition-all rounded-lg shadow-sm transform bg-gray-200 dark:bg-gray-700 p-2  hover:scale-95 active:bg-amber-400 focus:bg-amber-400  focus:text-gray-50 ">
+                                   @if(!empty($item->illustration))
                                     <img src="{{Storage::disk('local')->url('public/'.$item->illustration) }}"
                                         class="w-8 p-1 object-fill rounded-md" alt="">
+                                    @endif
                                     <span class="">{{$item->name}}</span>
                                     <!-- Adjusted span for the number -->
 

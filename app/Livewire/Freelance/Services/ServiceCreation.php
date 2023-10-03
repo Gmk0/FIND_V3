@@ -42,14 +42,14 @@ class ServiceCreation extends Component implements HasForms
     {
         return $form
             ->schema([
-                Section::make('Service')
-                ->schema([
+
+
                     // ...
                     Wizard::make([
                         Step::make('Titre')
                         ->schema([
 
-                            Fieldset::make('tite')->schema([
+                            Fieldset::make('Titre')->schema([
                                 TextInput::make('title')->label('Titre')->helperText('Donner un titre a votre service ')->required(),
 
                         TagsInput::make('tag')->helperText('le tag pour faciliter la recherche ')->suggestions([
@@ -155,7 +155,7 @@ class ServiceCreation extends Component implements HasForms
 
                         ])
                     ])->submitAction(new HtmlString('<button class="bg-amber-600 px-6 py-1.5 rounded-md text-white focus:bg-amber-800"  type="submit"><span wire:loading.remove>Submit</span><span wire:loading>Creation....</span></button>')),
-                ])
+
                 //
             ])
             ->statePath('data')

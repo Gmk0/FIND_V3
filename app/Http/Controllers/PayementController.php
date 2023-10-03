@@ -132,6 +132,7 @@ class PayementController extends Controller
             try {
                 // Enregistrer les informations de paiement dans la table "Transaction"
                 $payment = new Transaction();
+                $payment->user_id = auth()->id();
                // $payment->amount = $cart->totalPrice;
                 $payment->payment_method = $method;
                 $payment->payment_token = $reference;

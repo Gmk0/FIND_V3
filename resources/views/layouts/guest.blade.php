@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" :class="{ 'dark': dark }" x-data="data()">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,13 +14,13 @@
     <script src="/js/alpine-init.js"></script>
     <link rel="preconnect" href="https://fonts.bunny.net">
 
-  <link rel="stylesheet" href="/build/assets/app.css">
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<script src="/js/alpine-init.js"></script>
+    <script src="/js/alpine-init.js"></script>
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
@@ -32,6 +33,7 @@
     @wireUiScripts
 
 
+    @vite(['resources/css/app.css','resources/js/app.js'])
     <style>
         .gradient {
             background: linear-gradient(100deg, #FF9E5E 10%, rgb(69, 67, 67) 100%);
@@ -52,14 +54,14 @@
         }
     </style>
 
-@filamentStyles
+    @filamentStyles
 
 
-@filamentScripts
+    @filamentScripts
     <!-- Styles -->
     @livewireStyles
 
-    <script src="/build/assets/app.js" defer></script>
+
 
 </head>
 

@@ -47,7 +47,7 @@ class Transaction extends Model
 
         static::creating(function ($transaction) {
 
-            $transaction->user_id = auth()->user()->id;
+           // $transaction->user_id = auth()->user()->id;
             $transaction->transaction_numero = 'TC' . date('YmdH')
             . rand(10, 99);
         });

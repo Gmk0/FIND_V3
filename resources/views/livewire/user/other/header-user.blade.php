@@ -98,7 +98,12 @@
 
                                 <x-linkUser href="{{route('MessageUser')}}"
                                     :active="request()->routeIs('MessageUser')">
-                                    <ion-icon name="mail-outline" class="w-5 h-5"></ion-icon>
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                                    </svg>
                                     <span>
                                         Messages </span>
                                 </x-linkUser>
@@ -121,7 +126,12 @@
                             <li>
                                 <x-linkUser href="{{route('transactionUser')}}" wire:navigate
                                     :active="request()->routeIs('transactionUser')">
-                                    <ion-icon name="cash-outline" class="w-5 h-5"></ion-icon>
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                                    </svg>
                                     <span>
                                         transaction </span>
                                 </x-linkUser>
@@ -130,7 +140,12 @@
                             <li>
                                 <x-linkUser href="{{route('MissionUser')}}" wire:navigate
                                     :active="request()->routeIs('MissionUser')">
-                                    <ion-icon name="albums-outline" class="w-5 h-5"></ion-icon>
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                                    </svg>
                                     <span>
                                         Mes Mission </span>
                                 </x-linkUser>
@@ -146,7 +161,12 @@
                                             <button type="button"
                                                 class="inline-flex items-center px-3 text-sm font-medium leading-4 text-gray-400 transition bg-white border border-transparent rounded-md dark:text-gray-400 focus:outline-none">
 
-                                                <ion-icon name="person-outline" class="w-5 h-5 mr-2"></ion-icon>
+
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                                    stroke-width="2">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                                </svg>
                                                 <span>Profile</span>
                                                 <svg class="w-4 h-4 ml-1" aria-hidden="true" fill="currentColor"
                                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -168,18 +188,26 @@
 
 
                                         <x-dropdown-link wire:navigate href="{{ route('profile.show') }}">
-                                            <ion-icon name="albums-outline" class="w-4 h-4"></ion-icon>
+
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                                stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                            </svg>
                                             <span class="ml-2">{{__('Profile')}}</span>
                                         </x-dropdown-link>
                                         <x-dropdown-link href="{{ route('assistanceUser')}}" wire:navigate>
-                                            <ion-icon name="settings-outline" class="w-4 h-4"></ion-icon>
+
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                                stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            </svg>
                                             <span class="ml-2">{{__('Assitance ')}}</span>
                                         </x-dropdown-link>
 
-                                        <x-dropdown-link href="{{ route('profile.show')}}" wire:navigate>
-                                            <ion-icon name="settings-outline" class="w-4 h-4"></ion-icon>
-                                            <span class="ml-2">{{__('Securite')}}</span>
-                                        </x-dropdown-link>
+
 
 
 
@@ -272,7 +300,7 @@
             class="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden">
         </div>
         <div x-cloak x-show="isSidebarOpen" class="fixed inset-y-0 z-10 w-16 bg-white"></div>
-        <div  x-transition:enter="transform transition-transform duration-300"
+        <div wire:ignore  x-transition:enter="transform transition-transform duration-300"
             x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0"
             x-transition:leave="transform transition-transform duration-300" x-transition:leave-start="translate-x-0"
             x-transition:leave-end="-translate-x-full" x-show="isSidebarOpen" x-cloak

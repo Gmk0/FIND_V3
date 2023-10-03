@@ -173,6 +173,7 @@ class CheckoutPendig extends Component implements HasForms
 
 
                 $payment = new Transaction();
+                $payment->user_id = auth()->id();
                 $payment->amount = $this->priceTotal;
                 $payment->payment_method = $statusResponse['identityPayment'];
                 $payment->payment_token = $statusResponse['paymentIntent'];

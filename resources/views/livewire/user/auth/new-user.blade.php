@@ -1,7 +1,4 @@
 <div>
-    <div class="flex flex-wrap px-4">
-        <x-validation-errors class="mb-2" />
-    </div>
 
     <div class="flex-auto px-6 py-2" x-data="">
 
@@ -31,6 +28,10 @@
                 </x-label>
             </div>
             @endif
+
+            <div class="flex flex-wrap px-4">
+                <x-validation-errors class="mb-4" />
+            </div>
             <div class="text-center">
                 <button type="submit" wire:loading.attr='disabled'
                     class="inline-block w-full px-6 py-3 mt-6 mb-2 text-xs font-bold text-center text-white uppercase align-middle transition-all bg-transparent border-0 rounded-lg cursor-pointer active:opacity-85 hover:scale-102 hover:shadow-soft-xs leading-pro ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 gradient hover:border-slate-700 hover:bg-slate-700 hover:text-white">
@@ -46,5 +47,7 @@
                     class="relative z-10 font-semibold text-transparent bg-gradient-to-tl from-orange-600 to-orange-400 bg-clip-text">{{__('messages.SignIn')}}</a>
             </p>
         </form>
+
+
     </div>
 </div>

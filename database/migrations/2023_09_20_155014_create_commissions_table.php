@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('commissions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->nullable();
-            $table->foreignId('user_id');
+            $table->foreignUuid('user_id')->constrained();
             $table->foreignId('mission_id')->nullable();
             $table->foreignId('transaction_id')->nullable();
             $table->decimal('amount');

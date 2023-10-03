@@ -70,7 +70,7 @@ class DashboardFreelance extends Component
         })->where('status', 'reussie')
             ->sum('total_amount');
 
-        $projet = MissionResponse::where('freelance_id', $freelance_id)->where('is_paid', 'payer')->sum('bid_amount');
+        $projet = MissionResponse::where('freelance_id', $freelance_id)->where('is_paid', 'payer')->sum('budget');
 
 
         $total = '$' . number_format($transactions + $projet, 2, ',', ' ');

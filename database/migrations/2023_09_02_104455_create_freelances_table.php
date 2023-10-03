@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nom');
             $table->string('prenom');
-            $table->string('identifiant', 15);
+            $table->string('identifiant');
             $table->text('description');
             $table->text('experience')->nullable();
             $table->json('langue')->nullable();

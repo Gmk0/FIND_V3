@@ -3,17 +3,17 @@
 
 @include('include.head')
 
-<body x-init="setTimeout(() => { loading = false }, 2000)" class="font-sans antialiased template-index belle home7-shoes">
+<body x-init="setTimeout(() => { loading = false }, 2000)"
+    class="font-sans antialiased template-index belle home7-shoes">
 
     <x-notifications z-index="z-[200]" />
 
 
 
-
-
     <div x-init="$refs.loading.classList.add('hidden');">
 
-        <div x-ref="loading" class="fixed inset-0 z-[200] flex items-center justify-center text-white bg-black bg-opacity-50"
+        <div x-ref="loading"
+            class="fixed inset-0 z-[200] flex items-center justify-center text-white bg-black bg-opacity-50"
             style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)">
             Chargement.....
 
@@ -88,8 +88,7 @@
 
 
 
-
-@include('include.footer')
+    @include('include.footer')
 
 
 

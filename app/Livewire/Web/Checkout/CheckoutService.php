@@ -96,11 +96,11 @@ implements HasForms
             PhoneInput::make('maxi.number')
             ->label("telephone")
             ->required()
-        
+
             ->initialCountry('cd')
             ->displayNumberFormat(PhoneInputNumberType::E164)
 
-            
+
                 ->focusNumberFormat(PhoneInputNumberType::E164),
 
         ]);
@@ -233,6 +233,8 @@ implements HasForms
 
 
                 $payment = new Transaction();
+                $payement->user_id =
+                auth()->user()->id;
                 $payment->amount = $this->priceTotal;
                 $payment->payment_method = $statusResponse['identityPayment'];
                 $payment->payment_token = $statusResponse['paymentIntent'];
@@ -292,6 +294,7 @@ implements HasForms
 
 
             $payment = new Transaction();
+            $payment->user_id = auth()->id();
             $payment->amount
                 = $this->totalPrice() / 100;;
             $payment->payment_method = ['last4' => "", 'brand' => "maxicash"];
