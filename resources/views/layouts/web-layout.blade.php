@@ -3,7 +3,7 @@
 
 @include('include.head')
 
-<body x-init="setTimeout(() => { loading = false }, 2000)" class="font-sans antialiased template-index belle home7-shoes">
+<body x-init="setTimeout(() => { loading = false }, 2000)" class="font-sans overflow-x-hidden antialiased template-index belle home7-shoes">
 
     <x-notifications z-index="z-[200]" />
 

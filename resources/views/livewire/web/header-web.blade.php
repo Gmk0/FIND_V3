@@ -9,7 +9,7 @@
         <div class="w-full px-4 lg:px-12">
             <div class="grid items-center justify-between w-full grid-cols-12 lg:mx-auto">
                 <!--Desktop Logo-->
-                <div class="logo md:col-span-2 lg:block hidden">
+                <div class="hidden logo md:col-span-2 lg:block">
                     <a href="{{url('home')}}">
                         <img src="/images/logo/find_02.png" class="w-20 hidden lg:block" alt="FInd" title="Find" />
                     </a>
@@ -17,10 +17,10 @@
 
                 </div>
                 <!--End Desktop Logo-->
-                <div class="col-span-3  lg:col-span-8 ">
+                <div class="col-span-3 lg:col-span-8 ">
                     <div class="block lg:hidden">
                         <button @click="navOpen = !navOpen"
-                            class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white"
+                            class="inline-flex items-center justify-center p-2 text-gray-700 rounded-md hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white"
                             x-bind:aria-label="navOpen ? 'Close main menu' : 'Main menu'" x-bind:aria-expanded="navOpen">
                             <svg class="w-6 h-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                 <path :class="{'hidden': navOpen, 'inline-flex': !navOpen }" class="inline-flex" stroke-linecap="round"
@@ -32,11 +32,11 @@
                     </div>
                     <!--Desktop Menu-->
                     <nav
-                        class="grid__item relative" id="AccessibleNav">
+                        class="relative grid__item" id="AccessibleNav">
                         <!-- for mobile -->
                         <ul id="siteNav" class="site-nav medium center hidearrow">
                             <li class="lvl1 parent megamenu">
-                                <a class="text-dark" href="{{url('/')}}" wire:navigate>
+                                <a class="text-dark" href="{{url('/')}}" >
 
                                 <x-header-change :name="'Accueil'" />
 
@@ -44,7 +44,7 @@
 
 
                             </li>
-                            <li class="lvl1  parent megamenu">
+                            <li class="lvl1 parent megamenu">
                                 <a href="#">
 
                                  <x-header-change :name="'Categories'" />
@@ -53,18 +53,18 @@
                                 </a>
                                 <div class="megamenu hidden lg:block  !dark:bg:gray-800 !pb-12 style4 soft-scrollbar">
                                     <div>
-                                        <h1 class="mb-2 Text-lg font-bold">Toutes les categories</h1>
+                                        <h1 class="mb-2 font-bold Text-lg">Toutes les categories</h1>
                                     </div>
                                     <ul class="grid grid-cols-4 rounded-md grid--uniform mmWrapper">
                                         @forelse ($categories as $category)
                                         <li class="grid__item lvl-1 col-md-3 col-lg-3">
-                                            <a href="{{route('categoryByName',[$category->name])}}" class="site-nav lvl-1">{{$category->name}}</a>
+                                            <a href="{{route('categoryByName',[$category->name])}}"  class="site-nav lvl-1">{{$category->name}}</a>
                                             <ul class="subLinks">
                                                 @forelse ($category->subCategories as $item)
 
 
                                                 @if ($loop->index < 5)
-                                                <li class="lvl-2"><a href="{{route('SubcategoryName',[$category->name,$item->name])}}" class="site-nav lvl-2">{{$item->name}}</a></li>
+                                                <li class="lvl-2"><a href="{{route('SubcategoryName',[$category->name,$item->name])}}"  class="site-nav lvl-2">{{$item->name}}</a></li>
 
                                                 @endif
 
@@ -95,7 +95,7 @@
                                     </a>
                                 <ul class="dropdown">
                                     <li><a href="{{url('/registration')}}" class="site-nav">Devenir Freelance</a></li>
-                                    <li><a href="{{url('/find-freelance')}}" class="site-nav">Trouver un freelance</a></li>
+                                    <li><a href="{{url('/find-freelance')}}"  class="site-nav">Trouver un freelance</a></li>
 
 
                                 </ul>
@@ -149,16 +149,16 @@
                     <!--End Desktop Menu-->
                 </div>
                 <!--Mobile Logo-->
-                <div class="mx-auto col-span-6 lg:col-span-2 block lg:hidden mobile-logo">
+                <div class="block col-span-6 mx-auto lg:col-span-2 lg:hidden mobile-logo">
                     <div class="logo">
                         <a href="/">
 
                             <a :class="isWhite?'hidden':'block'"  href="{{url('/')}}">
                                 <img x-show="isHome"  src="/images/logo/find_03.png" alt="logo-find" class="h-14 dark:hidden">
-                                <img x-show="isHome" src="/images/logo/find_02.png" alt="logo-find" class=" w-24 hidden dark:block">
+                                <img x-show="isHome" src="/images/logo/find_02.png" alt="logo-find" class="hidden w-24 dark:block">
                             </a>
                             <a :class="isWhite?'block':'hidden'" href="{{url('/')}}">
-                                <img x-show="isHome"  src="/images/logo/find_02.png" alt="logo-find" class=" w-24">
+                                <img x-show="isHome"  src="/images/logo/find_02.png" alt="logo-find" class="w-24 ">
                             </a>
 
 
@@ -171,24 +171,24 @@
                     </div>
                 </div>
                 <!--Mobile Logo-->
-                <div  class="col-span-3   flex items-center justify-end gap-2 lg:col-span-2 ">
+                <div  class="flex items-center justify-end col-span-3 gap-2 lg:col-span-2 ">
 
                     @auth
 
                     <div class="site-header__search">
                         <button @click="isSearchBoxOpen=!isSearchBoxOpen" type="button" class="search-trigger">
 
-                            <svg x-cloak x-show="isHome" class="w-5 h-5 hidden lg:block " :class="isWhite?'dark:!text-white':'!text-white dark:!text-white'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            <svg x-cloak x-show="isHome" class="hidden w-5 h-5 lg:block " :class="isWhite?'dark:!text-white':'!text-white dark:!text-white'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
-                            <svg x-cloak x-show="!isHome" class="w-5 h-5 hidden lg:block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            <svg x-cloak x-show="!isHome" class="hidden w-5 h-5 lg:block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
-                            <svg  class="w-5 h-5 text-gray-700 dark:text-white lg:hidden block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            <svg  class="block w-5 h-5 text-gray-700 dark:text-white lg:hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -202,20 +202,20 @@
 
 
 
-                    <div class=" lg:block hidden">
+                    <div class="hidden lg:block">
                         <x-user-info />
                     </div>
 
                     @else
 
                     <a href="{{url('/register')}}"
-                        class="relative lg:flex hidden items-center justify-center w-full h-12 px-8 mx-auto bg-skin-fill  rounded-full group dark:bg-skin-fill hover:scale-105 active:duration-75 active:scale-95 sm:w-max">
+                        class="relative items-center justify-center hidden w-full h-12 px-8 mx-auto rounded-full lg:flex bg-skin-fill group dark:bg-skin-fill hover:scale-105 active:duration-75 active:scale-95 sm:w-max">
                         <span
-                            class="relative text-base font-semibold dark:text-white underline-none text-white">{{__("S'inscrire")}}</span>
+                            class="relative text-base font-semibold text-white dark:text-white underline-none">{{__("S'inscrire")}}</span>
 
                     </a>
                     <a href="{{url('/register')}}"
-                        class="relative lg:hidden  flex items-center justify-center h-10 px-4 mx-auto mr-4 text-sm duration-300 rounded-md bg-gray-50 before:absolute before:inset-0 before:transition hover:scale-105 active:duration-75 active:scale-95 sm:w-max">
+                        class="relative flex items-center justify-center h-10 px-4 mx-auto mr-4 text-sm duration-300 rounded-md lg:hidden bg-gray-50 before:absolute before:inset-0 before:transition hover:scale-105 active:duration-75 active:scale-95 sm:w-max">
                         <span class="relative text-base font-semibold text-amber-600">{{__("S'inscrire")}}</span>
                     </a>
 
@@ -289,7 +289,7 @@
 
                 <div class="flex-1 border-gray-800 dark:border-white custom-scrollbar">
                     <div class="pt-4 pb-3">
-                        <a href="{{url('/')}}" @click="navOpen = false" wire:navigate
+                        <a href="{{url('/')}}" @click="navOpen = false"
                             class="flex flex-row items-center px-3 py-2 text-base font-medium text-gray-800 rounded-md dark:text-white focus:outline-none focus:dark:text-white focus:text-white focus:bg-amber-600">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -299,7 +299,7 @@
                             </svg>
                             <span class="ml-2">{{__('Accueil')}}</span>
                         </a>
-                        <a href="{{url('/registration')}}" @click="navOpen = false" wire:navigate
+                        <a href="{{url('/registration')}}" @click="navOpen = false"
                             class="flex flex-row items-center px-3 py-2 mt-1 text-base font-medium text-gray-800 rounded-md dark:text-white hover:dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 focus:outline-none focus:dark:text-white focus:text-white focus:bg-amber-600">
                             <ion-icon name="person-add-outline" class="w-6 h-6"></ion-icon>
                             <span class="ml-2">{{__('Devenir Prestataire')}}</span>
@@ -338,13 +338,13 @@
                                         class="flex flex-col px-2 py-2 mt-2 rounded-md shadow-xs bg-inherit" role="menu"
                                         aria-orientation="vertical" aria-labelledby="user-menu" role="menuitem">
 
-                                        <a @click="navOpen = false" href="{{route('categoryByName',[$categorie->name])}}" wire:navigate @click="navOpen = false"
+                                        <a @click="navOpen = false" href="{{route('categoryByName',[$categorie->name])}}"  @click="navOpen = false"
                                             class="flex flex-row items-center px-3 py-2 text-base font-medium text-gray-800 rounded-md dark:text-white hover:text-gray-900 hover:bg-gray-200 dark:hover:bg-gray-600 focus:outline-none focus:text-gray-900 focus:bg-gray-200"
                                             role="menuitem"> Voir
                                             {{$categorie->name}}
                                         </a>
                                         @forelse($categorie->subCategories as $item)
-                                       <a @click="navOpen = false" href="{{route('SubcategoryName',[$category->name,$item->name])}}" wire:navigate @click="navOpen = false"
+                                       <a @click="navOpen = false" href="{{route('SubcategoryName',[$category->name,$item->name])}}"  @click="navOpen = false"
                                             class="flex flex-row items-center px-3 py-2 text-base font-medium text-gray-800 rounded-md dark:text-white hover:text-gray-900 hover:bg-gray-200 dark:hover:bg-gray-600 focus:outline-none focus:text-gray-900 focus:bg-gray-200"
                                             role="menuitem">
                                             {{$item->name}}
@@ -367,18 +367,18 @@
                             </div>
                         </div>
 
-                        <a href="{{url('/services')}}" @click="navOpen = false" wire:navigate
+                        <a href="{{url('/services')}}" @click="navOpen = false"
                             class="flex flex-row items-center px-3 py-2 mt-1 text-base font-medium text-gray-800 rounded-md dark:text-gray-50 hover:dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 focus:outline-none focus:dark:text-white focus:text-white focus:bg-amber-600">
                             <ion-icon name="albums-outline" class="w-6 h-6 dark:text-white"></ion-icon>
                             <span class="ml-2">{{__('Services')}}</span>
                         </a>
-                        <a href="{{url('/find-freelance')}}" @click="navOpen = false" wire:navigate
+                        <a href="{{url('/find-freelance')}}" @click="navOpen = false"
                             class="flex flex-row items-center px-3 py-2 mt-1 text-base font-medium text-gray-800 rounded-md dark:text-gray-50 hover:dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 focus:outline-none focus:dark:text-white focus:text-white focus:bg-amber-600">
                             <ion-icon name="reader-outline" class="w-6 h-6 dark:text-white"></ion-icon>
                             <span class="ml-2">{{__('Trouver un Freelancer')}}</span>
                         </a>
 
-                        <a href="{{route('createProject')}}" @click="navOpen = false" wire:navigate
+                        <a href="{{route('createProject')}}" @click="navOpen = false"
                             class="flex flex-row items-center px-3 py-2 mt-1 text-base font-medium text-gray-800 rounded-md dark:text-gray-50 hover:dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 focus:outline-none focus:dark:text-white focus:text-white focus:bg-amber-600">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-6 h-6">
@@ -390,12 +390,12 @@
                         </a>
 
 
-                        <a href="{{url('/apropos')}}" @click="navOpen = false" wire:navigate
+                        <a href="{{url('/apropos')}}" @click="navOpen = false"
                             class="flex flex-row items-center px-3 py-2 mt-1 text-base font-medium text-gray-800 rounded-md dark:text-gray-50 hover:dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 focus:outline-none focus:dark:text-white focus:text-white focus:bg-amber-600">
                             <ion-icon name="chatbubbles-outline" class="w-6 h-6 dark:text-white"></ion-icon>
                             <span class="ml-2">{{__('Apropos')}}</span>
                         </a>
-                        <a href="{{url('/faq')}}" @click="navOpen = false" wire:navigate
+                        <a href="{{url('/faq')}}" @click="navOpen = false"
                             class="flex flex-row items-center px-3 py-2 mt-1 text-base font-medium text-gray-800 rounded-md dark:text-gray-50 hover:dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 focus:outline-none focus:dark:text-white focus:text-white focus:bg-amber-600">
                             <ion-icon name="chatbubbles-outline" class="w-6 h-6 dark:text-white"></ion-icon>
                             <span class="ml-2">{{__('Foire aux Questions')}}</span>
@@ -443,7 +443,7 @@
 
 
                         <a href="{{route('freelance.dashboard')}}" @click="navOpen = false"
-                            class="flex flex-row font-medium items-center px-4 py-2 text-gray-800 text-md focus:text-gray-900 hover:text-gray-900 focus:outline-none hover:bg-gray-100 focus:bg-gray-100"
+                            class="flex flex-row items-center px-4 py-2 font-medium text-gray-800 text-md focus:text-gray-900 hover:text-gray-900 focus:outline-none hover:bg-gray-100 focus:bg-gray-100"
                             role="menuitem">
                             <ion-icon name="person-outline" class="w-6 h-6"></ion-icon>
                             <span class="ml-2">{{__('Dashboard Freelance')}}</span>
@@ -451,7 +451,7 @@
                         @endif
 
                         <a href="{{url('/user/messages')}}" @click="navOpen = false"
-                            class="flex flex-row items-center font-medium px-4 py-2 text-gray-800 text-md focus:text-gray-900 hover:text-gray-900 focus:outline-none hover:bg-gray-100 focus:bg-gray-100"
+                            class="flex flex-row items-center px-4 py-2 font-medium text-gray-800 text-md focus:text-gray-900 hover:text-gray-900 focus:outline-none hover:bg-gray-100 focus:bg-gray-100"
                             role="menuitem">
                             <ion-icon name="chatbox-outline" class="w-6 h-6"></ion-icon>
                             <span class="ml-2">{{__('Conversation')}}</span>

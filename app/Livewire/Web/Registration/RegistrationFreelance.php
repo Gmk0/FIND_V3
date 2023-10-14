@@ -484,12 +484,12 @@ class RegistrationFreelance extends Component implements HasForms
                 $this->dispatch('sendMail');
                 // dd($data);
 
-                $this->step = 1;
+               // $this->step = 1;
                 //$this->resetAll();
                 Session::flash('success', 'Bienvenue Freelance');
 
 
-                Db::commit();
+
 
                 return redirect()->intended('freelance/dashboard');
 

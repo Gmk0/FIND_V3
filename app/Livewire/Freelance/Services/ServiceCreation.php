@@ -13,7 +13,7 @@ use Livewire\Component;
 use Illuminate\Contracts\View\View;
 use Filament\Forms\Components\Tabs;
 
-use Filament\Forms\Components\{TextInput, RichEditor, TagsInput,MarkdownEditor, Select, Toggle, FileUpload, Section};
+use Filament\Forms\Components\{TextInput, Grid, RichEditor, Textarea, TagsInput,MarkdownEditor, Select, Toggle, FileUpload, Section};
 use Illuminate\Support\Facades\Auth;
 use Filament\Notifications\Notification;
 use Filament\Forms\Components\Wizard;
@@ -98,7 +98,7 @@ class ServiceCreation extends Component implements HasForms
 
                             RichEditor::make('description'),
 
-                            RichEditor::make('need_serivce')->label('Besoin service')->helperText('Ce dont vous auriez besoin pour realiser le service'),
+                            RichEditor::make('need_service')->label('Besoin service')->helperText('Ce dont vous auriez besoin pour realiser le service'),
 
 
                             // ...
@@ -110,14 +110,24 @@ class ServiceCreation extends Component implements HasForms
                             ->multiple()
                                 ->directory('service')
                                 ->imagePreviewHeight('100')
-
                                 ->image()
                                 ->imageEditor(),
-                            //->imageResizeMode('cover')
-                            //->imageCropAspectRatio('16:9'),
-                            RichEditor::make('example')->label('Quelques Realisation lier')
-                            ->fileAttachmentsDisk('local')
-                            ->fileAttachmentsDirectory('public/attachments'),
+                    //->imageResizeMode('cover')
+                    //->imageCropAspectRatio('16:9'),
+
+                    Fieldset::make('Realisation')->schema([
+
+                        FileUpload::make('example.image')
+                        ->imagePreviewHeight('100')
+                        ->image()
+                        ->imageEditor()
+                        ->directory('examples')
+                        ->multiple(),
+                        Textarea::make('example.description')
+
+
+                    ]),
+
 
 
                             Forms\Components\TagsInput::make('basic_support')->label('Support du service')->hint('Support du service')->suggestions([
@@ -173,10 +183,12 @@ class ServiceCreation extends Component implements HasForms
         try{
             $data = $this->form->getState();
 
+
+
             $record = Service::create($data);
 
 
-            $this->dispatch('notify', ['message' => "Mission creer avec success",'icon' => 'success',]);
+            $this->dispatch('notify', ['message' => "Service creer avec success",'icon' => 'success',]);
 
 
             $this->form->model($record)->saveRelationships();

@@ -233,8 +233,7 @@ implements HasForms
 
 
                 $payment = new Transaction();
-                $payement->user_id =
-                auth()->user()->id;
+                $payment->user_id = auth()->user()->id;
                 $payment->amount = $this->priceTotal;
                 $payment->payment_method = $statusResponse['identityPayment'];
                 $payment->payment_token = $statusResponse['paymentIntent'];

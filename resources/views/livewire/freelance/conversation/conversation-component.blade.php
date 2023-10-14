@@ -236,7 +236,7 @@
 
                             <div wire:click="$dispatch('changeChat',{data : {{$conversation}}})"
                                 class="flex cursor-pointer items-center justify-center py-2.5 hover:bg-slate-150 dark:hover:bg-navy-600">
-                                <div class="w-10 h-10 avatar">
+                                <div class="w-10 h-10 avatar" x-tooltip='"{{$conversation->user->name}}"'>
 
                                     @if (!empty($conversation->user->profile_photo_path))
 

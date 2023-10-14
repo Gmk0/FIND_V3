@@ -10,9 +10,11 @@
             \Illuminate\Support\Str::limit($service->category->name,
             10),'ServiceId'=>$service->service_numero])
         </div>
+        <div>
+            <x-button flat  href="{{ url()->previous()}}">Retour</x-button>
+        </div>
 
         <div>
-
             <div x-show="isLoading">
 
                 <div class="flex flex-row flex-1 h-screen p-8 overflow-y-hidden">
@@ -32,15 +34,15 @@
 
         </div>
 
-        <div x-show="!isLoading" x-cloak class="container px-4 py-4 mx-auto">
+        <div x-show="!isLoading" x-cloak class="px-4 py-4 mx-auto ">
 
 
-            <div class="flex flex-col md:flex-row md:space-x-8">
+            <div class="flex flex-col md:flex-row md:space-x-4">
 
                 @include('livewire.web.category.header-card')
 
 
-                <div x-data="{step:1, showExemple:false}" class="w-full md:w-2/3">
+                <div x-data="{step:1, showExemple:false}" class="w-full bg-white md:w-2/3">
                     <div class="p-4 dark:bg-gray-800">
                         <div class="flex flex-col mb-4">
 
@@ -56,7 +58,7 @@
                             @component("components.user-photo" ,['user'=>$service->freelance->user,'taille'=>18])
                             @endcomponent
                             <div class="flex flex-col gap-3 my-auto">
-                                <a class="text-base font-medium text-gray-500 underline">{{$service->freelance->user->name}}</a>
+                                <a href="{{route('profileFreelance',$service->freelance->identifiant)}}" class="text-base font-medium text-gray-500 underline">{{$service->freelance->user->name}}</a>
                                 <div class="flex flex-row gap-2">
 
                                     <span class="text-base font-medium">Niveau {{$service->freelance->level}}
@@ -83,43 +85,7 @@
 
 
 
-                       {{-- <div x-data="{ activeImage: 0, images: {{ json_encode($service->files) }} }"
-                            class="relative flex flex-col items-center justify-center transition-all duration-300 group hover:bg-opacity-90">
 
-                            <!-- Display the active image -->
-                            <div class="w-full">
-                                <template x-for="(img, index) in images" :key="index">
-                                    <img x-show="activeImage === index" :src="'/storage/' + img"
-                                        class="object-contain w-full bg-center rounded-md lg:w-10/12 h-10/12" alt="Product Name">
-                                </template>
-                            </div>
-
-                            <!-- Thumbnails (hidden on mobile) -->
-                            <div class="items-center justify-between hidden mt-4 space-x-2 md:flex">
-                                <template x-for="(img, index) in images" :key="index">
-                                    <img @click="activeImage = index" :src="'/storage/' + img" alt="Product Name"
-                                        class="border rounded-lg cursor-pointer w-18 h-18 2xl:w-24 hover:opacity-80">
-                                </template>
-                            </div>
-
-                            <!-- Dots (visible only on mobile) -->
-                            <div class="flex justify-center mt-4 space-x-2 md:hidden">
-                                <template x-for="(img, index) in images" :key="index">
-                                    <span @click="activeImage = index" class="w-3 h-3 bg-gray-400 rounded-full cursor-pointer hover:bg-gray-500"
-                                        x-bind:class="activeImage === index ? 'bg-gray-600' : ''"></span>
-                                </template>
-                            </div>
-
-                            <!-- Navigation buttons -->
-                            <template x-if="images.length > 1">
-                                <div>
-                                    <button @click="activeImage = activeImage === 0 ? images.length - 1 : activeImage - 1"
-                                        class="absolute left-0 transition-opacity duration-300 transform -translate-y-1/2 opacity-0 top-1/2 group-hover:opacity-100">Previous</button>
-                                    <button @click="activeImage = activeImage === images.length - 1 ? 0 : activeImage + 1"
-                                        class="absolute transition-opacity duration-300 transform -translate-y-1/2 opacity-0 right-4 top-1/2 group-hover:opacity-100">Next</button>
-                                </div>
-                            </template>
-                        </div>--}}
 
                         <div class="">
                             <div x-init="$nextTick(()=>$el._x_swiper = new Swiper($el,{ navigation: {prevEl: '.swiper-button-prev', nextEl: '.swiper-button-next'}, pagination: { el: '.swiper-pagination',type: 'progressbar'},lazy: true,}))"
@@ -130,8 +96,14 @@
 
 
                                     <div class="p-2 swiper-slide">
-                                        <img class="object-fill rounded-md h-10/12 swiper-lazy" src="{{Storage::disk('local')->url($image) }}"
-                                            alt="" />
+
+
+                                        <a class="example-image-link" href="{{Storage::disk('local')->url($image) }}" data-lightbox="{{$service->id}}" data-title="Presentation.">
+                                           <img class="object-fill rounded-md h-10/12 swiper-lazy" src="{{Storage::disk('local')->url($image) }}" alt="" />
+                                        </a>
+
+
+
                                         <div class="hidden swiper-lazy-preloader"></div>
                                     </div>
                                     @endforeach
@@ -248,9 +220,41 @@
 
                         <div x-show.transition="step==2" class="py-5 min-h-72">
 
-                            <div></div>
+                           <div class="grid grid-cols-1 gap-4 ">
+                            @empty(!$service->example)
 
-                            {!! $service->example !!}
+                            <div class="p-4 bg-white rounded-md shadow">
+                                <div class="flex flex-row gap-2 p-4 mb-4">
+                                    <div x-init="$nextTick(()=>$el._x_swiper = new Swiper($el,{ navigation: {prevEl: '.swiper-button-prev', nextEl: '.swiper-button-next'}, pagination: { el: '.swiper-pagination',type: 'progressbar'},lazy: true,}))"
+                                        class="rounded-lg swiper">
+                                        <div class="swiper-wrapper">
+
+                                            @foreach($service->example['image'] as $key=> $image)
+
+
+                                            <div class="p-2 swiper-slide">
+                                                <img class="object-fill w-full h-full rounded-md swiper-lazy"
+                                                    src="{{Storage::disk('local')->url($image) }}" alt="" />
+                                                <div class="hidden swiper-lazy-preloader"></div>
+                                            </div>
+                                            @endforeach
+
+
+                                        </div>
+                                        <div class="swiper-pagination"></div>
+                                        <div class="swiper-button-next"></div>
+                                        <div class="swiper-button-prev"></div>
+                                    </div>
+                                </div>
+                                <div class="p-4 mt-2 font-sans text-gray-700 dark:text-gray-200">
+                                    {!! $service->example['description'] !!}
+                                </div>
+                            </div>
+
+                            @endempty
+                        </div>
+
+
 
                         </div>
 

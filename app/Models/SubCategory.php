@@ -47,10 +47,24 @@ class SubCategory extends Model
             return in_array($this->id, $subCategoryIds);
         });
 
-
         return $relatedServices;
         // Récupérez tous les services dont l'attribut subcategory contient l'ID de cette sous-catégorie
 
+    }
+
+    public function getServicesAttribute()
+    {
+
+        $allServices = Service::all();
+
+        // Filter services based on the subcategory attribute
+        $relatedServices = $allServices->filter(function ($service) {
+            // Assuming subcategory is already an array
+            $subCategoryIds = $service->sub_category;
+            return in_array($this->id, $subCategoryIds);
+        });
+
+        return $relatedServices;
     }
 
 

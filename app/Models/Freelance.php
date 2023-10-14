@@ -50,6 +50,7 @@ class Freelance extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'level'=>'integer',
         'langue' =>
         AsArrayObject::class,
         'diplome' =>
@@ -129,6 +130,17 @@ class Freelance extends Model
     }
 
 
+
+    public function subcategories()
+    {
+        // Récupérez les IDs de sous-catégories du Freelance
+        $subCategoryIds = $this->sub_categorie;
+
+        // Chargez les sous-catégories correspondantes
+        $relatedSubcategories = SubCategory::whereIn('id', $subCategoryIds)->get();
+
+        return $relatedSubcategories;
+    }
 
 
     public function isFavorite()

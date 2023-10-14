@@ -1,12 +1,18 @@
 <div class="m-1 lg:mx-0">
-    <div class="relative flex w-full max-w-[20rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">
+    <div class="relative flex w-full min-w-[18rem] lg:min-w-[16rem] max-w-[20rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">
         <div
-            class="relative mx-4 mt-2 overflow-hidden text-white shadow-lg h-52 rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40">
+            class="relative h-48 mx-4 mt-2 overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40">
 
 
             @if (!empty($freelance->user->profile_photo_path))
-            <img src="{{Storage::disk('local')->url($freelance->user->profile_photo_path) }}" alt=""
-                class="object-cover w-full h-52">
+
+            <a class="example-image-link" href="{{Storage::disk('local')->url($freelance->user->profile_photo_path) }}" data-lightbox="{{$freelance->id}}" data-title="Presentation.">
+              <img src="{{Storage::disk('local')->url($freelance->user->profile_photo_path) }}" alt=""
+                    class="object-cover w-full h-48">
+            </a>
+
+
+
 
             @else
             <img class="object-cover w-full h-48" src="{{$freelance->user->profile_photo_url }}" alt="">
@@ -65,13 +71,12 @@
             <p class="block font-sans text-sm antialiased leading-relaxed text-gray-700 dark:text-gray-200">
                 {{$freelance->category->name}}
             </p>
-            <div class="!h-12 inline-flex flex-wrap items-center gap-3 mt-4 group">
+            <div class="inline-flex flex-wrap items-center h-20 gap-3 mt-2 group">
 
                 @empty(!$subCategories)
 
                 @forelse ($subCategories as $subCategory)
-                @if ($loop->index < 5)
-                <span x-tooltip='"{{$subCategory->name}}"'
+                @if ($loop->index < 4) <span x-tooltip='"{{$subCategory->name}}"'
                     class="items-center py-1 cursor-default px-2 rounded-md text-[10px] lg:text-[10px] font-medium border border-secondary-200 shadow-sm bg-secondary-100 text-secondary-700 dark:bg-secondary-700 dark:text-secondary-400 dark:border-none">
                     {{$subCategory->name}}
                     </span>
@@ -84,9 +89,9 @@
 
                     @empty
 
-                @endforelse
+                    @endforelse
 
-                @endempty
+                    @endempty
 
 
             </div>
@@ -94,7 +99,7 @@
 
 
         </div>
-        <div class="flex flex-row justify-between gap-2 p-3">
+        <div class="flex flex-row justify-between gap-2 p-3 pt-auto">
             <button type="button" wire:click="conversation({{$freelance->id}})"
                 class="block w-full select-none rounded-lg bg-amber-600 py-2 px-2 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-amber-500/20 transition-all hover:shadow-lg hover:shadow-amber-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                 type="button" data-ripple-light="true">

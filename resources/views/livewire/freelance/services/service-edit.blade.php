@@ -36,11 +36,56 @@
 
             </div>
 
+            <div>
+                <div class="gap-4 p-4 py-4 my-8 bg-white ">
+                    <div class="grid grid-cols-2 p-2 lg:grid-cols-3">
 
+                         @empty(!$record->example)
+                        @foreach ($record->example['image'] as $key=> $item)
+                        <div class="flex flex-col">
+                            <div class="flex flex-row items-center justify-start mb-4 space-x-2">
+                                <div class="relative group">
+                                    <img src="{{ Storage::disk('local')->url($item) }}" alt="Product Image"
+                                        class="w-40 transition-transform transform border rounded-md hover:scale-105">
+                                    <div class="absolute top-0 right-0 mt-2 mr-2">
+
+                                        <x-filament::icon-button icon="heroicon-m-trash" tooltip="Effacer" wire:click="effacerImageExample({{$key}})" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        @endforeach
+                        @endempty
+
+                    </div>
+
+
+
+                    <div class="grid w-full gap-4 p-4 mt-4 lg:grid-cols-2 dark:bg-navy-800 md:mt-0">
+
+                        <div>
+                            <x-textarea label='Description' wire:model='descriptionExample'>
+
+                            </x-textarea>
+
+                        </div>
+
+                        {{$this->ExampleForm}}
+                    </div>
+
+                    <div class="flex items-center justify-center mt-4">
+                        <x-filament::button size="lg" wire:click='editExample()'>
+                            <span wire:loading.remove wire:target='editExample'>Modifier l'example</span>
+                            <span wire:loading wire:target='editExample'>Modification....</span>
+                        </x-filament::button>
+                    </div>
+
+                </div>
+            </div>
 
             <div class="p-4 mt-4 bg-white rounded-lg dark:bg-gray-900">
                 <div>
-
                     <div x-data="{ image: @entangle('images') }" class="flex flex-col items-start justify-start py-4">
                         <div class="flex items-start justify-between mt-4 space-x-2">
                             @foreach ($record->files as $key=>$value)
@@ -49,22 +94,14 @@
                                 class="w-16 h-full border rounded-md cursor-pointer lg:w-24 2xl:w-24 hover:opacity-80">
 
 
-<x-filament::icon-button icon="heroicon-m-trash" tooltip="Effacer" wire:click="effacerImage({{$key}})" />
+                                <x-filament::icon-button icon="heroicon-m-trash" tooltip="Effacer" wire:click="effacerImage({{$key}})" />
                                 @endforeach
 
                         </div>
                     </div>
-
-
                     <form>
-
-
-
                         {{$this->imageForm}}
-
                     </form>
-
-
                 </div>
                 <div class="mt-4">
 
@@ -72,18 +109,11 @@
             </div>
 
             <div class="flex items-center justify-center mt-4">
-
                 <x-filament::button size="lg" wire:click='editImage()'>
-                 <span wire:loading.remove wire:target='editImage'>Changer l'image</span>
+                 <span wire:loading.remove wire:target='editImage'>Modifier l'image</span>
                 <span wire:loading wire:target='editImage'>Modification....</span>
                 </x-filament::button>
-
-
-
-
-
             </div>
-
 
 
 

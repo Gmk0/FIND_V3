@@ -2,8 +2,7 @@
 
 
     <div class="flex flex-col items-start py-3 space-x-4 lg:py-3">
-        <h2 class="mb-4 tex
-        t-xl font-medium text-slate-800 dark:text-navy-50 lg:text-2xl">
+        <h2 class="mb-4 font-medium tex t-xl text-slate-800 dark:text-navy-50 lg:text-2xl">
             Vos Realisations
         </h2>
 
@@ -23,14 +22,13 @@
                 @empty(!$record->realisations)
                 @foreach ($record->realisations as $cle => $value)
                 <div class="flex flex-col space-y-4 md:space-y-0 md:space-x-4">
-
                     <div class="flex flex-wrap items-center justify-start mb-4 space-x-2">
                         @foreach ($value['image'] as $key => $item)
                         <div class="relative group">
                             <img src="{{ Storage::disk('local')->url($item) }}" alt="Product Image"
                                 class="w-40 transition-transform transform border rounded-md hover:scale-105">
                             <div class="absolute top-0 right-0 mt-2 mr-2">
-                                <x-button.circle icon="trash" negative sm wire:click="effacerImage({{ $key }})"></x-button.circle>
+                                <x-button.circle icon="trash" negative sm wire:click="effacer({{$cle}},{{ $key }})"></x-button.circle>
                             </div>
                         </div>
                         @endforeach

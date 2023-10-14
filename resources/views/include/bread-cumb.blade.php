@@ -1,4 +1,4 @@
-<nav aria-label="breadcrumb" class="w-full p-4 text-gray-600 dark:text-gray-300">
+<nav aria-label="breadcrumb" class="w-full p-4 text-gray-100 dark:text-gray-300">
     <ol class="flex h-8 space-x-2">
         <li class="flex items-center">
             <a rel="noopener noreferrer" href="{{url('/')}}" title="Back to homepage" class="hover:underline">
@@ -13,11 +13,11 @@
         @if(isset($category))
         <li class="flex items-center space-x-2">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" fill="currentColor"
-                class="w-2 h-2 mt-1 transform rotate-90 fill-current  dark:text-gray-600">
+                class="w-2 h-2 mt-1 transform rotate-90 fill-current dark:text-gray-600">
                 <path d="M32 30.031h-32l16-28.061z"></path>
             </svg>
             <a rel="noopener noreferrer" href="{{route('categories')}}"
-                class="flex items-center px-1 text-sm capitalize font-semibold hover:underline">Categories</a>
+                class="flex items-center px-1 text-sm font-semibold capitalize hover:underline">Categories</a>
         </li>
         @endif
         @if(isset($categoryName))
@@ -67,7 +67,7 @@
                 <path d="M32 30.031h-32l16-28.061z"></path>
             </svg>
             <a rel="noopener noreferrer" href="#"
-                class="flex items-center px-1 font-semibold text-sm capitalize hover:underline">{{$mission}}</a>
+                class="flex items-center px-1 text-sm font-semibold capitalize hover:underline">{{$mission}}</a>
         </li>
         @endif
         @if(isset($feedback))
@@ -77,7 +77,17 @@
                 <path d="M32 30.031h-32l16-28.061z"></path>
             </svg>
             <a rel="noopener noreferrer" href="#"
-                class="flex items-center px-1 font-semibold text-sm capitalize hover:underline">{{$feedback}}</a>
+                class="flex items-center px-1 text-sm font-semibold capitalize hover:underline">{{$feedback}}</a>
+        </li>
+        @endif
+        @if(isset($freelance))
+        <li class="flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" fill="currentColor"
+                class="w-2 h-2 mt-1 transform rotate-90 fill-current dark:text-gray-600">
+                <path d="M32 30.031h-32l16-28.061z"></path>
+            </svg>
+            <a rel="noopener noreferrer" href="#"
+                class="flex items-center px-1 text-sm font-semibold capitalize hover:underline">{{$freelance}}</a>
         </li>
         @endif
     </ol>

@@ -171,14 +171,21 @@
                         <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">Ce message est lié à un service :</p>
 
                         <!-- Afficher le bloc du service lié -->
-                        <div
-                            class="flex items-center p-3 bg-gray-200 rounded-lg shadow-sm dark:bg-navy-700 dark:text-navy-100">
-                            <img class="w-10 h-10 mr-2 rounded-lg"
-                                src="{{ Storage::disk('local')->url($message->service->files[0]) }}"
-                                alt="Service Image">
-                            <a href="{{ route('ServicesViewOne', ['service_numero' => $message->service->service_numero, 'category' => $message->service->category->name]) }}"
-                                class="truncate hover:text-amber-500 ">{{ $message->service->title }}</a>
+                        <div class="flex flex-col">
+
+                            <div class="flex items-center p-3 bg-gray-200 rounded-lg shadow-sm dark:bg-navy-700 dark:text-navy-100">
+                                            <img class="w-10 h-10 mr-2 rounded-lg" src="{{ Storage::disk('local')->url($message->service->files[0]) }}"
+                                                alt="Service Image">
+                                            <a href="{{ route('ServicesViewOne', ['service_numero' => $message->service->service_numero, 'category' => $message->service->category->name]) }}"
+                                                class="truncate hover:text-amber-500 ">{{ $message->service->title }}</a>
+                            </div>
+                            <div>
+                                <x-button label="Discuter prix" @click="$dispatch('open-modal', { id: 'edit-user' })" >
+
+                                </x-button>
+                            </div>
                         </div>
+
                         @endif
                         @endif
 
@@ -847,6 +854,24 @@
         </x-slot>
 
     </x-confirmation-modal>
+
+   <x-filament::modal id="edit-user">
+    <x-slot name="heading">
+        Modal heading
+    </x-slot>
+
+    <form>
+        <div class="mb-4">
+            <label for="price" class="block mb-1 font-bold">Proposer un prix :</label>
+            <input type="number" id="price" name="price" placeholder="Saisissez votre prix"
+                class="w-full px-3 py-2 border rounded-lg">
+        </div>
+
+        <button type="submit" class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
+            Proposer le prix
+        </button>
+    </form>
+</x-filament::modal>
 
 
 

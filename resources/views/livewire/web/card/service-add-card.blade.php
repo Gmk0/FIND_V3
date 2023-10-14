@@ -51,7 +51,7 @@
     <div class="mt-1">
         <a href="{{route('ServicesViewOne',['service_numero'=>$service->service_numero,'category'=>$service->category->name])}}
 
-                                                                            " wire:navigate
+                                                                            "
             class="mr-1 hover:text-amber-600 text-gray-600 font-bold ">
             {{$service->title}}
         </a>
@@ -72,8 +72,8 @@
         </div>
     </div>
     <div class="flex md:mt-3 mt-auto mb-2  justify-between">
-        <div class="hidden">
-            <x-button></x-button>
+        <div class="">
+
         </div>
 
         <div class="flex items-center gap-1">

@@ -2,7 +2,7 @@
     <div style="top:8rem; position:sticky;" class="flex flex-col gap-2 px-2 pt-2 card-sticky ">
 
 
-        <div style="top:8rem; position:sticky;" class="sticky p-2 bg-white shadow-lg dark:bg-gray-800">
+        <div style="" class="sticky p-2 bg-white shadow-lg rounded-md dark:bg-gray-800">
             <div class=" sm:col-span-8 lg:col-span-7">
                 <h2 class="flex text-2xl font-bold text-gray-800 truncate lg:hidden dark:text-gray-300 sm:pr-12">
                     {{$service->title}}</h2>

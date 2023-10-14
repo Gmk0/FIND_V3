@@ -32,8 +32,8 @@
 
                 <div class="slide slideshow--medium">
                     <div class="blur-up lazyload bg-size">
-                        <img class="blur-up lazyload bg-img" data-src="/canva/filleC.png" src="/canva/filleC.png"
-                            alt="New Season Styles" title="New Season Styles" />
+                        <img class="blur-up lazyload bg-[#FFAA76] " data-src="/canva/sans.png" src="/canva/sans.png"
+                            alt="women sans" title="women sans" />
                         <div class="slideshow__text-wrap slideshow__overlay classic middle">
                             <div class="slideshow__text-content classic middle">
                                 <div class="container">
@@ -49,10 +49,12 @@
                 </div>
 
 
+
+
                 <div class="slide slideshow--medium">
                     <div class="blur-up lazyload bg-size">
-                        <img class="blur-up lazyload " data-src="/canva/brand2/7.png" src="/canva/brand2/7.png"
-                            alt="New Season Styles" title="New Season Styles" />
+                        <img class="blur-up lazyload " data-src="/canva/homme.png" src="/canva/homme.png" alt="New Season Styles"
+                            title="New Season Styles" />
                         <div class="slideshow__text-wrap slideshow__overlay classic middle">
                             <div class="slideshow__text-content classic middle">
                                 <div class="container">
@@ -166,79 +168,7 @@
 
     </div>
 
-    {{--
-    <div>
-     <div
-            class="relative grid grid-cols-1 gap-8 px-4 py-16 overflow-hidden lg:py-0 lg:h-screen text-neutral-50 2xl:px-60 lg:grid-cols-12 bg-skin-fill dark:bg-gray-800">
-            <div
-                class="[mask-image:linear-gradient(to_bottom,white_20%,transparent_75%)] absolute bottom-[-100px] md:w-[800px] md:h-[750px] lg:top-[120px] lg:right-[-100px] xl:right-0 w-[500px] h-[500px] 2xl:w-[1026px] 2xl:h-[1026px]">
-                <svg viewBox="0 0 1026 1026" fill="none" aria-hidden="true"
-                    class="absolute inset-0 w-full h-full animate-spin-slow">
-                    <path d="M1025 513c0 282.77-229.23 512-512 512S1 795.77 1 513 230.23 1 513 1s512 229.23 512 512Z"
-                        stroke="#D4D4D4" stroke-opacity="0.7"></path>
-                    <path d="M513 1025C230.23 1025 1 795.77 1 513" stroke="url(#:R65m:-gradient-1)" stroke-linecap="round">
-                    </path>
-                    <defs>
-                        <linearGradient id=":R65m:-gradient-1" x1="1" y1="513" x2="1" y2="1025"
-                            gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#f8fafc"></stop>
-                            <stop offset="1" stop-color="#f8fafc" stop-opacity="0"></stop>
-                        </linearGradient>
-                    </defs>
-                </svg>
-                <svg viewBox="0 0 1026 1026" fill="none" aria-hidden="true"
-                    class="absolute inset-0 w-full h-full animate-spin-slow">
-                    <path
-                        d="M913 513c0 220.914-179.086 400-400 400S113 733.914 113 513s179.086-400 400-400 400 179.086 400 400Z"
-                        stroke="#D4D4D4" stroke-opacity="0.7"></path>
-                    <path d="M913 513c0 220.914-179.086 400-400 400" stroke="url(#:R65m:-gradient-2)"
-                        stroke-linecap="round">
-                    </path>
-                    <defs>
-                        <linearGradient id=":R65m:-gradient-2" x1="913" y1="513" x2="913" y2="913"
-                            gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#f8fafc"></stop>
-                            <stop offset="1" stop-color="#f8fafc" stop-opacity="0"></stop>
-                        </linearGradient>
-                    </defs>
-                </svg>
-            </div>
 
-            <div data-aos="fade-right" data-aos-duration="800"
-                class="z-20 col-span-6 px-4 py-8 mt-8 lg:py-12 md:mb-8 xl:place-self-center xl:mt-0 lg:mb-0">
-                <h1 class="text-3xl font-bold text-center md:text-3xl xl:text-5xl lg:text-left">
-                    Votre satisfaction dans nos services Freelance <br />
-
-                </h1>
-
-                @livewire('web.other.home-search')
-
-
-
-            </div>
-
-            <div class="relative z-20 hidden col-span-6 lg:flex">
-                <div class="flex flex-wrap gap-2">
-                    <div  data-aos="fade-up" data-aos-duration="800" class="w-full ">
-                        <div class="">
-                            <picture class="">
-                                <source srcset="/images/hero/brand2.png" type="image/png" />
-                                <img class="z-50 w-full h-full " src="/images/hero/brand2.png" alt="" />
-                            </picture>
-
-                        </div>
-                    </div>
-                </div>
-
-
-
-            </div>
-        </div>
-
-
-
-
-    </div>--}}
 
     <div id="features" class="bg-gray-100 dark:bg-gray-900">
 
@@ -280,7 +210,7 @@
                         <img src="/images/brand/influnet2.jpg" alt="brand"
                             class="w-32 h-16 px-5 py-3 bg-white border rounded-lg shadow-md cursor-pointer duration border-blue-300/20 shadow-blue-500/5 hover:scale-95 sm:w-36">
                         <img src="/images/brand/udemy.PNG" alt="brand"
-                            class="w-32 h-16 px-5 py-3 duration-200 border rounded-lg shadow-md cursor-pointer bg-gray-50 border-blue-300/20 shadow-blue-500/5 hover:scale-95 sm:w-36">
+                            class="w-32 h-16 px-5 py-3  duration-200 border rounded-lg shadow-md cursor-pointer bg-gray-50 border-blue-300/20 shadow-blue-500/5 hover:scale-95 sm:w-36">
                         <img src="/images/brand/microsoft.svg" alt="brand"
                             class="w-32 h-16 px-5 py-3 duration-200 border rounded-lg shadow-md cursor-pointer bg-gray-50 border-blue-300/20 shadow-blue-500/5 hover:scale-95 sm:w-36">
                         <img src="/images/brand/airbnb.svg" alt="brand"
@@ -847,9 +777,10 @@
 
             </div>
 
+
             <div class="grid sm:grid-cols-2">
                 <div data-aos="fade-right" data-aos-duration="1000" class="w-full px-4">
-                    <img src="/images//services/faq.png" alt="hero div img" class="rounded-full lg:ml-auto">
+                    <img src="/images/services/faq.png" alt="hero div img" class="rounded-full lg:ml-auto">
                 </div>
                 <div class="w-full lg:w-11/12">
 

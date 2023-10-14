@@ -59,7 +59,7 @@
                         </div>
                     </div>
                 </div>
-                <div x-data="{open:false}" class="relative mb-3">
+                <div x-data="{open:false}" class="relative hidden mb-3">
                     <h6 class="mb-0">
                         <button @click="open=!open"
                             class="relative flex items-center w-full p-4 text-base font-semibold text-left transition-all ease-in border-solid cursor-pointer text-gray-50 border-slate-100 dark:text-gray-500 rounded-t-1 group text-dark-500"
@@ -96,11 +96,11 @@
                     </h6>
                     <div x-show="open" x-collapse class="overflow-hidden transition-all duration-300 ease-in-out ">
                         <div class="px-6 overflow-hidden leading-normal ">
-                            <ul class="flex flex-col w-full p-0 font-thin text-left list-none text-gray-50">
-                                <li><a href="{{url('/find-freelance')}}" wire:navigate
+                            <ul class="flex flex-col w-full p-0  text-left list-none text-gray-50">
+                                <li><a href="{{url('/find-freelance')}}"
                                         class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800 dark:hover:text-gray-100">Freelance</a>
                                 </li>
-                                <li><a href="{{url('createMision')}}" wire:navigate
+                                <li><a href="{{url('createMision')}}"
                                         class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800 dark:hover:text-gray-100">
                                         Mission</a>
                                 </li>
@@ -169,7 +169,7 @@
 
     <!-- FOOTER 2 DESKTOP -->
 
-    <div class="hidden md:flex">
+    <div class="hidden md:flex flex-col">
         <footer class="p-10 footer bg-base-200 text-base-content">
             <div>
 
@@ -205,6 +205,40 @@
 
             </div>
         </footer>
+        <div class="h-12  border-t border-gray-100">
+            <div class="flex  items-center justify-center gap-6 border-t border-gray-600 sm:mt-0 sm:flex-row sm:items-center">
+
+                <div class="flex items-center gap-6 p-2">
+
+                    <a href="https://twitter.com/find_freelance_?s=11&t=qv6NIovEcQsLxmQv9mo_Zw" target="blank" aria-label="twitter"
+                        class="px-2 hover:text-primary">
+                        <span class="text-lg fab fa-twitter"></span>
+                    </a>
+                    <a href="https://instagram.com/find_freelance?igshid=YmMyMTA2M2Y=" target="blank" aria-label="medium"
+                        class="px-2 hover:text-primary">
+                        <span class="text-lg fab fa-instagram"></span>
+                    </a>
+
+
+                    <a href="#" target="blank" aria-label="twitter" class="px-2 hover:text-primary">
+                        <span class="text-lg fab fa-linkedin"></span>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=100087893680900&mibextid=LQQJ4d" target="blank"
+                        aria-label="medium" class="px-2 hover:text-primary">
+                        <span class="text-lg fab fa-facebook"></span>
+                    </a>
+                    <a href="" class="px-3 py-2 hover:text-primary">
+
+                        <span class="text-sm fab fa-dollar">USD</span>
+                    </a>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
 
     </div>
 

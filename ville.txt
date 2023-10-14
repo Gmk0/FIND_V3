@@ -1,0 +1,95 @@
+-- Villes de la République démocratique du Congo
+INSERT INTO localisations (ville, pays)
+VALUES 
+  ('Kinshasa', 'République démocratique du Congo'),
+  ('Lubumbashi', 'République démocratique du Congo'),
+  ('Kisangani', 'République démocratique du Congo'),
+  ('Goma', 'République démocratique du Congo'),
+  ('Bukavu', 'République démocratique du Congo'),
+  ('Mbuji-Mayi', 'République démocratique du Congo'),
+  ('Kananga', 'République démocratique du Congo'),
+  ('Likasi', 'République démocratique du Congo'),
+  ('Matadi', 'République démocratique du Congo'),
+  ('Kolwezi', 'République démocratique du Congo'),
+  ('Uvira', 'République démocratique du Congo'),
+  ('Boma', 'République démocratique du Congo'),
+  ('Isiro', 'République démocratique du Congo'),
+  ('Beni', 'République démocratique du Congo'),
+  ('Bunia', 'République démocratique du Congo'),
+  ('Butembo', 'République démocratique du Congo'),
+  ('Kasongo', 'République démocratique du Congo'),
+  ('Kikwit', 'République démocratique du Congo'),
+  ('Mbandaka', 'République démocratique du Congo'),
+  ('Kalemie', 'République démocratique du Congo');
+
+-- Villes de la Côte d'Ivoire
+INSERT INTO localisations (ville, pays)
+VALUES 
+  ('Abidjan', 'Côte d''Ivoire'),
+  ('Bouaké', 'Côte d''Ivoire'),
+  ('Yamoussoukro', 'Côte d''Ivoire'),
+  ('San Pedro', 'Côte d''Ivoire'),
+  ('Daloa', 'Côte d''Ivoire'),
+  ('Korhogo', 'Côte d''Ivoire'),
+  ('Man', 'Côte d''Ivoire'),
+  ('Abengourou', 'Côte d''Ivoire'),
+  ('Gagnoa', 'Côte d''Ivoire'),
+  ('Séguéla', 'Côte d''Ivoire'),
+  ('Odienné', 'Côte d''Ivoire'),
+  ('Dimbokro', 'Côte d''Ivoire'),
+  ('Bondoukou', 'Côte d''Ivoire'),
+  ('Agboville', 'Côte d''Ivoire'),
+  ('Divo', 'Côte d''Ivoire'),
+  ('Guiglo', 'Côte d''Ivoire'),
+  ('Toumodi', 'Côte d''Ivoire'),
+  ('Danané', 'Côte d''Ivoire'),
+  ('Grand-Bassam', 'Côte d''Ivoire'),
+  ('Bouaflé', 'Côte d''Ivoire');
+
+-- Villes du Congo-Brazzaville
+INSERT INTO localisations (ville, pays)
+VALUES 
+  ('Brazzaville', 'Congo-Brazzaville'),
+  ('Pointe-Noire', 'Congo-Brazzaville'),
+  ('Dolisie', 'Congo-Brazzaville'),
+  ('Nkayi', 'Congo-Brazzaville'),
+  ('Impfondo', 'Congo-Brazzaville'),
+  ('Sibiti', 'Congo-Brazzaville'),
+  ('Madingou', 'Congo-Brazzaville'),
+  ('Ouesso', 'Congo-Brazzaville'),
+  ('Loandjili', 'Congo-Brazzaville'),
+  ('Gamboma', 'Congo-Brazzaville'),
+  ('Kinkala', 'Congo-Brazzaville'),
+  ('Mossendjo', 'Congo-Brazzaville'),
+  ('Boko', 'Congo-Brazzaville'),
+  ('Owando', 'Congo-Brazzaville'),
+  ('Oyo', 'Congo-Brazzaville'),
+  ('Makoua', 'Congo-Brazzaville'),
+  ('Kindamba', 'Congo-Brazzaville'),
+  ('Mossendjo', 'Congo-Brazzaville'),
+  ('Sibiti', 'Congo-Brazzaville'),
+  ('Djambala', 'Congo-Brazzaville');
+
+-- Villes du Cameroun
+INSERT INTO localisations (ville, pays)
+VALUES 
+  ('Yaoundé', 'Cameroun'),
+  ('Douala', 'Cameroun'),
+  ('Bamenda', 'Cameroun'),
+  ('Bafoussam', 'Cameroun'),
+  ('Ngaoundéré', 'Cameroun'),
+  ('Maroua', 'Cameroun'),
+  ('Garoua', 'Cameroun'),
+  ('Ebolowa', 'Cameroun'),
+  ('Kumba', 'Cameroun'),
+  ('Bertoua', 'Cameroun'),
+  ('Limbe', 'Cameroun'),
+  ('Bafia', 'Cameroun'),
+  ('Dschang', 'Cameroun'),
+  ('Bamuso', 'Cameroun'),
+  ('Batouri', 'Cameroun'),
+  ('Mokolo', 'Cameroun'),
+  ('Nkongsamba', 'Cameroun'),
+  ('Eseka', 'Cameroun'),
+  ('Bertoua', 'Cameroun'),
+  ('Kribi', 'Cameroun');

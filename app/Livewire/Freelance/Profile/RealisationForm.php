@@ -17,6 +17,7 @@ use Filament\Forms\Components\{TextInput, RichEditor, FileUpload, Grid, Markdown
 
 
 use Filament\Actions\Action;
+use Illuminate\Support\Facades\Storage;
 
 #[Layout('layouts.freelance-layout')]
 #[Title('Profile')]
@@ -60,7 +61,7 @@ class RealisationForm extends Component implements HasForms
 
 
 
-           $data = $this->record->realisations[$key]['image'];
+        $data = $this->record->realisations[$key]['image'];
         $this->form->fill([
 
             'description' => $this->record->realisations[$key]['description'],
@@ -114,8 +115,7 @@ class RealisationForm extends Component implements HasForms
 
             $this->record->update(['realisations' => $element]);
 
-            $this->dispatch('notify', ['message' => "Mission creer avec success", 'icon' => 'success',]);
-
+            $this->dispatch('notify', ['message' => "Realisation ajouter avec success", 'icon' => 'success',]);
 
             $this->form->fill();
 
@@ -180,6 +180,44 @@ class RealisationForm extends Component implements HasForms
                 'title' => 'error'
             ]);
         }
+    }
+    public function effacer($cle,$index){
+
+        try {
+
+
+
+            $file = $this->record->realisations[$cle]['image'][$index];
+
+
+           $data = $this->record->realisations[$cle]['image'];
+
+
+            unset($data[$index]);
+
+            $data = array_values($data);
+            $datal = Storage::disk('local')->exists('public/' . $file);
+            if ($datal) {
+                Storage::disk('local')->delete('public/' . $file);
+                $this->record->realisations[$cle]['image'] = $data;
+                $this->record->update();
+                $this->dispatch('notify', ['message' => "Realisation modifier avec success", 'icon' => 'success',]);
+                $this->dispatch('refresh');
+            } else {
+
+                $this->record->realisations[$cle]['image'] = $data;
+                $this->record->update();
+            }
+
+        } catch (\Exception $e) {
+
+            $this->dispatch('error', [
+                'message' => "Une erreur s'est produite" . $e->getMessage(),
+                'icon' => 'error',
+                'title' => 'error'
+            ]);
+        }
+
     }
 
     public function render(): View

@@ -11,7 +11,15 @@ use Livewire\Component;
 class FreelanceCard extends Component
 {
     public Freelance $freelance;
+    public $subCategories;
 
+
+    public function mount()
+    {
+
+        $this->subCategories = SubCategory::whereIn('id', $this->freelance->sub_categorie)->get();
+
+    }
     public function toogleFavorite($freelance)
     {
 
@@ -83,7 +91,7 @@ class FreelanceCard extends Component
 
     public function render()
     {
-        $subCategories = SubCategory::whereIn('id', $this->freelance->sub_categorie)->get();
-        return view('livewire.web.card.freelance-card',['subCategories'=>$subCategories]);
+
+        return view('livewire.web.card.freelance-card',);
     }
 }

@@ -44,6 +44,7 @@
     <link rel="stylesheet" href="/css/app3.css">
     <link rel="stylesheet" href="/css/important.css">
     <link rel="stylesheet" href="/css/plugin.css">
+    <link rel="stylesheet" href="/css/lightbox.css">
 
 
 
@@ -82,8 +83,12 @@
     </script>
 
 
+
+
 <script src="/js/jquery-3.3.1.min.js" defer></script>
 <script src="/js/plugins.js" defer></script>
 <script src="/js/main.js" defer></script>
+
+<script src="/js/lightbox.js" defer></script>
 
 </head>

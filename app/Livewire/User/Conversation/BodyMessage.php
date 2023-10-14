@@ -125,7 +125,7 @@ implements Forms\Contracts\HasForms
 
 
 
-                $broadcastedMessage->is_read = 1;
+                $broadcastedMessage->is_read = true;
                 $broadcastedMessage->save();
 
 
@@ -248,9 +248,10 @@ implements Forms\Contracts\HasForms
 
         $this->dispatch('rowChatToBottom');
 
-        Message::where('conversation_id', $this->selectedConversation['chatId'])
-            ->where('receiver_id', auth()->user()->id)->update(['is_read' => 1]);
+        $data= Message::where('conversation_id', $this->selectedConversation['chatId'])
+            ->where('receiver_id', auth()->user()->id)->update(['is_read' => true]);
 
+        // dd($data);
         $this->dispatch('broadcastMessageRead')->self();
 
         $this->messageElement = Message::where('conversation_id', $this->selectedConversation['chatId'])->get();
@@ -294,7 +295,7 @@ implements Forms\Contracts\HasForms
             $this->dispatch('rowChatToBottom');
 
             Message::where('conversation_id', $this->selectedConversation['chatId'])
-                ->where('receiver_id', auth()->user()->id)->update(['is_read' => 1]);
+                ->where('receiver_id', auth()->user()->id)->update(['is_read' => true]);
 
             $this->dispatch('broadcastMessageRead');
 
@@ -329,7 +330,7 @@ implements Forms\Contracts\HasForms
                 'conversation_id' => $this->selectedConversation['chatId'],
                 'body' => $this->body ?? null,
                 'file' => $file['files'],
-                'is_read' => 0,
+                'is_read' => false,
                 'type' => "file",
 
             ]);
@@ -365,7 +366,7 @@ implements Forms\Contracts\HasForms
                 'receiver_id' => $this->selectedConversation['user_id'],
                 'conversation_id' => $this->selectedConversation['chatId'],
                 'body' => $this->body,
-                'is_read' => '0',
+                'is_read' => false,
                 'type' => "text",
 
             ]);
@@ -432,7 +433,7 @@ implements Forms\Contracts\HasForms
                 'conversation_id' => $this->selectedConversation['chatId'],
                 'body' => $this->body ?? $this->body,
                 'file' => $file['document'],
-                'is_read' => 0,
+                'is_read' => false,
                 'type' => "doc",
 
             ]);

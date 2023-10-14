@@ -18,20 +18,16 @@ class FeedbackComponent extends Component
         // attendez 10 minutes
 
 
-       
-        
+
+
 
         $this->showFeedback = !auth()->user()->userSetting->feedback_submitted;
 
-      
+
     }
 
     public function sendFeedback()
     {
-        // Traitez le feedback ici (par exemple, enregistrez-le dans la base de données)
-
-        // Marquez que l'utilisateur a soumis un feedback
-
 
 
         $this->validate(['description'=>'required',]);
@@ -39,9 +35,6 @@ class FeedbackComponent extends Component
         try{
             $data = ['satisfaction' => $this->description, 'note' => $this->rating ?? 2];
             $userSetting = auth()->user()->userSetting;
-
-
-
             $userSetting->update([
                 'feedback_submitted' => true,
                 'feedback' => $data,

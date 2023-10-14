@@ -58,6 +58,10 @@ implements HasForms
     public $freelance_niveau=[];
 
     protected $queryString = [
+        'trie',
+        'query',
+        'experience',
+        'category'
 
 
 
@@ -220,7 +224,7 @@ implements HasForms
 
         })
         ->when($this->sub_category, function ($query) {
-            $query->where('sub_categorie', 'LIKE', '%"' . $this->sub_category . '"%');
+            $query->where('sub_category', 'LIKE', '%"' . $this->sub_category . '"%');
         })
         ->when($this->experience, function ($q) {
             $q->where('experience', 'LIKE', '%"' . $this->experience . '"%');
@@ -236,14 +240,15 @@ implements HasForms
         })->when($this->trie, function ($query) {
                 [$field, $direction] = explode('-', $this->trie);
 
-                // Si les valeurs sont "populaire" ou "nouveau", ajustez le champ et la direction en conséquence
                 if ($field === 'populaire') {
-                    $query->withCount('orders') // Assurez-vous que votre relation s'appelle "orders"
-                        ->orderBy('orders_count', $direction); // Triez par le nombre de commandes
+                $query->with(['services' => function ($query) use ($direction) {
+                    $query->withCount('orders')
+                        ->orderBy('orders_count', 'desc');
+                }]); // Triez par le nombre de commandes
                 } elseif ($field === 'nouveau') {
-                    $query->orderBy('created_at', $direction);
-                } else {
-                    $query->orderBy($field, $direction);
+                    $query->orderBy('created_at', 'desc');
+                } elseif($field === 'level') {
+                    $query->orderBy('level', $direction);
                 }
             })->when($this->isonLine, function ($query) {
             $query->whereHas('user', function ($q) {

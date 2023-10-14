@@ -21,6 +21,7 @@ return new class extends Migration
             $table->enum('theme', ['Dark', 'Light', 'Follow Device'])->default('Follow Device');
             $table->json('addresse_facturation')->nullable();
             $table->boolean('feedback_submitted')->default(false);
+            $table->boolean('feedback_published')->default(false);
             $table->json('feedback')->nullable();
             $table->timestamps();
         });

@@ -1,40 +1,37 @@
-<div x-data="{isScroll : false}" @scroll.window="isScroll = (window.pageYOffset > 150) ? true : false" class="min-h-screen pt-16  ">
+<div x-data="{isScroll : false}" @scroll.window="isScroll = (window.pageYOffset > 150) ? true : false" class="min-h-screen pt-16 ">
 
-
-    <style>
-        @media screen and (min-width: 768px) {
-            #menu-content {
-                top: 6rem;
-            }
-        }
-    </style>
-
-    <div class="flex pb-8 relative flex-col bg-gray-100 dark:bg-gray-900"
+    <div class="relative flex flex-col pb-8 bg-gray-100 dark:bg-gray-900"
         x-data="{ isOpen:false,showFilters: false,showSearch: false }">
 
-        <div x-cloak x-show="!loading" class=" bg-green-500 relative h-20">
-            <img class="w-full h-full object-cover opacity-70" src="/test/assets/images/cat-women2.jpg" alt="Women"
-                title="Women" />
+
+
+        <div x-cloak x-show="!loading" class="relative h-24 bg-green-600">
+
+            <div class="absolute inset-0 bg-black opacity-50"></div>
             <div class="absolute inset-0 flex items-center justify-center">
                 <h1 class="text-4xl font-bold text-white">Trouver un freelance</h1>
             </div>
+            <div class="absolute inset-0 flex items-center justify-start mx-2">
+                @include('include.bread-cumb',['freelance'=>'Freelance'])
+            </div>
         </div>
-        <div x-show="loading" class="relative h-36 w-full bg-gray-300 animate-pulse">
+
+        <div x-show="loading" class="relative w-full bg-gray-300 h-36 animate-pulse">
 
         </div>
 
-        <div x-cloak x-show="!loading" class="h-auto top-0 lg:z-0 z-30 bg-white lg:bg-transparent sticky lg:relative grid grid-cols-12 py-2 ">
-            <div class="lg:col-span-3 hidden lg:flex">
+        <div x-cloak x-show="!loading" class="sticky top-0 z-30 grid h-auto grid-cols-12 py-2 bg-white lg:z-0 lg:bg-transparent lg:relative ">
+            <div class="hidden lg:col-span-3 lg:flex">
 
             </div>
 
 
-            <div class="lg:grid-cols-12 grid relative lg:col-span-9 col-span-12  py-4 gap-4 lg:gap-2 ">
-                <div class="px-4  lg:col-span-9">
+            <div class="relative grid col-span-12 gap-4 py-4 lg:grid-cols-12 lg:col-span-9 lg:gap-2 ">
+                <div class="px-4 lg:col-span-9">
                     <x-input class="!rounded-full   !shadow-md" wire:model.live.debounce.100ms='query' placeholder="recherche"
                         icon='search' />
                 </div>
-                <div class="flex px-4 top-0 sticky  lg:col-span-3 flex-row justify-between gap-2">
+                <div class="sticky top-0 flex flex-row justify-between gap-2 px-4 lg:col-span-3">
 
                     <div class="block lg:hidden">
 
@@ -49,16 +46,17 @@
                         <div>
 
                         </div>
-                        <div>
-                            <x-select placeholder="Trier par" class="!rounded-xl !shadow-md"
-                                wire:model.live.debounce.100ms="trie">
+                        <div class="z-40">
+                            <x-native-select placeholder="Trier par" class=" z-30 !rounded-xl !shadow-md"
+                                wire:model.live="trie">
 
-                                <x-select.option label="Niveau ascendant" value="level-asc" />
-                                <x-select.option label="Niveau Descendant" value="level-desc" />
-                                <x-select.option label="Populaire" value="populaire-desc" />
-                                <x-select.option label="Nouveau" value="nouveau-desc" />
+                                <option value="">Trier par</option>
+                                <option value="level-asc">Niveau ascendant</option>
+                                <option  value="level-desc">Niveau Descendant</option>
+                                <option  value="populaire-desc">Populaire</option>
+                                <option  value="nouveau-desc">Nouveau</option>
 
-                            </x-select>
+                            </x-native-select>
 
                         </div>
 
@@ -100,14 +98,13 @@
             </div>
         </div>
 
-
         <div x-cloak x-show="!loading" class="grid grid-cols-12 px-2">
-            <div class="w-full  leading-normal text-gray-800  col-span-3 lg:px-2">
+            <div class="w-full col-span-3 mt-4 leading-normal text-gray-800 lg:px-2">
 
 
 
                 <div x-bind:class="showFilters ? 'fixed inset-0  top-0  bottom-0  dark:bg-gray-800 bg-white z-[600] p-4 transition-all duration-200 w-full' : 'hidden w-full h-auto mt-0  md:top-[6rem]  inset-0 z-20'"
-                    class="overflow-x-hidden overflow-y-auto border border-gray-400 rounded-md shadow  lg:h-auto lg:block lg:border-transparent lg:shadow-none lg:bg-transparent custom-scrollbar"
+                    class="overflow-x-hidden overflow-y-auto border border-gray-400 rounded-md shadow lg:h-auto lg:block lg:border-transparent lg:shadow-none lg:bg-transparent custom-scrollbar"
                     id="menu-content">
 
                     <nav class="overflow-y-auto">
@@ -217,7 +214,7 @@
                                     </svg>
                                 </button>
                                 <div x-collapse x-show="showPriceFilter" class="mt-2">
-                                    <fieldset x-data="{message:'10'}" class="space-y-1  w-full dark:text-gray-100">
+                                    <fieldset x-data="{message:'10'}" class="w-full space-y-1 dark:text-gray-100">
                                         <input type="range" x-model="message" wire:model.live.debounce.100ms="taux" class="w-full accent-amber-400"
                                             min="10" max="10000">
 
@@ -247,7 +244,7 @@
                                 </div>
                             </div>
 
-                           <div x-data="{showCategoryFilter:false}" class="mt-4 mb-4  py-3  relative border-gray-400 ">
+                           <div x-data="{showCategoryFilter:false}" class="relative py-3 mt-4 mb-4 border-gray-400 ">
                             <button @click="showCategoryFilter=!showCategoryFilter"
                                 class="flex items-center justify-between w-full mb-2 font-bold text-gray-700 focus:outline-none">
                                 <span class="text-base dark:text-gray-100">Disponibilte</span>
@@ -271,7 +268,7 @@
                             </div>
                         </div>
 
-                            <div x-data="{showCategoryFilter:false}" class="mt-4 mb-4 border-t py-3  relative border-gray-400 ">
+                            <div x-data="{showCategoryFilter:false}" class="relative py-3 mt-4 mb-4 border-t border-gray-400 ">
                                 <button @click="showCategoryFilter=!showCategoryFilter"
                                     class="flex items-center justify-between w-full mb-2 font-bold text-gray-700 focus:outline-none">
                                     <span class="text-base dark:text-gray-100"> Niveau Freelannce</span>
@@ -302,7 +299,7 @@
                             </div>
 
 
-                            <div x-data="{showCategoryFilter:false}" class="mt-4 mb-4 border-t py-3  relative border-gray-400 ">
+                            <div x-data="{showCategoryFilter:false}" class="relative py-3 mt-4 mb-4 border-t border-gray-400 ">
                                 <button @click="showCategoryFilter=!showCategoryFilter"
                                     class="flex items-center justify-between w-full mb-2 font-bold text-gray-700 focus:outline-none">
                                     <span class="text-base dark:text-gray-100"> Localisation</span>
@@ -330,7 +327,7 @@
 
 
 
-                        <div class="flex gap-4 w-full md:hidden ">
+                        <div class="flex w-full gap-4 md:hidden ">
 
 
                              <x-button amber x-on:click="showFilters=!showFilters" label="appliquer"></x-button>
@@ -346,12 +343,12 @@
 
             </div>
 
-            <div class="lg:col-span-9 pt-2 col-span-12">
+            <div class="col-span-12 pt-2 lg:col-span-9">
                 <!--Title-->
 
-                <div class="py-4 px-4">
+                <div class="px-4 py-4">
                     @if($count = $this->countFiltersApplied())
-                    <div class="mb-4 items-center  flex gap-4 p-2 rounded">
+                    <div class="flex items-center gap-4 p-2 mb-4 rounded">
 
                         <span class="text-sm text-amber-600">Filtres appliqués : {{ $count }}</span>
 
@@ -361,7 +358,7 @@
                     @endif
 
 
-                    <div class="hidden lg:block">
+                    <div class="hidden ">
                         {{$freelances->links()}}
 
                     </div>
@@ -372,12 +369,11 @@
 
 
 
-                <div class="grid  md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="z-0 grid gap-6 p-2 md:grid-cols-2 lg:grid-cols-3">
 
                     @forelse($freelances as $freelance)
-                    <div class="mx-auto lg:mx-0 lg:w-full w-[80%]">
-                        <livewire:web.card.freelance-card :$freelance :key="$freelance->id" />
-
+                    <div wire:key='{{$freelance->id}}' class="mx-auto lg:mx-0 w-[80%]">
+                        @livewire('web.card.freelance-card',['freelance' => $freelance], key($freelance->id))
                     </div>
 
 
@@ -399,16 +395,6 @@
 
 
         </div>
-
-
-
-
-
-
-
-
-
-
     </div>
 
     <script>
@@ -467,12 +453,7 @@
 
         var fixedNav= document.getElementById('fixed-nav');
 
-        // Récupérer la position de l'élément div par rapport au haut de la page
-     ///   var divOffsetTop = fixedDiv.offsetTop;
 
-
-
-        // Ajouter un événement de défilement à la fenêtre
 
     </script>
 

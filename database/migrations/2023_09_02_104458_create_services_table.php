@@ -31,10 +31,10 @@ return new class extends Migration
             $table->string('extra_support')->nullable();
             $table->integer('extra_revision')->nullable();
             $table->integer('extra_delivery_time')->nullable();
-            $table->string('example', 500)->nullable();
+            $table->string('example', 1000)->nullable();
             $table->string('files')->nullable();
             $table->string('format')->nullable();
-            $table->string('need_service')->nullable();
+            $table->longText('need_service')->nullable();
             $table->string('delivery_time_unit')->nullable();
             $table->json('sub_category')->nullable();
             $table->string('video_url')->nullable();

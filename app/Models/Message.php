@@ -40,6 +40,7 @@ class Message extends Model
         'order_id' => 'integer',
         'receiver_id'=>'string',
         'sender_id' => 'string',
+        'is_read'=>'boolean',
     ];
 
     public function user(): BelongsTo

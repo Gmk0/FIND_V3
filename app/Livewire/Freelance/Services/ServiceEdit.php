@@ -13,7 +13,7 @@ use Livewire\Component;
 use Filament\Forms\Components\Grid;
 use Illuminate\Support\Facades\Storage;
 
-use Filament\Forms\Components\{TextInput, RichEditor, MarkdownEditor, Select, Toggle, FileUpload, Section};
+use Filament\Forms\Components\{TextInput, RichEditor, Textarea,MarkdownEditor, Select, Toggle, FileUpload, Section};
 
 use Illuminate\Support\HtmlString;
 use Filament\Forms\Components\Fieldset;
@@ -25,7 +25,7 @@ use Filament\Notifications\Notification;
 use Illuminate\Contracts\View\View;
 
 use Livewire\Attributes\{Layout, Title};
-
+use PhpParser\JsonDecoder;
 
 #[Layout('layouts.freelance-layout')]
 #[Title('Modification Service')]
@@ -35,6 +35,8 @@ class ServiceEdit extends Component implements HasForms
 
     protected $listeners = ['refresh' => '$refresh'];
     public $files;
+    public $descriptionExample;
+    public $image= null;
 
     public ?array $data = [];
 
@@ -49,11 +51,14 @@ class ServiceEdit extends Component implements HasForms
             return $this->redirect(route('freelance.service.list'));
         }
 
-        $this->record
-            = Service::where('service_numero', $service_numero)->first();
+        $this->record =Service::where('service_numero', $service_numero)->first();
 
         $this->editForm->fill($this->record->attributesToArray());
         $this->imageForm->fill();
+        $this->ExampleForm->fill();
+
+        $this->descriptionExample = $this->record->example['description']??null;
+
     }
 
     public function imageForm(Form $form): Form
@@ -132,7 +137,7 @@ class ServiceEdit extends Component implements HasForms
 
                         RichEditor::make('description'),
 
-                        RichEditor::make('need_serivce')->label('Besoin service')->helperText('Ce dont vous auriez besoin pour realiser le service'),
+                        RichEditor::make('need_service')->label('Besoin service')->helperText('Ce dont vous auriez besoin pour realiser le service'),
 
 
                         // ...
@@ -140,9 +145,6 @@ class ServiceEdit extends Component implements HasForms
 
                         //->imageResizeMode('cover')
                         //->imageCropAspectRatio('16:9'),
-                        RichEditor::make('samples')->label('Quelques Realisation lier')
-                            ->fileAttachmentsDisk('local')
-                            ->fileAttachmentsDirectory('public/attachments'),
 
 
                         Forms\Components\TagsInput::make('basic_support')->label('Support du service')->hint('Support du service')->suggestions([
@@ -191,23 +193,23 @@ class ServiceEdit extends Component implements HasForms
     {
         $this->editForm->validate();
 
-try {
+            try {
 
 
-    $data = $this->editForm->getState();
-    $this->record->update($data);
+                $data = $this->editForm->getState();
+                $this->record->update($data);
 
-            $this->dispatch('notify', ['message' => "Mission creer avec success", 'icon' => 'success',]);
+                        $this->dispatch('notify', ['message' => "Sevice Modifier avec success", 'icon' => 'success',]);
 
-}catch(\Exception $e){
+            }catch(\Exception $e){
 
-            $this->dispatch('error', [
-                'message' => "Une erreur s'est produite" . $e->getMessage(),
-                'icon' => 'error',
-                'title' => 'error'
-            ]);
+                        $this->dispatch('error', [
+                            'message' => "Une erreur s'est produite" . $e->getMessage(),
+                            'icon' => 'error',
+                            'title' => 'error'
+                        ]);
 
-}
+            }
 
 
     }
@@ -216,9 +218,6 @@ try {
     public function effacerImage($key)
     {
         try{
-
-
-
         $file = $this->record->files[$key];
         $data = $this->record->files;
         unset($data[$key]);
@@ -229,7 +228,7 @@ try {
             $this->record->files = $data;
             $this->record->update();
 
-                $this->dispatch('notify', ['message' => "Mission creer avec success", 'icon' => 'success',]);
+                $this->dispatch('notify', ['message' => "Service modifier avec success", 'icon' => 'success',]);
 
 
             $this->dispatch('refresh');
@@ -255,8 +254,26 @@ try {
         return [
             'editForm',
             'imageForm',
+            'ExampleForm'
 
         ];
+    }
+
+    public function ExampleForm(Form $form): Form
+    {
+        return $form->schema([
+
+               // Textarea::make('descriptionExample')->label('Description Example'),
+                FileUpload::make('image')->label('Image Example')
+                    ->imagePreviewHeight('100')
+                    ->image()
+                    ->imageEditor()
+                    ->directory('examples'),
+
+
+
+        ]);
+
     }
 
     public function editImage()
@@ -277,7 +294,7 @@ try {
             $this->record->update();
 
 
-            $this->dispatch('notify', ['message' => "Mission creer avec success", 'icon' => 'success',]);
+            $this->dispatch('notify', ['message' => "Service  modifier avec success", 'icon' => 'success',]);
 
 
             $this->imageForm->fill();
@@ -294,6 +311,90 @@ try {
         }
 
 
+    }
+
+
+
+
+    public function effacerImageExample($index)
+    {
+
+        try {
+
+
+
+            $file = $this->record->example['image'][$index];
+
+            $data = $this->record->example['image'];
+
+
+            unset($data[$index]);
+
+            $data = array_values($data);
+            $datal = Storage::disk('local')->exists('public/' . $file);
+            if ($datal) {
+                Storage::disk('local')->delete('public/' . $file);
+                $this->record->example['image'] = $data;
+                $this->record->update();
+                $this->dispatch('notify', ['message' => "Realisation modifier avec success", 'icon' => 'success',]);
+                $this->dispatch('refresh');
+            } else {
+
+                $this->record->example['image'] = $data;
+                $this->record->update();
+            }
+        } catch (\Exception $e) {
+
+            $this->dispatch('error', [
+                'message' => "Une erreur s'est produite" . $e->getMessage(),
+                'icon' => 'error',
+                'title' => 'error'
+            ]);
+        }
+    }
+
+    public function editExample()
+    {
+        $this->ExampleForm->validate();
+        $this->validate(['descriptionExample'=>'required']);
+        $data = $this->ExampleForm->getState();
+
+
+
+        try {
+
+            $element = $this->record->example['image']??null;
+            $data = $this->ExampleForm->getState();
+            if($data['image'] !=null)
+            {
+                $element[] = $data['image'];
+            }
+
+            $mergedArray = [
+                'image' => $element,
+                'description' => $this->descriptionExample
+            ];
+
+
+
+
+            $this->record->example = $mergedArray;
+            $this->record->update();
+            $this->ExampleForm->fill();
+            $this->dispatch('notify', ['message' => "Example modifier avec succees", 'icon' => 'success',]);
+
+
+
+
+           // $this->dispatch('refresh');
+        } catch (\Exception $e) {
+
+            $this->dispatch('error', [
+                'message' => "Une erreur s'est produite" . $e->getMessage(),
+                'icon' => 'error',
+                'title' => 'error'
+            ]);
+        }
     }
 
     public function render(): View

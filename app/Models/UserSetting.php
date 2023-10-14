@@ -21,7 +21,8 @@ class UserSetting extends Model
         'user_id',
         'addresse_facturation',
         'feedback_submitted',
-        'feedback'
+        'feedback',
+        'feedback_published',
     ];
 
 
@@ -31,6 +32,7 @@ class UserSetting extends Model
         'send_invoice_enabled' => 'boolean',
         'number_notifications_enabled' => 'boolean',
         'feedback_submitted'=>'boolean',
+        'feedback_published'=>'boolean',
         'feedback'=>'array',
         'addresse_facturation'=> AsArrayObject::class,
     ];

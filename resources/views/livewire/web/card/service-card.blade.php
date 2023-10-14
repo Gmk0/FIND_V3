@@ -16,9 +16,17 @@
                     <!-- Slides -->
                     <template x-for="(slide, index) in slides" :key="index">
                         <div x-show="activeSlide === index" class="p-3 ">
-                            <div class="w-full transition border  duration-500 ease-out bg-center bg-cover rounded-xl h-48 lg:h-40"
-                                :style="'background-image: url(/storage/' + slide + ')'">
-                            </div>
+
+                           <div class="w-full transition border duration-500 ease-out rounded-xl h-48 lg:h-40">
+
+                            <a class="example-image-link" :href="'/storage/' + slide"
+                                data-lightbox="{{$service->id}}" data-title="Presentation.">
+                                <img :src="'/storage/' + slide" alt="Description de l'image"
+                                class="w-full h-full object-cover object-center rounded-xl">
+                                </a>
+
+
+                        </div>
                         </div>
                     </template>
 
