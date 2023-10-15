@@ -3,6 +3,7 @@
 namespace App\Livewire\Freelance\Other;
 
 use App\Models\FeedbackService;
+use App\Models\Message;
 use App\Models\Order;
 use Livewire\Component;
 
@@ -51,6 +52,9 @@ class PanelSlide extends Component
 
     public function render()
     {
-        return view('livewire.freelance.other.panel-slide', ['pending' => $this->pendingCommande()]);
+        return view('livewire.freelance.other.panel-slide',
+        ['pending' => $this->pendingCommande(),
+        'messages'=>Message::where('receiver_id', auth()->id())->where('is_read',false)->latest()->take(3)->get(),
+        ]);
     }
 }

@@ -281,7 +281,7 @@
                                 <div class="">
 
                                 <x-inputs.currency placeholder="Taux" icon="currency-dollar" thousands="." decimal="," precision="4"
-                                wire:model="currency" />
+                                    wire:model="currency" />
                                 </div>
                             </div>
                         </div>

@@ -111,6 +111,9 @@
 
         </div>
     </div>
+    <div wire:loading wire:target="loadmore" class="absolute flex items-center justify-center top-[8rem] left-1/2">
+        <div class="spinners"></div>
+    </div>
 
     <div :class="$store.breakpoints.smAndUp && 'scrollbar-sm'"
         class="grow overflow-y-auto main-messages px-[calc(var(--margin-x)-.5rem)] py-5 transition-all duration-[.25s]">
@@ -129,6 +132,11 @@
             @empty(!$messagesChat)
             @php
             $currentDate = null;
+            $lastRejectedProposal = null;
+            $lastRejectedMessage = null;
+            $lastPendingProposal =null;
+            $lastPendingMessage = null;
+
             @endphp
             @forelse ($messagesChat as $message)
             <!-- Boucle sur les messages -->
@@ -163,30 +171,69 @@
 
                         <div
                             class="p-3 break-normal {{ auth()->id() == $message->sender_id ? 'rounded-br-none bg-info/10 p-3 text-slate-700  dark:bg-accent dark:text-white' : 'rounded-bl-none dark:bg-navy-700 bg-navy-100 dark:text-navy-100' }} shadow-sm rounded-2xl">
-                            <p class="max-w-full overflow-x-hidden">{{ $message->body }}</p>
+                            <p class="max-w-full overflow-x-hidden ">{!! $message->body !!}</p>
                         </div>
 
                         @if ($message->service_id !== null)
                         <!-- Afficher un petit texte indiquant que le message est lié à un service -->
                         <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">Ce message est lié à un service :</p>
-
                         <!-- Afficher le bloc du service lié -->
                         <div class="flex flex-col">
-
                             <div class="flex items-center p-3 bg-gray-200 rounded-lg shadow-sm dark:bg-navy-700 dark:text-navy-100">
                                             <img class="w-10 h-10 mr-2 rounded-lg" src="{{ Storage::disk('local')->url($message->service->files[0]) }}"
                                                 alt="Service Image">
                                             <a href="{{ route('ServicesViewOne', ['service_numero' => $message->service->service_numero, 'category' => $message->service->category->name]) }}"
                                                 class="truncate hover:text-amber-500 ">{{ $message->service->title }}</a>
                             </div>
-                            <div>
-                                <x-button label="Discuter prix" @click="$dispatch('open-modal', { id: 'edit-user' })" >
+                            <div class="mt-4">
+                                @if(auth()->id() != $message->service->freelance->user->id)
+                                <x-button wire:click='Propososal({{$message->service->id}})' flat positive label="Discuter prix">
 
                                 </x-button>
+                                @endif
                             </div>
                         </div>
-
                         @endif
+                        @if($message->proposal_id !== null)
+
+                            <div class="flex gap-2 mt-4">
+                                @if($message->proposal && $message->proposal->status === 'pending')
+                                @php
+                                $lastPendingProposal = $message->proposal;
+                                $lastPendingMessage = $message;
+                                @endphp
+                                @endif
+
+                                    @if($lastPendingProposal && auth()->id() == $lastPendingProposal->freelance->user->id && auth()->id() ==
+                                    $message->receiver_id && (!$message->proposal || $message->id ===
+                                    $lastPendingProposal->messages()->orderBy('created_at', 'desc')->first()->id))
+                                    <x-button negative outline label="Refuser" wire:click='refuserProposal({{$message->proposal->id}})' sm />
+                                    {{ ($this->accepterAction)(['proposal_id' => $message->proposal_id]) }}
+                                    @endif
+
+
+                                @if($message->proposal && $message->proposal->status === 'rejected')
+                                @php
+                                $lastRejectedProposal = $message->proposal;
+                                $lastRejectedMessage = $message;
+                                @endphp
+                                @endif
+
+                             @if($lastRejectedProposal && auth()->id() != $lastRejectedProposal->freelance->user->id && (!$message->proposal ||
+                            $message->id === $lastRejectedProposal->messages()->orderBy('created_at', 'desc')->first()->id))
+                            <x-button label="Changer" wire:click='editActionE({{$message->proposal_id}})' sm />
+                            @endif
+                            </div>
+
+                            @endif
+
+
+                            @php
+                            $lastMessage = $message;
+
+
+                            // Mettez à jour le dernier message
+                            @endphp
                         @endif
 
                         @if(!empty($message->file))
@@ -333,7 +380,7 @@
     <div x-show="activeChat?.name"
         class="chat-footer relative flex h-12 w-full shrink-0 items-center justify-between border-t border-slate-150 bg-white px-[calc(var(--margin-x)-.25rem)] transition-[padding,width] duration-[.25s] dark:border-navy-600 dark:bg-navy-800">
         <div class="-ml-1.5 flex flex-1 space-x-2">
-            <button @click="showModal = true"
+            <button @click="showModal = true" @click="$store.global.isSidebarExpanded = false"
                 class="p-0 rounded-full btn2 h-9 w-9 shrink-0 text-slate-500 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:text-navy-200 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5.5 w-5.5" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor" stroke-width="1.5">
@@ -830,50 +877,10 @@
         </div>
     </div>
 
-
-    <x-confirmation-modal wire:model.defer="confirmModal">
-
-        <x-slot name="title">
-            Annuler la commande
-
-        </x-slot>
-
-        <x-slot name="content">
-            Voulez-vous supprimer cette conversation?
-
-        </x-slot>
-
-        <x-slot name="footer">
-            <x-secondary-button wire:click="$toggle('confirmModal')" wire:loading.attr="disabled">
-                {{ __('Annuler') }}
-            </x-secondary-button>
-
-            <x-danger-button class="ml-3" wire:click="EffacerMessage()" wire:loading.attr="disabled">
-                {{ __('Effacer') }}
-            </x-danger-button>
-        </x-slot>
-
-    </x-confirmation-modal>
-
-   <x-filament::modal id="edit-user">
-    <x-slot name="heading">
-        Modal heading
-    </x-slot>
-
-    <form>
-        <div class="mb-4">
-            <label for="price" class="block mb-1 font-bold">Proposer un prix :</label>
-            <input type="number" id="price" name="price" placeholder="Saisissez votre prix"
-                class="w-full px-3 py-2 border rounded-lg">
-        </div>
-
-        <button type="submit" class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
-            Proposer le prix
-        </button>
-    </form>
-</x-filament::modal>
+    @include('livewire.user.conversation.modal')
 
 
+<x-filament-actions::modals />
 
 
 
@@ -902,7 +909,7 @@
         if (top == 0) {
 
         @this.dispatch("loadmore");
-        }
+         }
         });
 
         window.addEventListener('rowChatToBottom', event => {

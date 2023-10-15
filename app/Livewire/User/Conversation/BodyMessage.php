@@ -3,7 +3,7 @@
 namespace App\Livewire\User\Conversation;
 
 use App\Models\Conversation;
-use App\Models\Message;
+use App\Models\{Message, Proposal,ClientLink};
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -21,11 +21,18 @@ use Filament\Forms\Form;
 use Filament\Forms\Components\{Card, TextInput, FileUpload};
 use Filament\Forms\Components\FormComponent;
 use WireUi\Traits\Actions;
+use Filament\Actions\Concerns\InteractsWithActions;
+use Filament\Actions\Contracts\HasActions;
+use Filament\Actions\Action;
+
+use Filament\Actions\EditAction;
+use Illuminate\Support\Facades\Crypt;
+
 
 
 class BodyMessage extends Component
 
-implements Forms\Contracts\HasForms
+implements Forms\Contracts\HasForms, HasActions
 {
     use Actions;
 
@@ -33,6 +40,7 @@ implements Forms\Contracts\HasForms
     use WithFileUploads;
 
     use Forms\Concerns\InteractsWithForms;
+    use InteractsWithActions;
 
 
     public $selectedConversation = null;
@@ -51,7 +59,9 @@ implements Forms\Contracts\HasForms
     public $messageElement;
     public $confirmModal;
     public $services;
-
+    public $price;
+    public $service_id;
+public $proposalChanged;
 
 
 
@@ -374,9 +384,8 @@ implements Forms\Contracts\HasForms
             $this->messagesChat->push($this->createdMessage);
             $this->reset('body');
             $this->dispatch('rowChatToBottom');
-
             $this->dispatch('refreshList');
-    $this->dispatch('dispatchMessageSent')->self();
+            $this->dispatch('dispatchMessageSent')->self();
             // $this->dispatchMessageSent();
         } catch (\Exception $e) {
 
@@ -561,6 +570,211 @@ implements Forms\Contracts\HasForms
 
     public function muteChat()
     {
+    }
+
+    public function Propososal($service_id){
+
+        $this->service_id = $service_id;
+
+
+        $this->dispatch('open-modal', id: 'proposer-price');
+    }
+
+    public function refuserProposal($id)
+    {
+
+        try{
+            $proposal = Proposal::find($id);
+            $proposal->status = 'rejected';
+            $proposal->update();
+            $this->createdMessage= Message::create(
+                [
+                    'sender_id' => Auth::user()->id,
+                    'receiver_id' => $this->selectedConversation['user_id'],
+                    'conversation_id' => $this->selectedConversation['chatId'],
+                    'body' => 'Proposition de '. $proposal->proposed_price .'$ refuser',
+                    'proposal_id' => $proposal->id,
+                    'is_read' => false,
+                    'type' => "text",
+                    ]
+
+            );
+            $this->messagesChat->push($this->createdMessage);
+            $this->reset('body');
+            $this->dispatch('rowChatToBottom');
+            $this->dispatchUser();
+
+
+        }catch(\Exception $e)
+        {
+            dd($e->getMessage());
+
+        }
+
+
+
+    }
+
+     public function editActionE($id)
+     {
+        $this->proposalChanged= Proposal::find($id);
+
+        $this->price = $this->proposalChanged->proposed_price;
+
+        $this->dispatch('open-modal', id: 'changer-price');
+
+
+     }
+
+
+    public function accepterAction(): Action
+    {
+        try {
+
+            return
+                Action::make('accepter')
+            ->label('valider')
+            ->outlined()
+            ->requiresConfirmation()
+            ->modalHeading('Confirmation de la Proposition de Prix')
+            ->modalDescription('Confirmez-vous la soumission de cette proposition de prix pour votre service d ? Une fois confirmée, le client sera notifié et un lien de paiement sera généré pour qu\'il puisse procéder au paiement si cette proposition est acceptée.')
+
+            ->modalSubmitActionLabel('Oui, Accepter')
+
+                ->color('success')
+                ->modalIcon('heroicon-o-pencil')
+                ->modalIconColor('success')
+                ->action(function (array $arguments) {
+                $propasal = Proposal::find($arguments['proposal_id']);
+
+                $uniqueId = \Ramsey\Uuid\Uuid::uuid4()->toString();
+
+                $propasal->status = "accepted";
+                $propasal->save();
+                $clientLink = new ClientLink();
+                $clientLink->user_id = $this->selectedConversation['user_id']; // ID du client
+                $clientLink->uniqueId = $uniqueId;
+                $clientLink->proposal_id = $propasal->id;
+                $clientLink->save();
+
+                $lien = route('customLink.paid', ['uniqueId' => $uniqueId]);
+
+                $this->sendLink($lien);
+
+
+
+                });
+        } catch (\Exception $e) {
+
+            //dd($e->getMessage());
+        }
+    }
+
+    public function sendLink($link)
+    {
+        try{
+
+
+            $this->createdMessage = Message::create(
+                [
+                    'sender_id' => Auth::user()->id,
+                    'receiver_id' => $this->selectedConversation['user_id'],
+                    'conversation_id' => $this->selectedConversation['chatId'],
+                    'body' => 'Veuillez procéder au paiement en utilisant ce lien : <a class="px-4 text-lg text-blue-600" href="' . $link . '">Paiement</a>',
+                   // 'proposal_id' => $this->proposalChanged->id,
+                    'is_read' => false,
+                    'type' => "text",
+                ]
+            );
+
+
+
+            $this->messagesChat->push($this->createdMessage);
+            $this->reset('body');
+            $this->dispatch('rowChatToBottom');
+            $this->dispatchUser();
+
+        }catch (\Exception $e){
+            dd($e->getMessage());
+
+        }
+
+    }
+
+
+
+    public function changePrice()
+    {
+        $this->validate(['price' =>'required|numeric']);
+
+    try {
+
+            $this->proposalChanged->status = 'pending';
+            $this->proposalChanged->proposed_price=$this->price;
+            $this->proposalChanged->update();
+            $this->createdMessage = Message::create(
+                [
+                    'sender_id' => Auth::user()->id,
+                    'receiver_id' => $this->selectedConversation['user_id'],
+                    'conversation_id' => $this->selectedConversation['chatId'],
+                    'body' => "Je propose un prix de <span class='px-4 font-bold'>$" . $this->price . "</span>. pour ce service !",
+                    'proposal_id' => $this->proposalChanged->id,
+                    'is_read' => false,
+                    'type' => "text",
+                ]
+            );
+            $this->dispatch('close-modal', id: 'changer-price');
+            $this->messagesChat->push($this->createdMessage);
+            $this->reset('body');
+            $this->dispatchUser();
+        }catch(\Exception $e){
+
+            dd($e->getMessage());
+
+        }
+
+    }
+
+
+
+
+    public function PropososalPrice(){
+
+        $this->validate(['price' => 'required']);
+
+
+        try{
+
+            $propososal = new Proposal();
+            $propososal->proposed_price=$this->price;
+            $propososal->service_id=$this->service_id;
+            $propososal->freelance_id= $this->dataC->freelance_id;
+            $propososal->save();
+
+            $messagesChat = New Message();
+            $body = "Je propose un prix de <span class='px-4 font-bold'>$" . $this->price . "</span>. pour ce service !";
+
+            $this->dispatch('close-modal', id: 'proposer-price');
+
+            $this->createdMessage=$messagesChat->createWithProposal($propososal, Auth::user()->id, $this->selectedConversation['user_id'], $body ,$this->selectedConversation['chatId']);
+
+            $this->messagesChat->push($this->createdMessage);
+            $this->reset('body');
+            $this->dispatchUser();
+
+        }catch(\Exception $e){
+            dd($e->getMessage());
+
+        }
+
+
+
+    }
+    public function dispatchUser()
+    {
+        $this->dispatch('rowChatToBottom');
+        $this->dispatch('refreshList');
+        $this->dispatch('dispatchMessageSent')->self();
     }
 
 

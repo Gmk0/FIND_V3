@@ -210,7 +210,7 @@
                         <img src="/images/brand/influnet2.jpg" alt="brand"
                             class="w-32 h-16 px-5 py-3 bg-white border rounded-lg shadow-md cursor-pointer duration border-blue-300/20 shadow-blue-500/5 hover:scale-95 sm:w-36">
                         <img src="/images/brand/udemy.PNG" alt="brand"
-                            class="w-32 h-16 px-5 py-3  duration-200 border rounded-lg shadow-md cursor-pointer bg-gray-50 border-blue-300/20 shadow-blue-500/5 hover:scale-95 sm:w-36">
+                            class="w-32 h-16 px-5 py-3 duration-200 border rounded-lg shadow-md cursor-pointer bg-gray-50 border-blue-300/20 shadow-blue-500/5 hover:scale-95 sm:w-36">
                         <img src="/images/brand/microsoft.svg" alt="brand"
                             class="w-32 h-16 px-5 py-3 duration-200 border rounded-lg shadow-md cursor-pointer bg-gray-50 border-blue-300/20 shadow-blue-500/5 hover:scale-95 sm:w-36">
                         <img src="/images/brand/airbnb.svg" alt="brand"
@@ -249,9 +249,9 @@
                             class="px-2 bg-white border border-gray-100 dark:border-gray-300 rounded-3xl dark:bg-gray-800 dark:shadow-none md:mx-auto lg:w-11/12 xl:w-8/12">
                             <div class="grid md:grid-cols-5">
 
-                                <div class="w-full m-2 h-50 aspect-w-8 aspect-h-9 md:col-span-2 rounded-2xl">
+                                <div class="w-full m-2 max-h-50 aspect-w-8 aspect-h-9 md:col-span-2 rounded-2xl">
 
-                                    <iframe class="rounded-sm w-11/2 h-9/12 aspect-video hover:aspect-square"
+                                    <iframe class="w-11/12 rounded-sm h-9/12 aspect-video hover:aspect-square"
                                         src="https://www.youtube.com/embed/rw_3Yv-rhZM" frameborder="0"
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                         allowfullscreen></iframe>
@@ -278,9 +278,9 @@
                             <div class="grid md:grid-cols-5">
 
 
-                                <div class="w-full m-2 h-50 aspect-w-8 aspect-h-9 md:col-span-2 rounded-2xl">
+                                <div class="w-full m-2 max-h-50 aspect-w-8 aspect-h-9 md:col-span-2 rounded-2xl">
 
-                                    <iframe class="rounded-sm w-11/2 h-9/12 aspect-video hover:aspect-square"
+                                    <iframe class="w-11/12 rounded-sm h-9/12 aspect-video hover:aspect-square"
                                         src="https://www.youtube.com/embed/rw_3Yv-rhZM" frameborder="0"
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                         allowfullscreen></iframe>

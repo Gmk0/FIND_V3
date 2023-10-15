@@ -318,6 +318,11 @@
 
     @livewire('user.conversation.body-message')
 
+    @if(Auth::user()->freelance()->exists())
+    @livewire('freelance.other.sidebar-panel')
+
+    @endif
+
 
 
 </div>

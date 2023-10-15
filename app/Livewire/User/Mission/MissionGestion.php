@@ -107,7 +107,6 @@ implements HasForms, HasActions
             return
             Action::make('accepter')
             ->label('Valider')
-
             ->requiresConfirmation()
                 ->modalHeading('Confirmer la fin de la mission')
                 ->modalDescription('Êtes-vous sûr que la mission est terminée et souhaitez-vous débloquer le paiement pour le freelance ? Une fois confirmé, cette action ne pourra pas être annulée.')

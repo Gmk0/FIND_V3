@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignUuid('sender_id')->constrained('users');
             $table->foreignUuid('receiver_id')->constrained('users');
             $table->foreignId('conversation_id')->constrained();
+            $table->foreignId('proposal_id')->nullable();
             $table->text('body')->nullable();
             $table->string('file')->nullable();
             $table->boolean('is_read')->default(false);

@@ -25,6 +25,7 @@ class Message extends Model
         'type',
         'service_id',
         'order_id',
+        'proposal_id',
     ];
 
     /**
@@ -37,6 +38,7 @@ class Message extends Model
         'conversation_id' => 'integer',
         'file'=>'array',
         'service_id' => 'integer',
+        'proposal_id'=>'integer',
         'order_id' => 'integer',
         'receiver_id'=>'string',
         'sender_id' => 'string',
@@ -81,4 +83,23 @@ class Message extends Model
     {
         return $this->belongsTo(Order::class);
     }
+
+    public function proposal()
+    {
+        return $this->belongsTo(Proposal::class);
+    }
+
+    public static function createWithProposal($proposal, $senderId, $receiverId, $body, $conversationId)
+    {
+        $message = new Message();
+        $message->proposal()->associate($proposal);
+        $message->sender_id = $senderId;
+        $message->receiver_id = $receiverId;
+        $message->conversation_id = $conversationId;
+        $message->body = $body;
+        $message->type='text';
+        $message->save();
+        return $message;
+    }
+
 }

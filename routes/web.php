@@ -8,6 +8,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ToolsController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\LinkCustom;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -92,6 +93,9 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::get('/paiement-service/{uniqueId}', [LinkCustom::class, 'acceder'])->name('customLink.paid');
+
 
 
     Route::get('/create-mission', \App\Livewire\Web\Mission\CreateMission::class)->name('createProject');

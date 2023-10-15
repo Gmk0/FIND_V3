@@ -117,51 +117,38 @@
                             class="px-3 text-xs+ font-medium tracking-wide text-slate-700 line-clamp-1 dark:text-navy-100">
                             Dernier messages
                         </h2>
-                        <div class="hidden px-2 space-y-3 mt-">
+                        <div class="px-2 mt-4 space-y-3">
                             <div class="flex justify-between space-x-2 rounded-lg bg-slate-100 p-2.5 dark:bg-navy-700">
-                                <div class="flex flex-col justify-between flex-1">
-                                    <div class="line-clamp-2">
-                                        <a href="#"
-                                            class="font-medium text-slate-700 hover:text-primary focus:text-primary dark:text-navy-100 dark:hover:text-accent-light dark:focus:text-accent-light">What
-                                            is Tailwind CSS?</a>
+
+                               @forelse ($messages as $message)
+                                  <div class="flex flex-col justify-between flex-1">
+                                    <div class="mb-4 line-clamp-2">
+                                        <a href="{{route('freelance.messages')}}"
+                                            class="font-medium text-slate-700 hover:text-primary focus:text-primary dark:text-navy-100 dark:hover:text-accent-light dark:focus:text-accent-light">
+                                            {{$message->body}}</a>
                                     </div>
                                     <div class="flex items-center justify-between">
                                         <div class="flex items-center space-x-2">
                                             <div class="avatar h-7 w-7">
-                                                <img class="rounded-full" src="{{ asset('images/100x100.png') }}"
-                                                    alt="avatar" />
+                                               @component("components.user-photo" ,['user'=>$message->senderUser])
+                                            @endcomponent
                                             </div>
                                             <div>
                                                 <p class="text-xs font-medium line-clamp-1">
-                                                    John D.
+                                                    {{$message->senderUser->name}}
                                                 </p>
-                                                <p class="text-tiny+ text-slate-400 line-clamp-1 dark:text-navy-300">
-                                                    2 min read
-                                                </p>
+
                                             </div>
                                         </div>
-                                        <div class="flex">
-                                            <button
-                                                class="p-0 rounded-full btn2 h-7 w-7 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
-                                                </svg>
-                                            </button>
-                                            <button
-                                                class="p-0 rounded-full btn2 h-7 w-7 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
-                                                </svg>
-                                            </button>
-                                        </div>
+
                                     </div>
                                 </div>
-                                <img src="{{ asset('images/800x600.png') }}"
-                                    class="object-cover object-center w-20 h-20 rounded-lg" alt="image" />
+                               @empty
+
+                               <div> Aucun message</div>
+                               @endforelse
+
+
                             </div>
 
 

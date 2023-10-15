@@ -13,6 +13,8 @@
 
     <!-- App preloader-->
     <x-app-preloader></x-app-preloader>
+
+
     <!-- Page Wrapper -->
 
 
